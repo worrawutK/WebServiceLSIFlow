@@ -1,0 +1,9 @@
+C:\Users\user099\source\repos\WCFServiceiLibrary\WCFServiceRistiLibrary\bin\Debug\WCFServiceRistiLibrary.dll
+C:\Users\user099\source\repos\WCFServiceiLibrary\WCFServiceRistiLibrary\bin\Debug\WCFServiceRistiLibrary.pdb
+C:\Users\user099\source\repos\WCFServiceiLibrary\WCFServiceRistiLibrary\bin\Debug\Rohm.Common.Logging.dll
+C:\Users\user099\source\repos\WCFServiceiLibrary\WCFServiceRistiLibrary\bin\Debug\Rohm.Common.Logging.pdb
+C:\Users\user099\source\repos\WCFServiceiLibrary\WCFServiceRistiLibrary\obj\Debug\WCFServiceRistiLibrary.csprojAssemblyReference.cache
+C:\Users\user099\source\repos\WCFServiceiLibrary\WCFServiceRistiLibrary\obj\Debug\WCFServiceRistiLibrary.csproj.CoreCompileInputs.cache
+C:\Users\user099\source\repos\WCFServiceiLibrary\WCFServiceRistiLibrary\obj\Debug\WCFServiceRistiLibrary.csproj.CopyComplete
+C:\Users\user099\source\repos\WCFServiceiLibrary\WCFServiceRistiLibrary\obj\Debug\WCFServiceRistiLibrary.dll
+C:\Users\user099\source\repos\WCFServiceiLibrary\WCFServiceRistiLibrary\obj\Debug\WCFServiceRistiLibrary.pdb

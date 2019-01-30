@@ -1,0 +1,7 @@
+C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\bin\Debug\WindowsServiceiLibrary.exe
+C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\bin\Debug\WindowsServiceiLibrary.pdb
+C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\obj\Debug\WindowsServiceiLibrary.csproj.CoreCompileInputs.cache
+C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\obj\Debug\WindowsServiceiLibrary.exe
+C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\obj\Debug\WindowsServiceiLibrary.pdb
+C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\obj\Debug\WindowsServiceiLibrary.ProjectInstaller.resources
+C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\obj\Debug\WindowsServiceiLibrary.csproj.GenerateResource.cache

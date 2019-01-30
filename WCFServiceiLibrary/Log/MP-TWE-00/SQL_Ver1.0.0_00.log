@@ -1,0 +1,593 @@
+﻿2019-01-15 11:33:48:13| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-15 11:33:48:23| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-15 11:33:48:25|0|Get_DateTimeInfo|SQLOUT||iLibrary|3[ms]||14762019-01-15 11:32:03
+|
+2019-01-15 11:33:48:26|0|Get_DateTimeInfo|OUT||iLibrary|122[ms]||OK|
+2019-01-15 11:32:03:00|0|GetMachineInfo|OUT||iLibrary|24[ms]||OK|
+2019-01-15 11:33:48:29| |Update_MachineOnlineState|IN||iLibrary|0[ms]|||
+2019-01-15 11:33:48:29| |Update_MachineOnlineState|IN||iLibrary|0[ms]|||
+2019-01-15 11:33:48:30| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-15 11:33:48:30| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-15 11:33:48:30|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14762019-01-15 11:32:03
+|
+2019-01-15 11:33:48:31|0|Get_DateTimeInfo|OUT||iLibrary|7[ms]||OK|
+2019-01-15 11:33:48:31| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||select NUM.id from trans.numbers as NUM with(xlock,rowlock)where NUM.name = @name |@name(VarChar) = machine_state_records.id
+2019-01-15 11:33:48:32|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||1081787
+|
+2019-01-15 11:33:48:33| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||update NUM set NUM.id = NUM.id + @num from trans.numbers as NUM where NUM.name = @name|@num(Int) = 1,@name(VarChar) = machine_state_records.id
+2019-01-15 11:33:48:33|0|CountUp_Numbers|SQLOUT||iLibrary|3[ms]||1 Records.|
+2019-01-15 11:33:48:34|0|CountUp_Numbers|OUT||iLibrary|23[ms]||1081788|
+2019-01-15 11:33:48:35| |Update_MachineOnlineState|SQLIN||iLibrary|0[ms]||update MS set MS.online_state = @state, MS.updated_at = @date, MS.onlined_at = @date, MS.run_state = 0 from[trans].machine_states as MS where MS.machine_id = @machine_id|@state(Int) = 1,@machine_id(Int) = 142,@date(DateTime) = 2019-01-15 11:32:03
+2019-01-15 11:33:48:35|0|Update_MachineOnlineState|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-15 11:33:48:35| |Update_MachineOnlineState|SQLIN||iLibrary|0[ms]||insert [trans].machine_state_records(id ,day_id ,updated_at ,operated_by ,machine_id ,online_state ,run_state ,qc_state ,check_state) select @record_id ,@day_id ,@date ,@user_id ,MS.machine_id ,MS.online_state ,MS.run_state ,MS.qc_state ,MS.check_state from [trans].machine_states as MS where MS.machine_id = @machine_id|@record_id(Int) = 1081787,@day_id(Int) = 1476,@date(DateTime) = 2019-01-15 11:32:03,@user_id(Int) = -1,@machine_id(Int) = 142
+2019-01-15 11:33:48:36|0|Update_MachineOnlineState|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-15 11:33:48:36|0|Update_MachineOnlineState|OUT||iLibrary|65[ms]||OK|
+2019-01-25 08:31:45:83| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:31:46:26| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:31:46:31|0|Get_DateTimeInfo|SQLOUT||iLibrary|3[ms]||14862019-01-25 08:29:52
+|
+2019-01-25 08:31:46:32|0|Get_DateTimeInfo|OUT||iLibrary|449[ms]||OK|
+2019-01-25 08:31:46:38| |Check_UserAutomotiveByLMS|IN||iLibrary|0[ms]|||
+2019-01-25 08:31:46:38| |Check_UserAutomotiveByLMS|SQLIN||iLibrary|0[ms]||Select US.id, LC.lic_name From[man].users as US with(NOLOCK) inner join[ctrlic].user_lic as UL with(NOLOCK) on UL.user_id = US.id inner join[ctrlic].license as LC with(NOLOCK) on LC.lic_id = UL.lic_id and LC.lic_name = 'PD AUTOMOTIVE' where US.id = @user_id|@user_id(Int) = 758
+2019-01-25 08:31:46:39|0|Check_UserAutomotiveByLMS|SQLOUT||iLibrary|3[ms]||758PD AUTOMOTIVE
+|
+2019-01-25 08:31:46:39| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:31:46:40| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:31:46:40|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:29:52
+|
+2019-01-25 08:31:46:41|0|Get_DateTimeInfo|OUT||iLibrary|10[ms]||OK|
+2019-01-25 08:29:52:00|0|Check_UserAutomotiveByLMS|OUT||iLibrary|32[ms]||OK|
+2019-01-25 08:29:52:00|0|GetUserInfo|OUT||iLibrary|91[ms]||OK|
+2019-01-25 08:29:52:00|0|GetLotInfo|OUT||iLibrary|5[ms]||OK|
+2019-01-25 08:29:52:00|0|GetMachineInfo|OUT||iLibrary|10[ms]||OK|
+2019-01-25 08:31:46:45| |LotCancel|IN||iLibrary|0[ms]|||
+2019-01-25 08:31:46:46| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:31:46:46| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:31:46:47|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:29:52
+|
+2019-01-25 08:31:46:47|0|Get_DateTimeInfo|OUT||iLibrary|11[ms]||OK|
+2019-01-25 08:31:46:48| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||select NUM.id from trans.numbers as NUM with(xlock,rowlock)where NUM.name = @name |@name(VarChar) = lot_process_records.id
+2019-01-25 08:31:46:48|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||719877
+|
+2019-01-25 08:31:46:49| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||update NUM set NUM.id = NUM.id + @num from trans.numbers as NUM where NUM.name = @name|@num(Int) = 1,@name(VarChar) = lot_process_records.id
+2019-01-25 08:31:46:49|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 08:31:46:50|0|CountUp_Numbers|OUT||iLibrary|21[ms]||719878|
+2019-01-25 08:31:46:50| |Get_LotDBData|SQLIN||iLibrary|0[ms]||select LO.id, LO.lot_no, DN.is_automotive, DF.job_id, LO.process_state, LO.device_slip_id, LO.step_no, LO.act_package_id, LO.product_family_id, LO.quality_state, LO.wip_state, case LO.is_special_flow when 0 then 0 else 1 end as is_special_flow, LO.location_id, LO.process_job_id, LO.qty_in, LO.qty_pass, LO.qty_fail, LO.first_ins_state, LO.final_ins_state from[trans].lots as LO with(NOLOCK) inner join[method].packages as PK with(NOLOCK) on PK.id = LO.act_package_id inner join[method].device_slips as DS with(NOLOCK) on DS.device_slip_id = LO.device_slip_id inner join[method].device_versions as DV with(NOLOCK) on DV.device_id = DS.device_id inner join[method].device_names as DN with(NOLOCK) on DN.id = DV.device_name_id left outer join[method].device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no where LO.id = @lots_id|@lots_id(Int) = 20785
+2019-01-25 08:31:46:51|0|Get_LotDBData|SQLOUT||iLibrary|3[ms]||20785"1844A7004V          "129053516002421020001446814191418100
+|
+2019-01-25 08:31:46:51|0|Get_LotDBData|OUT||iLibrary|13[ms]||OK|
+2019-01-25 08:31:46:52| |Get_LotAbnormalOrNot|IN||iLibrary|0[ms]|||
+2019-01-25 08:31:46:53| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:31:46:53| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:31:46:54|0|Get_DateTimeInfo|SQLOUT||iLibrary|1[ms]||14862019-01-25 08:29:52
+|
+2019-01-25 08:31:46:54|0|Get_DateTimeInfo|OUT||iLibrary|11[ms]||OK|
+2019-01-25 08:31:46:55| |Get_LotAbnormalOrNot|SQLIN||iLibrary|0[ms]||Select case LO.is_special_flow when 0 then LO.process_state	else SF.process_state end as process_state From[trans].lots as LO with(NOLOCK) left outer join trans.special_flows as SF with(NOLOCK) on SF.lot_id = LO.id and SF.id = LO.special_flow_id where LO.id = @lot_id|@lot_id(Int) = 20785
+2019-01-25 08:31:46:55|0|Get_LotAbnormalOrNot|SQLOUT||iLibrary|2[ms]||0
+|
+2019-01-25 08:31:46:56|0|Get_LotAbnormalOrNot|OUT||iLibrary|32[ms]||OK|
+2019-01-25 08:31:46:56| |LotCancel_NormalFlows|SQLIN||iLibrary|0[ms]||update LO set LO.process_state = 0, LO.finish_date_id = null, LO.finished_at = null, LO.updated_by = @user_id, LO.updated_at = @date, LO.qty_last_fail = 0, LO.machine_id = @machine_id, LO.process_job_id = @pjid from[trans].lots as LO where LO.id IN(@lot_id)|@user_id(Int) = 758,@date(DateTime) = 2019-01-25 08:29:52,@machine_id(Int) = 142,@pjid(Int) = 14468,@lot_id(Int) = 20785
+2019-01-25 08:31:46:57|0|LotCancel_NormalFlows|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 08:31:46:58| |LotCancel_NormalFlows|SQLIN||iLibrary|0[ms]||insert [trans].lot_process_records(id, day_id, recorded_at, record_class,  lot_id, process_id, step_no, qty_in, qty_pass, qty_last_pass, qty_pass_step_sum, qty_fail, qty_last_fail, qty_fail_step_sum, qty_divided, qty_hasuu, qty_out, recipe_version, machine_id, process_job_id, is_onlined, dbx_id, wip_state, process_state, quality_state, is_special_flow, special_flow_id, is_temp_devided, temp_devided_count, container_no, extend_data, std_time_sum, pass_plan_time, pass_plan_time_up, created_at, created_by, updated_at, updated_by, operated_by, first_ins_state, final_ins_state, job_id) select @record_id, @day_id, @day_at, @record_class,LO.id, JB.process_id, LO.step_no, LO.qty_in, @qty_pass, LO.qty_last_pass, LO.qty_pass_step_sum, @qty_fail, LO.qty_last_fail, LO.qty_fail_step_sum, LO.qty_divided, LO.qty_hasuu, LO.qty_out, DV.version_num ,LO.machine_id, @pjid ,@online_state, @DBx, LO.wip_state,LO.process_state,LO.quality_state, LO.is_special_flow ,LO.special_flow_id, LO.is_temp_devided ,LO.temp_devided_count,LO.container_no ,@XmlData, LO.std_time_sum, LO.pass_plan_time, LO.pass_plan_time_up ,LO.created_at, LO.created_by, LO.updated_at, LO.updated_by ,LO.updated_by ,LO.first_ins_state, LO.final_ins_state, DF.job_id from[trans].lots as LO with(nolock) inner join[method].device_flows as DF with(nolock) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no inner join method.jobs as JB with(nolock) on JB.id = DF.job_id inner join [method].device_slips as DS with ( NOLOCK ) on DS.device_slip_id = DF.device_slip_id inner join[method].device_versions as DV with(NOLOCK) on DV.device_id = DS.device_id where LO.id IN(@lots_id )|@record_id(Int) = 719877,@day_id(Int) = 1486,@day_at(DateTime) = 2019-01-25 08:29:52,@record_class(Int) = 6,@qty_pass(Int) = 1418,@qty_fail(Int) = 1,@DBx(Int) = 0,@pjid(Int) = 14468,@online_state(Int) = 1,@XmlData(Xml) = ,@lots_id(Int) = 20785
+2019-01-25 08:31:46:59|0|LotCancel_NormalFlows|SQLOUT||iLibrary|4[ms]||1 Records.|
+2019-01-25 08:31:46:59|0|LotCancel_NormalFlows|OUT||iLibrary|73[ms]||OK|
+2019-01-25 08:31:46:60|0|LotCancel|OUT||iLibrary|149[ms]||OK|
+2019-01-25 08:32:42:41| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:32:42:43| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:32:42:44|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:30:48
+|
+2019-01-25 08:32:42:45|0|Get_DateTimeInfo|OUT||iLibrary|26[ms]||OK|
+2019-01-25 08:32:43:50| |Check_UserAutomotiveByLMS|IN||iLibrary|0[ms]|||
+2019-01-25 08:32:43:51| |Check_UserAutomotiveByLMS|SQLIN||iLibrary|0[ms]||Select US.id, LC.lic_name From[man].users as US with(NOLOCK) inner join[ctrlic].user_lic as UL with(NOLOCK) on UL.user_id = US.id inner join[ctrlic].license as LC with(NOLOCK) on LC.lic_id = UL.lic_id and LC.lic_name = 'PD AUTOMOTIVE' where US.id = @user_id|@user_id(Int) = 758
+2019-01-25 08:32:43:51|0|Check_UserAutomotiveByLMS|SQLOUT||iLibrary|2[ms]||758PD AUTOMOTIVE
+|
+2019-01-25 08:32:43:52| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:32:43:53| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:32:43:53|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:30:49
+|
+2019-01-25 08:32:43:54|0|Get_DateTimeInfo|OUT||iLibrary|14[ms]||OK|
+2019-01-25 08:30:48:00|0|Check_UserAutomotiveByLMS|OUT||iLibrary|40[ms]||OK|
+2019-01-25 08:30:48:00|0|GetUserInfo|OUT||iLibrary|59[ms]||OK|
+2019-01-25 08:30:48:00|0|GetLotInfo|OUT||iLibrary|5[ms]||OK|
+2019-01-25 08:30:48:00|0|GetMachineInfo|OUT||iLibrary|9[ms]||OK|
+2019-01-25 08:33:09:30| |LotCancel|IN||iLibrary|0[ms]|||
+2019-01-25 08:33:09:31| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:33:09:33| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:33:09:34|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:31:15
+|
+2019-01-25 08:33:09:34|0|Get_DateTimeInfo|OUT||iLibrary|25[ms]||OK|
+2019-01-25 08:33:09:35| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||select NUM.id from trans.numbers as NUM with(xlock,rowlock)where NUM.name = @name |@name(VarChar) = lot_process_records.id
+2019-01-25 08:33:09:35|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||719878
+|
+2019-01-25 08:33:09:36| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||update NUM set NUM.id = NUM.id + @num from trans.numbers as NUM where NUM.name = @name|@num(Int) = 1,@name(VarChar) = lot_process_records.id
+2019-01-25 08:33:09:37|0|CountUp_Numbers|SQLOUT||iLibrary|4[ms]||1 Records.|
+2019-01-25 08:33:09:38|0|CountUp_Numbers|OUT||iLibrary|30[ms]||719879|
+2019-01-25 08:33:09:38| |Get_LotDBData|SQLIN||iLibrary|0[ms]||select LO.id, LO.lot_no, DN.is_automotive, DF.job_id, LO.process_state, LO.device_slip_id, LO.step_no, LO.act_package_id, LO.product_family_id, LO.quality_state, LO.wip_state, case LO.is_special_flow when 0 then 0 else 1 end as is_special_flow, LO.location_id, LO.process_job_id, LO.qty_in, LO.qty_pass, LO.qty_fail, LO.first_ins_state, LO.final_ins_state from[trans].lots as LO with(NOLOCK) inner join[method].packages as PK with(NOLOCK) on PK.id = LO.act_package_id inner join[method].device_slips as DS with(NOLOCK) on DS.device_slip_id = LO.device_slip_id inner join[method].device_versions as DV with(NOLOCK) on DV.device_id = DS.device_id inner join[method].device_names as DN with(NOLOCK) on DN.id = DV.device_name_id left outer join[method].device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no where LO.id = @lots_id|@lots_id(Int) = 20785
+2019-01-25 08:33:09:39|0|Get_LotDBData|SQLOUT||iLibrary|4[ms]||20785"1844A7004V          "129053516002421020001446814191418100
+|
+2019-01-25 08:33:09:40|0|Get_LotDBData|OUT||iLibrary|14[ms]||OK|
+2019-01-25 08:33:09:40| |Get_LotAbnormalOrNot|IN||iLibrary|0[ms]|||
+2019-01-25 08:33:09:41| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:33:09:41| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:33:09:42|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:31:15
+|
+2019-01-25 08:33:09:42|0|Get_DateTimeInfo|OUT||iLibrary|12[ms]||OK|
+2019-01-25 08:33:09:43| |Get_LotAbnormalOrNot|SQLIN||iLibrary|0[ms]||Select case LO.is_special_flow when 0 then LO.process_state	else SF.process_state end as process_state From[trans].lots as LO with(NOLOCK) left outer join trans.special_flows as SF with(NOLOCK) on SF.lot_id = LO.id and SF.id = LO.special_flow_id where LO.id = @lot_id|@lot_id(Int) = 20785
+2019-01-25 08:33:09:44|0|Get_LotAbnormalOrNot|SQLOUT||iLibrary|2[ms]||0
+|
+2019-01-25 08:33:09:44|0|Get_LotAbnormalOrNot|OUT||iLibrary|37[ms]||OK|
+2019-01-25 08:33:09:45| |LotCancel_NormalFlows|SQLIN||iLibrary|0[ms]||update LO set LO.process_state = 0, LO.finish_date_id = null, LO.finished_at = null, LO.updated_by = @user_id, LO.updated_at = @date, LO.qty_last_fail = 0, LO.machine_id = @machine_id, LO.process_job_id = @pjid from[trans].lots as LO where LO.id IN(@lot_id)|@user_id(Int) = 758,@date(DateTime) = 2019-01-25 08:31:15,@machine_id(Int) = 142,@pjid(Int) = 14468,@lot_id(Int) = 20785
+2019-01-25 08:33:09:46|0|LotCancel_NormalFlows|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 08:33:09:46| |LotCancel_NormalFlows|SQLIN||iLibrary|0[ms]||insert [trans].lot_process_records(id, day_id, recorded_at, record_class,  lot_id, process_id, step_no, qty_in, qty_pass, qty_last_pass, qty_pass_step_sum, qty_fail, qty_last_fail, qty_fail_step_sum, qty_divided, qty_hasuu, qty_out, recipe_version, machine_id, process_job_id, is_onlined, dbx_id, wip_state, process_state, quality_state, is_special_flow, special_flow_id, is_temp_devided, temp_devided_count, container_no, extend_data, std_time_sum, pass_plan_time, pass_plan_time_up, created_at, created_by, updated_at, updated_by, operated_by, first_ins_state, final_ins_state, job_id) select @record_id, @day_id, @day_at, @record_class,LO.id, JB.process_id, LO.step_no, LO.qty_in, @qty_pass, LO.qty_last_pass, LO.qty_pass_step_sum, @qty_fail, LO.qty_last_fail, LO.qty_fail_step_sum, LO.qty_divided, LO.qty_hasuu, LO.qty_out, DV.version_num ,LO.machine_id, @pjid ,@online_state, @DBx, LO.wip_state,LO.process_state,LO.quality_state, LO.is_special_flow ,LO.special_flow_id, LO.is_temp_devided ,LO.temp_devided_count,LO.container_no ,@XmlData, LO.std_time_sum, LO.pass_plan_time, LO.pass_plan_time_up ,LO.created_at, LO.created_by, LO.updated_at, LO.updated_by ,LO.updated_by ,LO.first_ins_state, LO.final_ins_state, DF.job_id from[trans].lots as LO with(nolock) inner join[method].device_flows as DF with(nolock) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no inner join method.jobs as JB with(nolock) on JB.id = DF.job_id inner join [method].device_slips as DS with ( NOLOCK ) on DS.device_slip_id = DF.device_slip_id inner join[method].device_versions as DV with(NOLOCK) on DV.device_id = DS.device_id where LO.id IN(@lots_id )|@record_id(Int) = 719878,@day_id(Int) = 1486,@day_at(DateTime) = 2019-01-25 08:31:15,@record_class(Int) = 6,@qty_pass(Int) = 1418,@qty_fail(Int) = 1,@DBx(Int) = 0,@pjid(Int) = 14468,@online_state(Int) = 1,@XmlData(Xml) = ,@lots_id(Int) = 20785
+2019-01-25 08:33:09:48|0|LotCancel_NormalFlows|SQLOUT||iLibrary|8[ms]||1 Records.|
+2019-01-25 08:33:09:48|0|LotCancel_NormalFlows|OUT||iLibrary|81[ms]||OK|
+2019-01-25 08:33:09:49|0|LotCancel|OUT||iLibrary|184[ms]||OK|
+2019-01-25 08:34:05:55| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:34:05:57| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:34:05:58|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:32:11
+|
+2019-01-25 08:34:05:58|0|Get_DateTimeInfo|OUT||iLibrary|28[ms]||OK|
+2019-01-25 08:34:05:60| |Check_UserAutomotiveByLMS|IN||iLibrary|0[ms]|||
+2019-01-25 08:34:05:60| |Check_UserAutomotiveByLMS|SQLIN||iLibrary|0[ms]||Select US.id, LC.lic_name From[man].users as US with(NOLOCK) inner join[ctrlic].user_lic as UL with(NOLOCK) on UL.user_id = US.id inner join[ctrlic].license as LC with(NOLOCK) on LC.lic_id = UL.lic_id and LC.lic_name = 'PD AUTOMOTIVE' where US.id = @user_id|@user_id(Int) = 758
+2019-01-25 08:34:05:61|0|Check_UserAutomotiveByLMS|SQLOUT||iLibrary|2[ms]||758PD AUTOMOTIVE
+|
+2019-01-25 08:34:05:62| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:34:05:62| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:34:05:63|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:32:11
+|
+2019-01-25 08:34:05:64|0|Get_DateTimeInfo|OUT||iLibrary|14[ms]||OK|
+2019-01-25 08:32:11:00|0|Check_UserAutomotiveByLMS|OUT||iLibrary|42[ms]||OK|
+2019-01-25 08:32:11:00|0|GetUserInfo|OUT||iLibrary|58[ms]||OK|
+2019-01-25 08:32:11:00|0|GetLotInfo|OUT||iLibrary|4[ms]||OK|
+2019-01-25 08:32:11:00|0|GetMachineInfo|OUT||iLibrary|9[ms]||OK|
+2019-01-25 08:34:05:68| |LotCancel|IN||iLibrary|0[ms]|||
+2019-01-25 08:34:05:69| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:34:05:70| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:34:05:71|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:32:11
+|
+2019-01-25 08:34:05:72|0|Get_DateTimeInfo|OUT||iLibrary|25[ms]||OK|
+2019-01-25 08:34:05:73| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||select NUM.id from trans.numbers as NUM with(xlock,rowlock)where NUM.name = @name |@name(VarChar) = lot_process_records.id
+2019-01-25 08:34:05:73|0|CountUp_Numbers|SQLOUT||iLibrary|3[ms]||719879
+|
+2019-01-25 08:34:05:74| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||update NUM set NUM.id = NUM.id + @num from trans.numbers as NUM where NUM.name = @name|@num(Int) = 1,@name(VarChar) = lot_process_records.id
+2019-01-25 08:34:05:75|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 08:34:05:75|0|CountUp_Numbers|OUT||iLibrary|28[ms]||719880|
+2019-01-25 08:34:05:76| |Get_LotDBData|SQLIN||iLibrary|0[ms]||select LO.id, LO.lot_no, DN.is_automotive, DF.job_id, LO.process_state, LO.device_slip_id, LO.step_no, LO.act_package_id, LO.product_family_id, LO.quality_state, LO.wip_state, case LO.is_special_flow when 0 then 0 else 1 end as is_special_flow, LO.location_id, LO.process_job_id, LO.qty_in, LO.qty_pass, LO.qty_fail, LO.first_ins_state, LO.final_ins_state from[trans].lots as LO with(NOLOCK) inner join[method].packages as PK with(NOLOCK) on PK.id = LO.act_package_id inner join[method].device_slips as DS with(NOLOCK) on DS.device_slip_id = LO.device_slip_id inner join[method].device_versions as DV with(NOLOCK) on DV.device_id = DS.device_id inner join[method].device_names as DN with(NOLOCK) on DN.id = DV.device_name_id left outer join[method].device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no where LO.id = @lots_id|@lots_id(Int) = 20785
+2019-01-25 08:34:05:77|0|Get_LotDBData|SQLOUT||iLibrary|2[ms]||20785"1844A7004V          "129053516002421020001446814191418100
+|
+2019-01-25 08:34:05:77|0|Get_LotDBData|OUT||iLibrary|14[ms]||OK|
+2019-01-25 08:34:05:78| |Get_LotAbnormalOrNot|IN||iLibrary|0[ms]|||
+2019-01-25 08:34:05:79| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:34:05:79| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:34:05:80|0|Get_DateTimeInfo|SQLOUT||iLibrary|3[ms]||14862019-01-25 08:32:12
+|
+2019-01-25 08:34:05:81|0|Get_DateTimeInfo|OUT||iLibrary|14[ms]||OK|
+2019-01-25 08:34:05:81| |Get_LotAbnormalOrNot|SQLIN||iLibrary|0[ms]||Select case LO.is_special_flow when 0 then LO.process_state	else SF.process_state end as process_state From[trans].lots as LO with(NOLOCK) left outer join trans.special_flows as SF with(NOLOCK) on SF.lot_id = LO.id and SF.id = LO.special_flow_id where LO.id = @lot_id|@lot_id(Int) = 20785
+2019-01-25 08:34:05:82|0|Get_LotAbnormalOrNot|SQLOUT||iLibrary|2[ms]||0
+|
+2019-01-25 08:34:05:83|0|Get_LotAbnormalOrNot|OUT||iLibrary|41[ms]||OK|
+2019-01-25 08:34:05:83| |LotCancel_NormalFlows|SQLIN||iLibrary|0[ms]||update LO set LO.process_state = 0, LO.finish_date_id = null, LO.finished_at = null, LO.updated_by = @user_id, LO.updated_at = @date, LO.qty_last_fail = 0, LO.machine_id = @machine_id, LO.process_job_id = @pjid from[trans].lots as LO where LO.id IN(@lot_id)|@user_id(Int) = 758,@date(DateTime) = 2019-01-25 08:32:11,@machine_id(Int) = 142,@pjid(Int) = 14468,@lot_id(Int) = 20785
+2019-01-25 08:34:05:88|0|LotCancel_NormalFlows|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 08:34:05:88| |LotCancel_NormalFlows|SQLIN||iLibrary|0[ms]||insert [trans].lot_process_records(id, day_id, recorded_at, record_class,  lot_id, process_id, step_no, qty_in, qty_pass, qty_last_pass, qty_pass_step_sum, qty_fail, qty_last_fail, qty_fail_step_sum, qty_divided, qty_hasuu, qty_out, recipe_version, machine_id, process_job_id, is_onlined, dbx_id, wip_state, process_state, quality_state, is_special_flow, special_flow_id, is_temp_devided, temp_devided_count, container_no, extend_data, std_time_sum, pass_plan_time, pass_plan_time_up, created_at, created_by, updated_at, updated_by, operated_by, first_ins_state, final_ins_state, job_id) select @record_id, @day_id, @day_at, @record_class,LO.id, JB.process_id, LO.step_no, LO.qty_in, @qty_pass, LO.qty_last_pass, LO.qty_pass_step_sum, @qty_fail, LO.qty_last_fail, LO.qty_fail_step_sum, LO.qty_divided, LO.qty_hasuu, LO.qty_out, DV.version_num ,LO.machine_id, @pjid ,@online_state, @DBx, LO.wip_state,LO.process_state,LO.quality_state, LO.is_special_flow ,LO.special_flow_id, LO.is_temp_devided ,LO.temp_devided_count,LO.container_no ,@XmlData, LO.std_time_sum, LO.pass_plan_time, LO.pass_plan_time_up ,LO.created_at, LO.created_by, LO.updated_at, LO.updated_by ,LO.updated_by ,LO.first_ins_state, LO.final_ins_state, DF.job_id from[trans].lots as LO with(nolock) inner join[method].device_flows as DF with(nolock) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no inner join method.jobs as JB with(nolock) on JB.id = DF.job_id inner join [method].device_slips as DS with ( NOLOCK ) on DS.device_slip_id = DF.device_slip_id inner join[method].device_versions as DV with(NOLOCK) on DV.device_id = DS.device_id where LO.id IN(@lots_id )|@record_id(Int) = 719879,@day_id(Int) = 1486,@day_at(DateTime) = 2019-01-25 08:32:11,@record_class(Int) = 6,@qty_pass(Int) = 1418,@qty_fail(Int) = 1,@DBx(Int) = 0,@pjid(Int) = 14468,@online_state(Int) = 1,@XmlData(Xml) = ,@lots_id(Int) = 20785
+2019-01-25 08:34:05:89|0|LotCancel_NormalFlows|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 08:34:05:90|0|LotCancel_NormalFlows|OUT||iLibrary|119[ms]||OK|
+2019-01-25 08:34:05:91|0|LotCancel|OUT||iLibrary|222[ms]||OK|
+2019-01-25 08:35:26:95| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:26:97| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:26:98|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:33:33
+|
+2019-01-25 08:35:26:99|0|Get_DateTimeInfo|OUT||iLibrary|31[ms]||OK|
+2019-01-25 08:33:33:00|0|GetMachineInfo|OUT||iLibrary|10[ms]||OK|
+2019-01-25 08:35:27:01| |Update_MachineOnlineState|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:27:02| |Update_MachineOnlineState|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:27:03| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:27:03| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:27:04|0|Get_DateTimeInfo|SQLOUT||iLibrary|3[ms]||14862019-01-25 08:33:33
+|
+2019-01-25 08:35:27:05|0|Get_DateTimeInfo|OUT||iLibrary|16[ms]||OK|
+2019-01-25 08:35:27:06| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||select NUM.id from trans.numbers as NUM with(xlock,rowlock)where NUM.name = @name |@name(VarChar) = machine_state_records.id
+2019-01-25 08:35:27:07|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||1082209
+|
+2019-01-25 08:35:27:08| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||update NUM set NUM.id = NUM.id + @num from trans.numbers as NUM where NUM.name = @name|@num(Int) = 1,@name(VarChar) = machine_state_records.id
+2019-01-25 08:35:27:08|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 08:35:27:09|0|CountUp_Numbers|OUT||iLibrary|28[ms]||1082210|
+2019-01-25 08:35:27:11| |Update_MachineOnlineState|SQLIN||iLibrary|0[ms]||update MS set MS.online_state = @state, MS.updated_at = @date, MS.onlined_at = @date, MS.run_state = 0 from[trans].machine_states as MS where MS.machine_id = @machine_id|@state(Int) = 1,@machine_id(Int) = 142,@date(DateTime) = 2019-01-25 08:33:33
+2019-01-25 08:35:27:12|0|Update_MachineOnlineState|SQLOUT||iLibrary|3[ms]||1 Records.|
+2019-01-25 08:35:27:13| |Update_MachineOnlineState|SQLIN||iLibrary|0[ms]||insert [trans].machine_state_records(id ,day_id ,updated_at ,operated_by ,machine_id ,online_state ,run_state ,qc_state ,check_state) select @record_id ,@day_id ,@date ,@user_id ,MS.machine_id ,MS.online_state ,MS.run_state ,MS.qc_state ,MS.check_state from [trans].machine_states as MS where MS.machine_id = @machine_id|@record_id(Int) = 1082209,@day_id(Int) = 1486,@date(DateTime) = 2019-01-25 08:33:33,@user_id(Int) = -1,@machine_id(Int) = 142
+2019-01-25 08:35:27:14|0|Update_MachineOnlineState|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 08:35:27:15|0|Update_MachineOnlineState|OUT||iLibrary|118[ms]||OK|
+2019-01-25 08:35:29:00| |CheckPackageEnable|SQLIN||iLibrary|0[ms]||select PK.id, PK.name from[method].packages as PK with(nolock) where PK.name = @package_name and PK.is_enabled = 1|@package_name(VarChar) = SSOP-B20W
+2019-01-25 08:35:29:05|0|CheckPackageEnable|SQLOUT||iLibrary|42[ms]||242,"SSOP-B20W           "
+|
+2019-01-25 08:35:29:06|0|CheckPackageEnable|OUT||iLibrary|66[ms]||OK|
+2019-01-25 08:35:29:07| |CheckLotisExist|SQLIN||iLibrary|0[ms]||select * from [trans].lots as LO with(nolock) where LO.lot_no = @lot_no|@lot_no(VarChar) = 1844A7004V
+2019-01-25 08:35:29:08|0|CheckLotisExist|SQLOUT||iLibrary|5[ms]||20785,"1844A7004V          ",1,242,5351,5351,0,600,4,29,1419,1418,1,0,0,0,0,0,0,0,0,1403,1423,7,0,0,20,0,0,0,0,0,0,0,0,0,50,,,1403,2018-11-03 00:00:00,1,,1423,,0,0,0,142,,1890,100,,0,0,,,14468,0,,0,2018-11-03 00:00:00,1,2019-01-25 08:32:11,758
+|
+2019-01-25 08:35:29:08|0|CheckLotisExist|OUT||iLibrary|16[ms]||OK|
+2019-01-25 08:35:29:09| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:29:10| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:29:11|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:33:35
+|
+2019-01-25 08:35:29:11|0|Get_DateTimeInfo|OUT||iLibrary|15[ms]||OK|
+2019-01-25 08:35:29:15| |Check_UserAutomotiveByLMS|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:29:16| |Check_UserAutomotiveByLMS|SQLIN||iLibrary|0[ms]||Select US.id, LC.lic_name From[man].users as US with(NOLOCK) inner join[ctrlic].user_lic as UL with(NOLOCK) on UL.user_id = US.id inner join[ctrlic].license as LC with(NOLOCK) on LC.lic_id = UL.lic_id and LC.lic_name = 'PD AUTOMOTIVE' where US.id = @user_id|@user_id(Int) = 758
+2019-01-25 08:35:29:17|0|Check_UserAutomotiveByLMS|SQLOUT||iLibrary|2[ms]||758PD AUTOMOTIVE
+|
+2019-01-25 08:35:29:17| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:29:18| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:29:19|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:33:35
+|
+2019-01-25 08:35:29:20|0|Get_DateTimeInfo|OUT||iLibrary|15[ms]||OK|
+2019-01-25 08:33:35:00|0|Check_UserAutomotiveByLMS|OUT||iLibrary|44[ms]||OK|
+2019-01-25 08:33:35:00|0|GetUserInfo|OUT||iLibrary|89[ms]||OK|
+2019-01-25 08:33:35:00|0|CheckUserPermission|OUT||iLibrary|6[ms]||OK|
+2019-01-25 08:33:35:00|0|GetLotInfo|OUT||iLibrary|3[ms]||OK|
+2019-01-25 08:33:35:00|0|GetMachineInfo|OUT||iLibrary|9[ms]||OK|
+2019-01-25 08:33:35:00| |LotSetup|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:29:27| |CheckProcessFlow|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:29:27| |Get_CheckFlowData|SQLIN||iLibrary|0[ms]||select DISTINCT LO.id, LO.lot_no, case LO.is_special_flow when 0 then 0 else 1 end as is_special_flow, LO.location_id, DF.job_id, LO.step_no, LO.act_package_id, LO.product_family_id, LO.process_state, DF.device_slip_id, LO.process_job_id, LO.quality_state, LO.wip_state, LO.qty_in, LO.qty_pass, LO.qty_fail, PK.id as package_id, PK.name, PK.is_Enabled, DN.is_automotive, case when PMM.permitted_machine_id is null then JMC.id else PMC.id end as machine_id, case when PMM.permitted_machine_id is null then JMC.name else PMC.name end as machine_name, MS.run_state as run_state, MS.online_state as online_state, MS.qc_state as qc_state, case when PMM.permitted_machine_id is null then JMC.is_automotive else PMC.is_automotive end as machine_is_automotive, LO.first_ins_state, LO.final_ins_state, DS.is_released from trans.lots as LO with(NOLOCK) inner join method.device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no inner join[method].device_slips as DS with(NOLOCK) on DS.device_slip_id = DF.device_slip_id inner join[method].device_names as DN with(NOLOCK) on DN.id = LO.act_device_name_id inner join[method].packages as PK with(NOLOCK) on PK.id = DN.package_id inner join method.jobs as JB with(NOLOCK) on JB.id = DF.job_id inner join mc.group_models as GM with(NOLOCK) on GM.machine_group_id = JB.machine_group_id left outer join mc.machines as JMC with(NOLOCK) on JMC.machine_model_id = GM.machine_model_id and JMC.id = @machine_id left outer join[trans].machine_states as MS with(NOLOCK) on MS.machine_id = JMC.id left outer join[mc].permitted_machine_machines as PMM with(NOLOCK) on PMM.permitted_machine_id = DF.permitted_machine_id left outer join[mc].machines as PMC with(NOLOCK) on PMC.id = PMM.machine_id and PMC.id = JMC.id where LO.id = @lot_id |@lot_id(Int) = 20785,@machine_id(Int) = 142
+2019-01-25 08:35:29:29|0|Get_CheckFlowData|SQLOUT||iLibrary|7[ms]||20785"1844A7004V          "002960024210535114468020141914181242"SSOP-B20W           "11001
+20785"1844A7004V          "002960024210535114468020141914181242"SSOP-B20W           "11142MP-TWE-000101001
+|
+2019-01-25 08:35:29:30|0|CheckProcessFlow|OUT||iLibrary|24[ms]||OK|
+2019-01-25 08:35:29:30| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:29:31| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:29:32|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:33:35
+|
+2019-01-25 08:35:29:33|0|Get_DateTimeInfo|OUT||iLibrary|14[ms]||OK|
+2019-01-25 08:35:29:33| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||select NUM.id from trans.numbers as NUM with(xlock,rowlock)where NUM.name = @name |@name(VarChar) = lot_process_records.id
+2019-01-25 08:35:29:34|0|CountUp_Numbers|SQLOUT||iLibrary|3[ms]||719880
+|
+2019-01-25 08:35:29:35| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||update NUM set NUM.id = NUM.id + @num from trans.numbers as NUM where NUM.name = @name|@num(Int) = 1,@name(VarChar) = lot_process_records.id
+2019-01-25 08:35:29:36|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 08:35:29:37|0|CountUp_Numbers|OUT||iLibrary|32[ms]||719881|
+2019-01-25 08:35:29:37| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||select NUM.id from trans.numbers as NUM with(xlock,rowlock)where NUM.name = @name |@name(VarChar) = lot_pjs.process_job_id
+2019-01-25 08:35:29:38|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||14473
+|
+2019-01-25 08:35:29:39| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||update NUM set NUM.id = NUM.id + @num from trans.numbers as NUM where NUM.name = @name|@num(Int) = 1,@name(VarChar) = lot_pjs.process_job_id
+2019-01-25 08:35:29:40|0|CountUp_Numbers|SQLOUT||iLibrary|3[ms]||1 Records.|
+2019-01-25 08:35:29:40|0|CountUp_Numbers|OUT||iLibrary|33[ms]||14474|
+2019-01-25 08:35:29:42| |Check_LotMaterialInfos|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:29:43| |Get_MaterialProductionInfos|IN||iLibrary|0[ms]|||
+2019-01-25 08:33:35:00|0|GetLotInfo|OUT||iLibrary|14[ms]||OK|
+2019-01-25 08:35:29:46| |Get_MaterialProductionInfos|SQLIN||iLibrary|0[ms]||SELECT MAMM.id as id, MAMM.barcode as barcode, PR.id as production_id, case when MAMM.name is null then PR.name else MAMM.name end as production_name, CG.id as category_id, CG.name as category_name, CI.spec_no, CI.spec_name, DF.process_minutes, MAB.use_qty, MAB.use_qty_unit, MAB.limit_time_unit1, MAB.time_limit1, MAB.time_warn1 FROM trans.lots as LO with(NOLOCK) inner join method.device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no inner join method.material_bills as MAB with(NOLOCK) on MAB.material_set_id = DF.material_set_id inner join method.material_bill_details as MABD with(NOLOCK) on MABD.material_bill_id = MAB.id inner join material.production_specs as PS with(NOLOCK) on PS.spec_no = MABD.spec_no inner join material.productions as PR with(NOLOCK) on PR.id = PS.production_id inner join material.categories as CG with(NOLOCK) on CG.id = PR.category_id inner join material.category_items as CI with(NOLOCK) on CI.id = CG.id and CI.spec_no = PS.spec_no full join( Select MA.id, MA.barcode, MA.material_production_id, PL.name from trans.materials as MA with(NOLOCK) inner join material.productions as PL with ( NOLOCK ) on PL.id = MA.material_production_id inner join trans.machine_materials as MM with(NOLOCK) on MM.material_id = MA.id and MM.machine_id = @machine_id) as MAMM on MAMM.material_production_id = PR.id where LO.id = @lot_id|@machine_id(Int) = 142,@lot_id(Int) = 20785
+2019-01-25 08:35:29:47|0|Get_MaterialProductionInfos|SQLOUT||iLibrary|3[ms]|||
+2019-01-25 08:33:35:00|1300|Get_MaterialProductionInfos|OUT||iLibrary|43[ms]||This Process don't need materials.|
+2019-01-25 08:35:29:48| |LotSetup|SQLIN||iLibrary|0[ms]||insert [trans].lot_pjs( process_job_id, product_family_id, machine_id, online_state, created_at, started_at, started_by, finished_at, finished_by ) select @pjid, @product_family_id, MS.machine_id, MS.online_state, @date1, null, null, null, null from [trans].machine_states as MS where MS.machine_id = @machine_id|@pjid(Int) = 14473,@product_family_id(Int) = 1,@date1(DateTime) = 2019-01-25 08:33:35,@date2(DateTime) = 2019-01-25 08:33:35,@user_id(Int) = 758,@machine_id(Int) = 142
+2019-01-25 08:35:29:49|0|LotSetup|SQLOUT||iLibrary|3[ms]||1 Records.|
+2019-01-25 08:35:29:50| |LotSetup|SQLIN||iLibrary|0[ms]||insert [trans].pj_lots(process_job_id, idx, lot_id) select @pjid, @idx, @lot_id|@pjid(Int) = 14473,@idx(Int) = 0,@lot_id(Int) = 20785
+2019-01-25 08:35:29:51|0|LotSetup|SQLOUT||iLibrary|3[ms]||1 Records.|
+2019-01-25 08:35:29:52| |Get_LotDBData|SQLIN||iLibrary|0[ms]||select LO.id, LO.lot_no, DN.is_automotive, DF.job_id, LO.process_state, LO.device_slip_id, LO.step_no, LO.act_package_id, LO.product_family_id, LO.quality_state, LO.wip_state, case LO.is_special_flow when 0 then 0 else 1 end as is_special_flow, LO.location_id, LO.process_job_id, LO.qty_in, LO.qty_pass, LO.qty_fail, LO.first_ins_state, LO.final_ins_state from[trans].lots as LO with(NOLOCK) inner join[method].packages as PK with(NOLOCK) on PK.id = LO.act_package_id inner join[method].device_slips as DS with(NOLOCK) on DS.device_slip_id = LO.device_slip_id inner join[method].device_versions as DV with(NOLOCK) on DV.device_id = DS.device_id inner join[method].device_names as DN with(NOLOCK) on DN.id = DV.device_name_id left outer join[method].device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no where LO.id = @lots_id|@lots_id(Int) = 20785
+2019-01-25 08:35:29:53|0|Get_LotDBData|SQLOUT||iLibrary|2[ms]||20785"1844A7004V          "129053516002421020001446814191418100
+|
+2019-01-25 08:35:29:53|0|Get_LotDBData|OUT||iLibrary|17[ms]||OK|
+2019-01-25 08:35:29:54| |Get_Recipe|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:29:55| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:29:56| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:29:57|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:33:35
+|
+2019-01-25 08:35:29:58|0|Get_DateTimeInfo|OUT||iLibrary|18[ms]||OK|
+2019-01-25 08:35:29:58| |Get_Recipe|SQLIN||iLibrary|0[ms]||Select DF.recipe, DS.tp_code, DS.os_program_name, DN.assy_name, DN.ft_name, DN.name as device_name, DC.chip_name, PK.name from[trans].lots as LO with(NOLOCK) inner join[method].packages as PK with(NOLOCK) on PK.id = LO.act_package_id inner join[method].device_slips as DS with(NOLOCK) on DS.device_slip_id = LO.device_slip_id inner join[method].device_versions as DV with(NOLOCK) on DV.device_id = DS.device_id inner join[method].device_names as DN with(NOLOCK) on DN.id = DV.device_name_id inner join[method].device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no left outer join[method].device_chips as DC with(NOLOCK) on DC.device_slip_id = DF.device_slip_id where LO.id = @lot_id|@lot_id(Int) = 20785
+2019-01-25 08:35:29:60|0|Get_Recipe|SQLOUT||iLibrary|5[ms]||F0240M6101FV OABM6101FV-C(CV3C)BM6101FV-C"BM6101FV-CE2        ""SSOP-B20W           "
+|
+2019-01-25 08:35:29:60| |Get_Recipe|SQLIN||iLibrary|0[ms]||Select MD.ppid_type1, MD.ppid_type2 from [mc].machines as MC with(NOLOCK) inner join[mc].models as MD with(NOLOCK) on MD.id = MC.machine_model_id where MC.id = @machine_id|@machine_id(Int) = 142
+2019-01-25 08:35:29:61|0|Get_Recipe|SQLOUT||iLibrary|2[ms]||5
+|
+2019-01-25 08:35:29:62|0|Get_Recipe|OUT||iLibrary|70[ms]||OK|
+2019-01-25 08:35:29:63| |Get_LotAbnormalOrNot|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:29:64| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:29:66| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:29:67|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:33:35
+|
+2019-01-25 08:35:29:68|0|Get_DateTimeInfo|OUT||iLibrary|31[ms]||OK|
+2019-01-25 08:35:29:68| |Get_LotAbnormalOrNot|SQLIN||iLibrary|0[ms]||Select case LO.is_special_flow when 0 then LO.process_state	else SF.process_state end as process_state From[trans].lots as LO with(NOLOCK) left outer join trans.special_flows as SF with(NOLOCK) on SF.lot_id = LO.id and SF.id = LO.special_flow_id where LO.id = @lot_id|@lot_id(Int) = 20785
+2019-01-25 08:35:29:69|0|Get_LotAbnormalOrNot|SQLOUT||iLibrary|2[ms]||0
+|
+2019-01-25 08:35:29:70|0|Get_LotAbnormalOrNot|OUT||iLibrary|61[ms]||OK|
+2019-01-25 08:35:29:71| |LotSetup_NormalFlows|SQLIN||iLibrary|0[ms]||update LO set LO.process_state = 1, LO.updated_by = @user_id, LO.updated_at = @date, LO.qty_last_fail = 0, LO.qty_last_pass = 0, LO.qty_fail_step_sum = 0, LO.qty_pass_step_sum = 0, LO.machine_id = @machine_id, LO.process_job_id = @pjid, LO.first_ins_state = 0, LO.final_ins_state = 0, LO.std_time_sum = DF.sum_process_minutes from[trans].lots as LO inner join [method].device_flows as DF on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no where LO.id IN(@lot_id)|@user_id(Int) = 758,@date(DateTime) = 2019-01-25 08:33:35,@machine_id(Int) = 142,@pjid(Int) = 14473,@lot_id(Int) = 20785
+2019-01-25 08:35:29:72|0|LotSetup_NormalFlows|SQLOUT||iLibrary|3[ms]||1 Records.|
+2019-01-25 08:35:29:72| |LotSetup_NormalFlows|SQLIN||iLibrary|0[ms]||insert [trans].lot_process_records(id, day_id, recorded_at, record_class,  lot_id, process_id, step_no, qty_in, qty_pass, qty_last_pass, qty_pass_step_sum, qty_fail, qty_last_fail, qty_fail_step_sum, qty_divided, qty_hasuu, qty_out, recipe, recipe_version, machine_id, process_job_id, is_onlined, dbx_id, wip_state, process_state, quality_state, is_special_flow, special_flow_id, is_temp_devided, temp_devided_count, container_no, extend_data, std_time_sum, pass_plan_time, pass_plan_time_up, created_at, created_by, updated_at, updated_by, operated_by, first_ins_state, final_ins_state, job_id) select @record_id, @day_id, @day_at, @record_class,LO.id, JB.process_id, LO.step_no, LO.qty_in, @qty_pass, LO.qty_last_pass, LO.qty_pass_step_sum, @qty_fail, LO.qty_last_fail, LO.qty_fail_step_sum, LO.qty_divided, LO.qty_hasuu, LO.qty_out, @Recipe, DV.version_num ,LO.machine_id, @pjid, @online_state, @DBx, LO.wip_state,LO.process_state,LO.quality_state, LO.is_special_flow ,LO.special_flow_id, LO.is_temp_devided ,LO.temp_devided_count ,LO.container_no ,@XmlData, LO.std_time_sum, LO.pass_plan_time, LO.pass_plan_time_up, LO.created_at, LO.created_by, LO.updated_at, LO.updated_by, LO.updated_by, LO.first_ins_state, LO.final_ins_state, DF.job_id from[trans].lots as LO with(nolock) inner join[method].device_flows as DF with(nolock) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no inner join method.jobs as JB with(nolock) on JB.id = DF.job_id inner join [method].device_slips as DS with(nolock) on DS.device_slip_id = DF.device_slip_id inner join[method].device_versions as DV with(nolock) on DV.device_id = DS.device_id where LO.id IN(@lots_id )|@record_id(Int) = 719880,@day_id(Int) = 1486,@day_at(DateTime) = 2019-01-25 08:33:35,@record_class(Int) = 5,@qty_pass(Int) = 1418,@qty_fail(Int) = 1,@DBx(Int) = 0,@pjid(Int) = 14473,@online_state(Int) = 1,@XmlData(Xml) = ,@lots_id(Int) = 20785,@Recipe(VarChar) = BM6101FV-C(CV3C)
+2019-01-25 08:35:29:73|0|LotSetup_NormalFlows|SQLOUT||iLibrary|3[ms]||1 Records.|
+2019-01-25 08:35:29:74|0|LotSetup_NormalFlows|OUT||iLibrary|34[ms]||OK|
+2019-01-25 08:33:35:00|0|LotSetup|OUT||iLibrary|484[ms]||OK|
+2019-01-25 08:35:36:36| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:36:37| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:36:38|0|Get_DateTimeInfo|SQLOUT||iLibrary|3[ms]||14862019-01-25 08:33:42
+|
+2019-01-25 08:35:36:39|0|Get_DateTimeInfo|OUT||iLibrary|22[ms]||OK|
+2019-01-25 08:35:36:41| |Check_UserAutomotiveByLMS|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:36:41| |Check_UserAutomotiveByLMS|SQLIN||iLibrary|0[ms]||Select US.id, LC.lic_name From[man].users as US with(NOLOCK) inner join[ctrlic].user_lic as UL with(NOLOCK) on UL.user_id = US.id inner join[ctrlic].license as LC with(NOLOCK) on LC.lic_id = UL.lic_id and LC.lic_name = 'PD AUTOMOTIVE' where US.id = @user_id|@user_id(Int) = 758
+2019-01-25 08:35:36:42|0|Check_UserAutomotiveByLMS|SQLOUT||iLibrary|2[ms]||758PD AUTOMOTIVE
+|
+2019-01-25 08:35:36:43| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:36:44| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:36:45|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:33:42
+|
+2019-01-25 08:35:36:46|0|Get_DateTimeInfo|OUT||iLibrary|19[ms]||OK|
+2019-01-25 08:33:42:00|0|Check_UserAutomotiveByLMS|OUT||iLibrary|51[ms]||OK|
+2019-01-25 08:33:42:00|0|GetUserInfo|OUT||iLibrary|71[ms]||OK|
+2019-01-25 08:33:42:00|0|GetLotInfo|OUT||iLibrary|3[ms]||OK|
+2019-01-25 08:33:42:00|0|GetMachineInfo|OUT||iLibrary|8[ms]||OK|
+2019-01-25 08:35:36:51| |LotCancel|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:36:52| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:36:53| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:36:54|0|Get_DateTimeInfo|SQLOUT||iLibrary|3[ms]||14862019-01-25 08:33:42
+|
+2019-01-25 08:35:36:55|0|Get_DateTimeInfo|OUT||iLibrary|30[ms]||OK|
+2019-01-25 08:35:36:56| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||select NUM.id from trans.numbers as NUM with(xlock,rowlock)where NUM.name = @name |@name(VarChar) = lot_process_records.id
+2019-01-25 08:35:36:57|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||719881
+|
+2019-01-25 08:35:36:58| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||update NUM set NUM.id = NUM.id + @num from trans.numbers as NUM where NUM.name = @name|@num(Int) = 1,@name(VarChar) = lot_process_records.id
+2019-01-25 08:35:36:59|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 08:35:36:60|0|CountUp_Numbers|OUT||iLibrary|35[ms]||719882|
+2019-01-25 08:35:36:60| |Get_LotDBData|SQLIN||iLibrary|0[ms]||select LO.id, LO.lot_no, DN.is_automotive, DF.job_id, LO.process_state, LO.device_slip_id, LO.step_no, LO.act_package_id, LO.product_family_id, LO.quality_state, LO.wip_state, case LO.is_special_flow when 0 then 0 else 1 end as is_special_flow, LO.location_id, LO.process_job_id, LO.qty_in, LO.qty_pass, LO.qty_fail, LO.first_ins_state, LO.final_ins_state from[trans].lots as LO with(NOLOCK) inner join[method].packages as PK with(NOLOCK) on PK.id = LO.act_package_id inner join[method].device_slips as DS with(NOLOCK) on DS.device_slip_id = LO.device_slip_id inner join[method].device_versions as DV with(NOLOCK) on DV.device_id = DS.device_id inner join[method].device_names as DN with(NOLOCK) on DN.id = DV.device_name_id left outer join[method].device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no where LO.id = @lots_id|@lots_id(Int) = 20785
+2019-01-25 08:35:36:62|0|Get_LotDBData|SQLOUT||iLibrary|3[ms]||20785"1844A7004V          "129153516002421020001447314191418100
+|
+2019-01-25 08:35:36:62|0|Get_LotDBData|OUT||iLibrary|20[ms]||OK|
+2019-01-25 08:35:36:64| |Get_LotAbnormalOrNot|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:36:64| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:36:65| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:36:66|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:33:42
+|
+2019-01-25 08:35:36:67|0|Get_DateTimeInfo|OUT||iLibrary|19[ms]||OK|
+2019-01-25 08:35:36:68| |Get_LotAbnormalOrNot|SQLIN||iLibrary|0[ms]||Select case LO.is_special_flow when 0 then LO.process_state	else SF.process_state end as process_state From[trans].lots as LO with(NOLOCK) left outer join trans.special_flows as SF with(NOLOCK) on SF.lot_id = LO.id and SF.id = LO.special_flow_id where LO.id = @lot_id|@lot_id(Int) = 20785
+2019-01-25 08:35:36:69|0|Get_LotAbnormalOrNot|SQLOUT||iLibrary|2[ms]||1
+|
+2019-01-25 08:35:36:69|0|Get_LotAbnormalOrNot|OUT||iLibrary|49[ms]||OK|
+2019-01-25 08:35:36:70| |LotCancel_NormalFlows|SQLIN||iLibrary|0[ms]||update LO set LO.process_state = 0, LO.finish_date_id = null, LO.finished_at = null, LO.updated_by = @user_id, LO.updated_at = @date, LO.qty_last_fail = 0, LO.machine_id = @machine_id, LO.process_job_id = @pjid from[trans].lots as LO where LO.id IN(@lot_id)|@user_id(Int) = 758,@date(DateTime) = 2019-01-25 08:33:42,@machine_id(Int) = 142,@pjid(Int) = 14473,@lot_id(Int) = 20785
+2019-01-25 08:35:36:71|0|LotCancel_NormalFlows|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 08:35:36:72| |LotCancel_NormalFlows|SQLIN||iLibrary|0[ms]||insert [trans].lot_process_records(id, day_id, recorded_at, record_class,  lot_id, process_id, step_no, qty_in, qty_pass, qty_last_pass, qty_pass_step_sum, qty_fail, qty_last_fail, qty_fail_step_sum, qty_divided, qty_hasuu, qty_out, recipe_version, machine_id, process_job_id, is_onlined, dbx_id, wip_state, process_state, quality_state, is_special_flow, special_flow_id, is_temp_devided, temp_devided_count, container_no, extend_data, std_time_sum, pass_plan_time, pass_plan_time_up, created_at, created_by, updated_at, updated_by, operated_by, first_ins_state, final_ins_state, job_id) select @record_id, @day_id, @day_at, @record_class,LO.id, JB.process_id, LO.step_no, LO.qty_in, @qty_pass, LO.qty_last_pass, LO.qty_pass_step_sum, @qty_fail, LO.qty_last_fail, LO.qty_fail_step_sum, LO.qty_divided, LO.qty_hasuu, LO.qty_out, DV.version_num ,LO.machine_id, @pjid ,@online_state, @DBx, LO.wip_state,LO.process_state,LO.quality_state, LO.is_special_flow ,LO.special_flow_id, LO.is_temp_devided ,LO.temp_devided_count,LO.container_no ,@XmlData, LO.std_time_sum, LO.pass_plan_time, LO.pass_plan_time_up ,LO.created_at, LO.created_by, LO.updated_at, LO.updated_by ,LO.updated_by ,LO.first_ins_state, LO.final_ins_state, DF.job_id from[trans].lots as LO with(nolock) inner join[method].device_flows as DF with(nolock) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no inner join method.jobs as JB with(nolock) on JB.id = DF.job_id inner join [method].device_slips as DS with ( NOLOCK ) on DS.device_slip_id = DF.device_slip_id inner join[method].device_versions as DV with(NOLOCK) on DV.device_id = DS.device_id where LO.id IN(@lots_id )|@record_id(Int) = 719881,@day_id(Int) = 1486,@day_at(DateTime) = 2019-01-25 08:33:42,@record_class(Int) = 6,@qty_pass(Int) = 1418,@qty_fail(Int) = 1,@DBx(Int) = 0,@pjid(Int) = 14473,@online_state(Int) = 1,@XmlData(Xml) = ,@lots_id(Int) = 20785
+2019-01-25 08:35:36:73|0|LotCancel_NormalFlows|SQLOUT||iLibrary|3[ms]||1 Records.|
+2019-01-25 08:35:36:73|0|LotCancel_NormalFlows|OUT||iLibrary|96[ms]||OK|
+2019-01-25 08:35:36:74|0|LotCancel|OUT||iLibrary|232[ms]||OK|
+2019-01-25 08:35:45:05| |CheckPackageEnable|SQLIN||iLibrary|0[ms]||select PK.id, PK.name from[method].packages as PK with(nolock) where PK.name = @package_name and PK.is_enabled = 1|@package_name(VarChar) = SSOP-B20W
+2019-01-25 08:35:45:07|0|CheckPackageEnable|SQLOUT||iLibrary|6[ms]||242,"SSOP-B20W           "
+|
+2019-01-25 08:35:45:07|0|CheckPackageEnable|OUT||iLibrary|33[ms]||OK|
+2019-01-25 08:35:45:08| |CheckLotisExist|SQLIN||iLibrary|0[ms]||select * from [trans].lots as LO with(nolock) where LO.lot_no = @lot_no|@lot_no(VarChar) = 1844A7004V
+2019-01-25 08:35:45:09|0|CheckLotisExist|SQLOUT||iLibrary|3[ms]||20785,"1844A7004V          ",1,242,5351,5351,0,600,4,29,1419,1418,1,0,0,0,0,0,0,0,0,1403,1423,7,0,0,20,0,0,0,0,0,0,0,0,0,50,,,1403,2018-11-03 00:00:00,1,,1423,,0,0,0,142,,1890,100,,0,0,,,14473,0,,0,2018-11-03 00:00:00,1,2019-01-25 08:33:42,758
+|
+2019-01-25 08:35:45:10|0|CheckLotisExist|OUT||iLibrary|21[ms]||OK|
+2019-01-25 08:35:45:11| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:45:12| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:45:13|0|Get_DateTimeInfo|SQLOUT||iLibrary|3[ms]||14862019-01-25 08:33:51
+|
+2019-01-25 08:35:45:14|0|Get_DateTimeInfo|OUT||iLibrary|18[ms]||OK|
+2019-01-25 08:35:45:15| |Check_UserAutomotiveByLMS|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:45:16| |Check_UserAutomotiveByLMS|SQLIN||iLibrary|0[ms]||Select US.id, LC.lic_name From[man].users as US with(NOLOCK) inner join[ctrlic].user_lic as UL with(NOLOCK) on UL.user_id = US.id inner join[ctrlic].license as LC with(NOLOCK) on LC.lic_id = UL.lic_id and LC.lic_name = 'PD AUTOMOTIVE' where US.id = @user_id|@user_id(Int) = 758
+2019-01-25 08:35:45:17|0|Check_UserAutomotiveByLMS|SQLOUT||iLibrary|2[ms]||758PD AUTOMOTIVE
+|
+2019-01-25 08:35:45:17| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:45:18| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:45:19|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:33:51
+|
+2019-01-25 08:35:45:20|0|Get_DateTimeInfo|OUT||iLibrary|16[ms]||OK|
+2019-01-25 08:33:51:00|0|Check_UserAutomotiveByLMS|OUT||iLibrary|46[ms]||OK|
+2019-01-25 08:33:51:00|0|GetUserInfo|OUT||iLibrary|66[ms]||OK|
+2019-01-25 08:33:51:00|0|CheckUserPermission|OUT||iLibrary|7[ms]||OK|
+2019-01-25 08:33:51:00|0|GetLotInfo|OUT||iLibrary|3[ms]||OK|
+2019-01-25 08:33:51:00|0|GetMachineInfo|OUT||iLibrary|8[ms]||OK|
+2019-01-25 08:33:51:00| |LotSetup|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:45:27| |CheckProcessFlow|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:45:27| |Get_CheckFlowData|SQLIN||iLibrary|0[ms]||select DISTINCT LO.id, LO.lot_no, case LO.is_special_flow when 0 then 0 else 1 end as is_special_flow, LO.location_id, DF.job_id, LO.step_no, LO.act_package_id, LO.product_family_id, LO.process_state, DF.device_slip_id, LO.process_job_id, LO.quality_state, LO.wip_state, LO.qty_in, LO.qty_pass, LO.qty_fail, PK.id as package_id, PK.name, PK.is_Enabled, DN.is_automotive, case when PMM.permitted_machine_id is null then JMC.id else PMC.id end as machine_id, case when PMM.permitted_machine_id is null then JMC.name else PMC.name end as machine_name, MS.run_state as run_state, MS.online_state as online_state, MS.qc_state as qc_state, case when PMM.permitted_machine_id is null then JMC.is_automotive else PMC.is_automotive end as machine_is_automotive, LO.first_ins_state, LO.final_ins_state, DS.is_released from trans.lots as LO with(NOLOCK) inner join method.device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no inner join[method].device_slips as DS with(NOLOCK) on DS.device_slip_id = DF.device_slip_id inner join[method].device_names as DN with(NOLOCK) on DN.id = LO.act_device_name_id inner join[method].packages as PK with(NOLOCK) on PK.id = DN.package_id inner join method.jobs as JB with(NOLOCK) on JB.id = DF.job_id inner join mc.group_models as GM with(NOLOCK) on GM.machine_group_id = JB.machine_group_id left outer join mc.machines as JMC with(NOLOCK) on JMC.machine_model_id = GM.machine_model_id and JMC.id = @machine_id left outer join[trans].machine_states as MS with(NOLOCK) on MS.machine_id = JMC.id left outer join[mc].permitted_machine_machines as PMM with(NOLOCK) on PMM.permitted_machine_id = DF.permitted_machine_id left outer join[mc].machines as PMC with(NOLOCK) on PMC.id = PMM.machine_id and PMC.id = JMC.id where LO.id = @lot_id |@lot_id(Int) = 20785,@machine_id(Int) = 142
+2019-01-25 08:35:45:29|0|Get_CheckFlowData|SQLOUT||iLibrary|2[ms]||20785"1844A7004V          "002960024210535114473020141914181242"SSOP-B20W           "11001
+20785"1844A7004V          "002960024210535114473020141914181242"SSOP-B20W           "11142MP-TWE-000101001
+|
+2019-01-25 08:35:45:29|0|CheckProcessFlow|OUT||iLibrary|18[ms]||OK|
+2019-01-25 08:35:45:30| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:45:32| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:45:33|0|Get_DateTimeInfo|SQLOUT||iLibrary|1[ms]||14862019-01-25 08:33:51
+|
+2019-01-25 08:35:45:34|0|Get_DateTimeInfo|OUT||iLibrary|28[ms]||OK|
+2019-01-25 08:35:45:35| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||select NUM.id from trans.numbers as NUM with(xlock,rowlock)where NUM.name = @name |@name(VarChar) = lot_process_records.id
+2019-01-25 08:35:45:35|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||719882
+|
+2019-01-25 08:35:45:36| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||update NUM set NUM.id = NUM.id + @num from trans.numbers as NUM where NUM.name = @name|@num(Int) = 1,@name(VarChar) = lot_process_records.id
+2019-01-25 08:35:45:37|0|CountUp_Numbers|SQLOUT||iLibrary|3[ms]||1 Records.|
+2019-01-25 08:35:45:38|0|CountUp_Numbers|OUT||iLibrary|34[ms]||719883|
+2019-01-25 08:35:45:39| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||select NUM.id from trans.numbers as NUM with(xlock,rowlock)where NUM.name = @name |@name(VarChar) = lot_pjs.process_job_id
+2019-01-25 08:35:45:40|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||14474
+|
+2019-01-25 08:35:45:41| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||update NUM set NUM.id = NUM.id + @num from trans.numbers as NUM where NUM.name = @name|@num(Int) = 1,@name(VarChar) = lot_pjs.process_job_id
+2019-01-25 08:35:45:42|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 08:35:45:42|0|CountUp_Numbers|OUT||iLibrary|37[ms]||14475|
+2019-01-25 08:35:45:44| |Check_LotMaterialInfos|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:45:45| |Get_MaterialProductionInfos|IN||iLibrary|0[ms]|||
+2019-01-25 08:33:51:00|0|GetLotInfo|OUT||iLibrary|14[ms]||OK|
+2019-01-25 08:35:45:48| |Get_MaterialProductionInfos|SQLIN||iLibrary|0[ms]||SELECT MAMM.id as id, MAMM.barcode as barcode, PR.id as production_id, case when MAMM.name is null then PR.name else MAMM.name end as production_name, CG.id as category_id, CG.name as category_name, CI.spec_no, CI.spec_name, DF.process_minutes, MAB.use_qty, MAB.use_qty_unit, MAB.limit_time_unit1, MAB.time_limit1, MAB.time_warn1 FROM trans.lots as LO with(NOLOCK) inner join method.device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no inner join method.material_bills as MAB with(NOLOCK) on MAB.material_set_id = DF.material_set_id inner join method.material_bill_details as MABD with(NOLOCK) on MABD.material_bill_id = MAB.id inner join material.production_specs as PS with(NOLOCK) on PS.spec_no = MABD.spec_no inner join material.productions as PR with(NOLOCK) on PR.id = PS.production_id inner join material.categories as CG with(NOLOCK) on CG.id = PR.category_id inner join material.category_items as CI with(NOLOCK) on CI.id = CG.id and CI.spec_no = PS.spec_no full join( Select MA.id, MA.barcode, MA.material_production_id, PL.name from trans.materials as MA with(NOLOCK) inner join material.productions as PL with ( NOLOCK ) on PL.id = MA.material_production_id inner join trans.machine_materials as MM with(NOLOCK) on MM.material_id = MA.id and MM.machine_id = @machine_id) as MAMM on MAMM.material_production_id = PR.id where LO.id = @lot_id|@machine_id(Int) = 142,@lot_id(Int) = 20785
+2019-01-25 08:35:45:49|0|Get_MaterialProductionInfos|SQLOUT||iLibrary|3[ms]|||
+2019-01-25 08:33:51:00|1300|Get_MaterialProductionInfos|OUT||iLibrary|46[ms]||This Process don't need materials.|
+2019-01-25 08:35:45:51| |LotSetup|SQLIN||iLibrary|0[ms]||insert [trans].lot_pjs( process_job_id, product_family_id, machine_id, online_state, created_at, started_at, started_by, finished_at, finished_by ) select @pjid, @product_family_id, MS.machine_id, MS.online_state, @date1, null, null, null, null from [trans].machine_states as MS where MS.machine_id = @machine_id|@pjid(Int) = 14474,@product_family_id(Int) = 1,@date1(DateTime) = 2019-01-25 08:33:51,@date2(DateTime) = 2019-01-25 08:33:51,@user_id(Int) = 758,@machine_id(Int) = 142
+2019-01-25 08:35:45:52|0|LotSetup|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 08:35:45:54| |LotSetup|SQLIN||iLibrary|0[ms]||insert [trans].pj_lots(process_job_id, idx, lot_id) select @pjid, @idx, @lot_id|@pjid(Int) = 14474,@idx(Int) = 0,@lot_id(Int) = 20785
+2019-01-25 08:35:45:55|0|LotSetup|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 08:35:45:56| |Get_LotDBData|SQLIN||iLibrary|0[ms]||select LO.id, LO.lot_no, DN.is_automotive, DF.job_id, LO.process_state, LO.device_slip_id, LO.step_no, LO.act_package_id, LO.product_family_id, LO.quality_state, LO.wip_state, case LO.is_special_flow when 0 then 0 else 1 end as is_special_flow, LO.location_id, LO.process_job_id, LO.qty_in, LO.qty_pass, LO.qty_fail, LO.first_ins_state, LO.final_ins_state from[trans].lots as LO with(NOLOCK) inner join[method].packages as PK with(NOLOCK) on PK.id = LO.act_package_id inner join[method].device_slips as DS with(NOLOCK) on DS.device_slip_id = LO.device_slip_id inner join[method].device_versions as DV with(NOLOCK) on DV.device_id = DS.device_id inner join[method].device_names as DN with(NOLOCK) on DN.id = DV.device_name_id left outer join[method].device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no where LO.id = @lots_id|@lots_id(Int) = 20785
+2019-01-25 08:35:45:57|0|Get_LotDBData|SQLOUT||iLibrary|2[ms]||20785"1844A7004V          "129053516002421020001447314191418100
+|
+2019-01-25 08:35:45:58|0|Get_LotDBData|OUT||iLibrary|21[ms]||OK|
+2019-01-25 08:35:45:59| |Get_Recipe|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:45:60| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:45:61| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:45:62|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:33:51
+|
+2019-01-25 08:35:45:63|0|Get_DateTimeInfo|OUT||iLibrary|22[ms]||OK|
+2019-01-25 08:35:45:64| |Get_Recipe|SQLIN||iLibrary|0[ms]||Select DF.recipe, DS.tp_code, DS.os_program_name, DN.assy_name, DN.ft_name, DN.name as device_name, DC.chip_name, PK.name from[trans].lots as LO with(NOLOCK) inner join[method].packages as PK with(NOLOCK) on PK.id = LO.act_package_id inner join[method].device_slips as DS with(NOLOCK) on DS.device_slip_id = LO.device_slip_id inner join[method].device_versions as DV with(NOLOCK) on DV.device_id = DS.device_id inner join[method].device_names as DN with(NOLOCK) on DN.id = DV.device_name_id inner join[method].device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no left outer join[method].device_chips as DC with(NOLOCK) on DC.device_slip_id = DF.device_slip_id where LO.id = @lot_id|@lot_id(Int) = 20785
+2019-01-25 08:35:45:66|0|Get_Recipe|SQLOUT||iLibrary|4[ms]||F0240M6101FV OABM6101FV-C(CV3C)BM6101FV-C"BM6101FV-CE2        ""SSOP-B20W           "
+|
+2019-01-25 08:35:45:67| |Get_Recipe|SQLIN||iLibrary|0[ms]||Select MD.ppid_type1, MD.ppid_type2 from [mc].machines as MC with(NOLOCK) inner join[mc].models as MD with(NOLOCK) on MD.id = MC.machine_model_id where MC.id = @machine_id|@machine_id(Int) = 142
+2019-01-25 08:35:45:68|0|Get_Recipe|SQLOUT||iLibrary|5[ms]||5
+|
+2019-01-25 08:35:45:69|0|Get_Recipe|OUT||iLibrary|97[ms]||OK|
+2019-01-25 08:35:45:70| |Get_LotAbnormalOrNot|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:45:71| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:45:74| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:45:75|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:33:51
+|
+2019-01-25 08:35:45:76|0|Get_DateTimeInfo|OUT||iLibrary|33[ms]||OK|
+2019-01-25 08:35:45:77| |Get_LotAbnormalOrNot|SQLIN||iLibrary|0[ms]||Select case LO.is_special_flow when 0 then LO.process_state	else SF.process_state end as process_state From[trans].lots as LO with(NOLOCK) left outer join trans.special_flows as SF with(NOLOCK) on SF.lot_id = LO.id and SF.id = LO.special_flow_id where LO.id = @lot_id|@lot_id(Int) = 20785
+2019-01-25 08:35:45:78|0|Get_LotAbnormalOrNot|SQLOUT||iLibrary|2[ms]||0
+|
+2019-01-25 08:35:45:79|0|Get_LotAbnormalOrNot|OUT||iLibrary|74[ms]||OK|
+2019-01-25 08:35:45:80| |LotSetup_NormalFlows|SQLIN||iLibrary|0[ms]||update LO set LO.process_state = 1, LO.updated_by = @user_id, LO.updated_at = @date, LO.qty_last_fail = 0, LO.qty_last_pass = 0, LO.qty_fail_step_sum = 0, LO.qty_pass_step_sum = 0, LO.machine_id = @machine_id, LO.process_job_id = @pjid, LO.first_ins_state = 0, LO.final_ins_state = 0, LO.std_time_sum = DF.sum_process_minutes from[trans].lots as LO inner join [method].device_flows as DF on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no where LO.id IN(@lot_id)|@user_id(Int) = 758,@date(DateTime) = 2019-01-25 08:33:51,@machine_id(Int) = 142,@pjid(Int) = 14474,@lot_id(Int) = 20785
+2019-01-25 08:35:45:81|0|LotSetup_NormalFlows|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 08:35:45:82| |LotSetup_NormalFlows|SQLIN||iLibrary|0[ms]||insert [trans].lot_process_records(id, day_id, recorded_at, record_class,  lot_id, process_id, step_no, qty_in, qty_pass, qty_last_pass, qty_pass_step_sum, qty_fail, qty_last_fail, qty_fail_step_sum, qty_divided, qty_hasuu, qty_out, recipe, recipe_version, machine_id, process_job_id, is_onlined, dbx_id, wip_state, process_state, quality_state, is_special_flow, special_flow_id, is_temp_devided, temp_devided_count, container_no, extend_data, std_time_sum, pass_plan_time, pass_plan_time_up, created_at, created_by, updated_at, updated_by, operated_by, first_ins_state, final_ins_state, job_id) select @record_id, @day_id, @day_at, @record_class,LO.id, JB.process_id, LO.step_no, LO.qty_in, @qty_pass, LO.qty_last_pass, LO.qty_pass_step_sum, @qty_fail, LO.qty_last_fail, LO.qty_fail_step_sum, LO.qty_divided, LO.qty_hasuu, LO.qty_out, @Recipe, DV.version_num ,LO.machine_id, @pjid, @online_state, @DBx, LO.wip_state,LO.process_state,LO.quality_state, LO.is_special_flow ,LO.special_flow_id, LO.is_temp_devided ,LO.temp_devided_count ,LO.container_no ,@XmlData, LO.std_time_sum, LO.pass_plan_time, LO.pass_plan_time_up, LO.created_at, LO.created_by, LO.updated_at, LO.updated_by, LO.updated_by, LO.first_ins_state, LO.final_ins_state, DF.job_id from[trans].lots as LO with(nolock) inner join[method].device_flows as DF with(nolock) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no inner join method.jobs as JB with(nolock) on JB.id = DF.job_id inner join [method].device_slips as DS with(nolock) on DS.device_slip_id = DF.device_slip_id inner join[method].device_versions as DV with(nolock) on DV.device_id = DS.device_id where LO.id IN(@lots_id )|@record_id(Int) = 719882,@day_id(Int) = 1486,@day_at(DateTime) = 2019-01-25 08:33:51,@record_class(Int) = 5,@qty_pass(Int) = 1418,@qty_fail(Int) = 1,@DBx(Int) = 0,@pjid(Int) = 14474,@online_state(Int) = 1,@XmlData(Xml) = ,@lots_id(Int) = 20785,@Recipe(VarChar) = BM6101FV-C(CV3C)
+2019-01-25 08:35:45:83|0|LotSetup_NormalFlows|SQLOUT||iLibrary|3[ms]||1 Records.|
+2019-01-25 08:35:45:84|0|LotSetup_NormalFlows|OUT||iLibrary|44[ms]||OK|
+2019-01-25 08:33:51:00|0|LotSetup|OUT||iLibrary|587[ms]||OK|
+2019-01-25 08:35:49:45| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:49:46| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:49:47|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:33:55
+|
+2019-01-25 08:35:49:49|0|Get_DateTimeInfo|OUT||iLibrary|27[ms]||OK|
+2019-01-25 08:35:49:50| |Check_UserAutomotiveByLMS|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:49:51| |Check_UserAutomotiveByLMS|SQLIN||iLibrary|0[ms]||Select US.id, LC.lic_name From[man].users as US with(NOLOCK) inner join[ctrlic].user_lic as UL with(NOLOCK) on UL.user_id = US.id inner join[ctrlic].license as LC with(NOLOCK) on LC.lic_id = UL.lic_id and LC.lic_name = 'PD AUTOMOTIVE' where US.id = @user_id|@user_id(Int) = 758
+2019-01-25 08:35:49:52|0|Check_UserAutomotiveByLMS|SQLOUT||iLibrary|2[ms]||758PD AUTOMOTIVE
+|
+2019-01-25 08:35:49:53| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:49:55| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:49:56|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:33:55
+|
+2019-01-25 08:35:49:57|0|Get_DateTimeInfo|OUT||iLibrary|25[ms]||OK|
+2019-01-25 08:33:55:00|0|Check_UserAutomotiveByLMS|OUT||iLibrary|69[ms]||OK|
+2019-01-25 08:33:55:00|0|GetUserInfo|OUT||iLibrary|97[ms]||OK|
+2019-01-25 08:33:55:00|0|GetLotInfo|OUT||iLibrary|3[ms]||OK|
+2019-01-25 08:33:55:00|0|GetMachineInfo|OUT||iLibrary|11[ms]||OK|
+2019-01-25 08:33:55:00| |AbnormalLotEnd_BackToThe_BeforeProcess|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:49:66| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:49:68| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 08:35:49:70|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 08:33:55
+|
+2019-01-25 08:35:49:71|0|Get_DateTimeInfo|OUT||iLibrary|43[ms]||OK|
+2019-01-25 08:35:49:73| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||select NUM.id from trans.numbers as NUM with(xlock,rowlock)where NUM.name = @name |@name(VarChar) = lot_process_records.id
+2019-01-25 08:35:49:75|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||719883
+|
+2019-01-25 08:35:49:76| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||update NUM set NUM.id = NUM.id + @num from trans.numbers as NUM where NUM.name = @name|@num(Int) = 1,@name(VarChar) = lot_process_records.id
+2019-01-25 08:35:49:77|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 08:35:49:79|0|CountUp_Numbers|OUT||iLibrary|51[ms]||719884|
+2019-01-25 08:35:49:80| |Get_LotDBData|SQLIN||iLibrary|0[ms]||select LO.id, LO.lot_no, DN.is_automotive, DF.job_id, LO.process_state, LO.device_slip_id, LO.step_no, LO.act_package_id, LO.product_family_id, LO.quality_state, LO.wip_state, case LO.is_special_flow when 0 then 0 else 1 end as is_special_flow, LO.location_id, LO.process_job_id, LO.qty_in, LO.qty_pass, LO.qty_fail, LO.first_ins_state, LO.final_ins_state from[trans].lots as LO with(NOLOCK) inner join[method].packages as PK with(NOLOCK) on PK.id = LO.act_package_id inner join[method].device_slips as DS with(NOLOCK) on DS.device_slip_id = LO.device_slip_id inner join[method].device_versions as DV with(NOLOCK) on DV.device_id = DS.device_id inner join[method].device_names as DN with(NOLOCK) on DN.id = DV.device_name_id left outer join[method].device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no where LO.id = @lots_id|@lots_id(Int) = 20785
+2019-01-25 08:35:49:81|0|Get_LotDBData|SQLOUT||iLibrary|2[ms]||20785"1844A7004V          "129153516002421020001447414191418100
+|
+2019-01-25 08:35:49:82|0|Get_LotDBData|OUT||iLibrary|25[ms]||OK|
+2019-01-25 08:35:49:84| |Get_NextStepNo|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:49:86| |Get_NextStepNo|SQLIN||iLibrary|0[ms]||select LO.id, case LO.is_special_flow when 0 then LO.device_slip_id else SF.id end as device_slip_id, case LO.is_special_flow when 0 then 0 else 1 end as is_special_flow, case LO.is_special_flow when 0 then LO.step_no else SF.step_no end as step_no, case LO.is_special_flow when 0 then DF.next_step_no else LOS.next_step_no end as next_step_no, case LO.is_special_flow when 0 then NEXT.next_step_no else SPNEXT.next_step_no end as next_second_step_no from[trans].lots as LO inner join[method].packages as PK with(NOLOCK) on PK.id = LO.act_package_id inner join[method].device_slips as DS with(NOLOCK) on DS.device_slip_id = LO.device_slip_id inner join[method].device_names as DN with(NOLOCK) on DN.id = LO.act_device_name_id inner join[method].device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no left outer join[method].device_flows as NEXT with(NOLOCK) on NEXT.device_slip_id = DF.device_slip_id and NEXT.step_no = DF.next_step_no and NEXT.is_skipped = 1 left outer join trans.special_flows as SF with(NOLOCK) on SF.lot_id = LO.id and SF.id = LO.special_flow_id left outer join trans.lot_special_flows as LOS with(NOLOCK) on LOS.special_flow_id = SF.id and LOS.step_no = SF.step_no left outer join trans.lot_special_flows as SPNEXT with(NOLOCK) on SPNEXT.special_flow_id = LOS.special_flow_id and SPNEXT.step_no = LOS.next_step_no and SPNEXT.is_skipped = 1 where LO.id = @lot_id|@lot_id(Int) = 20785
+2019-01-25 08:35:49:87|0|Get_NextStepNo|SQLOUT||iLibrary|3[ms]||2078553510600800
+|
+2019-01-25 08:35:49:88|0|Get_NextStepNo|OUT||iLibrary|25[ms]||Next Step =800|
+2019-01-25 08:35:49:89| |TimeUp_Calculation|SQLIN||iLibrary|0[ms]||select DS.normal_leadtime_minutes, case LO.is_special_flow when 0 then NEXT_DF.process_minutes else NEXT_SP.process_minutes end as process_minutes, case LO.is_special_flow when 0 then NEXT_DF.sum_process_minutes else NEXT_SP.sum_process_minutes + NEXT_DF.sum_process_minutes end as sum_process_minutes, INPLAN.date_value as in_date_value, OUTPLAN.date_value as out_date_value, FIXED_OUTPLAN.date_value as fixed_out_date_value, ACTUALLY_IN.date_value as act_in_date_value, LO.is_special_flow from[trans].lots as LO with(NOLOCK) inner join[method].device_slips as DS on DS.device_slip_id = LO.device_slip_id left outer join[method].device_flows as DF with(NOLOCK) on DF.device_slip_id = DS.device_slip_id and DF.step_no = LO.step_no left outer join[method].device_flows as NEXT_DF on NEXT_DF.device_slip_id = DS.device_slip_id and NEXT_DF.step_no = DF.next_step_no left outer join trans.special_flows as SF with(NOLOCK) on SF.lot_id = LO.id and SF.id = LO.special_flow_id left outer join trans.lot_special_flows as SP with(NOLOCK) on SP.special_flow_id = SF.id and SP.step_no = SF.step_no left outer join trans.lot_special_flows as NEXT_SP on NEXT_SP.special_flow_id = SF.id and NEXT_SP.step_no = SP.next_step_no inner join[trans].days as INPLAN on INPLAN.id = LO.in_plan_date_id inner join[trans].days as OUTPLAN on OUTPLAN.id = LO.out_plan_date_id inner join[trans].days as FIXED_OUTPLAN on FIXED_OUTPLAN.id = LO.modify_out_plan_date_id inner join[trans].days as ACTUALLY_IN on ACTUALLY_IN.id = LO.in_date_id where LO.id = @lot_id|@lot_id(Int) = 20785
+2019-01-25 08:35:49:91|0|TimeUp_Calculation|SQLOUT||iLibrary|2[ms]||042024902018-11-03 00:00:002018-11-23 00:00:002018-11-23 00:00:002018-11-03 00:00:000
+|
+2019-01-25 08:35:50:08|999|TimeUp_Calculation|OUT||iLibrary|0[ms]||Faile|
+2019-01-25 08:35:50:09| |Update_Lot_ProcessJobs|SQLIN||iLibrary|0[ms]||update [trans].lot_pjs Set finished_at = @date, finished_by = @user_id where[trans].lot_pjs.process_job_id = @pjid|@pjid(Int) = 14474,@date(DateTime) = 2019-01-25 08:33:55,@user_id(Int) = 758
+2019-01-25 08:35:50:10|0|Update_Lot_ProcessJobs|SQLOUT||iLibrary|3[ms]||1 Records.|
+2019-01-25 08:35:50:11|0|Update_Lot_ProcessJobs|OUT||iLibrary|26[ms]||OK|
+2019-01-25 08:35:50:13| |Update_LotProcessState|IN||iLibrary|0[ms]|||
+2019-01-25 08:35:50:14| |Update_LotProcessState|SQLIN||iLibrary|0[ms]||update LO set LO.process_state = @process_state from [trans].lots as LO where Lo.id = @lot_id|@lot_id(Int) = 20785,@process_state(Int) = 100
+2019-01-25 08:35:50:16|0|Update_LotProcessState|SQLOUT||iLibrary|4[ms]||1 Records.|
+2019-01-25 08:35:50:17| |AbnormalLotEnd_NormalFlows|SQLIN||iLibrary|0[ms]||insert [trans].lot_process_records(id, day_id, recorded_at, record_class,  lot_id, process_id, step_no, quality_state, qty_in, qty_pass, qty_last_pass, qty_pass_step_sum, qty_fail, qty_last_fail, qty_fail_step_sum, qty_divided, qty_hasuu, qty_out, recipe_version, machine_id, process_job_id, is_onlined, dbx_id, wip_state, process_state, is_special_flow, special_flow_id, is_temp_devided, temp_devided_count, container_no, extend_data, std_time_sum, pass_plan_time, pass_plan_time_up, created_at, created_by, updated_at, updated_by, operated_by, first_ins_state, final_ins_state, job_id) select @record_id, @day_id, @day_at, @record_class,LO.id, JB.process_id, LO.step_no, @hold, LO.qty_in, LO.qty_pass, @qty_pass, LO.qty_pass_step_sum + @qty_pass, LO.qty_fail , @qty_fail, LO.qty_fail_step_sum + @qty_fail, LO.qty_divided, LO.qty_hasuu, LO.qty_out, DV.version_num ,LO.machine_id, @pjid ,@online_state, @DBx, LO.wip_state, LO.process_state, LO.is_special_flow ,LO.special_flow_id, LO.is_temp_devided ,LO.temp_devided_count ,LO.container_no ,@XmlData, LO.std_time_sum, @pass_plan_time, @pass_plan_time_up ,LO.created_at, LO.created_by, LO.updated_at, LO.updated_by ,LO.updated_by ,LO.first_ins_state, LO.final_ins_state, DF.job_id from[trans].lots as LO with(nolock) inner join[method].device_flows as DF with(nolock) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no inner join method.jobs as JB with(nolock) on JB.id = DF.job_id inner join [method].device_slips as DS with ( NOLOCK ) on DS.device_slip_id = DF.device_slip_id inner join[method].device_versions as DV with(NOLOCK) on DV.device_id = DS.device_id where LO.id IN(@lots_id )|@record_id(Int) = 719883,@day_id(Int) = 1486,@day_at(DateTime) = 2019-01-25 08:33:55,@record_class(Int) = 23,@qty_pass(Int) = 6000,@qty_fail(Int) = 0,@DBx(Int) = 0,@pjid(Int) = 14474,@online_state(Int) = 1,@XmlData(Xml) = ,@lots_id(Int) = 20785,@hold(Int) = 0,@pass_plan_time(DateTime) = ,@pass_plan_time_up(DateTime) = 
+2019-01-25 08:35:50:20|0|AbnormalLotEnd_NormalFlows|SQLOUT||iLibrary|16[ms]||1 Records.|
+2019-01-25 08:35:50:21| |AbnormalLotEnd_NormalFlows|SQLIN||iLibrary|0[ms]||update MS set MS.last_package_id = DN.package_id, MS.last_device_id = DN.id from [trans].machine_states as MS inner join[trans].lots as LO on LO.machine_id = MS.machine_id inner join[method].device_slips as DS on DS.device_slip_id = LO.device_slip_id inner join[method].device_names as DN on DN.id = LO.act_device_name_id where MS.machine_id = @machine_id and LO.id = @lot_id|@machine_id(Int) = 142,@lot_id(Int) = 20785
+2019-01-25 08:35:50:23|0|AbnormalLotEnd_NormalFlows|SQLOUT||iLibrary|9[ms]||1 Records.|
+2019-01-25 08:35:50:25| |AbnormalLotEnd_NormalFlows|SQLIN||iLibrary|0[ms]||update LO set LO.process_state = @end_mode, LO.act_process_id = JB.process_id, LO.act_job_id = DF.job_id, LO.qty_last_pass = @qty_pass, LO.qty_pass_step_sum = LO.qty_pass_step_sum + @qty_pass, LO.qty_fail_step_sum = LO.qty_fail_step_sum + @qty_fail, LO.qty_last_fail = @qty_fail, LO.std_time_sum = DF.sum_process_minutes, LO.pass_plan_time = @pass_plan_time, LO.pass_plan_time_up = @pass_plan_time_up, LO.finish_date_id = @day_id, LO.finished_at = @date1, LO.updated_by = @user_id, LO.updated_at = @date2, LO.machine_id = -1, LO.first_ins_state = 0, LO.final_ins_state = 0, LO.quality_state = @hold from[trans].lots as LO with(nolock) inner join[method].device_flows as DF on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no inner join method.jobs as JB with(nolock) on JB.id = DF.job_id where LO.id IN(@lot_id)|@end_mode(Int) = 100,@qty_pass(Int) = 6000,@qty_fail(Int) = 0,@pass_plan_time(DateTime) = ,@pass_plan_time_up(DateTime) = ,@day_id(Int) = 1486,@date1(DateTime) = 2019-01-25 08:33:55,@user_id(Int) = 758,@date2(DateTime) = 2019-01-25 08:33:55,@lot_id(Int) = 20785,@hold(Int) = 0
+2019-01-25 08:35:50:27|0|AbnormalLotEnd_NormalFlows|SQLOUT||iLibrary|10[ms]||1 Records.|
+2019-01-25 08:35:50:28|0|AbnormalLotEnd_NormalFlows|OUT||iLibrary|441[ms]||OK|
+2019-01-25 08:33:55:00|0|AbnormalLotEnd_BackToThe_BeforeProcess|OUT||iLibrary|646[ms]||OK|
+2019-01-25 09:55:37:05| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 09:55:37:30| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 09:55:37:31|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 09:53:43
+|
+2019-01-25 09:55:37:33|0|Get_DateTimeInfo|OUT||iLibrary|39[ms]||OK|
+2019-01-25 09:55:38:29|10|GetLotInfo|OUT||iLibrary|20[ms]||This lot doesn't exist|
+2019-01-25 09:56:05:99| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 09:56:06:01| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 09:56:06:02|0|Get_DateTimeInfo|SQLOUT||iLibrary|6[ms]||14862019-01-25 09:54:12
+|
+2019-01-25 09:56:06:04|0|Get_DateTimeInfo|OUT||iLibrary|29[ms]||OK|
+2019-01-25 09:54:12:00|0|GetLotInfo|OUT||iLibrary|5[ms]||OK|
+2019-01-25 09:56:20:36| |CheckPackageEnable|SQLIN||iLibrary|0[ms]||select PK.id, PK.name from[method].packages as PK with(nolock) where PK.name = @package_name and PK.is_enabled = 1|@package_name(VarChar) = SSOP-B20W
+2019-01-25 09:56:20:38|0|CheckPackageEnable|SQLOUT||iLibrary|3[ms]||242,"SSOP-B20W           "
+|
+2019-01-25 09:56:20:39|0|CheckPackageEnable|OUT||iLibrary|29[ms]||OK|
+2019-01-25 09:56:20:41| |CheckLotisExist|SQLIN||iLibrary|0[ms]||select * from [trans].lots as LO with(nolock) where LO.lot_no = @lot_no|@lot_no(VarChar) = 1844A7004V
+2019-01-25 09:56:20:42|0|CheckLotisExist|SQLOUT||iLibrary|3[ms]||20785,"1844A7004V          ",1,242,5351,5351,0,600,4,29,1419,1418,1,6000,0,6000,0,0,0,0,0,1403,1423,7,0,0,20,100,0,0,0,0,0,0,0,0,50,1486,2019-01-25 08:33:55,1403,2018-11-03 00:00:00,1,,1423,,0,0,0,-1,,1890,100,,0,0,,,14474,0,,0,2018-11-03 00:00:00,1,2019-01-25 08:33:55,758
+|
+2019-01-25 09:56:20:43|0|CheckLotisExist|OUT||iLibrary|24[ms]||OK|
+2019-01-25 09:56:20:72| |Check_UserAutomotiveByLMS|IN||iLibrary|0[ms]|||
+2019-01-25 09:56:20:73| |Check_UserAutomotiveByLMS|SQLIN||iLibrary|0[ms]||Select US.id, LC.lic_name From[man].users as US with(NOLOCK) inner join[ctrlic].user_lic as UL with(NOLOCK) on UL.user_id = US.id inner join[ctrlic].license as LC with(NOLOCK) on LC.lic_id = UL.lic_id and LC.lic_name = 'PD AUTOMOTIVE' where US.id = @user_id|@user_id(Int) = 758
+2019-01-25 09:56:20:75|0|Check_UserAutomotiveByLMS|SQLOUT||iLibrary|3[ms]||758PD AUTOMOTIVE
+|
+2019-01-25 09:56:20:76| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 09:56:20:78| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 09:56:20:79|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 09:54:26
+|
+2019-01-25 09:56:20:81|0|Get_DateTimeInfo|OUT||iLibrary|32[ms]||OK|
+2019-01-25 09:54:12:00|0|Check_UserAutomotiveByLMS|OUT||iLibrary|93[ms]||OK|
+2019-01-25 09:54:12:00|0|GetUserInfo|OUT||iLibrary|146[ms]||OK|
+2019-01-25 09:54:12:00|0|CheckUserPermission|OUT||iLibrary|7[ms]||OK|
+2019-01-25 09:54:12:00|0|GetMachineInfo|OUT||iLibrary|11[ms]||OK|
+2019-01-25 09:54:12:00| |LotSetup|IN||iLibrary|0[ms]|||
+2019-01-25 09:56:20:92| |CheckProcessFlow|IN||iLibrary|0[ms]|||
+2019-01-25 09:56:20:93| |Get_CheckFlowData|SQLIN||iLibrary|0[ms]||select DISTINCT LO.id, LO.lot_no, case LO.is_special_flow when 0 then 0 else 1 end as is_special_flow, LO.location_id, DF.job_id, LO.step_no, LO.act_package_id, LO.product_family_id, LO.process_state, DF.device_slip_id, LO.process_job_id, LO.quality_state, LO.wip_state, LO.qty_in, LO.qty_pass, LO.qty_fail, PK.id as package_id, PK.name, PK.is_Enabled, DN.is_automotive, case when PMM.permitted_machine_id is null then JMC.id else PMC.id end as machine_id, case when PMM.permitted_machine_id is null then JMC.name else PMC.name end as machine_name, MS.run_state as run_state, MS.online_state as online_state, MS.qc_state as qc_state, case when PMM.permitted_machine_id is null then JMC.is_automotive else PMC.is_automotive end as machine_is_automotive, LO.first_ins_state, LO.final_ins_state, DS.is_released from trans.lots as LO with(NOLOCK) inner join method.device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no inner join[method].device_slips as DS with(NOLOCK) on DS.device_slip_id = DF.device_slip_id inner join[method].device_names as DN with(NOLOCK) on DN.id = LO.act_device_name_id inner join[method].packages as PK with(NOLOCK) on PK.id = DN.package_id inner join method.jobs as JB with(NOLOCK) on JB.id = DF.job_id inner join mc.group_models as GM with(NOLOCK) on GM.machine_group_id = JB.machine_group_id left outer join mc.machines as JMC with(NOLOCK) on JMC.machine_model_id = GM.machine_model_id and JMC.id = @machine_id left outer join[trans].machine_states as MS with(NOLOCK) on MS.machine_id = JMC.id left outer join[mc].permitted_machine_machines as PMM with(NOLOCK) on PMM.permitted_machine_id = DF.permitted_machine_id left outer join[mc].machines as PMC with(NOLOCK) on PMC.id = PMM.machine_id and PMC.id = JMC.id where LO.id = @lot_id |@lot_id(Int) = 20785,@machine_id(Int) = 142
+2019-01-25 09:56:20:96|0|Get_CheckFlowData|SQLOUT||iLibrary|8[ms]||20785"1844A7004V          "00296002421100535114474020141914181242"SSOP-B20W           "11001
+20785"1844A7004V          "00296002421100535114474020141914181242"SSOP-B20W           "11142MP-TWE-000101001
+|
+2019-01-25 09:56:20:97|0|CheckProcessFlow|OUT||iLibrary|43[ms]||OK|
+2019-01-25 09:56:20:99| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 09:56:21:01| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 09:56:21:02|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 09:54:27
+|
+2019-01-25 09:56:21:04|0|Get_DateTimeInfo|OUT||iLibrary|33[ms]||OK|
+2019-01-25 09:56:21:07| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||select NUM.id from trans.numbers as NUM with(xlock,rowlock)where NUM.name = @name |@name(VarChar) = lot_process_records.id
+2019-01-25 09:56:21:09|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||719884
+|
+2019-01-25 09:56:21:11| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||update NUM set NUM.id = NUM.id + @num from trans.numbers as NUM where NUM.name = @name|@num(Int) = 1,@name(VarChar) = lot_process_records.id
+2019-01-25 09:56:21:13|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 09:56:21:15|0|CountUp_Numbers|OUT||iLibrary|80[ms]||719885|
+2019-01-25 09:56:21:16| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||select NUM.id from trans.numbers as NUM with(xlock,rowlock)where NUM.name = @name |@name(VarChar) = lot_pjs.process_job_id
+2019-01-25 09:56:21:18|0|CountUp_Numbers|SQLOUT||iLibrary|2[ms]||14475
+|
+2019-01-25 09:56:21:19| |CountUp_Numbers|SQLIN||iLibrary|0[ms]||update NUM set NUM.id = NUM.id + @num from trans.numbers as NUM where NUM.name = @name|@num(Int) = 1,@name(VarChar) = lot_pjs.process_job_id
+2019-01-25 09:56:21:21|0|CountUp_Numbers|SQLOUT||iLibrary|3[ms]||1 Records.|
+2019-01-25 09:56:21:22|0|CountUp_Numbers|OUT||iLibrary|62[ms]||14476|
+2019-01-25 09:56:21:24| |Check_LotMaterialInfos|IN||iLibrary|0[ms]|||
+2019-01-25 09:56:21:26| |Get_MaterialProductionInfos|IN||iLibrary|0[ms]|||
+2019-01-25 09:54:12:00|0|GetLotInfo|OUT||iLibrary|15[ms]||OK|
+2019-01-25 09:56:21:31| |Get_MaterialProductionInfos|SQLIN||iLibrary|0[ms]||SELECT MAMM.id as id, MAMM.barcode as barcode, PR.id as production_id, case when MAMM.name is null then PR.name else MAMM.name end as production_name, CG.id as category_id, CG.name as category_name, CI.spec_no, CI.spec_name, DF.process_minutes, MAB.use_qty, MAB.use_qty_unit, MAB.limit_time_unit1, MAB.time_limit1, MAB.time_warn1 FROM trans.lots as LO with(NOLOCK) inner join method.device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no inner join method.material_bills as MAB with(NOLOCK) on MAB.material_set_id = DF.material_set_id inner join method.material_bill_details as MABD with(NOLOCK) on MABD.material_bill_id = MAB.id inner join material.production_specs as PS with(NOLOCK) on PS.spec_no = MABD.spec_no inner join material.productions as PR with(NOLOCK) on PR.id = PS.production_id inner join material.categories as CG with(NOLOCK) on CG.id = PR.category_id inner join material.category_items as CI with(NOLOCK) on CI.id = CG.id and CI.spec_no = PS.spec_no full join( Select MA.id, MA.barcode, MA.material_production_id, PL.name from trans.materials as MA with(NOLOCK) inner join material.productions as PL with ( NOLOCK ) on PL.id = MA.material_production_id inner join trans.machine_materials as MM with(NOLOCK) on MM.material_id = MA.id and MM.machine_id = @machine_id) as MAMM on MAMM.material_production_id = PR.id where LO.id = @lot_id|@machine_id(Int) = 142,@lot_id(Int) = 20785
+2019-01-25 09:56:21:33|0|Get_MaterialProductionInfos|SQLOUT||iLibrary|5[ms]|||
+2019-01-25 09:54:12:00|1300|Get_MaterialProductionInfos|OUT||iLibrary|69[ms]||This Process don't need materials.|
+2019-01-25 09:56:21:36| |LotSetup|SQLIN||iLibrary|0[ms]||insert [trans].lot_pjs( process_job_id, product_family_id, machine_id, online_state, created_at, started_at, started_by, finished_at, finished_by ) select @pjid, @product_family_id, MS.machine_id, MS.online_state, @date1, null, null, null, null from [trans].machine_states as MS where MS.machine_id = @machine_id|@pjid(Int) = 14475,@product_family_id(Int) = 1,@date1(DateTime) = 2019-01-25 09:54:12,@date2(DateTime) = 2019-01-25 09:54:12,@user_id(Int) = 758,@machine_id(Int) = 142
+2019-01-25 09:56:21:38|0|LotSetup|SQLOUT||iLibrary|4[ms]||1 Records.|
+2019-01-25 09:56:21:40| |LotSetup|SQLIN||iLibrary|0[ms]||insert [trans].pj_lots(process_job_id, idx, lot_id) select @pjid, @idx, @lot_id|@pjid(Int) = 14475,@idx(Int) = 0,@lot_id(Int) = 20785
+2019-01-25 09:56:21:41|0|LotSetup|SQLOUT||iLibrary|2[ms]||1 Records.|
+2019-01-25 09:56:21:43| |Get_LotDBData|SQLIN||iLibrary|0[ms]||select LO.id, LO.lot_no, DN.is_automotive, DF.job_id, LO.process_state, LO.device_slip_id, LO.step_no, LO.act_package_id, LO.product_family_id, LO.quality_state, LO.wip_state, case LO.is_special_flow when 0 then 0 else 1 end as is_special_flow, LO.location_id, LO.process_job_id, LO.qty_in, LO.qty_pass, LO.qty_fail, LO.first_ins_state, LO.final_ins_state from[trans].lots as LO with(NOLOCK) inner join[method].packages as PK with(NOLOCK) on PK.id = LO.act_package_id inner join[method].device_slips as DS with(NOLOCK) on DS.device_slip_id = LO.device_slip_id inner join[method].device_versions as DV with(NOLOCK) on DV.device_id = DS.device_id inner join[method].device_names as DN with(NOLOCK) on DN.id = DV.device_name_id left outer join[method].device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no where LO.id = @lots_id|@lots_id(Int) = 20785
+2019-01-25 09:56:21:50|0|Get_LotDBData|SQLOUT||iLibrary|61[ms]||20785"1844A7004V          "12910053516002421020001447414191418100
+|
+2019-01-25 09:56:21:52|0|Get_LotDBData|OUT||iLibrary|94[ms]||OK|
+2019-01-25 09:56:21:54| |Get_Recipe|IN||iLibrary|0[ms]|||
+2019-01-25 09:56:21:56| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 09:56:21:57| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 09:56:21:59|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 09:54:27
+|
+2019-01-25 09:56:21:61|0|Get_DateTimeInfo|OUT||iLibrary|34[ms]||OK|
+2019-01-25 09:56:21:62| |Get_Recipe|SQLIN||iLibrary|0[ms]||Select DF.recipe, DS.tp_code, DS.os_program_name, DN.assy_name, DN.ft_name, DN.name as device_name, DC.chip_name, PK.name from[trans].lots as LO with(NOLOCK) inner join[method].packages as PK with(NOLOCK) on PK.id = LO.act_package_id inner join[method].device_slips as DS with(NOLOCK) on DS.device_slip_id = LO.device_slip_id inner join[method].device_versions as DV with(NOLOCK) on DV.device_id = DS.device_id inner join[method].device_names as DN with(NOLOCK) on DN.id = DV.device_name_id inner join[method].device_flows as DF with(NOLOCK) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no left outer join[method].device_chips as DC with(NOLOCK) on DC.device_slip_id = DF.device_slip_id where LO.id = @lot_id|@lot_id(Int) = 20785
+2019-01-25 09:56:21:64|0|Get_Recipe|SQLOUT||iLibrary|3[ms]||F0240M6101FV OABM6101FV-C(CV3C)BM6101FV-C"BM6101FV-CE2        ""SSOP-B20W           "
+|
+2019-01-25 09:56:21:65| |Get_Recipe|SQLIN||iLibrary|0[ms]||Select MD.ppid_type1, MD.ppid_type2 from [mc].machines as MC with(NOLOCK) inner join[mc].models as MD with(NOLOCK) on MD.id = MC.machine_model_id where MC.id = @machine_id|@machine_id(Int) = 142
+2019-01-25 09:56:21:67|0|Get_Recipe|SQLOUT||iLibrary|2[ms]||5
+|
+2019-01-25 09:56:21:68|0|Get_Recipe|OUT||iLibrary|127[ms]||OK|
+2019-01-25 09:56:21:70| |Get_LotAbnormalOrNot|IN||iLibrary|0[ms]|||
+2019-01-25 09:56:21:71| |Get_DateTimeInfo|IN||iLibrary|0[ms]|||
+2019-01-25 09:56:21:74| |Get_DateTimeInfo|SQLIN||iLibrary|0[ms]||select DAYS.id ,getdate() from[trans].days as DAYS with(nolock) where DAYS.date_value = convert(date, getdate())|
+2019-01-25 09:56:21:75|0|Get_DateTimeInfo|SQLOUT||iLibrary|2[ms]||14862019-01-25 09:54:27
+|
+2019-01-25 09:56:21:77|0|Get_DateTimeInfo|OUT||iLibrary|44[ms]||OK|
+2019-01-25 09:56:21:78| |Get_LotAbnormalOrNot|SQLIN||iLibrary|0[ms]||Select case LO.is_special_flow when 0 then LO.process_state	else SF.process_state end as process_state From[trans].lots as LO with(NOLOCK) left outer join trans.special_flows as SF with(NOLOCK) on SF.lot_id = LO.id and SF.id = LO.special_flow_id where LO.id = @lot_id|@lot_id(Int) = 20785
+2019-01-25 09:56:21:80|0|Get_LotAbnormalOrNot|SQLOUT||iLibrary|2[ms]||100
+|
+2019-01-25 09:56:21:81|0|Get_LotAbnormalOrNot|OUT||iLibrary|98[ms]||OK|
+2019-01-25 09:56:21:82| |LotSetup_NormalFlows|SQLIN||iLibrary|0[ms]||update LO set LO.process_state = 101, LO.qty_last_pass = 0, LO.qty_last_fail = 0, LO.updated_by = @user_id, LO.updated_at = @date, LO.machine_id = @machine_id, LO.process_job_id = @pjid, LO.first_ins_state = 0, LO.final_ins_state = 0 from[trans].lots as LO where LO.id IN(@lot_id)|@user_id(Int) = 758,@date(DateTime) = 2019-01-25 09:54:12,@machine_id(Int) = 142,@pjid(Int) = 14475,@lot_id(Int) = 20785
+2019-01-25 09:56:21:85|0|LotSetup_NormalFlows|SQLOUT||iLibrary|10[ms]||1 Records.|
+2019-01-25 09:56:21:86| |LotSetup_NormalFlows|SQLIN||iLibrary|0[ms]||insert [trans].lot_process_records(id, day_id, recorded_at, record_class,  lot_id, process_id, step_no, qty_in, qty_pass, qty_last_pass, qty_pass_step_sum, qty_fail, qty_last_fail, qty_fail_step_sum, qty_divided, qty_hasuu, qty_out, recipe, recipe_version, machine_id, process_job_id, is_onlined, dbx_id, wip_state, process_state, quality_state, is_special_flow, special_flow_id, is_temp_devided, temp_devided_count, container_no, extend_data, std_time_sum, pass_plan_time, pass_plan_time_up, created_at, created_by, updated_at, updated_by, operated_by, first_ins_state, final_ins_state, job_id) select @record_id, @day_id, @day_at, @record_class,LO.id, JB.process_id, LO.step_no, LO.qty_in, @qty_pass, LO.qty_last_pass, LO.qty_pass_step_sum, @qty_fail, LO.qty_last_fail, LO.qty_fail_step_sum, LO.qty_divided, LO.qty_hasuu, LO.qty_out, @Recipe, DV.version_num ,LO.machine_id, @pjid, @online_state, @DBx, LO.wip_state,LO.process_state,LO.quality_state, LO.is_special_flow ,LO.special_flow_id, LO.is_temp_devided ,LO.temp_devided_count ,LO.container_no ,@XmlData, LO.std_time_sum, LO.pass_plan_time, LO.pass_plan_time_up, LO.created_at, LO.created_by, LO.updated_at, LO.updated_by, LO.updated_by, LO.first_ins_state, LO.final_ins_state, DF.job_id from[trans].lots as LO with(nolock) inner join[method].device_flows as DF with(nolock) on DF.device_slip_id = LO.device_slip_id and DF.step_no = LO.step_no inner join method.jobs as JB with(nolock) on JB.id = DF.job_id inner join [method].device_slips as DS with(nolock) on DS.device_slip_id = DF.device_slip_id inner join[method].device_versions as DV with(nolock) on DV.device_id = DS.device_id where LO.id IN(@lots_id )|@record_id(Int) = 719884,@day_id(Int) = 1486,@day_at(DateTime) = 2019-01-25 09:54:12,@record_class(Int) = 5,@qty_pass(Int) = 1418,@qty_fail(Int) = 1,@DBx(Int) = 0,@pjid(Int) = 14475,@online_state(Int) = 1,@XmlData(Xml) = ,@lots_id(Int) = 20785,@Recipe(VarChar) = BM6101FV-C(CV3C)
+2019-01-25 09:56:21:88|0|LotSetup_NormalFlows|SQLOUT||iLibrary|3[ms]||1 Records.|
+2019-01-25 09:56:21:89|0|LotSetup_NormalFlows|OUT||iLibrary|69[ms]||OK|
+2019-01-25 09:54:12:00|0|LotSetup|OUT||iLibrary|994[ms]||OK|

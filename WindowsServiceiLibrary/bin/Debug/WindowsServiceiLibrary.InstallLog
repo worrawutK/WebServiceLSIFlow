@@ -1,0 +1,26 @@
+﻿Installing assembly 'C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\bin\Debug\WindowsServiceiLibrary.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\bin\Debug\WindowsServiceiLibrary.InstallLog
+   assemblypath = C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\bin\Debug\WindowsServiceiLibrary.exe
+Installing service Service1...
+Creating EventLog source Service1 in log Application...
+Rolling back assembly 'C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\bin\Debug\WindowsServiceiLibrary.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\bin\Debug\WindowsServiceiLibrary.InstallLog
+   assemblypath = C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\bin\Debug\WindowsServiceiLibrary.exe
+Restoring event log to previous state for source Service1.
+Installing assembly 'C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\bin\Debug\WindowsServiceiLibrary.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\bin\Debug\WindowsServiceiLibrary.InstallLog
+   assemblypath = C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\bin\Debug\WindowsServiceiLibrary.exe
+Installing service Service1...
+Creating EventLog source Service1 in log Application...
+Rolling back assembly 'C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\bin\Debug\WindowsServiceiLibrary.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\bin\Debug\WindowsServiceiLibrary.InstallLog
+   assemblypath = C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsServiceiLibrary\bin\Debug\WindowsServiceiLibrary.exe
+Restoring event log to previous state for source Service1.

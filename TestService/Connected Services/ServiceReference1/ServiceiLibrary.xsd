@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="MachineOnline">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Offline" />
+      <xs:enumeration value="Online" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MachineOnline" nillable="true" type="tns:MachineOnline" />
+  <xs:complexType name="MachineOnlineStateResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MachineOnlineStateResult" nillable="true" type="tns:MachineOnlineStateResult" />
+  <xs:simpleType name="MachineProcessingState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Initial" />
+      <xs:enumeration value="Idle" />
+      <xs:enumeration value="Setup" />
+      <xs:enumeration value="Ready" />
+      <xs:enumeration value="Execute" />
+      <xs:enumeration value="Pause" />
+      <xs:enumeration value="LotSetUp" />
+      <xs:enumeration value="Maintenance" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MachineProcessingState" nillable="true" type="tns:MachineProcessingState" />
+  <xs:complexType name="UpdateMachineStateResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateMachineStateResult" nillable="true" type="tns:UpdateMachineStateResult" />
+  <xs:complexType name="SetupLotResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="tns:SetupLotResult.Status" />
+      <xs:element minOccurs="0" name="Recipe" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SetupLotResult" nillable="true" type="tns:SetupLotResult" />
+  <xs:simpleType name="SetupLotResult.Status">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Pass" />
+      <xs:enumeration value="NotPass" />
+      <xs:enumeration value="Warning" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SetupLotResult.Status" nillable="true" type="tns:SetupLotResult.Status" />
+  <xs:complexType name="StartLotResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StartLotResult" nillable="true" type="tns:StartLotResult" />
+  <xs:simpleType name="Judge">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NG" />
+      <xs:enumeration value="OK" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Judge" nillable="true" type="tns:Judge" />
+  <xs:complexType name="UpdateFirstinspectionResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateFirstinspectionResult" nillable="true" type="tns:UpdateFirstinspectionResult" />
+  <xs:complexType name="EndLotResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EndLotResult" nillable="true" type="tns:EndLotResult" />
+  <xs:complexType name="UpdateFinalinspectionResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateFinalinspectionResult" nillable="true" type="tns:UpdateFinalinspectionResult" />
+  <xs:simpleType name="AlarmState">
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:element name="AlarmState" nillable="true" type="tns:AlarmState" />
+  <xs:complexType name="MachineAlarmResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MachineAlarmResult" nillable="true" type="tns:MachineAlarmResult" />
+  <xs:complexType name="CancelLotResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CancelLotResult" nillable="true" type="tns:CancelLotResult" />
+  <xs:complexType name="ReinputResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReinputResult" nillable="true" type="tns:ReinputResult" />
+</xs:schema>
