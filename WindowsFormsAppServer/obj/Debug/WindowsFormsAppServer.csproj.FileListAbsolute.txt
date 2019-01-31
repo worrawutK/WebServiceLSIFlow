@@ -1,8 +1,0 @@
-C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsFormsAppServer\bin\Debug\WindowsFormsAppServer.exe
-C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsFormsAppServer\bin\Debug\WindowsFormsAppServer.pdb
-C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsFormsAppServer\obj\Debug\WindowsFormsAppServer.csprojAssemblyReference.cache
-C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsFormsAppServer\obj\Debug\WindowsFormsAppServer.Properties.Resources.resources
-C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsFormsAppServer\obj\Debug\WindowsFormsAppServer.csproj.GenerateResource.cache
-C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsFormsAppServer\obj\Debug\WindowsFormsAppServer.csproj.CoreCompileInputs.cache
-C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsFormsAppServer\obj\Debug\WindowsFormsAppServer.exe
-C:\Users\user099\source\repos\WCFServiceiLibrary\WindowsFormsAppServer\obj\Debug\WindowsFormsAppServer.pdb
