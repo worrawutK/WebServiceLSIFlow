@@ -14,17 +14,15 @@ public class EndLotResult
     [DataMember()]
     public string Cause { get; internal set; }
 
-    public EndLotResult()
+    public EndLotResult(string functionName, Logger log)
         :this(true,"")
     {
-        //
-        // TODO: Add constructor logic here
-        //
+        log.ConnectionLogger.Write(0, functionName, "Normal", "WCFService", "iLibrary", 0, "", "", "");
     }
     public EndLotResult(string cause, string cause2, string functionName,Logger log)
         :this(false,cause)
     {
-        log.ConnectionLogger.Write(0, functionName, "", "WCFService", "iLibrary", 0, "", cause, cause2);
+        log.ConnectionLogger.Write(0, functionName, "Error", "WCFService", "iLibrary", 0, "", cause, cause2);
     }
     private EndLotResult(bool isPass,string cause)
     {

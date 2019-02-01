@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TestService.ServiceReference2;
+using TestService.ServiceReference1;
 namespace TestService
 {
     public partial class Form1 : Form
@@ -47,12 +47,12 @@ namespace TestService
         {
            SetupLotResult result = c_ILibraryClient.SetupLot(textBoxLotNo.Text, textBoxMCNo.Text,
                textBoxOPNo.Text, textBoxProcess.Text,"");
-            if (result.IsPass == SetupLotResult.Status.NotPass)
+            if (!result.IsPass)
             {
                 MessageBox.Show(result.Cause);
                 return;
             }
-            else if(result.IsPass == SetupLotResult.Status.Warning)
+            else if(result.Cause != "")
             {
                 MessageBox.Show(result.Cause);
             }

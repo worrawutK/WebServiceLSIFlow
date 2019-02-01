@@ -15,6 +15,7 @@ public interface IServiceiLibrary
     [OperationContract]
     UpdateMachineStateResult UpdateMachineState(string mcNo,MachineProcessingState state);
 
+
     /// <summary>
     /// จำเป็นต้องเก็บ recipe จาก SetupLotResult เพื่อใช้ต่อ StartLot
     /// </summary>

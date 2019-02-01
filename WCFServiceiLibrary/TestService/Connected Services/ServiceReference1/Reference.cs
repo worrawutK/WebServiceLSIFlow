@@ -188,7 +188,7 @@ namespace TestService.ServiceReference1 {
         private string CauseField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.ServiceReference1.SetupLotResult.Status IsPassField;
+        private bool IsPassField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RecipeField;
@@ -217,7 +217,7 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.ServiceReference1.SetupLotResult.Status IsPass {
+        public bool IsPass {
             get {
                 return this.IsPassField;
             }
@@ -249,20 +249,6 @@ namespace TestService.ServiceReference1 {
             if ((propertyChanged != null)) {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
-        }
-        
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-        [System.Runtime.Serialization.DataContractAttribute(Name="SetupLotResult.Status", Namespace="http://schemas.datacontract.org/2004/07/")]
-        public enum Status : int {
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            Pass = 0,
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            NotPass = 1,
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            Warning = 2,
         }
     }
     
@@ -521,6 +507,17 @@ namespace TestService.ServiceReference1 {
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AlarmState", Namespace="http://schemas.datacontract.org/2004/07/")]
+    public enum AlarmState : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RESET = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SET = 1,
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="MachineAlarmResult", Namespace="http://schemas.datacontract.org/2004/07/")]
@@ -704,6 +701,67 @@ namespace TestService.ServiceReference1 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CheckLotApcsProResult", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class CheckLotApcsProResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CauseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsPassField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Cause {
+            get {
+                return this.CauseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CauseField, value) != true)) {
+                    this.CauseField = value;
+                    this.RaisePropertyChanged("Cause");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsPass {
+            get {
+                return this.IsPassField;
+            }
+            set {
+                if ((this.IsPassField.Equals(value) != true)) {
+                    this.IsPassField = value;
+                    this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IServiceiLibrary")]
     public interface IServiceiLibrary {
@@ -729,9 +787,8 @@ namespace TestService.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/UpdateFinalinspection", ReplyAction="http://tempuri.org/IServiceiLibrary/UpdateFinalinspectionResponse")]
         TestService.ServiceReference1.UpdateFinalinspectionResult UpdateFinalinspection(string lotNo, string opNo, TestService.ServiceReference1.Judge judge, string mcNo);
         
-        // CODEGEN: Generating message contract since element name alarm from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/MachineAlarm", ReplyAction="http://tempuri.org/IServiceiLibrary/MachineAlarmResponse")]
-        TestService.ServiceReference1.MachineAlarmResponse MachineAlarm(TestService.ServiceReference1.MachineAlarmRequest request);
+        TestService.ServiceReference1.MachineAlarmResult MachineAlarm(string lotNo, string mcNo, string opNo, string AlarmNo, TestService.ServiceReference1.AlarmState alarm);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/CancelLot", ReplyAction="http://tempuri.org/IServiceiLibrary/CancelLotResponse")]
         TestService.ServiceReference1.CancelLotResult CancelLot(string mcNo, string lotNo, string opNo);
@@ -741,90 +798,9 @@ namespace TestService.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/ReinputAndHoldLot", ReplyAction="http://tempuri.org/IServiceiLibrary/ReinputAndHoldLotResponse")]
         TestService.ServiceReference1.ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class MachineAlarmRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="MachineAlarm", Namespace="http://tempuri.org/", Order=0)]
-        public TestService.ServiceReference1.MachineAlarmRequestBody Body;
-        
-        public MachineAlarmRequest() {
-        }
-        
-        public MachineAlarmRequest(TestService.ServiceReference1.MachineAlarmRequestBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class MachineAlarmRequestBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
-        public string lotNo;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-        public string mcNo;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-        public string opNo;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-        public string AlarmNo;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
-        public string alarm;
-        
-        public MachineAlarmRequestBody() {
-        }
-        
-        public MachineAlarmRequestBody(string lotNo, string mcNo, string opNo, string AlarmNo, string alarm) {
-            this.lotNo = lotNo;
-            this.mcNo = mcNo;
-            this.opNo = opNo;
-            this.AlarmNo = AlarmNo;
-            this.alarm = alarm;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class MachineAlarmResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="MachineAlarmResponse", Namespace="http://tempuri.org/", Order=0)]
-        public TestService.ServiceReference1.MachineAlarmResponseBody Body;
-        
-        public MachineAlarmResponse() {
-        }
-        
-        public MachineAlarmResponse(TestService.ServiceReference1.MachineAlarmResponseBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class MachineAlarmResponseBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
-        public TestService.ServiceReference1.MachineAlarmResult MachineAlarmResult;
-        
-        public MachineAlarmResponseBody() {
-        }
-        
-        public MachineAlarmResponseBody(TestService.ServiceReference1.MachineAlarmResult MachineAlarmResult) {
-            this.MachineAlarmResult = MachineAlarmResult;
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/CheckLotApcsProManual", ReplyAction="http://tempuri.org/IServiceiLibrary/CheckLotApcsProManualResponse")]
+        TestService.ServiceReference1.CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -882,21 +858,8 @@ namespace TestService.ServiceReference1 {
             return base.Channel.UpdateFinalinspection(lotNo, opNo, judge, mcNo);
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        TestService.ServiceReference1.MachineAlarmResponse TestService.ServiceReference1.IServiceiLibrary.MachineAlarm(TestService.ServiceReference1.MachineAlarmRequest request) {
-            return base.Channel.MachineAlarm(request);
-        }
-        
-        public TestService.ServiceReference1.MachineAlarmResult MachineAlarm(string lotNo, string mcNo, string opNo, string AlarmNo, string alarm) {
-            TestService.ServiceReference1.MachineAlarmRequest inValue = new TestService.ServiceReference1.MachineAlarmRequest();
-            inValue.Body = new TestService.ServiceReference1.MachineAlarmRequestBody();
-            inValue.Body.lotNo = lotNo;
-            inValue.Body.mcNo = mcNo;
-            inValue.Body.opNo = opNo;
-            inValue.Body.AlarmNo = AlarmNo;
-            inValue.Body.alarm = alarm;
-            TestService.ServiceReference1.MachineAlarmResponse retVal = ((TestService.ServiceReference1.IServiceiLibrary)(this)).MachineAlarm(inValue);
-            return retVal.Body.MachineAlarmResult;
+        public TestService.ServiceReference1.MachineAlarmResult MachineAlarm(string lotNo, string mcNo, string opNo, string AlarmNo, TestService.ServiceReference1.AlarmState alarm) {
+            return base.Channel.MachineAlarm(lotNo, mcNo, opNo, AlarmNo, alarm);
         }
         
         public TestService.ServiceReference1.CancelLotResult CancelLot(string mcNo, string lotNo, string opNo) {
@@ -909,6 +872,10 @@ namespace TestService.ServiceReference1 {
         
         public TestService.ServiceReference1.ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng) {
             return base.Channel.ReinputAndHoldLot(lotNo, mcNo, opNo, good, ng);
+        }
+        
+        public TestService.ServiceReference1.CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package) {
+            return base.Channel.CheckLotApcsProManual(lotNo, mcNo, package);
         }
     }
 }
