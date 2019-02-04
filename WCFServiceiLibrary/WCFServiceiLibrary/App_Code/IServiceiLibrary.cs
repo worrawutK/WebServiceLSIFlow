@@ -79,6 +79,14 @@ public interface IServiceiLibrary
 
     [OperationContract]
     CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package);
+
+    [OperationContract]
+    OnlineStartResult OnlineStart(string lotNo, string mcNo, string opNo);
+
+    [OperationContract]
+    OnlineEndResult OnlineEnd(string lotNo, string mcNo, string opNo, int good, int ng);
+
+
 }
 
 [DataContract()]

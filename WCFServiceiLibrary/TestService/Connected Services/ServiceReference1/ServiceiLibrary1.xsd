@@ -204,4 +204,38 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="OnlineStart">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="lotNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mcNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="opNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnlineStartResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="OnlineStartResult" nillable="true" type="q18:OnlineStartResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnlineEnd">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="lotNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mcNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="opNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="good" type="xs:int" />
+        <xs:element minOccurs="0" name="ng" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnlineEndResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="OnlineEndResult" nillable="true" type="q19:OnlineEndResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

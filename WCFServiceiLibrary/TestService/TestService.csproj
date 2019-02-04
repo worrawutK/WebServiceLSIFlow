@@ -148,6 +148,12 @@
     <None Include="Connected Services\ServiceReference1\TestService.ServiceReference1.MachineOnlineStateResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ServiceReference1\TestService.ServiceReference1.OnlineEndResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReference1\TestService.ServiceReference1.OnlineStartResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceReference1\TestService.ServiceReference1.ReinputResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

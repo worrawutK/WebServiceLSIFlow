@@ -188,7 +188,7 @@ namespace TestService.ServiceReference1 {
         private string CauseField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsPassField;
+        private TestService.ServiceReference1.SetupLotResult.Status IsPassField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RecipeField;
@@ -217,7 +217,7 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsPass {
+        public TestService.ServiceReference1.SetupLotResult.Status IsPass {
             get {
                 return this.IsPassField;
             }
@@ -249,6 +249,20 @@ namespace TestService.ServiceReference1 {
             if ((propertyChanged != null)) {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+        [System.Runtime.Serialization.DataContractAttribute(Name="SetupLotResult.Status", Namespace="http://schemas.datacontract.org/2004/07/")]
+        public enum Status : int {
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            Pass = 0,
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            NotPass = 1,
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            Warning = 2,
         }
     }
     
@@ -762,6 +776,128 @@ namespace TestService.ServiceReference1 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OnlineStartResult", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class OnlineStartResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CauseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsPassField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Cause {
+            get {
+                return this.CauseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CauseField, value) != true)) {
+                    this.CauseField = value;
+                    this.RaisePropertyChanged("Cause");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsPass {
+            get {
+                return this.IsPassField;
+            }
+            set {
+                if ((this.IsPassField.Equals(value) != true)) {
+                    this.IsPassField = value;
+                    this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OnlineEndResult", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class OnlineEndResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CauseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsPassField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Cause {
+            get {
+                return this.CauseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CauseField, value) != true)) {
+                    this.CauseField = value;
+                    this.RaisePropertyChanged("Cause");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsPass {
+            get {
+                return this.IsPassField;
+            }
+            set {
+                if ((this.IsPassField.Equals(value) != true)) {
+                    this.IsPassField = value;
+                    this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IServiceiLibrary")]
     public interface IServiceiLibrary {
@@ -801,6 +937,12 @@ namespace TestService.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/CheckLotApcsProManual", ReplyAction="http://tempuri.org/IServiceiLibrary/CheckLotApcsProManualResponse")]
         TestService.ServiceReference1.CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/OnlineStart", ReplyAction="http://tempuri.org/IServiceiLibrary/OnlineStartResponse")]
+        TestService.ServiceReference1.OnlineStartResult OnlineStart(string lotNo, string mcNo, string opNo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/OnlineEnd", ReplyAction="http://tempuri.org/IServiceiLibrary/OnlineEndResponse")]
+        TestService.ServiceReference1.OnlineEndResult OnlineEnd(string lotNo, string mcNo, string opNo, int good, int ng);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -876,6 +1018,14 @@ namespace TestService.ServiceReference1 {
         
         public TestService.ServiceReference1.CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package) {
             return base.Channel.CheckLotApcsProManual(lotNo, mcNo, package);
+        }
+        
+        public TestService.ServiceReference1.OnlineStartResult OnlineStart(string lotNo, string mcNo, string opNo) {
+            return base.Channel.OnlineStart(lotNo, mcNo, opNo);
+        }
+        
+        public TestService.ServiceReference1.OnlineEndResult OnlineEnd(string lotNo, string mcNo, string opNo, int good, int ng) {
+            return base.Channel.OnlineEnd(lotNo, mcNo, opNo, good, ng);
         }
     }
 }

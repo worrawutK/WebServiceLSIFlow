@@ -47,12 +47,12 @@ namespace TestService
         {
            SetupLotResult result = c_ILibraryClient.SetupLot(textBoxLotNo.Text, textBoxMCNo.Text,
                textBoxOPNo.Text, textBoxProcess.Text,"");
-            if (!result.IsPass)
+            if (result.IsPass ==SetupLotResult.Status.NotPass)
             {
                 MessageBox.Show(result.Cause);
                 return;
             }
-            else if(result.Cause != "")
+            else if(result.IsPass == SetupLotResult.Status.Warning)
             {
                 MessageBox.Show(result.Cause);
             }
