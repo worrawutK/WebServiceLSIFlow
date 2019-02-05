@@ -14,10 +14,10 @@ public class UpdateMachineStateResult
     [DataMember()]
     public string Cause { get; internal set; }
 
-    public UpdateMachineStateResult(string functionName, Logger log)
+    public UpdateMachineStateResult(string functionName, Logger log,string machineProcessingState)
         :this(true,"")
     {
-        log.ConnectionLogger.Write(0, functionName, "Normal", "WCFService", "iLibrary", 0, "", "", "");
+        log.ConnectionLogger.Write(0, functionName, "Normal", "WCFService", "iLibrary", 0, "", machineProcessingState, "");
     }
     public UpdateMachineStateResult(string cause,string cause2, string functionName,Logger log)
         :this(false,cause)

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TestService.ServiceReference1;
+using TestService.iLibraryService;
 namespace TestService
 {
     public partial class Form1 : Form
@@ -30,6 +30,7 @@ namespace TestService
         }
         private void buttonMcOn_Click(object sender, EventArgs e)
         {
+            //c_ILibraryClient.UpdateMachineState(textBoxMCNo.Text, MachineProcessingState.Execute);
             MachineOnlineStateResult result = c_ILibraryClient.MachineOnlineState(textBoxMCNo.Text, MachineOnline.Online);
             int? aa = 2;
             int? b = null;

@@ -27,6 +27,8 @@ public interface IServiceiLibrary
     /// <returns></returns>
     [OperationContract]
     SetupLotResult SetupLot(string lotNo, string mcNo, string opNo, string processName, string layerNo);
+    [OperationContract]
+    SetupLotResult SetupLotNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo);
     //CheckPermissionApcsPro(mcNo, userInf, "PL-SetupLot", c_Log)
     //LicenseWarning(userInf)
 

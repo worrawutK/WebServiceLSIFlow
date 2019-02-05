@@ -114,6 +114,91 @@ public class ServiceiLibrary : IServiceiLibrary
             return new SetupLotResult(SetupLotResult.Status.NotPass,ex.Message.ToString(), "LotNo:" + lotNo + " opNo:" + opNo, "", MethodBase.GetCurrentMethod().Name, log);
         }
     }
+    public SetupLotResult SetupLotNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo)
+    {
+        Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
+        try
+        {
+            DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
+            LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
+            if (lotInfo == null)
+                return new SetupLotResult(SetupLotResult.Status.NotPass, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo, "", MethodBase.GetCurrentMethod().Name, log);
+
+            //Check package and Lot Pro
+            CheckLotApcsProResult proResult = CheckLotApcsPro(lotNo, lotInfo.Package.Name, log);
+            if (!proResult.IsPass)
+            {
+                return new SetupLotResult(SetupLotResult.Status.NotPass, proResult.Cause, "LotNo:" + lotNo + " opNo:" + opNo + " package:" + lotInfo.Package.Name, "", MethodBase.GetCurrentMethod().Name, log);
+            }
+
+            //TDC Move
+            TdcMove(mcNo, lotNo, opNo, layerNo, log);
+
+
+            UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
+            string warningMessage = "";
+            if (userInfo.License != null)
+            {
+                //foreach (License item in userInfo.License)
+                //{
+                //    if (item.Is_Expired)
+                //    {
+
+                //    }else if (item.Is_Warning)
+                //    {
+
+                //    }
+                //}
+                if (userInfo.License[0].Is_Expired)
+                {
+                    warningMessage = "แจ้งเตือน!! รหัส :" + userInfo.Code + Environment.NewLine + "License " + userInfo.License[0].Name + Environment.NewLine + " หมดอายุ กรุณาต่ออายุ License ที่ ETG " + Environment.NewLine + "วันหมดอายุ " + userInfo.License[0].ExpireDate.ToString("yyyy/MM/dd");
+                }
+                else if (userInfo.License[0].Is_Warning)
+                {
+                    warningMessage = "แจ้งเตือน!! รหัส :" + userInfo.Code + Environment.NewLine + "License " + userInfo.License[0].Name + Environment.NewLine + " ใกล้หมดอายุ กรุณาต่ออายุ License ที่ ETG " + Environment.NewLine + "วันหมดอายุ " + userInfo.License[0].ExpireDate.ToString("yyyy/MM/dd");
+                }
+            }
+
+            //Check Permission
+            CheckUserPermissionResult permissionResult = c_ApcsProService.CheckUserPermission(userInfo, "CellController", processName + "-SetupLot", log, dateTimeInfo.Datetime);
+            if (!permissionResult.IsPass)
+                return new SetupLotResult(SetupLotResult.Status.NotPass, permissionResult.ErrorNo + ":" + permissionResult.ErrorMessage, "LotNo:" + lotNo + " opNo:" + opNo + " processName:" + processName, "", MethodBase.GetCurrentMethod().Name, log);
+
+            //if (!c_ApcsProService.Check_PermissionMachinesByLMS(userInfo.Id, mcNo, log))
+            //{
+            //    return new SetupLotResult(SetupLotResult.Status.NotPass, "Check_PermissionMachinesByLMS", "รหัส : " + userInfo.Code +
+            //         " ไม่ผ่านการตรวจสอบในระบบ Licenser กรุณาติดต่อ ETG (MCNo : " + mcNo + ")", "", MethodBase.GetCurrentMethod().Name, log);
+            //}
+            //if (!c_ApcsProService.Check_UserLotAutoMotive(userInfo, lotInfo, log))
+            //{
+            //    return new SetupLotResult(SetupLotResult.Status.NotPass, "Check_PermissionMachinesByLMS", "รหัส : " + userInfo.Code +
+            //         " User ที่ไม่ใช่ Automotive ไม่สามารถรัน Lot Automotive ได้ กรุณาติดต่อ ETG (Lot Automotive : " + lotInfo.Name + ")", "", MethodBase.GetCurrentMethod().Name, log);
+            //}
+
+            MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
+            if (machineInfo == null)
+                return new SetupLotResult(SetupLotResult.Status.NotPass, "ไม่พบ MCNo :" + mcNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo" + mcNo, "", MethodBase.GetCurrentMethod().Name, log);
+
+            LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotSetup(lotInfo.Id, machineInfo.Id, userInfo.Id, 0, "", 1, dateTimeInfo.Datetime, log);
+            if (!lotUpdateInfo.IsOk)
+                return new SetupLotResult(SetupLotResult.Status.NotPass, lotUpdateInfo.ErrorNo + ":" + lotUpdateInfo.ErrorMessage, "LotNo:" + lotNo + " opNo:" + opNo, "", MethodBase.GetCurrentMethod().Name, log);
+
+            if (warningMessage != "")
+            {
+                return new SetupLotResult(SetupLotResult.Status.Warning, warningMessage, "", lotUpdateInfo.Recipe1, MethodBase.GetCurrentMethod().Name, log);
+            }
+            else
+            {
+                return new SetupLotResult(SetupLotResult.Status.Pass, "", "", lotUpdateInfo.Recipe1, MethodBase.GetCurrentMethod().Name, log);
+            }
+
+
+        }
+        catch (Exception ex)
+        {
+            return new SetupLotResult(SetupLotResult.Status.NotPass, ex.Message.ToString(), "LotNo:" + lotNo + " opNo:" + opNo, "", MethodBase.GetCurrentMethod().Name, log);
+        }
+    }
 
     public OnlineStartResult OnlineStart(string lotNo,string mcNo,string opNo)
     {
@@ -466,7 +551,7 @@ public class ServiceiLibrary : IServiceiLibrary
             if (result ==0)
                 return new UpdateMachineStateResult("Update Machine State ไม่ได้","", MethodBase.GetCurrentMethod().Name, log);
 
-            return new UpdateMachineStateResult(MethodBase.GetCurrentMethod().Name,log);
+            return new UpdateMachineStateResult(MethodBase.GetCurrentMethod().Name,log,state.ToString());
         }
         catch (Exception ex)
         {

@@ -83,17 +83,20 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\iLibraryService\service1.wsdl" />
-    <None Include="Connected Services\iLibraryService\service3.xsd">
+    <None Include="Connected Services\iLibraryService\service.wsdl" />
+    <None Include="Connected Services\iLibraryService\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\iLibraryService\service31.xsd">
+    <None Include="Connected Services\iLibraryService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\iLibraryService\service32.xsd">
+    <None Include="Connected Services\iLibraryService\service2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\iLibraryService\TestService.iLibraryService.CancelLotResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\iLibraryService\TestService.iLibraryService.CheckLotApcsProResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\iLibraryService\TestService.iLibraryService.EndLotResult.datasource">
@@ -103,6 +106,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\iLibraryService\TestService.iLibraryService.MachineOnlineStateResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\iLibraryService\TestService.iLibraryService.OnlineEndResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\iLibraryService\TestService.iLibraryService.OnlineStartResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\iLibraryService\TestService.iLibraryService.ReinputResult.datasource">

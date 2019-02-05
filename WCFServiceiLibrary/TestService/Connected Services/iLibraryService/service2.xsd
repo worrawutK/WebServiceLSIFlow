@@ -85,10 +85,13 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UpdateFinalinspectionResult" nillable="true" type="tns:UpdateFinalinspectionResult" />
-  <xs:simpleType name="Alarm">
-    <xs:restriction base="xs:string" />
+  <xs:simpleType name="AlarmState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RESET" />
+      <xs:enumeration value="SET" />
+    </xs:restriction>
   </xs:simpleType>
-  <xs:element name="Alarm" nillable="true" type="tns:Alarm" />
+  <xs:element name="AlarmState" nillable="true" type="tns:AlarmState" />
   <xs:complexType name="MachineAlarmResult">
     <xs:sequence>
       <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
@@ -110,4 +113,25 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ReinputResult" nillable="true" type="tns:ReinputResult" />
+  <xs:complexType name="CheckLotApcsProResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CheckLotApcsProResult" nillable="true" type="tns:CheckLotApcsProResult" />
+  <xs:complexType name="OnlineStartResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OnlineStartResult" nillable="true" type="tns:OnlineStartResult" />
+  <xs:complexType name="OnlineEndResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OnlineEndResult" nillable="true" type="tns:OnlineEndResult" />
 </xs:schema>

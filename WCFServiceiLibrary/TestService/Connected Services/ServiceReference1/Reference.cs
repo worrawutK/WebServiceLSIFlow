@@ -911,6 +911,9 @@ namespace TestService.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/SetupLot", ReplyAction="http://tempuri.org/IServiceiLibrary/SetupLotResponse")]
         TestService.ServiceReference1.SetupLotResult SetupLot(string lotNo, string mcNo, string opNo, string processName, string layerNo);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/SetupLotNoCheckLicenser", ReplyAction="http://tempuri.org/IServiceiLibrary/SetupLotNoCheckLicenserResponse")]
+        TestService.ServiceReference1.SetupLotResult SetupLotNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/StartLot", ReplyAction="http://tempuri.org/IServiceiLibrary/StartLotResponse")]
         TestService.ServiceReference1.StartLotResult StartLot(string lotNo, string mcNo, string opNo, string recipe);
         
@@ -982,6 +985,10 @@ namespace TestService.ServiceReference1 {
         
         public TestService.ServiceReference1.SetupLotResult SetupLot(string lotNo, string mcNo, string opNo, string processName, string layerNo) {
             return base.Channel.SetupLot(lotNo, mcNo, opNo, processName, layerNo);
+        }
+        
+        public TestService.ServiceReference1.SetupLotResult SetupLotNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo) {
+            return base.Channel.SetupLotNoCheckLicenser(lotNo, mcNo, opNo, processName, layerNo);
         }
         
         public TestService.ServiceReference1.StartLotResult StartLot(string lotNo, string mcNo, string opNo, string recipe) {
