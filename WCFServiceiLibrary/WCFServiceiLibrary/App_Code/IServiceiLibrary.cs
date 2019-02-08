@@ -29,8 +29,10 @@ public interface IServiceiLibrary
     SetupLotResult SetupLot(string lotNo, string mcNo, string opNo, string processName, string layerNo);
     [OperationContract]
     SetupLotResult SetupLotNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo);
-    //CheckPermissionApcsPro(mcNo, userInf, "PL-SetupLot", c_Log)
-    //LicenseWarning(userInf)
+    [OperationContract]
+    SetupLotResult SetupLotCustomMode(string lotNo, string mcNo, string opNo, string processName, string layerNo, RunMode runMode);
+    [OperationContract]
+    SetupLotResult SetupLotCustomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo, RunMode runMode);
 
     /// <summary>
     /// 
@@ -43,6 +45,15 @@ public interface IServiceiLibrary
     [OperationContract]
     StartLotResult StartLot(string lotNo,string mcNo,string opNo,string recipe);
 
+    [OperationContract]
+    StartLotResult StartLotCustomMode(string lotNo, string mcNo, string opNo, string recipe, RunMode runMode);
+
+
+    [OperationContract]
+    OnlineStartResult OnlineStart(string lotNo, string mcNo, string opNo);
+
+    [OperationContract]
+    OnlineEndResult OnlineEnd(string lotNo, string mcNo, string opNo, int good, int ng);
     /// <summary>
     /// 
     /// </summary>
@@ -57,6 +68,14 @@ public interface IServiceiLibrary
     [OperationContract]
     EndLotResult EndLot(string lotNo,string mcNo,string opNo,int good,int ng);
 
+    [OperationContract]
+    EndLotResult EndLotNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng);
+
+    [OperationContract]
+    EndLotResult EndLotCustomMode(string lotNo, string mcNo, string opNo, int good, int ng, EndMode endMode);
+
+    [OperationContract]
+    EndLotResult EndLotCostomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng, EndMode endMode);
     /// <summary>
     /// 
     /// </summary>
@@ -82,11 +101,6 @@ public interface IServiceiLibrary
     [OperationContract]
     CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package);
 
-    [OperationContract]
-    OnlineStartResult OnlineStart(string lotNo, string mcNo, string opNo);
-
-    [OperationContract]
-    OnlineEndResult OnlineEnd(string lotNo, string mcNo, string opNo, int good, int ng);
 
 
 }
@@ -111,6 +125,7 @@ public enum MachineProcessingState
     [EnumMember()]
     Maintenance = 7
 }
+
 [DataContract()]
 public enum AlarmState
 {
@@ -119,6 +134,42 @@ public enum AlarmState
     [EnumMember()]
     SET = 1
 }
+
+[DataContract()]
+public enum MessageType
+{
+    [EnumMember()]
+    TDC,
+    [EnumMember()]
+    ApcsPro,
+    [EnumMember()]
+    Unknown
+}
+
+[DataContract()]
+public enum RunMode
+{
+    [EnumMember()]
+    Normal = 0,
+    [EnumMember()]
+    Separated = 1,
+    [EnumMember()]
+    SeparatedEnd = 2,
+    [EnumMember()]
+    ReRun = 3
+}
+
+[DataContract()]
+public enum EndMode
+{
+    [EnumMember()]
+    Normal = 1,
+    [EnumMember()]
+    AbnormalEndReset = 2,
+    [EnumMember()]
+    AbnormalEndAccumulate = 3
+}
+
 [DataContract()]
 public enum MachineOnline
 {
@@ -137,21 +188,21 @@ public enum Judge
     OK = 1
 }
 
-// Use a data contract as illustrated in the sample below to add composite types to service operations.
-[DataContract]
-public class MachineState
-{
-    //[DataMember]
-    //public bool BoolValue
-    //{
-    //    get { return boolValue; }
-    //    set { boolValue = value; }
-    //}
+//// Use a data contract as illustrated in the sample below to add composite types to service operations.
+//[DataContract]
+//public class MachineState
+//{
+//    //[DataMember]
+//    //public bool BoolValue
+//    //{
+//    //    get { return boolValue; }
+//    //    set { boolValue = value; }
+//    //}
 
-    //[DataMember]
-    //public string StringValue
-    //{
-    //    get { return stringValue; }
-    //    set { stringValue = value; }
-    //}
-}
+//    //[DataMember]
+//    //public string StringValue
+//    //{
+//    //    get { return stringValue; }
+//    //    set { stringValue = value; }
+//    //}
+//}

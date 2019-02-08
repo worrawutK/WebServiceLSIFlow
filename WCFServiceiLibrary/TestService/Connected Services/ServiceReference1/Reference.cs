@@ -188,7 +188,13 @@ namespace TestService.ServiceReference1 {
         private string CauseField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorNoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private TestService.ServiceReference1.SetupLotResult.Status IsPassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.SetupLotResult.LotEnum LotTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RecipeField;
@@ -217,6 +223,19 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorNo {
+            get {
+                return this.ErrorNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorNoField, value) != true)) {
+                    this.ErrorNoField = value;
+                    this.RaisePropertyChanged("ErrorNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public TestService.ServiceReference1.SetupLotResult.Status IsPass {
             get {
                 return this.IsPassField;
@@ -225,6 +244,19 @@ namespace TestService.ServiceReference1 {
                 if ((this.IsPassField.Equals(value) != true)) {
                     this.IsPassField = value;
                     this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.SetupLotResult.LotEnum LotType {
+            get {
+                return this.LotTypeField;
+            }
+            set {
+                if ((this.LotTypeField.Equals(value) != true)) {
+                    this.LotTypeField = value;
+                    this.RaisePropertyChanged("LotType");
                 }
             }
         }
@@ -263,6 +295,17 @@ namespace TestService.ServiceReference1 {
             
             [System.Runtime.Serialization.EnumMemberAttribute()]
             Warning = 2,
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+        [System.Runtime.Serialization.DataContractAttribute(Name="SetupLotResult.LotEnum", Namespace="http://schemas.datacontract.org/2004/07/")]
+        public enum LotEnum : int {
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            TDC = 0,
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            ApcsPro = 1,
         }
     }
     
@@ -923,6 +966,9 @@ namespace TestService.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/EndLot", ReplyAction="http://tempuri.org/IServiceiLibrary/EndLotResponse")]
         TestService.ServiceReference1.EndLotResult EndLot(string lotNo, string mcNo, string opNo, int good, int ng);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/EndLotNoCheckLicenser", ReplyAction="http://tempuri.org/IServiceiLibrary/EndLotNoCheckLicenserResponse")]
+        TestService.ServiceReference1.EndLotResult EndLotNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/UpdateFinalinspection", ReplyAction="http://tempuri.org/IServiceiLibrary/UpdateFinalinspectionResponse")]
         TestService.ServiceReference1.UpdateFinalinspectionResult UpdateFinalinspection(string lotNo, string opNo, TestService.ServiceReference1.Judge judge, string mcNo);
         
@@ -1001,6 +1047,10 @@ namespace TestService.ServiceReference1 {
         
         public TestService.ServiceReference1.EndLotResult EndLot(string lotNo, string mcNo, string opNo, int good, int ng) {
             return base.Channel.EndLot(lotNo, mcNo, opNo, good, ng);
+        }
+        
+        public TestService.ServiceReference1.EndLotResult EndLotNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng) {
+            return base.Channel.EndLotNoCheckLicenser(lotNo, mcNo, opNo, good, ng);
         }
         
         public TestService.ServiceReference1.UpdateFinalinspectionResult UpdateFinalinspection(string lotNo, string opNo, TestService.ServiceReference1.Judge judge, string mcNo) {

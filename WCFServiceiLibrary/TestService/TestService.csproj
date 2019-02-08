@@ -194,6 +194,9 @@
     <None Include="Connected Services\ServiceReference2\TestService.ServiceReference2.CancelLotResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ServiceReference2\TestService.ServiceReference2.CheckLotApcsProResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceReference2\TestService.ServiceReference2.EndLotResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -201,6 +204,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceReference2\TestService.ServiceReference2.MachineOnlineStateResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReference2\TestService.ServiceReference2.OnlineEndResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReference2\TestService.ServiceReference2.OnlineStartResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceReference2\TestService.ServiceReference2.ReinputResult.datasource">
@@ -280,6 +289,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MessageDialog\MessageDialog.csproj">
+      <Project>{17131395-28cf-4cfe-acca-7dffc38bd4d8}</Project>
+      <Name>MessageDialog</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -49,6 +49,12 @@
   <wsdl:message name="IServiceiLibrary_EndLot_OutputMessage">
     <wsdl:part name="parameters" element="tns:EndLotResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_EndLotNoCheckLicenser_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndLotNoCheckLicenser" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_EndLotNoCheckLicenser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndLotNoCheckLicenserResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceiLibrary_UpdateFinalinspection_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateFinalinspection" />
   </wsdl:message>
@@ -125,6 +131,10 @@
     <wsdl:operation name="EndLot">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/EndLot" message="tns:IServiceiLibrary_EndLot_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/EndLotResponse" message="tns:IServiceiLibrary_EndLot_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndLotNoCheckLicenser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/EndLotNoCheckLicenser" message="tns:IServiceiLibrary_EndLotNoCheckLicenser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/EndLotNoCheckLicenserResponse" message="tns:IServiceiLibrary_EndLotNoCheckLicenser_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateFinalinspection">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/UpdateFinalinspection" message="tns:IServiceiLibrary_UpdateFinalinspection_InputMessage" />
@@ -217,6 +227,15 @@
     </wsdl:operation>
     <wsdl:operation name="EndLot">
       <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/EndLot" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndLotNoCheckLicenser">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/EndLotNoCheckLicenser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

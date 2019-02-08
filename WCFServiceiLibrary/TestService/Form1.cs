@@ -6,7 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TestService.iLibraryService;
+using TestService.ServiceReference2;
+using MessageDialog;
+//using Message;
 namespace TestService
 {
     public partial class Form1 : Form
@@ -46,16 +48,18 @@ namespace TestService
 
         private void buttonSetup_Click(object sender, EventArgs e)
         {
-           SetupLotResult result = c_ILibraryClient.SetupLot(textBoxLotNo.Text, textBoxMCNo.Text,
+            SetupLotResult result = c_ILibraryClient.SetupLot(textBoxLotNo.Text, textBoxMCNo.Text,
                textBoxOPNo.Text, textBoxProcess.Text,"");
+
+           
             if (result.IsPass ==SetupLotResult.Status.NotPass)
             {
-                MessageBox.Show(result.Cause);
+                MessageBoxDialog.ShowMessageDialog(result.FunctionName + " " + result.Type.ToString(), result.Cause, result.ErrorNo);
                 return;
             }
             else if(result.IsPass == SetupLotResult.Status.Warning)
             {
-                MessageBox.Show(result.Cause);
+                MessageBoxDialog.ShowMessageDialog(result.FunctionName + " " + result.Type.ToString(), result.Cause, result.ErrorNo);
             }
             textBoxRecipe.Text = result.Recipe;
 

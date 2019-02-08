@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WCFServiceiLibrary", "WCFServiceiLibrary\", "{350C7695-1B6A-4BF4-85B0-BB1AD7913C00}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
+		ProjectReferences = ""
 		Debug.AspNetCompiler.VirtualPath = "/localhost_57918"
 		Debug.AspNetCompiler.PhysicalPath = "WCFServiceiLibrary\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57918\"
@@ -36,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsAppServer", "Wi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFServiceRistiLibrary", "WCFServiceRistiLibrary\WCFServiceRistiLibrary.csproj", "{DC425B05-FEA0-4EEC-A834-167C8EF79273}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageDialog", "MessageDialog\MessageDialog.csproj", "{17131395-28CF-4CFE-ACCA-7DFFC38BD4D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +65,10 @@ Global
 		{DC425B05-FEA0-4EEC-A834-167C8EF79273}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC425B05-FEA0-4EEC-A834-167C8EF79273}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC425B05-FEA0-4EEC-A834-167C8EF79273}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17131395-28CF-4CFE-ACCA-7DFFC38BD4D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17131395-28CF-4CFE-ACCA-7DFFC38BD4D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17131395-28CF-4CFE-ACCA-7DFFC38BD4D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17131395-28CF-4CFE-ACCA-7DFFC38BD4D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

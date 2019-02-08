@@ -119,12 +119,30 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="EndLotNoCheckLicenser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="lotNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mcNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="opNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="good" type="xs:int" />
+        <xs:element minOccurs="0" name="ng" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndLotNoCheckLicenserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="EndLotNoCheckLicenserResult" nillable="true" type="q11:EndLotResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="UpdateFinalinspection">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="lotNo" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="opNo" nillable="true" type="xs:string" />
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="judge" type="q11:Judge" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="judge" type="q12:Judge" />
         <xs:element minOccurs="0" name="mcNo" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -132,7 +150,7 @@
   <xs:element name="UpdateFinalinspectionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="UpdateFinalinspectionResult" nillable="true" type="q12:UpdateFinalinspectionResult" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="UpdateFinalinspectionResult" nillable="true" type="q13:UpdateFinalinspectionResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -143,14 +161,14 @@
         <xs:element minOccurs="0" name="mcNo" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="opNo" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="AlarmNo" nillable="true" type="xs:string" />
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="alarm" type="q13:AlarmState" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="alarm" type="q14:AlarmState" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="MachineAlarmResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="MachineAlarmResult" nillable="true" type="q14:MachineAlarmResult" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="MachineAlarmResult" nillable="true" type="q15:MachineAlarmResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -166,7 +184,7 @@
   <xs:element name="CancelLotResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="CancelLotResult" nillable="true" type="q15:CancelLotResult" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="CancelLotResult" nillable="true" type="q16:CancelLotResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -184,7 +202,7 @@
   <xs:element name="ReinputResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="ReinputResult" nillable="true" type="q16:ReinputResult" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="ReinputResult" nillable="true" type="q17:ReinputResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -202,7 +220,7 @@
   <xs:element name="ReinputAndHoldLotResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="ReinputAndHoldLotResult" nillable="true" type="q17:ReinputResult" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="ReinputAndHoldLotResult" nillable="true" type="q18:ReinputResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -218,7 +236,7 @@
   <xs:element name="CheckLotApcsProManualResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="CheckLotApcsProManualResult" nillable="true" type="q18:CheckLotApcsProResult" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="CheckLotApcsProManualResult" nillable="true" type="q19:CheckLotApcsProResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -234,7 +252,7 @@
   <xs:element name="OnlineStartResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="OnlineStartResult" nillable="true" type="q19:OnlineStartResult" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="OnlineStartResult" nillable="true" type="q20:OnlineStartResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -252,7 +270,7 @@
   <xs:element name="OnlineEndResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="OnlineEndResult" nillable="true" type="q20:OnlineEndResult" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="OnlineEndResult" nillable="true" type="q21:OnlineEndResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -37,7 +37,9 @@
   <xs:complexType name="SetupLotResult">
     <xs:sequence>
       <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorNo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsPass" type="tns:SetupLotResult.Status" />
+      <xs:element minOccurs="0" name="LotType" type="tns:SetupLotResult.LotEnum" />
       <xs:element minOccurs="0" name="Recipe" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -50,6 +52,13 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="SetupLotResult.Status" nillable="true" type="tns:SetupLotResult.Status" />
+  <xs:simpleType name="SetupLotResult.LotEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="TDC" />
+      <xs:enumeration value="ApcsPro" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SetupLotResult.LotEnum" nillable="true" type="tns:SetupLotResult.LotEnum" />
   <xs:complexType name="StartLotResult">
     <xs:sequence>
       <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />

@@ -36,6 +36,8 @@
             this.buttonMcOn = new System.Windows.Forms.Button();
             this.buttonMcOff = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonReinput = new System.Windows.Forms.Button();
+            this.buttonCancelLot = new System.Windows.Forms.Button();
             this.textBoxNg = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.textBoxGood = new System.Windows.Forms.TextBox();
@@ -52,8 +54,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxOPNo = new System.Windows.Forms.TextBox();
             this.textBoxMCNo = new System.Windows.Forms.TextBox();
-            this.buttonCancelLot = new System.Windows.Forms.Button();
-            this.buttonReinput = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -127,6 +127,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.buttonFirst);
             this.groupBox2.Controls.Add(this.buttonReinput);
             this.groupBox2.Controls.Add(this.buttonCancelLot);
             this.groupBox2.Controls.Add(this.textBoxNg);
@@ -138,7 +139,6 @@
             this.groupBox2.Controls.Add(this.buttonMcOff);
             this.groupBox2.Controls.Add(this.buttonMcOn);
             this.groupBox2.Controls.Add(this.buttonFinal);
-            this.groupBox2.Controls.Add(this.buttonFirst);
             this.groupBox2.Controls.Add(this.textBoxProcess);
             this.groupBox2.Controls.Add(this.textBoxPackage);
             this.groupBox2.Controls.Add(this.label2);
@@ -158,6 +158,26 @@
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Example";
+            // 
+            // buttonReinput
+            // 
+            this.buttonReinput.Location = new System.Drawing.Point(207, 280);
+            this.buttonReinput.Name = "buttonReinput";
+            this.buttonReinput.Size = new System.Drawing.Size(75, 23);
+            this.buttonReinput.TabIndex = 13;
+            this.buttonReinput.Text = "Reinput";
+            this.buttonReinput.UseVisualStyleBackColor = true;
+            this.buttonReinput.Click += new System.EventHandler(this.buttonReinput_Click);
+            // 
+            // buttonCancelLot
+            // 
+            this.buttonCancelLot.Location = new System.Drawing.Point(207, 228);
+            this.buttonCancelLot.Name = "buttonCancelLot";
+            this.buttonCancelLot.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancelLot.TabIndex = 12;
+            this.buttonCancelLot.Text = "CancelLot";
+            this.buttonCancelLot.UseVisualStyleBackColor = true;
+            this.buttonCancelLot.Click += new System.EventHandler(this.buttonCancelLot_Click);
             // 
             // textBoxNg
             // 
@@ -296,26 +316,6 @@
             this.textBoxMCNo.Size = new System.Drawing.Size(128, 20);
             this.textBoxMCNo.TabIndex = 2;
             this.textBoxMCNo.Text = "MP-TWE-00";
-            // 
-            // buttonCancelLot
-            // 
-            this.buttonCancelLot.Location = new System.Drawing.Point(207, 228);
-            this.buttonCancelLot.Name = "buttonCancelLot";
-            this.buttonCancelLot.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancelLot.TabIndex = 12;
-            this.buttonCancelLot.Text = "CancelLot";
-            this.buttonCancelLot.UseVisualStyleBackColor = true;
-            this.buttonCancelLot.Click += new System.EventHandler(this.buttonCancelLot_Click);
-            // 
-            // buttonReinput
-            // 
-            this.buttonReinput.Location = new System.Drawing.Point(207, 280);
-            this.buttonReinput.Name = "buttonReinput";
-            this.buttonReinput.Size = new System.Drawing.Size(75, 23);
-            this.buttonReinput.TabIndex = 13;
-            this.buttonReinput.Text = "Reinput";
-            this.buttonReinput.UseVisualStyleBackColor = true;
-            this.buttonReinput.Click += new System.EventHandler(this.buttonReinput_Click);
             // 
             // Form1
             // 
