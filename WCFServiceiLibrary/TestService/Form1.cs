@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TestService.ServiceReference2;
+using TestService.ServiceReference1;
 using MessageDialog;
 //using Message;
 namespace TestService
@@ -52,14 +52,14 @@ namespace TestService
                textBoxOPNo.Text, textBoxProcess.Text,"");
 
            
-            if (result.IsPass ==SetupLotResult.Status.NotPass)
+            if (result.IsPass == SetupLotResult.Status.NotPass)
             {
-                MessageBoxDialog.ShowMessageDialog(result.FunctionName + " " + result.Type.ToString(), result.Cause, result.ErrorNo);
+                MessageBoxDialog.ShowMessageDialog(result.FunctionName , result.Cause, result.Type.ToString(), result.ErrorNo);
                 return;
             }
             else if(result.IsPass == SetupLotResult.Status.Warning)
             {
-                MessageBoxDialog.ShowMessageDialog(result.FunctionName + " " + result.Type.ToString(), result.Cause, result.ErrorNo);
+                MessageBoxDialog.ShowMessageDialog(result.FunctionName, result.Cause,result.Type.ToString(), result.ErrorNo);
             }
             textBoxRecipe.Text = result.Recipe;
 
@@ -108,7 +108,7 @@ namespace TestService
 
         private void buttonReinput_Click(object sender, EventArgs e)
         { 
-            ReinputResult result =  c_ILibraryClient.Reinput(textBoxLotNo.Text, textBoxMCNo.Text, textBoxOPNo.Text, int.Parse(textBoxGood.Text), int.Parse(textBoxNg.Text));
+            ReinputResult result =  c_ILibraryClient.Reinput(textBoxLotNo.Text, textBoxMCNo.Text, textBoxOPNo.Text, int.Parse(textBoxGood.Text), int.Parse(textBoxNg.Text),EndMode.AbnormalEndAccumulate);
             MessageBox.Show(result.IsPass.ToString());
             //c_ILibraryClient.MachineAlarm()
         }
@@ -117,6 +117,19 @@ namespace TestService
         {
             CancelLotResult result = c_ILibraryClient.CancelLot(textBoxMCNo.Text, textBoxLotNo.Text, textBoxOPNo.Text);
             MessageBox.Show(result.IsPass.ToString());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string AlarmNo = "A097";
+            if (int.TryParse(AlarmNo, out int alarmNo))
+            {
+                AlarmNo = alarmNo.ToString();
+            }
+            else
+            {
+                AlarmNo = AlarmNo;
+            }
         }
     }
 }

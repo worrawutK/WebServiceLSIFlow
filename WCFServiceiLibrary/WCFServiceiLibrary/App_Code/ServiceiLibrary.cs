@@ -13,7 +13,6 @@ using System.ServiceModel.Activation;
 using Rohm.Apcs.Tdc;
 using LotInfo = iLibrary.LotInfo;
 using TDCService;
-using System.Windows.Forms;
 
 // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "ServiceiLibrary" in code, svc and config file together.
 [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
@@ -35,8 +34,6 @@ public class ServiceiLibrary : IServiceiLibrary
     
     public SetupLotResult SetupLot(string lotNo, string mcNo, string opNo, string processName, string layerNo)
     {
-        //Message.MessageError messageError = new Message.MessageError();
-        //messageError.ShowDialog();
         return SetupLotCommon(lotNo, mcNo, opNo, processName, layerNo, RunMode.Normal, MethodBase.GetCurrentMethod().Name);
     }
     
@@ -62,9 +59,20 @@ public class ServiceiLibrary : IServiceiLibrary
             DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
             LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
             if (lotInfo == null)
-                return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", 
-                    "LotNo:" + lotNo + " opNo:" + opNo,"","", "GetLotInfo", functionName, log);
-
+            {
+                //รอการแก้บัค เนื่องจากคิดว่าทุก lot จะมีใน db ของ ApcsPro แต่ไม่ใช่จะมีแค่ device slip ที่ลงทะเบียนแล้ว ถึงจะนำ lot เข้ามาในระบบ Apcs Pro (SetUp Start End)
+                TdcLotRequestResult requestResult = TdcLotRequest(mcNo, lotNo, (RunModeType)tdcRunModeType, log);
+                if (!requestResult.IsPass)
+                {
+                    return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.Apcs, requestResult.Cause,
+                              "LotNo:" + lotNo + " opNo:" + opNo + " package:" + lotInfo.Package.Name, "", requestResult.ErrorNo,
+                              "CheckLotApcsPro", functionName, log);
+                }
+                return new SetupLotResult(SetupLotResult.Status.Pass, MessageType.Apcs, "lotInfo is null", "LotNo:" + lotNo + " opNo:" + opNo, "", "",
+                    "TdcLotRequest", functionName, log);
+                //return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ",
+                //   "LotNo:" + lotNo + " opNo:" + opNo, "", "", "GetLotInfo", functionName, log);
+            }
             //Check package and Lot Pro
             CheckLotApcsProResult proResult = CheckLotApcsPro(lotNo, lotInfo.Package.Name, log);
             if (!proResult.IsPass)
@@ -73,12 +81,12 @@ public class ServiceiLibrary : IServiceiLibrary
                 TdcLotRequestResult requestResult = TdcLotRequest(mcNo, lotNo, (RunModeType)tdcRunModeType,log);
                 if (!requestResult.IsPass)
                 {
-                    return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.TDC, requestResult.Cause,
+                    return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.Apcs, requestResult.Cause,
                               "LotNo:" + lotNo + " opNo:" + opNo + " package:" + lotInfo.Package.Name, "", requestResult.ErrorNo,
                               "CheckLotApcsPro", functionName, log);
                 }
-                return new SetupLotResult(SetupLotResult.Status.Pass, MessageType.TDC, "", "LotNo:" + lotNo + " opNo:" + opNo, "", "",
-                    "CheckLotApcsPro", functionName, log);
+                return new SetupLotResult(SetupLotResult.Status.Pass, MessageType.Apcs, "", "LotNo:" + lotNo + " opNo:" + opNo, "", "",
+                    "TdcLotRequest", functionName, log);
             }
             else
             {
@@ -200,8 +208,14 @@ public class ServiceiLibrary : IServiceiLibrary
 
             LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
             if (lotInfo == null)
-                return new StartLotResult(false, MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo,
-                    "GetLotInfo", functionName, log);
+            {
+                return new StartLotResult(true, MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo,
+              "GetLotInfo", functionName, log);
+                //return new StartLotResult(false, MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo,
+                //  "GetLotInfo", functionName, log);
+            }
+
+              
 
             //Check package and Lot Pro
             CheckLotApcsProResult proResult = CheckLotApcsPro(lotNo, lotInfo.Package.Name, log);
@@ -394,28 +408,30 @@ public class ServiceiLibrary : IServiceiLibrary
 
     public EndLotResult EndLot(string lotNo, string mcNo, string opNo, int good, int ng)
     {
-        return EndLotCommon(lotNo, mcNo, opNo, good, ng, MethodBase.GetCurrentMethod().Name, EndMode.Normal, false);
+        return EndLotCommon(lotNo, mcNo, opNo, good, ng, MethodBase.GetCurrentMethod().Name, false);
     }
     public EndLotResult EndLotNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng)
     {
-        return EndLotCommon(lotNo, mcNo, opNo, good, ng,MethodBase.GetCurrentMethod().Name, EndMode.Normal, false);
+        return EndLotCommon(lotNo, mcNo, opNo, good, ng,MethodBase.GetCurrentMethod().Name, false);
     }
-    public EndLotResult EndLotCustomMode(string lotNo, string mcNo, string opNo, int good, int ng ,EndMode endMode)
-    {
-        return EndLotCommon(lotNo, mcNo, opNo, good, ng, MethodBase.GetCurrentMethod().Name, endMode, false);
-    }
-    public EndLotResult EndLotCostomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng , EndMode endMode)
-    {
-        return EndLotCommon(lotNo, mcNo, opNo, good, ng, MethodBase.GetCurrentMethod().Name, endMode, false);
-    }
-    private EndLotResult EndLotCommon(string lotNo, string mcNo, string opNo, int good, int ng,string functionName, EndMode endMode, bool isCheckLicenser = true)
+    //public EndLotResult EndLotCustomMode(string lotNo, string mcNo, string opNo, int good, int ng ,EndMode endMode)
+    //{
+    //    return EndLotCommon(lotNo, mcNo, opNo, good, ng, MethodBase.GetCurrentMethod().Name, endMode, false);
+    //}
+    //public EndLotResult EndLotCostomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng , EndMode endMode)
+    //{
+    //    return EndLotCommon(lotNo, mcNo, opNo, good, ng, MethodBase.GetCurrentMethod().Name, endMode, false);
+    //}
+    private EndLotResult EndLotCommon(string lotNo, string mcNo, string opNo, int good, int ng,string functionName,  bool isCheckLicenser = true)
     {
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
             DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
-
-            TdcLotEndResult tdcLotEndResult = TdcLotEnd(mcNo, lotNo, opNo, dateTimeInfo.Datetime, log, good, ng, (EndModeType)endMode);
+            //EndModeType.AbnormalEndAccumulate รันใหม่ทั้งหมด
+            //EndModeType.AbnormalEndReset รันต่อที่เหลือ
+            //EndModeType.Normal จบ Lot ปกติ
+            TdcLotEndResult tdcLotEndResult = TdcLotEnd(mcNo, lotNo, opNo, dateTimeInfo.Datetime, log, good, ng, EndModeType.Normal);
             if (!tdcLotEndResult.IsPass)
             {
                 //
@@ -425,13 +441,18 @@ public class ServiceiLibrary : IServiceiLibrary
 
             LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
             if (lotInfo == null)
-                return new EndLotResult(false,MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo +
-                    " good:" + good + " ng:" + ng, "GetLotInfo", functionName, log);
+            {
+                //return new EndLotResult(false, MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo +
+                //   " good:" + good + " ng:" + ng, "GetLotInfo", functionName, log);
+                return new EndLotResult(true, MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo +
+                   " good:" + good + " ng:" + ng, "GetLotInfo", functionName, log);
+            }
+               
             //Check package and Lot Pro
             CheckLotApcsProResult proResult = CheckLotApcsPro(lotNo, lotInfo.Package.Name, log);
             if (!proResult.IsPass)
             {
-                return new EndLotResult(false, MessageType.ApcsPro, proResult.Cause, "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " good:" + good + " ng:" + ng,
+                return new EndLotResult(true, MessageType.ApcsPro, proResult.Cause, "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " good:" + good + " ng:" + ng,
                    "CheckLotApcsPro", functionName, log);
             }
             UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
@@ -527,9 +548,9 @@ public class ServiceiLibrary : IServiceiLibrary
     /// <param name="good"></param>
     /// <param name="ng"> NG=0 is Reload </param>
     /// <returns></returns>
-    public ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng)
+    public ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng, EndMode endMode)
     {
-        return AbnormalLotEnd_BackToThe_BeforeProcess(lotNo, mcNo, opNo, good, ng, true, MethodBase.GetCurrentMethod().Name);
+        return AbnormalLotEnd_BackToThe_BeforeProcess(lotNo, mcNo, opNo, good, ng, true, MethodBase.GetCurrentMethod().Name, endMode);
     }
     /// <summary>
     /// 
@@ -540,16 +561,20 @@ public class ServiceiLibrary : IServiceiLibrary
     /// <param name="good"></param>
     /// <param name="ng"> NG=0 is Reload </param>
     /// <returns></returns>
-    public ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng)
+    public ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng,EndMode endMode)
     {
-        return AbnormalLotEnd_BackToThe_BeforeProcess(lotNo, mcNo, opNo, good, ng, false, MethodBase.GetCurrentMethod().Name);
+        return AbnormalLotEnd_BackToThe_BeforeProcess(lotNo, mcNo, opNo, good, ng, false, MethodBase.GetCurrentMethod().Name, endMode);
     }
 
-    private ReinputResult AbnormalLotEnd_BackToThe_BeforeProcess(string lotNo, string mcNo, string opNo, int good, int ng, bool holdLot, string functionName)
+    private ReinputResult AbnormalLotEnd_BackToThe_BeforeProcess(string lotNo, string mcNo, string opNo, int good, int ng, bool holdLot, string functionName ,EndMode endMode)
     {
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
+            if (endMode == EndMode.AbnormalEndReset)
+            {
+                ng = 0;
+            }
             DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
 
             LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
@@ -560,6 +585,13 @@ public class ServiceiLibrary : IServiceiLibrary
             CheckLotApcsProResult proResult = CheckLotApcsPro(lotNo, lotInfo.Package.Name, log);
             if (!proResult.IsPass)
             {
+                TdcLotEndResult tdcLotEndResult = TdcLotEnd(mcNo, lotNo, opNo, dateTimeInfo.Datetime, log, good, ng, (EndModeType)endMode);
+                if (!tdcLotEndResult.IsPass)
+                {
+                    //
+                    // TODO: Add constructor logic here
+                    //
+                }
                 return new ReinputResult(false, MessageType.ApcsPro, proResult.Cause, "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo, "CheckLotApcsPro",
                     functionName, log);
             }
@@ -572,6 +604,7 @@ public class ServiceiLibrary : IServiceiLibrary
                     " good:" + good + " ng:" + ng, "GetMachineInfo", functionName, log);
             LotUpdateInfo lotUpdateInfo = c_ApcsProService.AbnormalLotEnd_BackToThe_BeforeProcess(lotInfo.Id, machineInfo.Id, userInfo.Id, holdLot,
                 good, ng, 0, "", 1, dateTimeInfo.Datetime, log);
+
             if (!lotUpdateInfo.IsOk)
             {
                 return new ReinputResult(false, MessageType.ApcsPro, lotUpdateInfo.ErrorMessage, "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo +
@@ -662,6 +695,12 @@ public class ServiceiLibrary : IServiceiLibrary
                     + " mcNo:" + mcNo + " AlarmNo:" + AlarmNo + " AlarmState:" + alarm.ToString(), "GetMachineInfo",
                     MethodBase.GetCurrentMethod().Name, log);
 
+            //ตัด 0### ออก
+            int alarmNo;
+            if (int.TryParse(AlarmNo,out alarmNo))
+            {
+                AlarmNo = alarmNo.ToString();
+            }
 
             int[] lotArray = new int[1];
             lotArray[0] = lotInfo.Id;
@@ -682,22 +721,8 @@ public class ServiceiLibrary : IServiceiLibrary
         }
     }
    
-    private CheckLotApcsProResult CheckLotApcsPro(string lotNo,string package,Logger log)
-    {
-        //Check package and Lot Pro
-        if (!c_ApcsProService.CheckPackageEnable(package, log))
-        {
-            return new CheckLotApcsProResult(false,"Package :" + package + " นี้ยังไม่เปิดใช้งานในระบบ Apcs Pro","",MessageType.ApcsPro,"",
-                "CheckPackageEnable",MethodBase.GetCurrentMethod().Name,log);
-        }
-        if (!c_ApcsProService.CheckLotisExist(lotNo, log))
-        {
-            return new CheckLotApcsProResult(false,"ไม่พบ LotNo :" + lotNo + " ในระบบ Apcs Pro","",MessageType.ApcsPro,"", 
-                "CheckLotisExist",MethodBase.GetCurrentMethod().Name,log);
-        }
-        return new CheckLotApcsProResult(true, "", "", MessageType.ApcsPro, "", "", MethodBase.GetCurrentMethod().Name, log);
-    }
-
+   
+    #region Check
 
     public CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package)
     {
@@ -721,10 +746,28 @@ public class ServiceiLibrary : IServiceiLibrary
         {
             log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Error", "WCF Service", "iLibrary", 0,
                 "Exception", ex.ToString(), "lotNo:" + lotNo + " mcNo:" + mcNo + " package:" + package);
-            return new CheckLotApcsProResult(false,"lotNo:" + lotNo + " mcNo:" + mcNo + " package:" + package + 
-                " Exception:" + ex.ToString(),"",MessageType.ApcsPro,"", "Exception",MethodBase.GetCurrentMethod().Name,log);
+            return new CheckLotApcsProResult(false, "lotNo:" + lotNo + " mcNo:" + mcNo + " package:" + package +
+                " Exception:" + ex.ToString(), "", MessageType.ApcsPro, "", "Exception", MethodBase.GetCurrentMethod().Name, log);
         }
     }
+    private CheckLotApcsProResult CheckLotApcsPro(string lotNo, string package, Logger log)
+    {
+        //Check package and Lot Pro
+        if (!c_ApcsProService.CheckPackageEnable(package, log))
+        {
+            return new CheckLotApcsProResult(false, "Package :" + package + " นี้ยังไม่เปิดใช้งานในระบบ Apcs Pro", "", MessageType.ApcsPro, "",
+                "CheckPackageEnable", MethodBase.GetCurrentMethod().Name, log);
+        }
+        if (!c_ApcsProService.CheckLotisExist(lotNo, log))
+        {
+            return new CheckLotApcsProResult(false, "ไม่พบ LotNo :" + lotNo + " ในระบบ Apcs Pro", "", MessageType.ApcsPro, "",
+                "CheckLotisExist", MethodBase.GetCurrentMethod().Name, log);
+        }
+        return new CheckLotApcsProResult(true, "", "", MessageType.ApcsPro, "", "", MethodBase.GetCurrentMethod().Name, log);
+    }
+
+    #endregion
+
 
     #region TDC
     private void TdcMove(string mcNo, string lotNo, string opNo, string layerNo, Logger log)

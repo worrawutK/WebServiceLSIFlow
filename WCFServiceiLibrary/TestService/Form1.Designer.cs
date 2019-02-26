@@ -36,6 +36,7 @@
             this.buttonMcOn = new System.Windows.Forms.Button();
             this.buttonMcOff = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonFirst = new System.Windows.Forms.Button();
             this.buttonReinput = new System.Windows.Forms.Button();
             this.buttonCancelLot = new System.Windows.Forms.Button();
             this.textBoxNg = new System.Windows.Forms.TextBox();
@@ -45,7 +46,6 @@
             this.textBoxRecipe = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.buttonFinal = new System.Windows.Forms.Button();
-            this.buttonFirst = new System.Windows.Forms.Button();
             this.textBoxProcess = new System.Windows.Forms.TextBox();
             this.textBoxPackage = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -54,6 +54,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxOPNo = new System.Windows.Forms.TextBox();
             this.textBoxMCNo = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -127,6 +128,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.buttonFirst);
             this.groupBox2.Controls.Add(this.buttonReinput);
             this.groupBox2.Controls.Add(this.buttonCancelLot);
@@ -158,6 +160,16 @@
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Example";
+            // 
+            // buttonFirst
+            // 
+            this.buttonFirst.Location = new System.Drawing.Point(207, 111);
+            this.buttonFirst.Name = "buttonFirst";
+            this.buttonFirst.Size = new System.Drawing.Size(75, 23);
+            this.buttonFirst.TabIndex = 6;
+            this.buttonFirst.Text = "First";
+            this.buttonFirst.UseVisualStyleBackColor = true;
+            this.buttonFirst.Click += new System.EventHandler(this.buttonFirst_Click);
             // 
             // buttonReinput
             // 
@@ -239,16 +251,6 @@
             this.buttonFinal.UseVisualStyleBackColor = true;
             this.buttonFinal.Click += new System.EventHandler(this.buttonFinal_Click);
             // 
-            // buttonFirst
-            // 
-            this.buttonFirst.Location = new System.Drawing.Point(207, 111);
-            this.buttonFirst.Name = "buttonFirst";
-            this.buttonFirst.Size = new System.Drawing.Size(75, 23);
-            this.buttonFirst.TabIndex = 6;
-            this.buttonFirst.Text = "First";
-            this.buttonFirst.UseVisualStyleBackColor = true;
-            this.buttonFirst.Click += new System.EventHandler(this.buttonFirst_Click);
-            // 
             // textBoxProcess
             // 
             this.textBoxProcess.Location = new System.Drawing.Point(60, 141);
@@ -317,6 +319,16 @@
             this.textBoxMCNo.TabIndex = 2;
             this.textBoxMCNo.Text = "MP-TWE-00";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(60, 279);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "MC Alarm";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -359,6 +371,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button buttonReinput;
         private System.Windows.Forms.Button buttonCancelLot;
+        private System.Windows.Forms.Button button1;
     }
 }
 

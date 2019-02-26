@@ -37,7 +37,16 @@ namespace TestService.ServiceReference1 {
         private string CauseField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FunctionNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsPassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SubFunctionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -63,6 +72,19 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FunctionName {
+            get {
+                return this.FunctionNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FunctionNameField, value) != true)) {
+                    this.FunctionNameField = value;
+                    this.RaisePropertyChanged("FunctionName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsPass {
             get {
                 return this.IsPassField;
@@ -75,6 +97,32 @@ namespace TestService.ServiceReference1 {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SubFunction {
+            get {
+                return this.SubFunctionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SubFunctionField, value) != true)) {
+                    this.SubFunctionField = value;
+                    this.RaisePropertyChanged("SubFunction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.MessageType Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -83,6 +131,20 @@ namespace TestService.ServiceReference1 {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MessageType", Namespace="http://schemas.datacontract.org/2004/07/")]
+    public enum MessageType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Apcs = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ApcsPro = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Unknown = 2,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -127,7 +189,16 @@ namespace TestService.ServiceReference1 {
         private string CauseField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FunctionNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsPassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SubFunctionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -153,6 +224,19 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FunctionName {
+            get {
+                return this.FunctionNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FunctionNameField, value) != true)) {
+                    this.FunctionNameField = value;
+                    this.RaisePropertyChanged("FunctionName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsPass {
             get {
                 return this.IsPassField;
@@ -161,6 +245,32 @@ namespace TestService.ServiceReference1 {
                 if ((this.IsPassField.Equals(value) != true)) {
                     this.IsPassField = value;
                     this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SubFunction {
+            get {
+                return this.SubFunctionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SubFunctionField, value) != true)) {
+                    this.SubFunctionField = value;
+                    this.RaisePropertyChanged("SubFunction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.MessageType Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
                 }
             }
         }
@@ -191,13 +301,19 @@ namespace TestService.ServiceReference1 {
         private string ErrorNoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FunctionNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private TestService.ServiceReference1.SetupLotResult.Status IsPassField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.ServiceReference1.SetupLotResult.LotEnum LotTypeField;
+        private string RecipeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string RecipeField;
+        private string SubFunctionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -236,6 +352,19 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FunctionName {
+            get {
+                return this.FunctionNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FunctionNameField, value) != true)) {
+                    this.FunctionNameField = value;
+                    this.RaisePropertyChanged("FunctionName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public TestService.ServiceReference1.SetupLotResult.Status IsPass {
             get {
                 return this.IsPassField;
@@ -249,19 +378,6 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.ServiceReference1.SetupLotResult.LotEnum LotType {
-            get {
-                return this.LotTypeField;
-            }
-            set {
-                if ((this.LotTypeField.Equals(value) != true)) {
-                    this.LotTypeField = value;
-                    this.RaisePropertyChanged("LotType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Recipe {
             get {
                 return this.RecipeField;
@@ -270,6 +386,32 @@ namespace TestService.ServiceReference1 {
                 if ((object.ReferenceEquals(this.RecipeField, value) != true)) {
                     this.RecipeField = value;
                     this.RaisePropertyChanged("Recipe");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SubFunction {
+            get {
+                return this.SubFunctionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SubFunctionField, value) != true)) {
+                    this.SubFunctionField = value;
+                    this.RaisePropertyChanged("SubFunction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.MessageType Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
                 }
             }
         }
@@ -296,17 +438,23 @@ namespace TestService.ServiceReference1 {
             [System.Runtime.Serialization.EnumMemberAttribute()]
             Warning = 2,
         }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RunMode", Namespace="http://schemas.datacontract.org/2004/07/")]
+    public enum RunMode : int {
         
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-        [System.Runtime.Serialization.DataContractAttribute(Name="SetupLotResult.LotEnum", Namespace="http://schemas.datacontract.org/2004/07/")]
-        public enum LotEnum : int {
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            TDC = 0,
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            ApcsPro = 1,
-        }
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Normal = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Separated = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SeparatedEnd = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ReRun = 3,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -322,7 +470,16 @@ namespace TestService.ServiceReference1 {
         private string CauseField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FunctionNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsPassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SubFunctionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -348,6 +505,19 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FunctionName {
+            get {
+                return this.FunctionNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FunctionNameField, value) != true)) {
+                    this.FunctionNameField = value;
+                    this.RaisePropertyChanged("FunctionName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsPass {
             get {
                 return this.IsPassField;
@@ -356,6 +526,250 @@ namespace TestService.ServiceReference1 {
                 if ((this.IsPassField.Equals(value) != true)) {
                     this.IsPassField = value;
                     this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SubFunction {
+            get {
+                return this.SubFunctionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SubFunctionField, value) != true)) {
+                    this.SubFunctionField = value;
+                    this.RaisePropertyChanged("SubFunction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.MessageType Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OnlineStartResult", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class OnlineStartResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CauseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FunctionNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsPassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SubFunctionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.MessageType TypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Cause {
+            get {
+                return this.CauseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CauseField, value) != true)) {
+                    this.CauseField = value;
+                    this.RaisePropertyChanged("Cause");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FunctionName {
+            get {
+                return this.FunctionNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FunctionNameField, value) != true)) {
+                    this.FunctionNameField = value;
+                    this.RaisePropertyChanged("FunctionName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsPass {
+            get {
+                return this.IsPassField;
+            }
+            set {
+                if ((this.IsPassField.Equals(value) != true)) {
+                    this.IsPassField = value;
+                    this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SubFunction {
+            get {
+                return this.SubFunctionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SubFunctionField, value) != true)) {
+                    this.SubFunctionField = value;
+                    this.RaisePropertyChanged("SubFunction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.MessageType Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OnlineEndResult", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class OnlineEndResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CauseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FunctionNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsPassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SubFunctionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.MessageType TypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Cause {
+            get {
+                return this.CauseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CauseField, value) != true)) {
+                    this.CauseField = value;
+                    this.RaisePropertyChanged("Cause");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FunctionName {
+            get {
+                return this.FunctionNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FunctionNameField, value) != true)) {
+                    this.FunctionNameField = value;
+                    this.RaisePropertyChanged("FunctionName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsPass {
+            get {
+                return this.IsPassField;
+            }
+            set {
+                if ((this.IsPassField.Equals(value) != true)) {
+                    this.IsPassField = value;
+                    this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SubFunction {
+            get {
+                return this.SubFunctionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SubFunctionField, value) != true)) {
+                    this.SubFunctionField = value;
+                    this.RaisePropertyChanged("SubFunction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.MessageType Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
                 }
             }
         }
@@ -394,7 +808,16 @@ namespace TestService.ServiceReference1 {
         private string CauseField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FunctionNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsPassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SubFunctionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -420,6 +843,19 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FunctionName {
+            get {
+                return this.FunctionNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FunctionNameField, value) != true)) {
+                    this.FunctionNameField = value;
+                    this.RaisePropertyChanged("FunctionName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsPass {
             get {
                 return this.IsPassField;
@@ -428,6 +864,32 @@ namespace TestService.ServiceReference1 {
                 if ((this.IsPassField.Equals(value) != true)) {
                     this.IsPassField = value;
                     this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SubFunction {
+            get {
+                return this.SubFunctionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SubFunctionField, value) != true)) {
+                    this.SubFunctionField = value;
+                    this.RaisePropertyChanged("SubFunction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.MessageType Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
                 }
             }
         }
@@ -455,7 +917,16 @@ namespace TestService.ServiceReference1 {
         private string CauseField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FunctionNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsPassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SubFunctionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -481,6 +952,19 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FunctionName {
+            get {
+                return this.FunctionNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FunctionNameField, value) != true)) {
+                    this.FunctionNameField = value;
+                    this.RaisePropertyChanged("FunctionName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsPass {
             get {
                 return this.IsPassField;
@@ -489,6 +973,32 @@ namespace TestService.ServiceReference1 {
                 if ((this.IsPassField.Equals(value) != true)) {
                     this.IsPassField = value;
                     this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SubFunction {
+            get {
+                return this.SubFunctionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SubFunctionField, value) != true)) {
+                    this.SubFunctionField = value;
+                    this.RaisePropertyChanged("SubFunction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.MessageType Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
                 }
             }
         }
@@ -516,7 +1026,16 @@ namespace TestService.ServiceReference1 {
         private string CauseField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FunctionNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsPassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SubFunctionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -542,6 +1061,19 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FunctionName {
+            get {
+                return this.FunctionNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FunctionNameField, value) != true)) {
+                    this.FunctionNameField = value;
+                    this.RaisePropertyChanged("FunctionName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsPass {
             get {
                 return this.IsPassField;
@@ -550,6 +1082,32 @@ namespace TestService.ServiceReference1 {
                 if ((this.IsPassField.Equals(value) != true)) {
                     this.IsPassField = value;
                     this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SubFunction {
+            get {
+                return this.SubFunctionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SubFunctionField, value) != true)) {
+                    this.SubFunctionField = value;
+                    this.RaisePropertyChanged("SubFunction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.MessageType Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
                 }
             }
         }
@@ -588,7 +1146,16 @@ namespace TestService.ServiceReference1 {
         private string CauseField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FunctionNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsPassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SubFunctionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -614,6 +1181,19 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FunctionName {
+            get {
+                return this.FunctionNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FunctionNameField, value) != true)) {
+                    this.FunctionNameField = value;
+                    this.RaisePropertyChanged("FunctionName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsPass {
             get {
                 return this.IsPassField;
@@ -622,6 +1202,32 @@ namespace TestService.ServiceReference1 {
                 if ((this.IsPassField.Equals(value) != true)) {
                     this.IsPassField = value;
                     this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SubFunction {
+            get {
+                return this.SubFunctionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SubFunctionField, value) != true)) {
+                    this.SubFunctionField = value;
+                    this.RaisePropertyChanged("SubFunction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.MessageType Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
                 }
             }
         }
@@ -649,7 +1255,16 @@ namespace TestService.ServiceReference1 {
         private string CauseField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FunctionNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsPassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SubFunctionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -675,6 +1290,19 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FunctionName {
+            get {
+                return this.FunctionNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FunctionNameField, value) != true)) {
+                    this.FunctionNameField = value;
+                    this.RaisePropertyChanged("FunctionName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsPass {
             get {
                 return this.IsPassField;
@@ -687,6 +1315,32 @@ namespace TestService.ServiceReference1 {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SubFunction {
+            get {
+                return this.SubFunctionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SubFunctionField, value) != true)) {
+                    this.SubFunctionField = value;
+                    this.RaisePropertyChanged("SubFunction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.MessageType Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -695,6 +1349,20 @@ namespace TestService.ServiceReference1 {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EndMode", Namespace="http://schemas.datacontract.org/2004/07/")]
+    public enum EndMode : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Normal = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AbnormalEndReset = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AbnormalEndAccumulate = 3,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -710,7 +1378,16 @@ namespace TestService.ServiceReference1 {
         private string CauseField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FunctionNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsPassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SubFunctionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -736,6 +1413,19 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FunctionName {
+            get {
+                return this.FunctionNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FunctionNameField, value) != true)) {
+                    this.FunctionNameField = value;
+                    this.RaisePropertyChanged("FunctionName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsPass {
             get {
                 return this.IsPassField;
@@ -744,6 +1434,32 @@ namespace TestService.ServiceReference1 {
                 if ((this.IsPassField.Equals(value) != true)) {
                     this.IsPassField = value;
                     this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SubFunction {
+            get {
+                return this.SubFunctionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SubFunctionField, value) != true)) {
+                    this.SubFunctionField = value;
+                    this.RaisePropertyChanged("SubFunction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.MessageType Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
                 }
             }
         }
@@ -771,7 +1487,16 @@ namespace TestService.ServiceReference1 {
         private string CauseField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FunctionNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsPassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SubFunctionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -797,62 +1522,14 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsPass {
+        public string FunctionName {
             get {
-                return this.IsPassField;
+                return this.FunctionNameField;
             }
             set {
-                if ((this.IsPassField.Equals(value) != true)) {
-                    this.IsPassField = value;
-                    this.RaisePropertyChanged("IsPass");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OnlineStartResult", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    public partial class OnlineStartResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CauseField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsPassField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Cause {
-            get {
-                return this.CauseField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CauseField, value) != true)) {
-                    this.CauseField = value;
-                    this.RaisePropertyChanged("Cause");
+                if ((object.ReferenceEquals(this.FunctionNameField, value) != true)) {
+                    this.FunctionNameField = value;
+                    this.RaisePropertyChanged("FunctionName");
                 }
             }
         }
@@ -870,63 +1547,28 @@ namespace TestService.ServiceReference1 {
             }
         }
         
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OnlineEndResult", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    public partial class OnlineEndResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CauseField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsPassField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Cause {
+        public string SubFunction {
             get {
-                return this.CauseField;
+                return this.SubFunctionField;
             }
             set {
-                if ((object.ReferenceEquals(this.CauseField, value) != true)) {
-                    this.CauseField = value;
-                    this.RaisePropertyChanged("Cause");
+                if ((object.ReferenceEquals(this.SubFunctionField, value) != true)) {
+                    this.SubFunctionField = value;
+                    this.RaisePropertyChanged("SubFunction");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsPass {
+        public TestService.ServiceReference1.MessageType Type {
             get {
-                return this.IsPassField;
+                return this.TypeField;
             }
             set {
-                if ((this.IsPassField.Equals(value) != true)) {
-                    this.IsPassField = value;
-                    this.RaisePropertyChanged("IsPass");
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
                 }
             }
         }
@@ -957,8 +1599,23 @@ namespace TestService.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/SetupLotNoCheckLicenser", ReplyAction="http://tempuri.org/IServiceiLibrary/SetupLotNoCheckLicenserResponse")]
         TestService.ServiceReference1.SetupLotResult SetupLotNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/SetupLotCustomMode", ReplyAction="http://tempuri.org/IServiceiLibrary/SetupLotCustomModeResponse")]
+        TestService.ServiceReference1.SetupLotResult SetupLotCustomMode(string lotNo, string mcNo, string opNo, string processName, string layerNo, TestService.ServiceReference1.RunMode runMode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/SetupLotCustomModeNoCheckLicenser", ReplyAction="http://tempuri.org/IServiceiLibrary/SetupLotCustomModeNoCheckLicenserResponse")]
+        TestService.ServiceReference1.SetupLotResult SetupLotCustomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo, TestService.ServiceReference1.RunMode runMode);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/StartLot", ReplyAction="http://tempuri.org/IServiceiLibrary/StartLotResponse")]
         TestService.ServiceReference1.StartLotResult StartLot(string lotNo, string mcNo, string opNo, string recipe);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/StartLotCustomMode", ReplyAction="http://tempuri.org/IServiceiLibrary/StartLotCustomModeResponse")]
+        TestService.ServiceReference1.StartLotResult StartLotCustomMode(string lotNo, string mcNo, string opNo, string recipe, TestService.ServiceReference1.RunMode runMode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/OnlineStart", ReplyAction="http://tempuri.org/IServiceiLibrary/OnlineStartResponse")]
+        TestService.ServiceReference1.OnlineStartResult OnlineStart(string lotNo, string mcNo, string opNo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/OnlineEnd", ReplyAction="http://tempuri.org/IServiceiLibrary/OnlineEndResponse")]
+        TestService.ServiceReference1.OnlineEndResult OnlineEnd(string lotNo, string mcNo, string opNo, int good, int ng);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/UpdateFirstinspection", ReplyAction="http://tempuri.org/IServiceiLibrary/UpdateFirstinspectionResponse")]
         TestService.ServiceReference1.UpdateFirstinspectionResult UpdateFirstinspection(string lotNo, string opNo, TestService.ServiceReference1.Judge judge, string mcNo);
@@ -979,19 +1636,13 @@ namespace TestService.ServiceReference1 {
         TestService.ServiceReference1.CancelLotResult CancelLot(string mcNo, string lotNo, string opNo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/Reinput", ReplyAction="http://tempuri.org/IServiceiLibrary/ReinputResponse")]
-        TestService.ServiceReference1.ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng);
+        TestService.ServiceReference1.ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference1.EndMode endMode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/ReinputAndHoldLot", ReplyAction="http://tempuri.org/IServiceiLibrary/ReinputAndHoldLotResponse")]
-        TestService.ServiceReference1.ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng);
+        TestService.ServiceReference1.ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference1.EndMode endMode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/CheckLotApcsProManual", ReplyAction="http://tempuri.org/IServiceiLibrary/CheckLotApcsProManualResponse")]
         TestService.ServiceReference1.CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/OnlineStart", ReplyAction="http://tempuri.org/IServiceiLibrary/OnlineStartResponse")]
-        TestService.ServiceReference1.OnlineStartResult OnlineStart(string lotNo, string mcNo, string opNo);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/OnlineEnd", ReplyAction="http://tempuri.org/IServiceiLibrary/OnlineEndResponse")]
-        TestService.ServiceReference1.OnlineEndResult OnlineEnd(string lotNo, string mcNo, string opNo, int good, int ng);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1037,8 +1688,28 @@ namespace TestService.ServiceReference1 {
             return base.Channel.SetupLotNoCheckLicenser(lotNo, mcNo, opNo, processName, layerNo);
         }
         
+        public TestService.ServiceReference1.SetupLotResult SetupLotCustomMode(string lotNo, string mcNo, string opNo, string processName, string layerNo, TestService.ServiceReference1.RunMode runMode) {
+            return base.Channel.SetupLotCustomMode(lotNo, mcNo, opNo, processName, layerNo, runMode);
+        }
+        
+        public TestService.ServiceReference1.SetupLotResult SetupLotCustomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo, TestService.ServiceReference1.RunMode runMode) {
+            return base.Channel.SetupLotCustomModeNoCheckLicenser(lotNo, mcNo, opNo, processName, layerNo, runMode);
+        }
+        
         public TestService.ServiceReference1.StartLotResult StartLot(string lotNo, string mcNo, string opNo, string recipe) {
             return base.Channel.StartLot(lotNo, mcNo, opNo, recipe);
+        }
+        
+        public TestService.ServiceReference1.StartLotResult StartLotCustomMode(string lotNo, string mcNo, string opNo, string recipe, TestService.ServiceReference1.RunMode runMode) {
+            return base.Channel.StartLotCustomMode(lotNo, mcNo, opNo, recipe, runMode);
+        }
+        
+        public TestService.ServiceReference1.OnlineStartResult OnlineStart(string lotNo, string mcNo, string opNo) {
+            return base.Channel.OnlineStart(lotNo, mcNo, opNo);
+        }
+        
+        public TestService.ServiceReference1.OnlineEndResult OnlineEnd(string lotNo, string mcNo, string opNo, int good, int ng) {
+            return base.Channel.OnlineEnd(lotNo, mcNo, opNo, good, ng);
         }
         
         public TestService.ServiceReference1.UpdateFirstinspectionResult UpdateFirstinspection(string lotNo, string opNo, TestService.ServiceReference1.Judge judge, string mcNo) {
@@ -1065,24 +1736,16 @@ namespace TestService.ServiceReference1 {
             return base.Channel.CancelLot(mcNo, lotNo, opNo);
         }
         
-        public TestService.ServiceReference1.ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng) {
-            return base.Channel.Reinput(lotNo, mcNo, opNo, good, ng);
+        public TestService.ServiceReference1.ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference1.EndMode endMode) {
+            return base.Channel.Reinput(lotNo, mcNo, opNo, good, ng, endMode);
         }
         
-        public TestService.ServiceReference1.ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng) {
-            return base.Channel.ReinputAndHoldLot(lotNo, mcNo, opNo, good, ng);
+        public TestService.ServiceReference1.ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference1.EndMode endMode) {
+            return base.Channel.ReinputAndHoldLot(lotNo, mcNo, opNo, good, ng, endMode);
         }
         
         public TestService.ServiceReference1.CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package) {
             return base.Channel.CheckLotApcsProManual(lotNo, mcNo, package);
-        }
-        
-        public TestService.ServiceReference1.OnlineStartResult OnlineStart(string lotNo, string mcNo, string opNo) {
-            return base.Channel.OnlineStart(lotNo, mcNo, opNo);
-        }
-        
-        public TestService.ServiceReference1.OnlineEndResult OnlineEnd(string lotNo, string mcNo, string opNo, int good, int ng) {
-            return base.Channel.OnlineEnd(lotNo, mcNo, opNo, good, ng);
         }
     }
 }

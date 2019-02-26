@@ -71,11 +71,11 @@ public interface IServiceiLibrary
     [OperationContract]
     EndLotResult EndLotNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng);
 
-    [OperationContract]
-    EndLotResult EndLotCustomMode(string lotNo, string mcNo, string opNo, int good, int ng, EndMode endMode);
+    //[OperationContract]
+    //EndLotResult EndLotCustomMode(string lotNo, string mcNo, string opNo, int good, int ng, EndMode endMode);
 
-    [OperationContract]
-    EndLotResult EndLotCostomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng, EndMode endMode);
+    //[OperationContract]
+    //EndLotResult EndLotCostomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng, EndMode endMode);
     /// <summary>
     /// 
     /// </summary>
@@ -94,9 +94,9 @@ public interface IServiceiLibrary
     CancelLotResult CancelLot(string mcNo, string lotNo, string opNo);
 
     [OperationContract]
-    ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng);
+    ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng, EndMode endMode);
     [OperationContract]
-    ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng);
+    ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng, EndMode endMode);
 
     [OperationContract]
     CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package);
@@ -139,7 +139,7 @@ public enum AlarmState
 public enum MessageType
 {
     [EnumMember()]
-    TDC,
+    Apcs,
     [EnumMember()]
     ApcsPro,
     [EnumMember()]

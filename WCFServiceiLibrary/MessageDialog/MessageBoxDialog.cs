@@ -15,7 +15,17 @@ namespace MessageDialog
         {
             InitializeComponent();
         }
-
+        public string MessageType
+        {
+            get
+            {
+                return labelMessageType.Text;
+            }
+            set
+            {
+                labelMessageType.Text = value;
+            }
+        }
         public string ErrorMessage
         {
             get
@@ -53,6 +63,7 @@ namespace MessageDialog
         private void ButtonDismiss_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
+            this.Close();
         }
         /// <summary>
         /// ใช้ในกรณีที่มี ErrorNo
@@ -60,18 +71,33 @@ namespace MessageDialog
         /// <param name="title"></param>
         /// <param name="message"></param>
         /// <param name="errorNo"></param>
-        public static DialogResult ShowMessageDialog(string title, string message, string errorNo = "00")
+        public static DialogResult ShowMessageDialog(string title, string message,string messageType, string errorNo = "00")
         {
             using (MessageBoxDialog frm = new MessageBoxDialog())
             {
                 frm.Title = title;
                 frm.ErrorMessage = message;
-                if (errorNo == "00")
+                frm.MessageType = messageType;
+                if (errorNo == "00" || errorNo == "")
                     frm.ErrorNo = "-";
                 else
                     frm.ErrorNo = errorNo;
                return frm.ShowDialog();
             }
+        }
+
+        public static void ShowMessage(string title, string message, string messageType, string errorNo = "00")
+        {
+            MessageBoxDialog frm = new MessageBoxDialog();
+            frm.Title = title;
+            frm.ErrorMessage = message;
+            frm.MessageType = messageType;
+            if (errorNo == "00" || errorNo == "")
+                frm.ErrorNo = "-";
+            else
+                frm.ErrorNo = errorNo;
+            frm.Show();
+            frm.TopMost = true;
         }
         /// <summary>
         /// ใช้ในกรณีที่ไม่มี ErrorNo
@@ -80,9 +106,9 @@ namespace MessageDialog
         /// <param name="mcNo"></param>
         /// <param name="lotNo"></param>
         /// <param name="message"></param>
-        public static void ShowMessageDialog(string eventName, string mcNo, string lotNo, string message)
+        public static void ShowMessageDialog(string eventName, string mcNo, string lotNo, string message,string messageType)
         {
-            ShowMessageDialog(eventName, "MCNo : " + mcNo + ", LotNo : " + lotNo + " | " + message);
+            ShowMessageDialog(eventName, "MCNo : " + mcNo + ", LotNo : " + lotNo + " | " + message, messageType);
         }
     }
 }
