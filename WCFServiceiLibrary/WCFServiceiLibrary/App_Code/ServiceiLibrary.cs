@@ -93,7 +93,11 @@ public class ServiceiLibrary : IServiceiLibrary
                 //Apcs Pro priority
                 //TDC Move
                 TdcMove(mcNo, lotNo, opNo, layerNo, log);
-                
+                if (IsSkipped(mcNo))
+                {
+                    return new SetupLotResult(SetupLotResult.Status.Pass, MessageType.ApcsPro, "IsSkipped", "web.config", "", "", "IsSkipped", functionName, log);
+                }
+
                 UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
                 string warningMessage = "";
                 if (userInfo.License != null)
@@ -151,7 +155,7 @@ public class ServiceiLibrary : IServiceiLibrary
                     return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro, "ไม่พบ MCNo :" + mcNo + " ในระบบ", 
                         "LotNo:" + lotNo + " opNo:" + opNo + " mcNo" + mcNo, "","", "GetMachineInfo",
                         functionName, log);
-
+            
                 LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotSetup(lotInfo.Id, machineInfo.Id, userInfo.Id, 0, "", 1, dateTimeInfo.Datetime, log);
                 if (!lotUpdateInfo.IsOk)
                     return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro, lotUpdateInfo.ErrorMessage,
@@ -205,7 +209,7 @@ public class ServiceiLibrary : IServiceiLibrary
                 // TODO: Add constructor logic here
                 //
             }
-
+       
             LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
             if (lotInfo == null)
             {
@@ -226,6 +230,10 @@ public class ServiceiLibrary : IServiceiLibrary
             }
             else
             {
+                if (IsSkipped(mcNo))
+                {
+                    return new StartLotResult(true, MessageType.ApcsPro, "IsSkipped", "web.config", "IsSkipped", functionName, log);
+                }
                 UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
 
                 MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
@@ -267,7 +275,10 @@ public class ServiceiLibrary : IServiceiLibrary
                 return new OnlineStartResult(false, MessageType.ApcsPro, proResult.Cause, "LotNo:" + lotNo + " opNo:" + opNo + " package:" + lotInfo.Package.Name,
                     "CheckLotApcsPro", MethodBase.GetCurrentMethod().Name, log);
             }
-
+            if (IsSkipped(mcNo))
+            {
+                return new OnlineStartResult(true, MessageType.ApcsPro, "IsSkipped", "web.config", "IsSkipped", MethodBase.GetCurrentMethod().Name, log);
+            }
             UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
 
             MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
@@ -309,7 +320,10 @@ public class ServiceiLibrary : IServiceiLibrary
                 return new UpdateFirstinspectionResult(false, MessageType.ApcsPro, proResult.Cause, "LotNo:" + lotNo + " opNo:" + opNo + " package:" + lotInfo.Package.Name,
                     "CheckLotApcsPro", MethodBase.GetCurrentMethod().Name, log);
             }
-
+            if (IsSkipped(mcNo))
+            {
+                return new UpdateFirstinspectionResult(true, MessageType.ApcsPro, "IsSkipped", "web.config", "IsSkipped", MethodBase.GetCurrentMethod().Name, log);
+            }
             UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
             LotUpdateInfo lotUpdateInfo = c_ApcsProService.Update_Firstinspection(lotInfo.Id, (int)judge, userInfo.Id, 0, "", 1, dateTimeInfo.Datetime, log);
             if (!lotUpdateInfo.IsOk)
@@ -345,7 +359,10 @@ public class ServiceiLibrary : IServiceiLibrary
                 return new OnlineEndResult(false, MessageType.ApcsPro, proResult.Cause, "LotNo:" + lotNo + " opNo:" + opNo + " package:" + lotInfo.Package.Name,
                     "CheckLotApcsPro", MethodBase.GetCurrentMethod().Name, log);
             }
-
+            if (IsSkipped(mcNo))
+            {
+                return new OnlineEndResult(true, MessageType.ApcsPro, "IsSkipped", "web.config", "IsSkipped", MethodBase.GetCurrentMethod().Name, log);
+            }
             UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
 
             MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
@@ -388,7 +405,10 @@ public class ServiceiLibrary : IServiceiLibrary
                 return new UpdateFinalinspectionResult(false, MessageType.ApcsPro, proResult.Cause, "LotNo:" + lotNo + " opNo:" + opNo + " package:" + lotInfo.Package.Name,
                     "CheckLotApcsPro", MethodBase.GetCurrentMethod().Name, log);
             }
-
+            if (IsSkipped(mcNo))
+            {
+                return new UpdateFinalinspectionResult(true, MessageType.ApcsPro, "IsSkipped", "web.config", "IsSkipped", MethodBase.GetCurrentMethod().Name, log);
+            }
             UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
 
             LotUpdateInfo lotUpdateInfo = c_ApcsProService.Update_Finalinspection(lotInfo.Id, (int)judge, userInfo.Id, 0, "", 1, dateTimeInfo.Datetime, log);
@@ -455,6 +475,11 @@ public class ServiceiLibrary : IServiceiLibrary
                 return new EndLotResult(true, MessageType.ApcsPro, proResult.Cause, "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " good:" + good + " ng:" + ng,
                    "CheckLotApcsPro", functionName, log);
             }
+            if (IsSkipped(mcNo))
+            {
+                return new EndLotResult(true, MessageType.ApcsPro, "IsSkipped", "web.config", "IsSkipped", functionName, log);
+            }
+
             UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
 
             MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
@@ -765,7 +790,17 @@ public class ServiceiLibrary : IServiceiLibrary
         }
         return new CheckLotApcsProResult(true, "", "", MessageType.ApcsPro, "", "", MethodBase.GetCurrentMethod().Name, log);
     }
+    private bool IsSkipped(string mcNo)
+    {
+        string McNoSkipped = AppSettingHelper.GetAppSettingsValue("McNoSkipped");
+        List<string> McList = McNoSkipped.Split(',').ToList();
 
+        if (McList.Where(x => x == mcNo).Any())
+        {
+            return true;
+        }
+        return false;
+    }
     #endregion
 
 

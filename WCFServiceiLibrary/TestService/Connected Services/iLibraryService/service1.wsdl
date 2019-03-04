@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ServiceiLibrary" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="" namespace="http://schemas.datacontract.org/2004/07/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServiceiLibrary_MachineOnlineState_InputMessage">
+    <wsdl:part name="parameters" element="tns:MachineOnlineState" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_MachineOnlineState_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MachineOnlineStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_UpdateMachineState_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMachineState" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_UpdateMachineState_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMachineStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_SetupLot_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetupLot" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_SetupLot_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetupLotResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_SetupLotNoCheckLicenser_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetupLotNoCheckLicenser" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_SetupLotNoCheckLicenser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetupLotNoCheckLicenserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_SetupLotCustomMode_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetupLotCustomMode" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_SetupLotCustomMode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetupLotCustomModeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_SetupLotCustomModeNoCheckLicenser_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetupLotCustomModeNoCheckLicenser" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_SetupLotCustomModeNoCheckLicenser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetupLotCustomModeNoCheckLicenserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_StartLot_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartLot" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_StartLot_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartLotResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_StartLotCustomMode_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartLotCustomMode" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_StartLotCustomMode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartLotCustomModeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_OnlineStart_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnlineStart" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_OnlineStart_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OnlineStartResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_OnlineEnd_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnlineEnd" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_OnlineEnd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OnlineEndResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_UpdateFirstinspection_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFirstinspection" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_UpdateFirstinspection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFirstinspectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_EndLot_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndLot" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_EndLot_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndLotResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_EndLotNoCheckLicenser_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndLotNoCheckLicenser" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_EndLotNoCheckLicenser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndLotNoCheckLicenserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_UpdateFinalinspection_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFinalinspection" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_UpdateFinalinspection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFinalinspectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_MachineAlarm_InputMessage">
+    <wsdl:part name="parameters" element="tns:MachineAlarm" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_MachineAlarm_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MachineAlarmResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_CancelLot_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelLot" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_CancelLot_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelLotResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_Reinput_InputMessage">
+    <wsdl:part name="parameters" element="tns:Reinput" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_Reinput_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReinputResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_ReinputAndHoldLot_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReinputAndHoldLot" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_ReinputAndHoldLot_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReinputAndHoldLotResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_CheckLotApcsProManual_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckLotApcsProManual" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_CheckLotApcsProManual_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckLotApcsProManualResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServiceiLibrary">
+    <wsdl:operation name="MachineOnlineState">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/MachineOnlineState" message="tns:IServiceiLibrary_MachineOnlineState_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/MachineOnlineStateResponse" message="tns:IServiceiLibrary_MachineOnlineState_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMachineState">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/UpdateMachineState" message="tns:IServiceiLibrary_UpdateMachineState_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/UpdateMachineStateResponse" message="tns:IServiceiLibrary_UpdateMachineState_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetupLot">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/SetupLot" message="tns:IServiceiLibrary_SetupLot_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/SetupLotResponse" message="tns:IServiceiLibrary_SetupLot_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetupLotNoCheckLicenser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/SetupLotNoCheckLicenser" message="tns:IServiceiLibrary_SetupLotNoCheckLicenser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/SetupLotNoCheckLicenserResponse" message="tns:IServiceiLibrary_SetupLotNoCheckLicenser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetupLotCustomMode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/SetupLotCustomMode" message="tns:IServiceiLibrary_SetupLotCustomMode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/SetupLotCustomModeResponse" message="tns:IServiceiLibrary_SetupLotCustomMode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetupLotCustomModeNoCheckLicenser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/SetupLotCustomModeNoCheckLicenser" message="tns:IServiceiLibrary_SetupLotCustomModeNoCheckLicenser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/SetupLotCustomModeNoCheckLicenserResponse" message="tns:IServiceiLibrary_SetupLotCustomModeNoCheckLicenser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StartLot">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/StartLot" message="tns:IServiceiLibrary_StartLot_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/StartLotResponse" message="tns:IServiceiLibrary_StartLot_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StartLotCustomMode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/StartLotCustomMode" message="tns:IServiceiLibrary_StartLotCustomMode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/StartLotCustomModeResponse" message="tns:IServiceiLibrary_StartLotCustomMode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnlineStart">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/OnlineStart" message="tns:IServiceiLibrary_OnlineStart_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/OnlineStartResponse" message="tns:IServiceiLibrary_OnlineStart_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnlineEnd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/OnlineEnd" message="tns:IServiceiLibrary_OnlineEnd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/OnlineEndResponse" message="tns:IServiceiLibrary_OnlineEnd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFirstinspection">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/UpdateFirstinspection" message="tns:IServiceiLibrary_UpdateFirstinspection_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/UpdateFirstinspectionResponse" message="tns:IServiceiLibrary_UpdateFirstinspection_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndLot">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/EndLot" message="tns:IServiceiLibrary_EndLot_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/EndLotResponse" message="tns:IServiceiLibrary_EndLot_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndLotNoCheckLicenser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/EndLotNoCheckLicenser" message="tns:IServiceiLibrary_EndLotNoCheckLicenser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/EndLotNoCheckLicenserResponse" message="tns:IServiceiLibrary_EndLotNoCheckLicenser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFinalinspection">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/UpdateFinalinspection" message="tns:IServiceiLibrary_UpdateFinalinspection_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/UpdateFinalinspectionResponse" message="tns:IServiceiLibrary_UpdateFinalinspection_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MachineAlarm">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/MachineAlarm" message="tns:IServiceiLibrary_MachineAlarm_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/MachineAlarmResponse" message="tns:IServiceiLibrary_MachineAlarm_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelLot">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/CancelLot" message="tns:IServiceiLibrary_CancelLot_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/CancelLotResponse" message="tns:IServiceiLibrary_CancelLot_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Reinput">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/Reinput" message="tns:IServiceiLibrary_Reinput_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/ReinputResponse" message="tns:IServiceiLibrary_Reinput_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReinputAndHoldLot">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/ReinputAndHoldLot" message="tns:IServiceiLibrary_ReinputAndHoldLot_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/ReinputAndHoldLotResponse" message="tns:IServiceiLibrary_ReinputAndHoldLot_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckLotApcsProManual">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/CheckLotApcsProManual" message="tns:IServiceiLibrary_CheckLotApcsProManual_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/CheckLotApcsProManualResponse" message="tns:IServiceiLibrary_CheckLotApcsProManual_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IServiceiLibrary" type="tns:IServiceiLibrary">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="MachineOnlineState">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/MachineOnlineState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMachineState">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/UpdateMachineState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetupLot">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/SetupLot" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetupLotNoCheckLicenser">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/SetupLotNoCheckLicenser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetupLotCustomMode">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/SetupLotCustomMode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetupLotCustomModeNoCheckLicenser">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/SetupLotCustomModeNoCheckLicenser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartLot">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/StartLot" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartLotCustomMode">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/StartLotCustomMode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnlineStart">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/OnlineStart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnlineEnd">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/OnlineEnd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFirstinspection">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/UpdateFirstinspection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndLot">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/EndLot" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndLotNoCheckLicenser">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/EndLotNoCheckLicenser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFinalinspection">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/UpdateFinalinspection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MachineAlarm">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/MachineAlarm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelLot">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/CancelLot" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Reinput">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/Reinput" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReinputAndHoldLot">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/ReinputAndHoldLot" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckLotApcsProManual">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/CheckLotApcsProManual" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceiLibrary">
+    <wsdl:port name="BasicHttpBinding_IServiceiLibrary" binding="tns:BasicHttpBinding_IServiceiLibrary">
+      <soap:address location="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

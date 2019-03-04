@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:simpleType name="MachineOnline">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Offline" />
+      <xs:enumeration value="Online" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MachineOnline" nillable="true" type="tns:MachineOnline" />
+  <xs:complexType name="MachineOnlineStateResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FunctionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SubFunction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:MessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MachineOnlineStateResult" nillable="true" type="tns:MachineOnlineStateResult" />
+  <xs:simpleType name="MessageType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Apcs" />
+      <xs:enumeration value="ApcsPro" />
+      <xs:enumeration value="Unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MessageType" nillable="true" type="tns:MessageType" />
+  <xs:simpleType name="MachineProcessingState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Initial" />
+      <xs:enumeration value="Idle" />
+      <xs:enumeration value="Setup" />
+      <xs:enumeration value="Ready" />
+      <xs:enumeration value="Execute" />
+      <xs:enumeration value="Pause" />
+      <xs:enumeration value="LotSetUp" />
+      <xs:enumeration value="Maintenance" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MachineProcessingState" nillable="true" type="tns:MachineProcessingState" />
+  <xs:complexType name="UpdateMachineStateResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FunctionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SubFunction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:MessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateMachineStateResult" nillable="true" type="tns:UpdateMachineStateResult" />
+  <xs:complexType name="SetupLotResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FunctionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="tns:SetupLotResult.Status" />
+      <xs:element minOccurs="0" name="Recipe" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SubFunction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:MessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SetupLotResult" nillable="true" type="tns:SetupLotResult" />
+  <xs:simpleType name="SetupLotResult.Status">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Pass" />
+      <xs:enumeration value="NotPass" />
+      <xs:enumeration value="Warning" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SetupLotResult.Status" nillable="true" type="tns:SetupLotResult.Status" />
+  <xs:simpleType name="RunMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Normal" />
+      <xs:enumeration value="Separated" />
+      <xs:enumeration value="SeparatedEnd" />
+      <xs:enumeration value="ReRun" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="RunMode" nillable="true" type="tns:RunMode" />
+  <xs:complexType name="StartLotResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FunctionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SubFunction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:MessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StartLotResult" nillable="true" type="tns:StartLotResult" />
+  <xs:complexType name="OnlineStartResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FunctionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SubFunction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:MessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OnlineStartResult" nillable="true" type="tns:OnlineStartResult" />
+  <xs:complexType name="OnlineEndResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FunctionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SubFunction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:MessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OnlineEndResult" nillable="true" type="tns:OnlineEndResult" />
+  <xs:simpleType name="Judge">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NG" />
+      <xs:enumeration value="OK" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Judge" nillable="true" type="tns:Judge" />
+  <xs:complexType name="UpdateFirstinspectionResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FunctionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SubFunction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:MessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateFirstinspectionResult" nillable="true" type="tns:UpdateFirstinspectionResult" />
+  <xs:complexType name="EndLotResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FunctionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SubFunction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:MessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EndLotResult" nillable="true" type="tns:EndLotResult" />
+  <xs:complexType name="UpdateFinalinspectionResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FunctionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SubFunction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:MessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateFinalinspectionResult" nillable="true" type="tns:UpdateFinalinspectionResult" />
+  <xs:simpleType name="AlarmState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RESET" />
+      <xs:enumeration value="SET" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AlarmState" nillable="true" type="tns:AlarmState" />
+  <xs:complexType name="MachineAlarmResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FunctionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SubFunction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:MessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MachineAlarmResult" nillable="true" type="tns:MachineAlarmResult" />
+  <xs:complexType name="CancelLotResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FunctionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SubFunction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:MessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CancelLotResult" nillable="true" type="tns:CancelLotResult" />
+  <xs:simpleType name="EndMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Normal">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AbnormalEndReset">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AbnormalEndAccumulate">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EndMode" nillable="true" type="tns:EndMode" />
+  <xs:complexType name="ReinputResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FunctionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SubFunction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:MessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReinputResult" nillable="true" type="tns:ReinputResult" />
+  <xs:complexType name="CheckLotApcsProResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FunctionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SubFunction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:MessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CheckLotApcsProResult" nillable="true" type="tns:CheckLotApcsProResult" />
+</xs:schema>

@@ -18,13 +18,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://10.28.32.123/iLibraryService/ServiceiLibrary.svc/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="9e55e7c2-e0c3-4937-9984-3ea4ace28b1d" SourceId="1" SourceUrl="http://10.28.32.123/iLibraryService/ServiceiLibrary.svc/mex" />
-    <MetadataFile FileName="service3.xsd" MetadataType="Schema" ID="95722618-5e9b-410c-a0f8-fb1311d35f61" SourceId="1" SourceUrl="http://10.28.32.123/iLibraryService/ServiceiLibrary.svc/mex" />
-    <MetadataFile FileName="service31.xsd" MetadataType="Schema" ID="1e7ff8b0-c500-46df-bee4-cff8b26d4dec" SourceId="1" SourceUrl="http://10.28.32.123/iLibraryService/ServiceiLibrary.svc/mex" />
-    <MetadataFile FileName="service32.xsd" MetadataType="Schema" ID="6a919b30-00ee-43e4-9acf-6cb1050a2fa5" SourceId="1" SourceUrl="http://10.28.32.123/iLibraryService/ServiceiLibrary.svc/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="fb3cbe76-461c-474a-a36c-f40cb817b3f4" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex" />
+    <MetadataFile FileName="service3.xsd" MetadataType="Schema" ID="94de98f4-ac1e-4e84-a61d-50a4d82bcbd8" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex" />
+    <MetadataFile FileName="service4.xsd" MetadataType="Schema" ID="4e48707b-3aea-401d-8c2e-a68d3db37275" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex" />
+    <MetadataFile FileName="service5.xsd" MetadataType="Schema" ID="01baaa30-3d5a-48c4-a997-0f7b7ebc3204" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
