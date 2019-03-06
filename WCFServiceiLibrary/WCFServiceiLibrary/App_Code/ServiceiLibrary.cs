@@ -65,7 +65,7 @@ public class ServiceiLibrary : IServiceiLibrary
                 if (!requestResult.IsPass)
                 {
                     return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.Apcs, requestResult.Cause,
-                              "LotNo:" + lotNo + " opNo:" + opNo + " package:" + lotInfo.Package.Name, "", requestResult.ErrorNo,
+                              "LotNo:" + lotNo + " opNo:" + opNo, "", requestResult.ErrorNo,
                               "CheckLotApcsPro", functionName, log);
                 }
                 return new SetupLotResult(SetupLotResult.Status.Pass, MessageType.Apcs, "lotInfo is null", "LotNo:" + lotNo + " opNo:" + opNo, "", "",
@@ -604,8 +604,19 @@ public class ServiceiLibrary : IServiceiLibrary
 
             LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
             if (lotInfo == null)
-                return new ReinputResult(false,MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo +
-                    " good:" + good + " ng:" + ng, "GetLotInfo", functionName, log);
+            {
+                TdcLotEndResult tdcLotEndResult = TdcLotEnd(mcNo, lotNo, opNo, dateTimeInfo.Datetime, log, good, ng, (EndModeType)endMode);
+                if (!tdcLotEndResult.IsPass)
+                {
+                    //
+                    // TODO: Add constructor logic here
+                    //
+                }
+                return new ReinputResult(true, MessageType.Apcs, "ไม่พบ lotInfo", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo, "TdcLotEnd",
+                    functionName, log);
+            }
+                //return new ReinputResult(false,MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo +
+                //    " good:" + good + " ng:" + ng, "GetLotInfo", functionName, log);
             //Check package and Lot Pro
             CheckLotApcsProResult proResult = CheckLotApcsPro(lotNo, lotInfo.Package.Name, log);
             if (!proResult.IsPass)
@@ -617,7 +628,7 @@ public class ServiceiLibrary : IServiceiLibrary
                     // TODO: Add constructor logic here
                     //
                 }
-                return new ReinputResult(false, MessageType.ApcsPro, proResult.Cause, "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo, "CheckLotApcsPro",
+                return new ReinputResult(true, MessageType.Apcs, proResult.Cause, "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo, "TdcLotEnd",
                     functionName, log);
             }
 
@@ -837,7 +848,7 @@ public class ServiceiLibrary : IServiceiLibrary
         {
             using (ApcsWebServiceSoapClient svError = new ApcsWebServiceSoapClient())
             {
-                if (svError.LotRptIgnoreError(mcNo, tdcLotRequest.ErrorCode))
+                if (!svError.LotRptIgnoreError(mcNo, tdcLotRequest.ErrorCode))
                 {
                     return new TdcLotRequestResult(tdcLotRequest.ErrorCode, tdcLotRequest.ErrorMessage);
                 }

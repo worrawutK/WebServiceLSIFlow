@@ -138,7 +138,7 @@ namespace TestService.ServiceReference2 {
     public enum MessageType : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        TDC = 0,
+        Apcs = 0,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         ApcsPro = 1,
@@ -1013,20 +1013,6 @@ namespace TestService.ServiceReference2 {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="EndMode", Namespace="http://schemas.datacontract.org/2004/07/")]
-    public enum EndMode : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Normal = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AbnormalEndReset = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AbnormalEndAccumulate = 3,
-    }
-    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="UpdateFinalinspectionResult", Namespace="http://schemas.datacontract.org/2004/07/")]
@@ -1365,6 +1351,20 @@ namespace TestService.ServiceReference2 {
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EndMode", Namespace="http://schemas.datacontract.org/2004/07/")]
+    public enum EndMode : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Normal = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AbnormalEndReset = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AbnormalEndAccumulate = 3,
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ReinputResult", Namespace="http://schemas.datacontract.org/2004/07/")]
@@ -1626,12 +1626,6 @@ namespace TestService.ServiceReference2 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/EndLotNoCheckLicenser", ReplyAction="http://tempuri.org/IServiceiLibrary/EndLotNoCheckLicenserResponse")]
         TestService.ServiceReference2.EndLotResult EndLotNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/EndLotCustomMode", ReplyAction="http://tempuri.org/IServiceiLibrary/EndLotCustomModeResponse")]
-        TestService.ServiceReference2.EndLotResult EndLotCustomMode(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference2.EndMode endMode);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/EndLotCostomModeNoCheckLicenser", ReplyAction="http://tempuri.org/IServiceiLibrary/EndLotCostomModeNoCheckLicenserResponse")]
-        TestService.ServiceReference2.EndLotResult EndLotCostomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference2.EndMode endMode);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/UpdateFinalinspection", ReplyAction="http://tempuri.org/IServiceiLibrary/UpdateFinalinspectionResponse")]
         TestService.ServiceReference2.UpdateFinalinspectionResult UpdateFinalinspection(string lotNo, string opNo, TestService.ServiceReference2.Judge judge, string mcNo);
         
@@ -1642,10 +1636,10 @@ namespace TestService.ServiceReference2 {
         TestService.ServiceReference2.CancelLotResult CancelLot(string mcNo, string lotNo, string opNo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/Reinput", ReplyAction="http://tempuri.org/IServiceiLibrary/ReinputResponse")]
-        TestService.ServiceReference2.ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng);
+        TestService.ServiceReference2.ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference2.EndMode endMode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/ReinputAndHoldLot", ReplyAction="http://tempuri.org/IServiceiLibrary/ReinputAndHoldLotResponse")]
-        TestService.ServiceReference2.ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng);
+        TestService.ServiceReference2.ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference2.EndMode endMode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/CheckLotApcsProManual", ReplyAction="http://tempuri.org/IServiceiLibrary/CheckLotApcsProManualResponse")]
         TestService.ServiceReference2.CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package);
@@ -1730,14 +1724,6 @@ namespace TestService.ServiceReference2 {
             return base.Channel.EndLotNoCheckLicenser(lotNo, mcNo, opNo, good, ng);
         }
         
-        public TestService.ServiceReference2.EndLotResult EndLotCustomMode(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference2.EndMode endMode) {
-            return base.Channel.EndLotCustomMode(lotNo, mcNo, opNo, good, ng, endMode);
-        }
-        
-        public TestService.ServiceReference2.EndLotResult EndLotCostomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference2.EndMode endMode) {
-            return base.Channel.EndLotCostomModeNoCheckLicenser(lotNo, mcNo, opNo, good, ng, endMode);
-        }
-        
         public TestService.ServiceReference2.UpdateFinalinspectionResult UpdateFinalinspection(string lotNo, string opNo, TestService.ServiceReference2.Judge judge, string mcNo) {
             return base.Channel.UpdateFinalinspection(lotNo, opNo, judge, mcNo);
         }
@@ -1750,12 +1736,12 @@ namespace TestService.ServiceReference2 {
             return base.Channel.CancelLot(mcNo, lotNo, opNo);
         }
         
-        public TestService.ServiceReference2.ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng) {
-            return base.Channel.Reinput(lotNo, mcNo, opNo, good, ng);
+        public TestService.ServiceReference2.ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference2.EndMode endMode) {
+            return base.Channel.Reinput(lotNo, mcNo, opNo, good, ng, endMode);
         }
         
-        public TestService.ServiceReference2.ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng) {
-            return base.Channel.ReinputAndHoldLot(lotNo, mcNo, opNo, good, ng);
+        public TestService.ServiceReference2.ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference2.EndMode endMode) {
+            return base.Channel.ReinputAndHoldLot(lotNo, mcNo, opNo, good, ng, endMode);
         }
         
         public TestService.ServiceReference2.CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package) {

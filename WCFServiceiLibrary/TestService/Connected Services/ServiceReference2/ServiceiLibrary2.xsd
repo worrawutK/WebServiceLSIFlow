@@ -20,7 +20,7 @@
   <xs:element name="MachineOnlineStateResult" nillable="true" type="tns:MachineOnlineStateResult" />
   <xs:simpleType name="MessageType">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="TDC" />
+      <xs:enumeration value="Apcs" />
       <xs:enumeration value="ApcsPro" />
       <xs:enumeration value="Unknown" />
     </xs:restriction>
@@ -135,32 +135,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="EndLotResult" nillable="true" type="tns:EndLotResult" />
-  <xs:simpleType name="EndMode">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Normal">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="AbnormalEndReset">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="AbnormalEndAccumulate">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="EndMode" nillable="true" type="tns:EndMode" />
   <xs:complexType name="UpdateFinalinspectionResult">
     <xs:sequence>
       <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
@@ -198,6 +172,32 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CancelLotResult" nillable="true" type="tns:CancelLotResult" />
+  <xs:simpleType name="EndMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Normal">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AbnormalEndReset">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AbnormalEndAccumulate">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EndMode" nillable="true" type="tns:EndMode" />
   <xs:complexType name="ReinputResult">
     <xs:sequence>
       <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
