@@ -1,18 +1,15 @@
-﻿using System;
-using System.Web;
+﻿using iLibrary;
+using Rohm.Apcs.Tdc;
+using Rohm.Common.Logging;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
-using iLibrary;
-using Rohm.Common.Logging;
-using System.IO;
 using System.ServiceModel.Activation;
-using Rohm.Apcs.Tdc;
-using LotInfo = iLibrary.LotInfo;
+using System.Web;
 using TDCService;
+using LotInfo = iLibrary.LotInfo;
 
 // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "ServiceiLibrary" in code, svc and config file together.
 [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
@@ -23,10 +20,12 @@ public class ServiceiLibrary : IServiceiLibrary
     public int count;
     private string c_PahtLogFile;
     private const string c_LogVersion = "1.0.0";
+    private const string c_PathFolderBackupTdc = "backupTDC";
+    private const string c_FileTdcBackupName = "TDC_before.csv";
     public ServiceiLibrary()
     {
         c_ApcsProService = new ApcsProService();
-        c_TdcService = TdcService.GetInstance();
+        c_TdcService =  TdcService.GetInstance();
         //[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
         c_PahtLogFile = HttpContext.Current.Server.MapPath(@"~\\Log");
     }
@@ -51,17 +50,33 @@ public class ServiceiLibrary : IServiceiLibrary
         return SetupLotCommon(lotNo, mcNo, opNo, processName, layerNo,runMode, MethodBase.GetCurrentMethod().Name, false);
     }
 
-    private SetupLotResult SetupLotCommon(string lotNo, string mcNo, string opNo, string processName, string layerNo, RunMode tdcRunModeType,string functionName, bool isCheckLicenser = true)
+    //Oven พี่อาร์ม
+    public SetupLotResult SetupLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, string processName, string layerNo)
     {
+        return SetupLotCommon(lotNo, mcNoApcsPro, opNo, processName, layerNo, RunMode.Normal, MethodBase.GetCurrentMethod().Name,false, mcNoApcs);
+    }
+
+    private SetupLotResult SetupLotCommon(string lotNo, string mcNo, string opNo, string processName, string layerNo, RunMode tdcRunModeType,string functionName, bool isCheckLicenser = true,string mcNoApcs = "")
+    {
+        string mcNoToApcs;
+        if (mcNoApcs != "")
+        {
+            mcNoToApcs = mcNoApcs;
+        }
+        else
+        {
+            mcNoToApcs = mcNo;
+        }
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
+          
             DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
             LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
             if (lotInfo == null)
             {
                 //รอการแก้บัค เนื่องจากคิดว่าทุก lot จะมีใน db ของ ApcsPro แต่ไม่ใช่จะมีแค่ device slip ที่ลงทะเบียนแล้ว ถึงจะนำ lot เข้ามาในระบบ Apcs Pro (SetUp Start End)
-                TdcLotRequestResult requestResult = TdcLotRequest(mcNo, lotNo, (RunModeType)tdcRunModeType, log);
+                TdcLotRequestResult requestResult = TdcLotRequest(mcNoToApcs, lotNo, (RunModeType)tdcRunModeType, log);
                 if (!requestResult.IsPass)
                 {
                     return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.Apcs, requestResult.Cause,
@@ -78,7 +93,7 @@ public class ServiceiLibrary : IServiceiLibrary
             if (!proResult.IsPass)
             {
                 //TDC priority
-                TdcLotRequestResult requestResult = TdcLotRequest(mcNo, lotNo, (RunModeType)tdcRunModeType,log);
+                TdcLotRequestResult requestResult = TdcLotRequest(mcNoToApcs, lotNo, (RunModeType)tdcRunModeType,log);
                 if (!requestResult.IsPass)
                 {
                     return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.Apcs, requestResult.Cause,
@@ -92,7 +107,7 @@ public class ServiceiLibrary : IServiceiLibrary
             {
                 //Apcs Pro priority
                 //TDC Move
-                TdcMove(mcNo, lotNo, opNo, layerNo, log);
+                TdcMove(mcNoToApcs, lotNo, opNo, layerNo, log);
                 if (IsSkipped(mcNo))
                 {
                     return new SetupLotResult(SetupLotResult.Status.Pass, MessageType.ApcsPro, "IsSkipped", "web.config", "", "", "IsSkipped", functionName, log);
@@ -194,15 +209,27 @@ public class ServiceiLibrary : IServiceiLibrary
     {
         return StartLotCommon(lotNo, mcNo, opNo, recipe, MethodBase.GetCurrentMethod().Name, runMode);
     }
-    private StartLotResult StartLotCommon(string lotNo, string mcNo, string opNo, string recipe,string functionName,RunMode runMode)
+    public StartLotResult StartLotOven(string lotNo, string mcNoApcsPro ,string mcNoApcs, string opNo, string recipe)
+    {
+        return StartLotCommon(lotNo, mcNoApcsPro, opNo, recipe, MethodBase.GetCurrentMethod().Name, RunMode.Normal, mcNoApcs);
+    }
+    private StartLotResult StartLotCommon(string lotNo, string mcNo, string opNo, string recipe,string functionName,RunMode runMode,string mcNoApcs = "")
     {
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
             DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
-
+            string mcNoToApcs;
+            if (mcNoApcs != "")
+            {
+                mcNoToApcs = mcNoApcs;
+            }
+            else
+            {
+                mcNoToApcs = mcNo;
+            }
             //TDC LotSet
-            TdcLotSetResult tdcLotSetResult = TdcLotSet(mcNo, lotNo, opNo, (RunModeType)runMode, dateTimeInfo.Datetime, log);
+            TdcLotSetResult tdcLotSetResult = TdcLotSet(mcNoToApcs, lotNo, opNo, (RunModeType)runMode, dateTimeInfo.Datetime, log);
             if (!tdcLotSetResult.IsPass)
             {
                 //
@@ -434,6 +461,10 @@ public class ServiceiLibrary : IServiceiLibrary
     {
         return EndLotCommon(lotNo, mcNo, opNo, good, ng,MethodBase.GetCurrentMethod().Name, false);
     }
+    public EndLotResult EndLotOven(string lotNo, string mcNoApcs,string mcNoApcsPro, string opNo, int good, int ng)
+    {
+        return EndLotCommon(lotNo, mcNoApcs, opNo, good, ng, MethodBase.GetCurrentMethod().Name, false, mcNoApcsPro);
+    }
     //public EndLotResult EndLotCustomMode(string lotNo, string mcNo, string opNo, int good, int ng ,EndMode endMode)
     //{
     //    return EndLotCommon(lotNo, mcNo, opNo, good, ng, MethodBase.GetCurrentMethod().Name, endMode, false);
@@ -442,16 +473,25 @@ public class ServiceiLibrary : IServiceiLibrary
     //{
     //    return EndLotCommon(lotNo, mcNo, opNo, good, ng, MethodBase.GetCurrentMethod().Name, endMode, false);
     //}
-    private EndLotResult EndLotCommon(string lotNo, string mcNo, string opNo, int good, int ng,string functionName,  bool isCheckLicenser = true)
+    private EndLotResult EndLotCommon(string lotNo, string mcNo, string opNo, int good, int ng,string functionName,  bool isCheckLicenser = true,string mcNoApcs = "")
     {
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
             DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
+            string mcNoToApcs;
+            if (mcNoApcs != "")
+            {
+                mcNoToApcs = mcNoApcs;
+            }
+            else
+            {
+                mcNoToApcs = mcNo;
+            }
             //EndModeType.AbnormalEndAccumulate รันใหม่ทั้งหมด
             //EndModeType.AbnormalEndReset รันต่อที่เหลือ
             //EndModeType.Normal จบ Lot ปกติ
-            TdcLotEndResult tdcLotEndResult = TdcLotEnd(mcNo, lotNo, opNo, dateTimeInfo.Datetime, log, good, ng, EndModeType.Normal);
+            TdcLotEndResult tdcLotEndResult = TdcLotEnd(mcNoToApcs, lotNo, opNo, dateTimeInfo.Datetime, log, good, ng, EndModeType.Normal);
             if (!tdcLotEndResult.IsPass)
             {
                 //
@@ -590,12 +630,24 @@ public class ServiceiLibrary : IServiceiLibrary
     {
         return AbnormalLotEnd_BackToThe_BeforeProcess(lotNo, mcNo, opNo, good, ng, false, MethodBase.GetCurrentMethod().Name, endMode);
     }
-
-    private ReinputResult AbnormalLotEnd_BackToThe_BeforeProcess(string lotNo, string mcNo, string opNo, int good, int ng, bool holdLot, string functionName ,EndMode endMode)
+    public ReinputResult ReinputOven(string lotNo, string mcNoApcsPro,string mcNoApcs, string opNo, int good, int ng, EndMode endMode)
+    {
+        return AbnormalLotEnd_BackToThe_BeforeProcess(lotNo, mcNoApcsPro, opNo, good, ng, false, MethodBase.GetCurrentMethod().Name, endMode, mcNoApcs);
+    }
+    private ReinputResult AbnormalLotEnd_BackToThe_BeforeProcess(string lotNo, string mcNo, string opNo, int good, int ng, bool holdLot, string functionName ,EndMode endMode,string mcNoApcs = "")
     {
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
+            string mcNoToApcs;
+            if (mcNoApcs != "")
+            {
+                mcNoToApcs = mcNoApcs;
+            }
+            else
+            {
+                mcNoToApcs = mcNo;
+            }
             if (endMode == EndMode.AbnormalEndReset)
             {
                 ng = 0;
@@ -605,7 +657,7 @@ public class ServiceiLibrary : IServiceiLibrary
             LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
             if (lotInfo == null)
             {
-                TdcLotEndResult tdcLotEndResult = TdcLotEnd(mcNo, lotNo, opNo, dateTimeInfo.Datetime, log, good, ng, (EndModeType)endMode);
+                TdcLotEndResult tdcLotEndResult = TdcLotEnd(mcNoToApcs, lotNo, opNo, dateTimeInfo.Datetime, log, good, ng, (EndModeType)endMode);
                 if (!tdcLotEndResult.IsPass)
                 {
                     //
@@ -621,7 +673,7 @@ public class ServiceiLibrary : IServiceiLibrary
             CheckLotApcsProResult proResult = CheckLotApcsPro(lotNo, lotInfo.Package.Name, log);
             if (!proResult.IsPass)
             {
-                TdcLotEndResult tdcLotEndResult = TdcLotEnd(mcNo, lotNo, opNo, dateTimeInfo.Datetime, log, good, ng, (EndModeType)endMode);
+                TdcLotEndResult tdcLotEndResult = TdcLotEnd(mcNoToApcs, lotNo, opNo, dateTimeInfo.Datetime, log, good, ng, (EndModeType)endMode);
                 if (!tdcLotEndResult.IsPass)
                 {
                     //
@@ -740,12 +792,32 @@ public class ServiceiLibrary : IServiceiLibrary
 
             int[] lotArray = new int[1];
             lotArray[0] = lotInfo.Id;
-            MachineUpdateInfo machineAlarmInfo  = c_ApcsProService.Update_ErrorHappenRecord(lotArray, machineInfo, userInfo.Id, AlarmNo,
-                dateTimeInfo.Datetime, log);
-            if (!machineAlarmInfo.IsOk)
-                return new MachineAlarmResult(false, MessageType.ApcsPro, machineAlarmInfo.ErrorNo + ":" + machineAlarmInfo.ErrorMessage, 
-                    "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " AlarmNo:" + AlarmNo + " AlarmState:" + alarm.ToString(),
-                    "Update_ErrorHappenRecord", MethodBase.GetCurrentMethod().Name, log);
+            if (alarm == AlarmState.SET)
+            {
+                MachineUpdateInfo machineAlarmSet = c_ApcsProService.Update_ErrorHappenRecord(lotArray, machineInfo, userInfo.Id, AlarmNo,
+               dateTimeInfo.Datetime, log);
+                if (!machineAlarmSet.IsOk)
+                    return new MachineAlarmResult(false, MessageType.ApcsPro, machineAlarmSet.ErrorNo + ":" + machineAlarmSet.ErrorMessage,
+                        "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " AlarmNo:" + AlarmNo + " AlarmState:" + alarm.ToString(),
+                        "Update_ErrorHappenRecord", MethodBase.GetCurrentMethod().Name, log);
+            }
+            else
+            {
+                try
+                {
+                    MachineUpdateInfo machineAlarmReset = c_ApcsProService.Update_ErrorResetRecord(machineInfo, userInfo.Id, AlarmNo, dateTimeInfo.Datetime, log);
+                    if (!machineAlarmReset.IsOk)
+                        return new MachineAlarmResult(false, MessageType.ApcsPro, machineAlarmReset.ErrorNo + ":" + machineAlarmReset.ErrorMessage,
+                            "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " AlarmNo:" + AlarmNo + " AlarmState:" + alarm.ToString(),
+                            "Update_ErrorResetRecord", MethodBase.GetCurrentMethod().Name, log);
+                }
+                catch (Exception ex)
+                {
+                    log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, alarm.ToString(), "WCFService", "iLibrary",
+                        0, "Update_ErrorResetRecord", ex.Message.ToString(), "");
+                }
+             
+            }
 
             return new MachineAlarmResult(true, MessageType.ApcsPro, "", "AlarmNo:" + AlarmNo + " AlarmState:" + alarm.ToString(), "",
                 MethodBase.GetCurrentMethod().Name,log);
@@ -825,7 +897,7 @@ public class ServiceiLibrary : IServiceiLibrary
             return;
         }
         //Init TCD Library    
-        c_TdcService.Logger = CreateLogTdc(mcNo);
+        c_TdcService.Logger = CreateLogTdc(c_PahtLogFile);
         TdcLotRequestResponse res = c_TdcService.LotRequest(mcNo, lotNo, RunModeType.Normal);
         //log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCFService", "TDC", 0, "LotRequest", "",
         //    "lotNo:" + lotNo + " opNo:" + opNo + " LayerNo:" + layerNo);
@@ -839,16 +911,16 @@ public class ServiceiLibrary : IServiceiLibrary
             }
         }
     }
-    private TdcLotRequestResult TdcLotRequest(string mcNo,string lotNo,RunModeType runMode, Logger log)
+    private TdcLotRequestResult TdcLotRequest(string mcNoApcs,string lotNo,RunModeType runMode, Logger log)
     {
         //TDC priority
-        c_TdcService.Logger = CreateLogTdc(mcNo);
-        TdcLotRequestResponse tdcLotRequest = c_TdcService.LotRequest(mcNo, lotNo, runMode);
+        c_TdcService.Logger = CreateLogTdc(c_PahtLogFile);
+        TdcLotRequestResponse tdcLotRequest = c_TdcService.LotRequest(mcNoApcs, lotNo, runMode);
         if (tdcLotRequest.HasError)
         {
             using (ApcsWebServiceSoapClient svError = new ApcsWebServiceSoapClient())
             {
-                if (!svError.LotRptIgnoreError(mcNo, tdcLotRequest.ErrorCode))
+                if (!svError.LotRptIgnoreError(mcNoApcs, tdcLotRequest.ErrorCode))
                 {
                     return new TdcLotRequestResult(tdcLotRequest.ErrorCode, tdcLotRequest.ErrorMessage);
                 }
@@ -856,11 +928,11 @@ public class ServiceiLibrary : IServiceiLibrary
         }
         return new TdcLotRequestResult();       
     }
-    private TdcLotSetResult TdcLotSet(string mcNo, string lotNo, string opNo, RunModeType runMode, DateTime dateTime, Logger log)
+    private TdcLotSetResult TdcLotSet(string mcNoApcs, string lotNo, string opNo, RunModeType runMode, DateTime dateTime, Logger log)
     {
         //Init TCD Library
-        c_TdcService.Logger = CreateLogTdc(mcNo);
-        TdcResponse response = c_TdcService.LotSet(mcNo, lotNo, dateTime, opNo, runMode);
+        c_TdcService.Logger = CreateLogTdc(c_PahtLogFile);
+        TdcResponse response = c_TdcService.LotSet(mcNoApcs, lotNo, dateTime, opNo, runMode);
         if (response.HasError)
         {
             return new TdcLotSetResult(response.ErrorCode, response.ErrorMessage);
@@ -868,11 +940,11 @@ public class ServiceiLibrary : IServiceiLibrary
         return new TdcLotSetResult();
 
     }
-    private TdcLotEndResult TdcLotEnd(string mcNo, string lotNo, string opNo, DateTime dateTime, Logger log, int good, int ng , EndModeType endMode)
+    private TdcLotEndResult TdcLotEnd(string mcNoApcs, string lotNo, string opNo, DateTime dateTime, Logger log, int good, int ng , EndModeType endMode)
     {
         //Init TCD Library
-        c_TdcService.Logger = CreateLogTdc(mcNo);
-        TdcResponse response = c_TdcService.LotEnd(mcNo, lotNo, dateTime, good, ng, endMode, opNo);
+        c_TdcService.Logger = CreateLogTdc(c_PahtLogFile);
+        TdcResponse response = c_TdcService.LotEnd(mcNoApcs, lotNo, dateTime, good, ng, endMode, opNo);
         if (response.HasError)
         {
             return new TdcLotEndResult(response.ErrorMessage, response.ErrorCode);
@@ -880,12 +952,66 @@ public class ServiceiLibrary : IServiceiLibrary
         return new TdcLotEndResult();
 
     }
-    private TdcLoggerCsvWriter CreateLogTdc(string mcNo)
+    private TdcLoggerCsvWriter CreateLogTdc(string pathLog)
     {
-        TdcLoggerCsvWriter tdcLogger = new TdcLoggerCsvWriter
+        //try
+        //{
+        //    if (!Directory.Exists(HttpContext.Current.Server.MapPath(@"~\\Log\\" + pathLog)))
+        //    {
+        //        Directory.CreateDirectory(HttpContext.Current.Server.MapPath(@"~\\Log\\" + pathLog));
+        //    }
+        //}
+        //catch (Exception)
+        //{
+
+        //}
+        try
         {
-            LogFolder = HttpContext.Current.Server.MapPath(@"~\\Log\\" + mcNo)
-        };
+            if (File.Exists(Path.Combine(pathLog, c_FileTdcBackupName)))
+            {
+                if (!Directory.Exists(Path.Combine(pathLog, c_PathFolderBackupTdc)))
+                {
+                    Directory.CreateDirectory(Path.Combine(pathLog, c_PathFolderBackupTdc));
+                }
+
+                List<FileData> fileDatas = new List<FileData>();
+                var pathFiles = Directory.GetFileSystemEntries(Path.Combine(pathLog, c_PathFolderBackupTdc));
+                foreach (string pathFile in pathFiles)
+                {              
+                    FileData fileData = new FileData()
+                    {
+                        FileName = Path.GetFileName(pathFile).Trim(),
+                        ModifiedDate = File.GetLastWriteTime(pathFile),
+                        CreateTime = File.GetCreationTime(pathFile),
+                        Path = pathFile
+                    };
+                    fileDatas.Add(fileData);
+                }
+                int maxsimum = 100;
+                int.TryParse(AppSettingHelper.GetAppSettingsValue("FileApcsLog"),out maxsimum);
+                if (fileDatas.Count >= maxsimum)
+                {
+                    int countRemove = fileDatas.Count - (maxsimum - 1);
+                    var fileOlds = fileDatas.OrderBy(x => x.CreateTime).Take(countRemove).ToList();
+                    foreach (FileData fileOld in fileOlds)
+                    {
+                        File.Delete(fileOld.Path);
+                    }
+                   
+                }
+                File.Copy(Path.Combine(pathLog, c_FileTdcBackupName), Path.Combine(pathLog, c_PathFolderBackupTdc, "TDC_before_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".csv"), true);
+                File.Delete(Path.Combine(pathLog, c_FileTdcBackupName));
+            }
+        }
+        catch (Exception)
+        {
+            
+        }
+      
+        TdcLoggerCsvWriter tdcLogger = new TdcLoggerCsvWriter();
+        tdcLogger.LogFolder = pathLog;//HttpContext.Current.Server.MapPath(@"~\\Log\\" + pathLog);
+        c_TdcService.Logger = tdcLogger;
+       
         return tdcLogger;
     }
     #endregion

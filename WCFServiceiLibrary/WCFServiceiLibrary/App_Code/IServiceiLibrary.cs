@@ -34,6 +34,8 @@ public interface IServiceiLibrary
     [OperationContract]
     SetupLotResult SetupLotCustomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo, RunMode runMode);
 
+    [OperationContract]
+    SetupLotResult SetupLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, string processName, string layerNo);
     /// <summary>
     /// 
     /// </summary>
@@ -48,6 +50,8 @@ public interface IServiceiLibrary
     [OperationContract]
     StartLotResult StartLotCustomMode(string lotNo, string mcNo, string opNo, string recipe, RunMode runMode);
 
+    [OperationContract]
+    StartLotResult StartLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, string recipe);
 
     [OperationContract]
     OnlineStartResult OnlineStart(string lotNo, string mcNo, string opNo);
@@ -71,6 +75,8 @@ public interface IServiceiLibrary
     [OperationContract]
     EndLotResult EndLotNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng);
 
+    [OperationContract]
+    EndLotResult EndLotOven(string lotNo, string mcNoApcs, string mcNoApcsPro, string opNo, int good, int ng);
     //[OperationContract]
     //EndLotResult EndLotCustomMode(string lotNo, string mcNo, string opNo, int good, int ng, EndMode endMode);
 
@@ -97,6 +103,8 @@ public interface IServiceiLibrary
     ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng, EndMode endMode);
     [OperationContract]
     ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng, EndMode endMode);
+    [OperationContract]
+    ReinputResult ReinputOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, int good, int ng, EndMode endMode);
 
     [OperationContract]
     CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package);

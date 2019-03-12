@@ -1605,11 +1605,17 @@ namespace TestService.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/SetupLotCustomModeNoCheckLicenser", ReplyAction="http://tempuri.org/IServiceiLibrary/SetupLotCustomModeNoCheckLicenserResponse")]
         TestService.ServiceReference1.SetupLotResult SetupLotCustomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo, TestService.ServiceReference1.RunMode runMode);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/SetupLotOven", ReplyAction="http://tempuri.org/IServiceiLibrary/SetupLotOvenResponse")]
+        TestService.ServiceReference1.SetupLotResult SetupLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, string processName, string layerNo);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/StartLot", ReplyAction="http://tempuri.org/IServiceiLibrary/StartLotResponse")]
         TestService.ServiceReference1.StartLotResult StartLot(string lotNo, string mcNo, string opNo, string recipe);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/StartLotCustomMode", ReplyAction="http://tempuri.org/IServiceiLibrary/StartLotCustomModeResponse")]
         TestService.ServiceReference1.StartLotResult StartLotCustomMode(string lotNo, string mcNo, string opNo, string recipe, TestService.ServiceReference1.RunMode runMode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/StartLotOven", ReplyAction="http://tempuri.org/IServiceiLibrary/StartLotOvenResponse")]
+        TestService.ServiceReference1.StartLotResult StartLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, string recipe);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/OnlineStart", ReplyAction="http://tempuri.org/IServiceiLibrary/OnlineStartResponse")]
         TestService.ServiceReference1.OnlineStartResult OnlineStart(string lotNo, string mcNo, string opNo);
@@ -1626,6 +1632,9 @@ namespace TestService.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/EndLotNoCheckLicenser", ReplyAction="http://tempuri.org/IServiceiLibrary/EndLotNoCheckLicenserResponse")]
         TestService.ServiceReference1.EndLotResult EndLotNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/EndLotOven", ReplyAction="http://tempuri.org/IServiceiLibrary/EndLotOvenResponse")]
+        TestService.ServiceReference1.EndLotResult EndLotOven(string lotNo, string mcNoApcs, string mcNoApcsPro, string opNo, int good, int ng);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/UpdateFinalinspection", ReplyAction="http://tempuri.org/IServiceiLibrary/UpdateFinalinspectionResponse")]
         TestService.ServiceReference1.UpdateFinalinspectionResult UpdateFinalinspection(string lotNo, string opNo, TestService.ServiceReference1.Judge judge, string mcNo);
         
@@ -1640,6 +1649,9 @@ namespace TestService.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/ReinputAndHoldLot", ReplyAction="http://tempuri.org/IServiceiLibrary/ReinputAndHoldLotResponse")]
         TestService.ServiceReference1.ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference1.EndMode endMode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/ReinputOven", ReplyAction="http://tempuri.org/IServiceiLibrary/ReinputOvenResponse")]
+        TestService.ServiceReference1.ReinputResult ReinputOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, int good, int ng, TestService.ServiceReference1.EndMode endMode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/CheckLotApcsProManual", ReplyAction="http://tempuri.org/IServiceiLibrary/CheckLotApcsProManualResponse")]
         TestService.ServiceReference1.CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package);
@@ -1696,12 +1708,20 @@ namespace TestService.ServiceReference1 {
             return base.Channel.SetupLotCustomModeNoCheckLicenser(lotNo, mcNo, opNo, processName, layerNo, runMode);
         }
         
+        public TestService.ServiceReference1.SetupLotResult SetupLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, string processName, string layerNo) {
+            return base.Channel.SetupLotOven(lotNo, mcNoApcsPro, mcNoApcs, opNo, processName, layerNo);
+        }
+        
         public TestService.ServiceReference1.StartLotResult StartLot(string lotNo, string mcNo, string opNo, string recipe) {
             return base.Channel.StartLot(lotNo, mcNo, opNo, recipe);
         }
         
         public TestService.ServiceReference1.StartLotResult StartLotCustomMode(string lotNo, string mcNo, string opNo, string recipe, TestService.ServiceReference1.RunMode runMode) {
             return base.Channel.StartLotCustomMode(lotNo, mcNo, opNo, recipe, runMode);
+        }
+        
+        public TestService.ServiceReference1.StartLotResult StartLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, string recipe) {
+            return base.Channel.StartLotOven(lotNo, mcNoApcsPro, mcNoApcs, opNo, recipe);
         }
         
         public TestService.ServiceReference1.OnlineStartResult OnlineStart(string lotNo, string mcNo, string opNo) {
@@ -1724,6 +1744,10 @@ namespace TestService.ServiceReference1 {
             return base.Channel.EndLotNoCheckLicenser(lotNo, mcNo, opNo, good, ng);
         }
         
+        public TestService.ServiceReference1.EndLotResult EndLotOven(string lotNo, string mcNoApcs, string mcNoApcsPro, string opNo, int good, int ng) {
+            return base.Channel.EndLotOven(lotNo, mcNoApcs, mcNoApcsPro, opNo, good, ng);
+        }
+        
         public TestService.ServiceReference1.UpdateFinalinspectionResult UpdateFinalinspection(string lotNo, string opNo, TestService.ServiceReference1.Judge judge, string mcNo) {
             return base.Channel.UpdateFinalinspection(lotNo, opNo, judge, mcNo);
         }
@@ -1742,6 +1766,10 @@ namespace TestService.ServiceReference1 {
         
         public TestService.ServiceReference1.ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference1.EndMode endMode) {
             return base.Channel.ReinputAndHoldLot(lotNo, mcNo, opNo, good, ng, endMode);
+        }
+        
+        public TestService.ServiceReference1.ReinputResult ReinputOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, int good, int ng, TestService.ServiceReference1.EndMode endMode) {
+            return base.Channel.ReinputOven(lotNo, mcNoApcsPro, mcNoApcs, opNo, good, ng, endMode);
         }
         
         public TestService.ServiceReference1.CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package) {

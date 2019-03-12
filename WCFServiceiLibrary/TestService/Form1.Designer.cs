@@ -36,6 +36,7 @@
             this.buttonMcOn = new System.Windows.Forms.Button();
             this.buttonMcOff = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.buttonFirst = new System.Windows.Forms.Button();
             this.buttonReinput = new System.Windows.Forms.Button();
             this.buttonCancelLot = new System.Windows.Forms.Button();
@@ -54,7 +55,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxOPNo = new System.Windows.Forms.TextBox();
             this.textBoxMCNo = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxMCNoOv = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -128,6 +130,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.textBoxMCNoOv);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.buttonFirst);
             this.groupBox2.Controls.Add(this.buttonReinput);
@@ -160,6 +164,16 @@
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Example";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(60, 279);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "MC Alarm";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // buttonFirst
             // 
@@ -319,15 +333,22 @@
             this.textBoxMCNo.TabIndex = 2;
             this.textBoxMCNo.Text = "MP-TWE-00";
             // 
-            // button1
+            // label9
             // 
-            this.button1.Location = new System.Drawing.Point(60, 279);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "MC Alarm";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 309);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(37, 13);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "MCNo";
+            // 
+            // textBoxMCNoOv
+            // 
+            this.textBoxMCNoOv.Location = new System.Drawing.Point(60, 306);
+            this.textBoxMCNoOv.Name = "textBoxMCNoOv";
+            this.textBoxMCNoOv.Size = new System.Drawing.Size(128, 20);
+            this.textBoxMCNoOv.TabIndex = 15;
+            this.textBoxMCNoOv.Text = "MP-TWE-00";
             // 
             // Form1
             // 
@@ -372,6 +393,8 @@
         private System.Windows.Forms.Button buttonReinput;
         private System.Windows.Forms.Button buttonCancelLot;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBoxMCNoOv;
     }
 }
 

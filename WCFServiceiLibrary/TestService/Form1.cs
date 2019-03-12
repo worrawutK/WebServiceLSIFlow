@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TestService.ServiceReference1;
+using TestService.iLibraryService;
 using MessageDialog;
 //using Message;
 namespace TestService
@@ -49,9 +49,10 @@ namespace TestService
         private void buttonSetup_Click(object sender, EventArgs e)
         {
             SetupLotResult result = c_ILibraryClient.SetupLot(textBoxLotNo.Text, textBoxMCNo.Text,
-               textBoxOPNo.Text, textBoxProcess.Text,"");
+               textBoxOPNo.Text, textBoxProcess.Text, "1001");
+            //SetupLotResult result = c_ILibraryClient.SetupLotOven(textBoxLotNo.Text, textBoxMCNo.Text, textBoxMCNoOv.Text,
+            //  textBoxOPNo.Text, textBoxProcess.Text, "");
 
-           
             if (result.IsPass == SetupLotResult.Status.NotPass)
             {
                 MessageBoxDialog.ShowMessageDialog(result.FunctionName , result.Cause, result.Type.ToString(), result.ErrorNo);
@@ -67,8 +68,10 @@ namespace TestService
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            StartLotResult result = c_ILibraryClient.StartLot(textBoxLotNo.Text, textBoxMCNo.Text, 
+            StartLotResult result = c_ILibraryClient.StartLot(textBoxLotNo.Text, textBoxMCNo.Text,
                 textBoxOPNo.Text, textBoxRecipe.Text);
+            //StartLotResult result = c_ILibraryClient.StartLotOven(textBoxLotNo.Text, textBoxMCNo.Text, textBoxMCNoOv.Text,
+            //  textBoxOPNo.Text, textBoxRecipe.Text);
             if (!result.IsPass)
             {
                 MessageBox.Show(result.Cause);
