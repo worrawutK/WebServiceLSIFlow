@@ -114,6 +114,11 @@ public class ServiceiLibrary : IServiceiLibrary
                 }
 
                 UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
+                if (userInfo == null)
+                {
+                    return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.Unknown, "ไม่พบผู้ใช้งานนี้ :" + opNo,
+                        "","","","GetUserInfo",MethodBase.GetCurrentMethod().Name,log);
+                }
                 string warningMessage = "";
                 if (userInfo.License != null)
                 {
@@ -262,7 +267,11 @@ public class ServiceiLibrary : IServiceiLibrary
                     return new StartLotResult(true, MessageType.ApcsPro, "IsSkipped", "web.config", "IsSkipped", functionName, log);
                 }
                 UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
-
+                if (userInfo == null)
+                {
+                    return new StartLotResult(false, MessageType.Unknown, "ไม่พบผู้ใช้งานนี้ :" + opNo,
+                        "", "GetUserInfo", MethodBase.GetCurrentMethod().Name, log);
+                }
                 MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
                 if (machineInfo == null)
                     return new StartLotResult(false,MessageType.ApcsPro, "ไม่พบ MCNo :" + mcNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo,
@@ -307,6 +316,11 @@ public class ServiceiLibrary : IServiceiLibrary
                 return new OnlineStartResult(true, MessageType.ApcsPro, "IsSkipped", "web.config", "IsSkipped", MethodBase.GetCurrentMethod().Name, log);
             }
             UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
+            if (userInfo == null)
+            {
+                return new OnlineStartResult(false, MessageType.Unknown, "ไม่พบผู้ใช้งานนี้ :" + opNo,
+                    "", "GetUserInfo", MethodBase.GetCurrentMethod().Name, log);
+            }
 
             MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
             if (machineInfo == null)
@@ -352,6 +366,12 @@ public class ServiceiLibrary : IServiceiLibrary
                 return new UpdateFirstinspectionResult(true, MessageType.ApcsPro, "IsSkipped", "web.config", "IsSkipped", MethodBase.GetCurrentMethod().Name, log);
             }
             UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
+            if (userInfo == null)
+            {
+                return new UpdateFirstinspectionResult(false, MessageType.Unknown, "ไม่พบผู้ใช้งานนี้ :" + opNo,
+                    "", "GetUserInfo", MethodBase.GetCurrentMethod().Name, log);
+            }
+
             LotUpdateInfo lotUpdateInfo = c_ApcsProService.Update_Firstinspection(lotInfo.Id, (int)judge, userInfo.Id, 0, "", 1, dateTimeInfo.Datetime, log);
             if (!lotUpdateInfo.IsOk)
                 return new UpdateFirstinspectionResult(false, MessageType.ApcsPro, lotUpdateInfo.ErrorNo + ":" + lotUpdateInfo.ErrorMessage, "LotNo:" + lotNo +
@@ -391,6 +411,11 @@ public class ServiceiLibrary : IServiceiLibrary
                 return new OnlineEndResult(true, MessageType.ApcsPro, "IsSkipped", "web.config", "IsSkipped", MethodBase.GetCurrentMethod().Name, log);
             }
             UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
+            if (userInfo == null)
+            {
+                return new OnlineEndResult(false, MessageType.Unknown, "ไม่พบผู้ใช้งานนี้ :" + opNo,
+                    "", "GetUserInfo", MethodBase.GetCurrentMethod().Name, log);
+            }
 
             MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
             if (machineInfo == null)
@@ -437,6 +462,11 @@ public class ServiceiLibrary : IServiceiLibrary
                 return new UpdateFinalinspectionResult(true, MessageType.ApcsPro, "IsSkipped", "web.config", "IsSkipped", MethodBase.GetCurrentMethod().Name, log);
             }
             UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
+            if (userInfo == null)
+            {
+                return new UpdateFinalinspectionResult(false, MessageType.Unknown, "ไม่พบผู้ใช้งานนี้ :" + opNo,
+                    "", "GetUserInfo", MethodBase.GetCurrentMethod().Name, log);
+            }
 
             LotUpdateInfo lotUpdateInfo = c_ApcsProService.Update_Finalinspection(lotInfo.Id, (int)judge, userInfo.Id, 0, "", 1, dateTimeInfo.Datetime, log);
             if (!lotUpdateInfo.IsOk)
@@ -521,6 +551,11 @@ public class ServiceiLibrary : IServiceiLibrary
             }
 
             UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
+            if (userInfo == null)
+            {
+                return new EndLotResult(false, MessageType.Unknown, "ไม่พบผู้ใช้งานนี้ :" + opNo,
+                    "", "GetUserInfo", MethodBase.GetCurrentMethod().Name, log);
+            }
 
             MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
             if (machineInfo == null)
@@ -583,6 +618,11 @@ public class ServiceiLibrary : IServiceiLibrary
             }
 
             UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
+            if (userInfo == null)
+            {
+                return new CancelLotResult(false, MessageType.Unknown, "ไม่พบผู้ใช้งานนี้ :" + opNo,
+                    "", "GetUserInfo", MethodBase.GetCurrentMethod().Name, log);
+            }
 
             MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
             if (machineInfo == null)
@@ -685,6 +725,11 @@ public class ServiceiLibrary : IServiceiLibrary
             }
 
             UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
+            if (userInfo == null)
+            {
+                return new ReinputResult(false, MessageType.Unknown, "ไม่พบผู้ใช้งานนี้ :" + opNo,
+                    "", "GetUserInfo", MethodBase.GetCurrentMethod().Name, log);
+            }
 
             MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
             if (machineInfo == null)
@@ -770,6 +815,11 @@ public class ServiceiLibrary : IServiceiLibrary
             log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
             DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
             UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
+            if (userInfo == null)
+            {
+                return new MachineAlarmResult(false, MessageType.Unknown, "ไม่พบผู้ใช้งานนี้ :" + opNo,
+                    "", "GetUserInfo", MethodBase.GetCurrentMethod().Name, log);
+            }
 
             LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
             if (lotInfo == null)
