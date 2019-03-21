@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:simpleType name="MachineOnline">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Offline" />
@@ -54,7 +54,9 @@
       <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ErrorNo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FunctionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GoodQty" type="xs:int" />
       <xs:element minOccurs="0" name="IsPass" type="tns:SetupLotResult.Status" />
+      <xs:element minOccurs="0" name="NgQty" type="xs:int" />
       <xs:element minOccurs="0" name="Recipe" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SubFunction" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Type" type="tns:MessageType" />

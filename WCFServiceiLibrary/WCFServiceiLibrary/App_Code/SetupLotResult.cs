@@ -27,18 +27,24 @@ public class SetupLotResult
     [DataMember()]
     public MessageType Type { get; internal set; }
     [DataMember()]
-    public string FunctionName { get; set; }
+    public string FunctionName { get;internal set; }
     [DataMember()]
-    public string SubFunction { get; set; }
+    public string SubFunction { get; internal set; }
 
-    public SetupLotResult(Status isPass,MessageType type, string cause ,string cause2, string recipe, string errorNo , string subFunction, string functionName, Logger log)
+    [DataMember()]
+    public int GoodQty { get; internal set; }
+    [DataMember()]
+    public int NgQty { get; internal set; }
+
+
+    public SetupLotResult(Status isPass,MessageType type, string cause ,string cause2, string recipe, string errorNo , string subFunction, string functionName, Logger log, int goodQty = 0, int ngQty = 0)
     {
         if (isPass == Status.NotPass)
-            log.ConnectionLogger.Write(0, functionName, "Error", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause, cause2);
+            log.ConnectionLogger.Write(0, functionName, "Error", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause + " ,Good:" + goodQty + " ,Ng:" + ngQty, cause2);
         else if (isPass == Status.Warning)
-            log.ConnectionLogger.Write(0, functionName, "Warning", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause, cause2);
+            log.ConnectionLogger.Write(0, functionName, "Warning", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause + " ,Good:" + goodQty + " ,Ng:" + ngQty, cause2);
         else
-            log.ConnectionLogger.Write(0, functionName, "Normal", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause, cause2);
+            log.ConnectionLogger.Write(0, functionName, "Normal", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause + " ,Good:" + goodQty + " ,Ng:" + ngQty, cause2);
 
         this.IsPass = isPass;
         this.Cause = cause;
@@ -47,6 +53,8 @@ public class SetupLotResult
         this.Type = type;
         this.FunctionName = functionName;
         this.SubFunction = subFunction;
+        this.GoodQty = goodQty;
+        this.NgQty = ngQty;
     }
 
     [DataContract()]

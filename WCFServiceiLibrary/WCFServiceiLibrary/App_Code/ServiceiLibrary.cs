@@ -84,7 +84,7 @@ public class ServiceiLibrary : IServiceiLibrary
                               "CheckLotApcsPro", functionName, log);
                 }
                 return new SetupLotResult(SetupLotResult.Status.Pass, MessageType.Apcs, "lotInfo is null", "LotNo:" + lotNo + " opNo:" + opNo, "", "",
-                    "TdcLotRequest", functionName, log);
+                    "TdcLotRequest", functionName, log, requestResult.GoodQty, requestResult.NgQty);
                 //return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ",
                 //   "LotNo:" + lotNo + " opNo:" + opNo, "", "", "GetLotInfo", functionName, log);
             }
@@ -101,7 +101,7 @@ public class ServiceiLibrary : IServiceiLibrary
                               "CheckLotApcsPro", functionName, log);
                 }
                 return new SetupLotResult(SetupLotResult.Status.Pass, MessageType.Apcs, "", "LotNo:" + lotNo + " opNo:" + opNo, "", "",
-                    "TdcLotRequest", functionName, log);
+                    "TdcLotRequest", functionName, log, requestResult.GoodQty, requestResult.NgQty);
             }
             else
             {
@@ -182,16 +182,16 @@ public class ServiceiLibrary : IServiceiLibrary
                         "LotNo:" + lotNo + " opNo:" + opNo, "", lotUpdateInfo.ErrorNo.ToString(), "LotSetup",
                         functionName, log);
 
-
+                
                 if (warningMessage != "")
                 {
                     return new SetupLotResult(SetupLotResult.Status.Warning,MessageType.ApcsPro, warningMessage, 
-                        "LotNo:" + lotNo + " opNo:" + opNo, lotUpdateInfo.Recipe1, "","GetUserInfo", functionName, log);
+                        "LotNo:" + lotNo + " opNo:" + opNo, lotUpdateInfo.Recipe1, "","GetUserInfo", functionName, log, lotInfo.Quantity.Pass, lotInfo.Quantity.LastFail);
                 }
                 else
                 {
                     return new SetupLotResult(SetupLotResult.Status.Pass,MessageType.ApcsPro, "", "LotNo:" + lotNo + " opNo:" + opNo, lotUpdateInfo.Recipe1, "", "",
-                        functionName, log);
+                        functionName, log, lotInfo.Quantity.Pass, lotInfo.Quantity.LastFail);
                 }
             }
            
@@ -976,7 +976,7 @@ public class ServiceiLibrary : IServiceiLibrary
                 }
             }
         }
-        return new TdcLotRequestResult();       
+        return new TdcLotRequestResult(tdcLotRequest.GoodPieces, tdcLotRequest.BadPieces);       
     }
     private TdcLotSetResult TdcLotSet(string mcNoApcs, string lotNo, string opNo, RunModeType runMode, DateTime dateTime, Logger log)
     {

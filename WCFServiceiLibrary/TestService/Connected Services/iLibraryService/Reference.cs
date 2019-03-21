@@ -304,7 +304,13 @@ namespace TestService.iLibraryService {
         private string FunctionNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int GoodQtyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private TestService.iLibraryService.SetupLotResult.Status IsPassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NgQtyField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RecipeField;
@@ -365,6 +371,19 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int GoodQty {
+            get {
+                return this.GoodQtyField;
+            }
+            set {
+                if ((this.GoodQtyField.Equals(value) != true)) {
+                    this.GoodQtyField = value;
+                    this.RaisePropertyChanged("GoodQty");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public TestService.iLibraryService.SetupLotResult.Status IsPass {
             get {
                 return this.IsPassField;
@@ -373,6 +392,19 @@ namespace TestService.iLibraryService {
                 if ((this.IsPassField.Equals(value) != true)) {
                     this.IsPassField = value;
                     this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NgQty {
+            get {
+                return this.NgQtyField;
+            }
+            set {
+                if ((this.NgQtyField.Equals(value) != true)) {
+                    this.NgQtyField = value;
+                    this.RaisePropertyChanged("NgQty");
                 }
             }
         }

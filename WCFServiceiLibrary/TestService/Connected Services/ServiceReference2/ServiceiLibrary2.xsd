@@ -54,7 +54,9 @@
       <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ErrorNo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FunctionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GoodQty" type="xs:int" />
       <xs:element minOccurs="0" name="IsPass" type="tns:SetupLotResult.Status" />
+      <xs:element minOccurs="0" name="NgQty" type="xs:int" />
       <xs:element minOccurs="0" name="Recipe" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SubFunction" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Type" type="tns:MessageType" />
