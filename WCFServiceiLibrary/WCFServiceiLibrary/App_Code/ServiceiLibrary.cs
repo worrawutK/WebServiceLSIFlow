@@ -940,7 +940,7 @@ public class ServiceiLibrary : IServiceiLibrary
     #region TDC
     private void TdcMove(string mcNo, string lotNo, string opNo, string layerNo, Logger log)
     {        
-        if (layerNo == "")
+        if (string.IsNullOrEmpty(layerNo))
         {
             log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCFService", "TDC", 0, "NoMove", "",
                 "lotNo:" + lotNo + " opNo:" + opNo + " LayerNo:" + layerNo);

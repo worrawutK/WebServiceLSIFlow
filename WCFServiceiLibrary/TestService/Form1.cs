@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TestService.iLibraryService;
+using TestService.ServiceReference1;
 using MessageDialog;
 //using Message;
 namespace TestService
@@ -48,10 +48,10 @@ namespace TestService
 
         private void buttonSetup_Click(object sender, EventArgs e)
         {
-            SetupLotResult result = c_ILibraryClient.SetupLot(textBoxLotNo.Text, textBoxMCNo.Text,
-               textBoxOPNo.Text, textBoxProcess.Text, "1001");
-            //SetupLotResult result = c_ILibraryClient.SetupLotOven(textBoxLotNo.Text, textBoxMCNo.Text, textBoxMCNoOv.Text,
-            //  textBoxOPNo.Text, textBoxProcess.Text, "");
+            //SetupLotResult result = c_ILibraryClient.SetupLot(textBoxLotNo.Text, textBoxMCNo.Text,
+            //   textBoxOPNo.Text, textBoxProcess.Text, "");
+            SetupLotResult result = c_ILibraryClient.SetupLotOven(textBoxLotNo.Text, textBoxMCNo.Text, textBoxMCNoOv.Text,
+              textBoxOPNo.Text, textBoxProcess.Text, "");
 
             if (result.IsPass == SetupLotResult.Status.NotPass)
             {
