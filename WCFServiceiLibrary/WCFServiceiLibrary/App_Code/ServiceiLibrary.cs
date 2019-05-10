@@ -106,8 +106,7 @@ public class ServiceiLibrary : IServiceiLibrary
             else
             {
                 //Apcs Pro priority
-                //TDC Move
-                TdcMove(mcNoToApcs, lotNo, opNo, layerNo, log);
+               
                 if (IsSkipped(mcNo))
                 {
                     return new SetupLotResult(SetupLotResult.Status.Pass, MessageType.ApcsPro, "IsSkipped", "web.config", "", "", "IsSkipped", functionName, log);
@@ -182,7 +181,10 @@ public class ServiceiLibrary : IServiceiLibrary
                         "LotNo:" + lotNo + " opNo:" + opNo, "", lotUpdateInfo.ErrorNo.ToString(), "LotSetup",
                         functionName, log);
 
-                
+
+                //TDC Move
+                TdcMove(mcNoToApcs, lotNo, opNo, layerNo, log);
+
                 if (warningMessage != "")
                 {
                     return new SetupLotResult(SetupLotResult.Status.Warning,MessageType.ApcsPro, warningMessage, 
