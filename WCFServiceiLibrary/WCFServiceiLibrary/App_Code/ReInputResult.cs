@@ -42,7 +42,17 @@ public class ReinputResult
             typeState = "Normal";
         else
             typeState = "Error";
-        log.ConnectionLogger.Write(0, functionName, typeState, "WCFService", "iLibrary", 0, "", cause, cause2);
+        try
+        {
+            log.ConnectionLogger.Write(0, functionName, typeState, "WCFService", "iLibrary", 0, "", cause, cause2);
+        }
+        catch (Exception ex)
+        {
+            Logger logCatch = new Logger("1.0.0", "CatchLog", HttpContext.Current.Server.MapPath(@"~\\Log"));
+            logCatch.ConnectionLogger.Write(0, functionName, typeState, "WCFService", "iLibrary", 0, subFunction, cause, ex.Message.ToString());
+
+        }
+
 
         this.IsPass = isPass;
         this.Cause = cause;

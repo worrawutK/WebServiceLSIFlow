@@ -21,11 +21,7 @@ public class UpdateMachineStateResult
     [DataMember()]
     public string SubFunction { get; internal set; }
 
-    //public UpdateMachineStateResult(string functionName, Logger log,string machineProcessingState)
-    //    :this(true,"")
-    //{
-    //    log.ConnectionLogger.Write(0, functionName, "Normal", "WCFService", "iLibrary", 0, "", machineProcessingState, "");
-    //}
+
     public UpdateMachineStateResult(bool isPass,MessageType type,string cause,string cause2,string subFunction, string functionName,Logger log)
     {
         string typeState;
@@ -33,8 +29,8 @@ public class UpdateMachineStateResult
             typeState = "Normal";
         else
             typeState = "Error";
-        log.ConnectionLogger.Write(0, functionName, typeState, "WCFService", "iLibrary", 0, subFunction, cause, cause2);
-
+        LogFile.SaveLog(log, 0, functionName, typeState, "WCFService", "iLibrary", subFunction, cause, cause2);
+     
         this.IsPass = IsPass;
         this.Cause = cause;
         this.FunctionName = functionName;

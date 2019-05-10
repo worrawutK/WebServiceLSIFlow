@@ -35,8 +35,8 @@ public class UpdateFirstinspectionResult
             typeState = "Normal";
         else
             typeState = "Error";
-        log.ConnectionLogger.Write(0, functionName, typeState, "WCFService", "iLibrary", 0, subFunction, cause, cause2);
-
+        LogFile.SaveLog(log, 0, functionName, typeState, "WCFService", "iLibrary", subFunction, cause, cause2);
+          
         this.IsPass = isPass;
         this.Cause = cause;
         this.FunctionName = functionName;

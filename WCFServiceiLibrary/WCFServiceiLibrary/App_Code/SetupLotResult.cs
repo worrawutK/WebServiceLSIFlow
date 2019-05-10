@@ -36,16 +36,24 @@ public class SetupLotResult
     [DataMember()]
     public int NgQty { get; internal set; }
 
-
     public SetupLotResult(Status isPass,MessageType type, string cause ,string cause2, string recipe, string errorNo , string subFunction, string functionName, Logger log, int goodQty = 0, int ngQty = 0)
     {
-        if (isPass == Status.NotPass)
-            log.ConnectionLogger.Write(0, functionName, "Error", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause + " ,Good:" + goodQty + " ,Ng:" + ngQty, cause2);
-        else if (isPass == Status.Warning)
-            log.ConnectionLogger.Write(0, functionName, "Warning", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause + " ,Good:" + goodQty + " ,Ng:" + ngQty, cause2);
-        else
-            log.ConnectionLogger.Write(0, functionName, "Normal", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause + " ,Good:" + goodQty + " ,Ng:" + ngQty, cause2);
+        try
+        {
+            if (isPass == Status.NotPass)
+                log.ConnectionLogger.Write(0, functionName, "Error", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause + " ,Good:" + goodQty + " ,Ng:" + ngQty, cause2);
+            else if (isPass == Status.Warning)
+                log.ConnectionLogger.Write(0, functionName, "Warning", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause + " ,Good:" + goodQty + " ,Ng:" + ngQty, cause2);
+            else
+                log.ConnectionLogger.Write(0, functionName, "Normal", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause + " ,Good:" + goodQty + " ,Ng:" + ngQty, cause2);
 
+        }
+        catch (Exception ex)
+        {
+            Logger logCatch = new Logger("1.0.0", "CatchLog", HttpContext.Current.Server.MapPath(@"~\\Log"));
+            logCatch.ConnectionLogger.Write(0, functionName, "Error", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause + " ,Good:" + goodQty + " ,Ng:" + ngQty, ex.Message.ToString());
+        }
+       
         this.IsPass = isPass;
         this.Cause = cause;
         this.Recipe = recipe;

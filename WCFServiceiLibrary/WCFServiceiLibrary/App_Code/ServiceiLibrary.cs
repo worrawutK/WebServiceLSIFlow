@@ -865,8 +865,8 @@ public class ServiceiLibrary : IServiceiLibrary
                 }
                 catch (Exception ex)
                 {
-                    log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, alarm.ToString(), "WCFService", "iLibrary",
-                        0, "Update_ErrorResetRecord", ex.Message.ToString(), "");
+                    LogFile.SaveLog(log, 0, MethodBase.GetCurrentMethod().Name, alarm.ToString(), "WCFService", "iLibrary",
+                        "Update_ErrorResetRecord", ex.Message.ToString(), "Exception");
                 }
              
             }
@@ -892,20 +892,20 @@ public class ServiceiLibrary : IServiceiLibrary
             CheckLotApcsProResult apcsProResult = CheckLotApcsPro(lotNo, package, log);
             if (!apcsProResult.IsPass)
             {
-                log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Error", "WCF Service", "iLibrary", 0,
-                    "CheckLotApcsPro", apcsProResult.Cause, "lotNo:" + lotNo + " mcNo:" + mcNo + " package:" + package);
+                LogFile.SaveLog(log, 0, MethodBase.GetCurrentMethod().Name, "Error", "WCFService", "iLibrary",
+                        "CheckLotApcsPro", apcsProResult.Cause, "lotNo:" + lotNo + " mcNo:" + mcNo + " package:" + package);
             }
             else
             {
-                log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCF Service", "iLibrary", 0,
-                    "CheckLotApcsPro", apcsProResult.Cause, "lotNo:" + lotNo + " mcNo:" + mcNo + " package:" + package);
+                LogFile.SaveLog(log, 0, MethodBase.GetCurrentMethod().Name, "Normal", "WCFService", "iLibrary",
+                       "CheckLotApcsPro", apcsProResult.Cause, "lotNo:" + lotNo + " mcNo:" + mcNo + " package:" + package);
             }
             return apcsProResult;
         }
         catch (Exception ex)
         {
-            log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Error", "WCF Service", "iLibrary", 0,
-                "Exception", ex.ToString(), "lotNo:" + lotNo + " mcNo:" + mcNo + " package:" + package);
+            LogFile.SaveLog(log, 0, MethodBase.GetCurrentMethod().Name, "Error", "WCFService", "iLibrary",
+                     "Exception", ex.ToString(), "lotNo:" + lotNo + " mcNo:" + mcNo + " package:" + package);
             return new CheckLotApcsProResult(false, "lotNo:" + lotNo + " mcNo:" + mcNo + " package:" + package +
                 " Exception:" + ex.ToString(), "", MessageType.ApcsPro, "", "Exception", MethodBase.GetCurrentMethod().Name, log);
         }
@@ -941,67 +941,102 @@ public class ServiceiLibrary : IServiceiLibrary
 
     #region TDC
     private void TdcMove(string mcNo, string lotNo, string opNo, string layerNo, Logger log)
-    {        
-        if (string.IsNullOrEmpty(layerNo))
-        {
-            log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCFService", "TDC", 0, "NoMove", "",
-                "lotNo:" + lotNo + " opNo:" + opNo + " LayerNo:" + layerNo);
-            return;
-        }
-        //Init TCD Library    
-        c_TdcService.Logger = CreateLogTdc(c_PahtLogFile);
-        TdcLotRequestResponse res = c_TdcService.LotRequest(mcNo, lotNo, RunModeType.Normal);
-        //log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCFService", "TDC", 0, "LotRequest", "",
-        //    "lotNo:" + lotNo + " opNo:" + opNo + " LayerNo:" + layerNo);
-        if (res.HasError)
-        {
-            if (res.ErrorCode == "06" || res.ErrorCode == "02")
-            {
-                c_TdcService.MoveLot(lotNo, mcNo, opNo, layerNo);
-                //log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCFService", "TDC", 0, "LotRequest", 
-                //    res.ErrorCode + ":" + res.ErrorMessage, "lotNo:" + lotNo + " opNo:" + opNo + " LayerNo:" + layerNo);
-            }
-        }
-    }
-    private TdcLotRequestResult TdcLotRequest(string mcNoApcs,string lotNo,RunModeType runMode, Logger log)
     {
-        //TDC priority
-        c_TdcService.Logger = CreateLogTdc(c_PahtLogFile);
-        TdcLotRequestResponse tdcLotRequest = c_TdcService.LotRequest(mcNoApcs, lotNo, runMode);
-        if (tdcLotRequest.HasError)
+        try
         {
-            using (ApcsWebServiceSoapClient svError = new ApcsWebServiceSoapClient())
+            if (string.IsNullOrEmpty(layerNo))
             {
-                if (!svError.LotRptIgnoreError(mcNoApcs, tdcLotRequest.ErrorCode))
+                LogFile.SaveLog(log, 0, MethodBase.GetCurrentMethod().Name, "Normal", "WCFService", "TDC",
+                       "NoMove", "", "lotNo:" + lotNo + " opNo:" + opNo + " LayerNo:" + layerNo);
+                return;
+            }
+            //Init TCD Library    
+            c_TdcService.Logger = CreateLogTdc(c_PahtLogFile);
+            TdcLotRequestResponse res = c_TdcService.LotRequest(mcNo, lotNo, RunModeType.Normal);
+            //log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCFService", "TDC", 0, "LotRequest", "",
+            //    "lotNo:" + lotNo + " opNo:" + opNo + " LayerNo:" + layerNo);
+            if (res.HasError)
+            {
+                if (res.ErrorCode == "06" || res.ErrorCode == "02")
                 {
-                    return new TdcLotRequestResult(tdcLotRequest.ErrorCode, tdcLotRequest.ErrorMessage);
+                    c_TdcService.MoveLot(lotNo, mcNo, opNo, layerNo);
+                    //log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCFService", "TDC", 0, "LotRequest", 
+                    //    res.ErrorCode + ":" + res.ErrorMessage, "lotNo:" + lotNo + " opNo:" + opNo + " LayerNo:" + layerNo);
                 }
             }
         }
-        return new TdcLotRequestResult(tdcLotRequest.GoodPieces, tdcLotRequest.BadPieces);       
+        catch (Exception ex)
+        {
+            LogFile.SaveLog(log, 0, MethodBase.GetCurrentMethod().Name,"Error", "WCFService", "TDC", "Exception", ex.Message.ToString(), "");
+        }
+        
+    }
+    private TdcLotRequestResult TdcLotRequest(string mcNoApcs,string lotNo,RunModeType runMode, Logger log)
+    {
+        try
+        {
+            //TDC priority
+            c_TdcService.Logger = CreateLogTdc(c_PahtLogFile);
+            TdcLotRequestResponse tdcLotRequest = c_TdcService.LotRequest(mcNoApcs, lotNo, runMode);
+            if (tdcLotRequest.HasError)
+            {
+                using (ApcsWebServiceSoapClient svError = new ApcsWebServiceSoapClient())
+                {
+                    if (!svError.LotRptIgnoreError(mcNoApcs, tdcLotRequest.ErrorCode))
+                    {
+                        return new TdcLotRequestResult(tdcLotRequest.ErrorCode, tdcLotRequest.ErrorMessage);
+                    }
+                }
+            }
+            return new TdcLotRequestResult(tdcLotRequest.GoodPieces, tdcLotRequest.BadPieces);
+        }
+        catch (Exception ex)
+        {
+            LogFile.SaveLog(log, 0, MethodBase.GetCurrentMethod().Name, "Error", "WCFService", "TDC", "Exception", ex.Message.ToString(), "");
+            return new TdcLotRequestResult("0", ex.Message.ToString());
+        }
+        
     }
     private TdcLotSetResult TdcLotSet(string mcNoApcs, string lotNo, string opNo, RunModeType runMode, DateTime dateTime, Logger log)
     {
-        //Init TCD Library
-        c_TdcService.Logger = CreateLogTdc(c_PahtLogFile);
-        TdcResponse response = c_TdcService.LotSet(mcNoApcs, lotNo, dateTime, opNo, runMode);
-        if (response.HasError)
+        try
         {
-            return new TdcLotSetResult(response.ErrorCode, response.ErrorMessage);
+            //Init TCD Library
+            c_TdcService.Logger = CreateLogTdc(c_PahtLogFile);
+            TdcResponse response = c_TdcService.LotSet(mcNoApcs, lotNo, dateTime, opNo, runMode);
+            if (response.HasError)
+            {
+                return new TdcLotSetResult(response.ErrorCode, response.ErrorMessage);
+            }
+            return new TdcLotSetResult();
         }
-        return new TdcLotSetResult();
+        catch (Exception ex)
+        {
+            LogFile.SaveLog(log, 0, MethodBase.GetCurrentMethod().Name, "Error", "WCFService", "TDC", "Exception", ex.Message.ToString(), "");
+            return new TdcLotSetResult("0", ex.Message.ToString());
+        }
+
 
     }
     private TdcLotEndResult TdcLotEnd(string mcNoApcs, string lotNo, string opNo, DateTime dateTime, Logger log, int good, int ng , EndModeType endMode)
     {
-        //Init TCD Library
-        c_TdcService.Logger = CreateLogTdc(c_PahtLogFile);
-        TdcResponse response = c_TdcService.LotEnd(mcNoApcs, lotNo, dateTime, good, ng, endMode, opNo);
-        if (response.HasError)
+        try
         {
-            return new TdcLotEndResult(response.ErrorMessage, response.ErrorCode);
+            //Init TCD Library
+            c_TdcService.Logger = CreateLogTdc(c_PahtLogFile);
+            TdcResponse response = c_TdcService.LotEnd(mcNoApcs, lotNo, dateTime, good, ng, endMode, opNo);
+            if (response.HasError)
+            {
+                return new TdcLotEndResult(response.ErrorMessage, response.ErrorCode);
+            }
+            return new TdcLotEndResult();
         }
-        return new TdcLotEndResult();
+        catch (Exception ex)
+        {
+            LogFile.SaveLog(log, 0, MethodBase.GetCurrentMethod().Name, "Error", "WCFService", "TDC", "Exception", ex.Message.ToString(), "");
+            return new TdcLotEndResult("0", ex.Message.ToString());
+        }
+
 
     }
     private TdcLoggerCsvWriter CreateLogTdc(string pathLog)
@@ -1055,9 +1090,9 @@ public class ServiceiLibrary : IServiceiLibrary
                 File.Delete(Path.Combine(pathLog, c_FileTdcBackupName));
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            
+            LogFile.SaveLog("CatchLog",0, MethodBase.GetCurrentMethod().Name, "Error", "WCFService", "TDC", "Exception", ex.Message.ToString(), "");
         }
       
         TdcLoggerCsvWriter tdcLogger = new TdcLoggerCsvWriter();
