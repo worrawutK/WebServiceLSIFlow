@@ -78,6 +78,8 @@ namespace MessageDialog
                 frm.Title = title;
                 frm.ErrorMessage = message;
                 frm.MessageType = messageType;
+                frm.TopMost = true;
+                frm.StartPosition = FormStartPosition.CenterScreen;
                 if (errorNo == "00" || errorNo == "")
                     frm.ErrorNo = "-";
                 else
