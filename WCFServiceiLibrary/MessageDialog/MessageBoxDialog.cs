@@ -71,7 +71,8 @@ namespace MessageDialog
         /// <param name="title"></param>
         /// <param name="message"></param>
         /// <param name="errorNo"></param>
-        public static DialogResult ShowMessageDialog(string title, string message,string messageType, string errorNo = "00")
+        public static DialogResult ShowMessageDialog(string title, string message, string messageType, string errorNo = "00"
+            , int? x = null, int? y = null)
         {
             using (MessageBoxDialog frm = new MessageBoxDialog())
             {
@@ -79,12 +80,17 @@ namespace MessageDialog
                 frm.ErrorMessage = message;
                 frm.MessageType = messageType;
                 frm.TopMost = true;
-                frm.StartPosition = FormStartPosition.CenterScreen;
+                if (x.HasValue && y.HasValue)
+                    frm.Location = new Point(x.Value, y.Value);
+                else
+                    frm.StartPosition = FormStartPosition.CenterScreen;
+                
                 if (errorNo == "00" || errorNo == "")
                     frm.ErrorNo = "-";
                 else
                     frm.ErrorNo = errorNo;
-               return frm.ShowDialog();
+               
+                return frm.ShowDialog();
             }
         }
 
@@ -100,6 +106,7 @@ namespace MessageDialog
                 frm.ErrorNo = errorNo;
             frm.Show();
             frm.TopMost = true;
+            frm.StartPosition = FormStartPosition.CenterScreen;
         }
         /// <summary>
         /// ใช้ในกรณีที่ไม่มี ErrorNo
@@ -108,9 +115,9 @@ namespace MessageDialog
         /// <param name="mcNo"></param>
         /// <param name="lotNo"></param>
         /// <param name="message"></param>
-        public static void ShowMessageDialog(string eventName, string mcNo, string lotNo, string message,string messageType)
+        public static void ShowMessageDialog(string eventName, string mcNo, string lotNo, string message,string messageType ,int? x = null,int? y =null)
         {
-            ShowMessageDialog(eventName, "MCNo : " + mcNo + ", LotNo : " + lotNo + " | " + message, messageType);
+            ShowMessageDialog(eventName, "MCNo : " + mcNo + ", LotNo : " + lotNo + " | " + message, messageType,"00",x.Value,y.Value);
         }
     }
 }

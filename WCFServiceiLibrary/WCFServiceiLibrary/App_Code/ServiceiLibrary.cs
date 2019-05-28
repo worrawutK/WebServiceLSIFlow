@@ -96,7 +96,8 @@ public class ServiceiLibrary : IServiceiLibrary
                 TdcLotRequestResult requestResult = TdcLotRequest(mcNoToApcs, lotNo, (RunModeType)tdcRunModeType,log);
                 if (!requestResult.IsPass)
                 {
-                    return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.Apcs, requestResult.Cause,
+                    return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.Apcs, requestResult.Cause + 
+                        Environment.NewLine + "LotNo:" + lotNo + " opNo:" + opNo + " package:" + lotInfo.Package.Name,
                               "LotNo:" + lotNo + " opNo:" + opNo + " package:" + lotInfo.Package.Name, "", requestResult.ErrorNo,
                               "CheckLotApcsPro", functionName, log);
                 }
@@ -177,8 +178,10 @@ public class ServiceiLibrary : IServiceiLibrary
             
                 LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotSetup(lotInfo.Id, machineInfo.Id, userInfo.Id, 0, "", 1, dateTimeInfo.Datetime, log);
                 if (!lotUpdateInfo.IsOk)
-                    return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro, lotUpdateInfo.ErrorMessage,
-                        "LotNo:" + lotNo + " opNo:" + opNo, "", lotUpdateInfo.ErrorNo.ToString(), "LotSetup",
+                    return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro, lotUpdateInfo.ErrorMessage + Environment.NewLine
+                        + "MCNo:" + machineInfo.Name + " || Process:" + lotInfo.Job.Name + Environment.NewLine
+                        + "LotNo:" + lotInfo.Name + " || OPID:" + userInfo.Code,
+                       "", "", lotUpdateInfo.ErrorNo.ToString(), "LotSetup",
                         functionName, log);
 
 

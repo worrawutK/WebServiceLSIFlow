@@ -36,6 +36,8 @@
             this.buttonMcOn = new System.Windows.Forms.Button();
             this.buttonMcOff = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxMCNoOv = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonFirst = new System.Windows.Forms.Button();
             this.buttonReinput = new System.Windows.Forms.Button();
@@ -55,8 +57,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxOPNo = new System.Windows.Forms.TextBox();
             this.textBoxMCNo = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBoxMCNoOv = new System.Windows.Forms.TextBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,6 +132,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.textBoxMCNoOv);
             this.groupBox2.Controls.Add(this.button1);
@@ -164,6 +167,23 @@
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Example";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 309);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(37, 13);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "MCNo";
+            // 
+            // textBoxMCNoOv
+            // 
+            this.textBoxMCNoOv.Location = new System.Drawing.Point(60, 306);
+            this.textBoxMCNoOv.Name = "textBoxMCNoOv";
+            this.textBoxMCNoOv.Size = new System.Drawing.Size(128, 20);
+            this.textBoxMCNoOv.TabIndex = 15;
+            this.textBoxMCNoOv.Text = "MP-TWE-00";
             // 
             // button1
             // 
@@ -333,22 +353,20 @@
             this.textBoxMCNo.TabIndex = 2;
             this.textBoxMCNo.Text = "MP-TWE-00";
             // 
-            // label9
+            // backgroundWorker1
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 309);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(37, 13);
-            this.label9.TabIndex = 16;
-            this.label9.Text = "MCNo";
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker1_RunWorkerCompleted);
             // 
-            // textBoxMCNoOv
+            // button2
             // 
-            this.textBoxMCNoOv.Location = new System.Drawing.Point(60, 306);
-            this.textBoxMCNoOv.Name = "textBoxMCNoOv";
-            this.textBoxMCNoOv.Size = new System.Drawing.Size(128, 20);
-            this.textBoxMCNoOv.TabIndex = 15;
-            this.textBoxMCNoOv.Text = "MP-TWE-00";
+            this.button2.Location = new System.Drawing.Point(207, 309);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 17;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // Form1
             // 
@@ -395,6 +413,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBoxMCNoOv;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

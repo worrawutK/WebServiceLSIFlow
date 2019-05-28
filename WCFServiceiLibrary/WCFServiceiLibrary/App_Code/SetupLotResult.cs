@@ -41,17 +41,17 @@ public class SetupLotResult
         try
         {
             if (isPass == Status.NotPass)
-                log.ConnectionLogger.Write(0, functionName, "Error", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause + " ,Good:" + goodQty + " ,Ng:" + ngQty, cause2);
+                log.ConnectionLogger.Write(0, functionName, "Error", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause.Replace(Environment.NewLine," ") + " ,Good:" + goodQty + " ,Ng:" + ngQty, cause2);
             else if (isPass == Status.Warning)
-                log.ConnectionLogger.Write(0, functionName, "Warning", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause + " ,Good:" + goodQty + " ,Ng:" + ngQty, cause2);
+                log.ConnectionLogger.Write(0, functionName, "Warning", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause.Replace(Environment.NewLine, " ") + " ,Good:" + goodQty + " ,Ng:" + ngQty, cause2);
             else
-                log.ConnectionLogger.Write(0, functionName, "Normal", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause + " ,Good:" + goodQty + " ,Ng:" + ngQty, cause2);
+                log.ConnectionLogger.Write(0, functionName, "Normal", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause.Replace(Environment.NewLine, " ") + " ,Good:" + goodQty + " ,Ng:" + ngQty, cause2);
 
         }
         catch (Exception ex)
         {
             Logger logCatch = new Logger("1.0.0", "CatchLog", HttpContext.Current.Server.MapPath(@"~\\Log"));
-            logCatch.ConnectionLogger.Write(0, functionName, "Error", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause + " ,Good:" + goodQty + " ,Ng:" + ngQty, ex.Message.ToString());
+            logCatch.ConnectionLogger.Write(0, functionName, "Error", "WCFService", "iLibrary", 0, subFunction, type.ToString() + "=>" + errorNo + ":" + cause.Replace(Environment.NewLine, " ") + " ,Good:" + goodQty + " ,Ng:" + ngQty, ex.Message.ToString());
         }
        
         this.IsPass = isPass;

@@ -6,8 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TestService.ServiceReference1;
+using TestService.iLibraryService;
 using MessageDialog;
+using System.Threading;
 //using Message;
 namespace TestService
 {
@@ -50,7 +51,7 @@ namespace TestService
         {
             //SetupLotResult result = c_ILibraryClient.SetupLot(textBoxLotNo.Text, textBoxMCNo.Text,
             //   textBoxOPNo.Text, textBoxProcess.Text, "");
-            SetupLotResult result = c_ILibraryClient.SetupLotOven(textBoxLotNo.Text, textBoxMCNo.Text, textBoxMCNoOv.Text,
+            SetupLotResult result = c_ILibraryClient.SetupLotNoCheckLicenser(textBoxLotNo.Text, textBoxMCNo.Text,
               textBoxOPNo.Text, textBoxProcess.Text, "");
 
             if (result.IsPass == SetupLotResult.Status.NotPass)
@@ -133,6 +134,53 @@ namespace TestService
             {
                 AlarmNo = AlarmNo;
             }
+        }
+
+        private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                SetupLotResult result = c_ILibraryClient.SetupLotNoCheckLicenser(textBoxLotNo.Text, textBoxMCNo.Text,
+                textBoxOPNo.Text, textBoxProcess.Text, "");
+
+                StartLotResult result2 = c_ILibraryClient.StartLot(textBoxLotNo.Text, textBoxMCNo.Text,
+                   textBoxOPNo.Text, textBoxRecipe.Text);
+            }
+      
+        
+        }
+
+        private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            Test();
+            //backgroundWorker1.RunWorkerAsync();
+            //Thread thread = new Thread(new ThreadStart(Test));
+            //thread.Start();
+            //Thread thread2 = new Thread(new ThreadStart(Test));
+            //thread2.Start();
+            //Thread thread3 = new Thread(new ThreadStart(Test));
+            //thread3.Start();
+            //Test();
+            //Test();
+
+        }
+        private void Test()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                SetupLotResult result = c_ILibraryClient.SetupLotNoCheckLicenser(textBoxLotNo.Text, textBoxMCNo.Text,
+               textBoxOPNo.Text, textBoxProcess.Text, "");
+
+                StartLotResult result2 = c_ILibraryClient.StartLot(textBoxLotNo.Text, textBoxMCNo.Text,
+                   textBoxOPNo.Text, textBoxRecipe.Text);
+            }
+               
+
         }
     }
 }
