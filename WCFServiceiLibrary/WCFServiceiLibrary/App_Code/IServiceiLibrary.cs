@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IReport;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -109,7 +110,8 @@ public interface IServiceiLibrary
     [OperationContract]
     CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package);
 
-
+    [OperationContract]
+    iReportResponse IRePortCheck(string mcNo);
 
 }
 

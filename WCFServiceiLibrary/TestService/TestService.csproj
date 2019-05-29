@@ -112,6 +112,9 @@
     <None Include="Connected Services\iLibraryService\TestService.iLibraryService.EndLotResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\iLibraryService\TestService.iLibraryService.iReportResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\iLibraryService\TestService.iLibraryService.MachineAlarmResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -159,6 +162,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceReference1\TestService.ServiceReference1.EndLotResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReference1\TestService.ServiceReference1.iReportResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceReference1\TestService.ServiceReference1.MachineAlarmResult.datasource">

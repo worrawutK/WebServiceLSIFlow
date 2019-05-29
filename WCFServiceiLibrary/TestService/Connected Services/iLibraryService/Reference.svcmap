@@ -18,13 +18,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="fb3cbe76-461c-474a-a36c-f40cb817b3f4" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex" />
-    <MetadataFile FileName="service3.xsd" MetadataType="Schema" ID="94de98f4-ac1e-4e84-a61d-50a4d82bcbd8" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex" />
-    <MetadataFile FileName="service4.xsd" MetadataType="Schema" ID="4e48707b-3aea-401d-8c2e-a68d3db37275" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex" />
-    <MetadataFile FileName="service5.xsd" MetadataType="Schema" ID="01baaa30-3d5a-48c4-a997-0f7b7ebc3204" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="768b31c5-be34-4d38-b340-17bc1cc02e03" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex" />
+    <MetadataFile FileName="service3.xsd" MetadataType="Schema" ID="35daa8b2-36bd-4b5e-b23f-2e79d519fa86" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex" />
+    <MetadataFile FileName="service4.xsd" MetadataType="Schema" ID="4e1420ce-99a2-47e1-a544-05e8f226fb1d" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex" />
+    <MetadataFile FileName="service5.xsd" MetadataType="Schema" ID="39ca7949-4933-472d-9611-d2fc784b19c2" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -9,6 +9,7 @@ using System.Reflection;
 using System.ServiceModel.Activation;
 using System.Web;
 using TDCService;
+using IReport;
 using LotInfo = iLibrary.LotInfo;
 
 // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "ServiceiLibrary" in code, svc and config file together.
@@ -88,7 +89,7 @@ public class ServiceiLibrary : IServiceiLibrary
                 //return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ",
                 //   "LotNo:" + lotNo + " opNo:" + opNo, "", "", "GetLotInfo", functionName, log);
             }
-            //Check package and Lot Pro
+            //Check package and Lot  
             CheckLotApcsProResult proResult = CheckLotApcsPro(lotNo, lotInfo.Package.Name, log);
             if (!proResult.IsPass)
             {
@@ -1103,6 +1104,38 @@ public class ServiceiLibrary : IServiceiLibrary
         c_TdcService.Logger = tdcLogger;
        
         return tdcLogger;
+    }
+    #endregion
+
+    #region iReport
+   
+    public iReportResponse IRePortCheck(string mcNo)
+    {
+        try
+        {
+            DateTime dtConfig;
+            DateTime.TryParse("13:30:00", out dtConfig); //Manual config time Limit 
+            TimeSpan tsConfig = dtConfig.TimeOfDay;
+            TimeSpan tmpTs = DateTime.Now.TimeOfDay;
+            DateTime dtNow = DateTime.Now;
+            if (tmpTs < tsConfig)
+            {
+                dtNow = dtNow.AddDays(-1);
+            }
+            using (Service1SoapClient iReport = new Service1SoapClient())
+            {
+                iReportResponse result = iReport.iRePortCheck(mcNo, dtNow);
+                return result;
+            }
+        }
+        catch (Exception ex)
+        {
+            iReportResponse result = new iReportResponse();
+            result.HasError = true;
+            result.ErrorMessage = "Exception:" + ex.Message.ToString();
+            return result;
+        }
+
     }
     #endregion
 }

@@ -125,15 +125,15 @@ namespace TestService
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string AlarmNo = "A097";
-            if (int.TryParse(AlarmNo, out int alarmNo))
-            {
-                AlarmNo = alarmNo.ToString();
-            }
-            else
-            {
-                AlarmNo = AlarmNo;
-            }
+            //string AlarmNo = "A097";
+            //if (int.TryParse(AlarmNo, out int alarmNo))
+            //{
+            //    AlarmNo = alarmNo.ToString();
+            //}
+            //else
+            //{
+            //    AlarmNo = AlarmNo;
+            //}
         }
 
         private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
