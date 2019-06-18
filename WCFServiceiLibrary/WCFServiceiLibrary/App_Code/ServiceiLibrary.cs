@@ -180,8 +180,9 @@ public class ServiceiLibrary : IServiceiLibrary
                 LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotSetup(lotInfo.Id, machineInfo.Id, userInfo.Id, 0, "", 1, dateTimeInfo.Datetime, log);
                 if (!lotUpdateInfo.IsOk)
                     return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro, lotUpdateInfo.ErrorMessage + Environment.NewLine
-                        + "MCNo:" + machineInfo.Name + " || Process:" + lotInfo.Job.Name + Environment.NewLine
-                        + "LotNo:" + lotInfo.Name + " || OPID:" + userInfo.Code,
+                        + "MCNo:" + machineInfo.Name + Environment.NewLine
+                        + "LotNo:" + lotInfo.Name + " || OPID:" + userInfo.Code + Environment.NewLine
+                        + "เป็นงานของ:" + lotInfo.Job.Name,
                        "", "", lotUpdateInfo.ErrorNo.ToString(), "LotSetup",
                         functionName, log);
 
@@ -1111,6 +1112,7 @@ public class ServiceiLibrary : IServiceiLibrary
    
     public iReportResponse IRePortCheck(string mcNo)
     {
+        Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
             DateTime dtConfig;
@@ -1125,6 +1127,16 @@ public class ServiceiLibrary : IServiceiLibrary
             using (Service1SoapClient iReport = new Service1SoapClient())
             {
                 iReportResponse result = iReport.iRePortCheck(mcNo, dtNow);
+                string typeState;
+                if (result.HasError)
+                {
+                    typeState = "Error";
+                }
+                else
+                {
+                    typeState = "Normal";
+                }
+                log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, typeState, "WCFService", "iReportService", 0, "IRePortCheck", result.ErrorMessage, dtNow.ToString("yyyy/MM/dd HH:mm:ss"));
                 return result;
             }
         }
@@ -1133,6 +1145,9 @@ public class ServiceiLibrary : IServiceiLibrary
             iReportResponse result = new iReportResponse();
             result.HasError = true;
             result.ErrorMessage = "Exception:" + ex.Message.ToString();
+
+            log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Error", "WCFService", "iReportService", 0, "IRePortCheck", result.ErrorMessage,"");
+
             return result;
         }
 
