@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TestService.iLibraryService;
+using TestService.ServiceReference1;
 using MessageDialog;
 using System.Threading;
 //using Message;
@@ -108,6 +108,10 @@ namespace TestService
             {
                 MessageBox.Show(result.Cause);
             }
+            if (!string.IsNullOrEmpty(result.NextFlow))
+            {
+                MessageBox.Show(result.NextFlow);
+            }
         }
 
         private void buttonReinput_Click(object sender, EventArgs e)
@@ -181,6 +185,13 @@ namespace TestService
             }
                
 
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+          iReportResponse response =  c_ILibraryClient.IRePortCheck(textBoxMCNo.Text);
+            if (response.HasError)
+                MessageBoxDialog.ShowMessageDialog("iReport", response.ErrorMessage, "");
         }
     }
 }

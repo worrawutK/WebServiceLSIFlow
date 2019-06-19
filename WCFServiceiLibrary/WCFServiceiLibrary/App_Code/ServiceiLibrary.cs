@@ -590,7 +590,25 @@ public class ServiceiLibrary : IServiceiLibrary
                 return new EndLotResult(false, MessageType.ApcsPro, lotUpdateInfo.ErrorNo + ":" + lotUpdateInfo.ErrorMessage, "LotNo:" + lotNo + " opNo:" + opNo +
                     " mcNo:" + mcNo + " good:" + good + " ng:" + ng, "LotEnd", functionName, log);
 
-            return new EndLotResult(true, MessageType.ApcsPro, "", "LotNo:" + lotNo + " opNo:" + opNo, "", functionName, log);
+            string nextFlow = "";
+            if (lotUpdateInfo.NextProcess != null)
+            {
+                //if (lotUpdateInfo.NextProcess.ReserveInfo.SFReserve_On || lotUpdateInfo.NextProcess.ReserveInfo.SFSFReserve_On)
+                //{
+                //    // MessageBoxDialog.ShowMessageDialog("SPECIAL FLOW", lotUpdateInfo.NextProcess.SpComments.SpComment + "\r\n" + endInfo.NextProcess.SpComments.CommentForStart);
+                //}
+                //else if (lotUpdateInfo.NextProcess.ReserveInfo.Is_EndStep)
+                //{
+                //    // MessageBoxDialog.ShowMessageDialog("SPECIAL FLOW", lotUpdateInfo.NextProcess.SpComments.SpComment + "\r\n" + endInfo.NextProcess.SpComments.CommentForEnd);
+                //}
+                //else
+                //{
+                  
+                //    //MessageBoxDialog.ShowMessageDialog("NEXT PROCESS", endInfo.NextProcess.Process_name);
+                //}
+                nextFlow = "Next Process :" + lotUpdateInfo.NextProcess.Job_name;
+            }
+            return new EndLotResult(true, MessageType.ApcsPro, "", "LotNo:" + lotNo + " opNo:" + opNo, "", functionName, log, nextFlow);
         }
         catch (Exception ex)
         {
