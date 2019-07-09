@@ -117,7 +117,7 @@ namespace MessageDialog
         /// <param name="message"></param>
         public static void ShowMessageDialog(string eventName, string mcNo, string lotNo, string message,string messageType ,int? x = null,int? y =null)
         {
-            ShowMessageDialog(eventName, "MCNo : " + mcNo + ", LotNo : " + lotNo + " | " + message, messageType,"00",x.Value,y.Value);
+            ShowMessageDialog(eventName, "MCNo : " + mcNo + ", LotNo : " + lotNo + " | " + message, messageType,"00",x,y);
         }
     }
 }
