@@ -132,6 +132,7 @@
       <xs:element minOccurs="0" name="Cause" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FunctionName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+      <xs:element minOccurs="0" name="NextFlow" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SubFunction" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Type" type="tns:MessageType" />
     </xs:sequence>

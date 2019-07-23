@@ -955,6 +955,9 @@ namespace TestService.iLibraryService {
         private bool IsPassField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NextFlowField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SubFunctionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1005,6 +1008,19 @@ namespace TestService.iLibraryService {
                 if ((this.IsPassField.Equals(value) != true)) {
                     this.IsPassField = value;
                     this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NextFlow {
+            get {
+                return this.NextFlowField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NextFlowField, value) != true)) {
+                    this.NextFlowField = value;
+                    this.RaisePropertyChanged("NextFlow");
                 }
             }
         }

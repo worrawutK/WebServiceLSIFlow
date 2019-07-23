@@ -179,12 +179,24 @@ public class ServiceiLibrary : IServiceiLibrary
             
                 LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotSetup(lotInfo.Id, machineInfo.Id, userInfo.Id, 0, "", 1, dateTimeInfo.Datetime, log);
                 if (!lotUpdateInfo.IsOk)
-                    return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro, lotUpdateInfo.ErrorMessage + Environment.NewLine
+                {
+                    string jobName;
+                    if (lotInfo.IsSpecialFlow)
+                    {
+                        jobName = lotInfo.SpJob.Name;
+                    }
+                    else
+                    {
+                        jobName = lotInfo.Job.Name;
+                    }
+                     return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro, lotUpdateInfo.ErrorMessage + Environment.NewLine
                         + "MCNo:" + machineInfo.Name + Environment.NewLine
                         + "LotNo:" + lotInfo.Name + " || OPID:" + userInfo.Code + Environment.NewLine
-                        + "เป็นงานของ:" + lotInfo.Job.Name,
+                        + "เป็นงานของ:" + jobName,
                        "", "", lotUpdateInfo.ErrorNo.ToString(), "LotSetup",
                         functionName, log);
+                }
+                   
 
 
                 //TDC Move
