@@ -23,6 +23,7 @@ public class ServiceiLibrary : IServiceiLibrary
     private const string c_LogVersion = "1.0.0";
     private const string c_PathFolderBackupTdc = "backupTDC";
     private const string c_FileTdcBackupName = "TDC_before.csv";
+    private const string c_ApcsProDisable = "TRUE";
     public ServiceiLibrary()
     {
         c_ApcsProService = new ApcsProService();
@@ -71,11 +72,19 @@ public class ServiceiLibrary : IServiceiLibrary
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
-          
-            DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
-            LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
-            if (lotInfo == null)
+            DateTime dateTime = DateTime.Now;
+            LotInfo lotInfo = null;
+            var apcsProDisable = AppSettingHelper.GetAppSettingsValue("ApcsProDisable").ToUpper();
+            if (apcsProDisable == c_ApcsProDisable)
             {
+               goto apcsProDisa;
+            }
+            dateTime = c_ApcsProService.Get_DateTimeInfo(log).Datetime;
+            lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTime);
+        apcsProDisa:
+            if (lotInfo == null || IsSkipped(mcNo))
+            {
+            
                 //รอการแก้บัค เนื่องจากคิดว่าทุก lot จะมีใน db ของ ApcsPro แต่ไม่ใช่จะมีแค่ device slip ที่ลงทะเบียนแล้ว ถึงจะนำ lot เข้ามาในระบบ Apcs Pro (SetUp Start End)
                 TdcLotRequestResult requestResult = TdcLotRequest(mcNoToApcs, lotNo, (RunModeType)tdcRunModeType, log);
                 if (!requestResult.IsPass)
@@ -86,8 +95,7 @@ public class ServiceiLibrary : IServiceiLibrary
                 }
                 return new SetupLotResult(SetupLotResult.Status.Pass, MessageType.Apcs, "lotInfo is null", "LotNo:" + lotNo + " opNo:" + opNo, "", "",
                     "TdcLotRequest", functionName, log, requestResult.GoodQty, requestResult.NgQty);
-                //return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ",
-                //   "LotNo:" + lotNo + " opNo:" + opNo, "", "", "GetLotInfo", functionName, log);
+            
             }
             //Check package and Lot  
             CheckLotApcsProResult proResult = CheckLotApcsPro(lotNo, lotInfo.Package.Name, log);
@@ -107,14 +115,8 @@ public class ServiceiLibrary : IServiceiLibrary
             }
             else
             {
-                //Apcs Pro priority
-               
-                if (IsSkipped(mcNo))
-                {
-                    return new SetupLotResult(SetupLotResult.Status.Pass, MessageType.ApcsPro, "IsSkipped", "web.config", "", "", "IsSkipped", functionName, log);
-                }
 
-                UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
+                UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTime, 30);
                 if (userInfo == null)
                 {
                     return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.Unknown, "ไม่พบผู้ใช้งานนี้ :" + opNo,
@@ -149,7 +151,7 @@ public class ServiceiLibrary : IServiceiLibrary
 
                 //Check Permission
                 CheckUserPermissionResult permissionResult = c_ApcsProService.CheckUserPermission(userInfo, "CellController",
-                    processName + "-SetupLot", log, dateTimeInfo.Datetime);
+                    processName + "-SetupLot", log, dateTime);
                 if (!permissionResult.IsPass)
                     return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro, permissionResult.ErrorMessage,
                         "LotNo:" + lotNo + " opNo:" + opNo + " processName:" + processName, "", permissionResult.ErrorNo.ToString(), 
@@ -171,13 +173,13 @@ public class ServiceiLibrary : IServiceiLibrary
                     }
                 }
 
-                MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
+                MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTime);
                 if (machineInfo == null)
                     return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro, "ไม่พบ MCNo :" + mcNo + " ในระบบ", 
                         "LotNo:" + lotNo + " opNo:" + opNo + " mcNo" + mcNo, "","", "GetMachineInfo",
                         functionName, log);
             
-                LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotSetup(lotInfo.Id, machineInfo.Id, userInfo.Id, 0, "", 1, dateTimeInfo.Datetime, log);
+                LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotSetup(lotInfo.Id, machineInfo.Id, userInfo.Id, 0, "", 1, dateTime, log);
                 if (!lotUpdateInfo.IsOk)
                 {
                     string jobName;
@@ -197,8 +199,6 @@ public class ServiceiLibrary : IServiceiLibrary
                         functionName, log);
                 }
                    
-
-
                 //TDC Move
                 TdcMove(mcNoToApcs, lotNo, opNo, layerNo, log);
 
@@ -242,7 +242,6 @@ public class ServiceiLibrary : IServiceiLibrary
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
-            DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
             string mcNoToApcs;
             if (mcNoApcs != "")
             {
@@ -252,31 +251,46 @@ public class ServiceiLibrary : IServiceiLibrary
             {
                 mcNoToApcs = mcNo;
             }
-            //TDC LotSet
-            TdcLotSetResult tdcLotSetResult = TdcLotSet(mcNoToApcs, lotNo, opNo, (RunModeType)runMode, dateTimeInfo.Datetime, log);
-            if (!tdcLotSetResult.IsPass)
+            //  DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
+            DateTime dateTime = DateTime.Now;
+            LotInfo lotInfo = null;
+            var apcsProDisable = AppSettingHelper.GetAppSettingsValue("ApcsProDisable").ToUpper();
+            if (apcsProDisable == c_ApcsProDisable)
             {
-                //
-                // TODO: Add constructor logic here
-                //
+                //TDC LotSet
+                TdcLotSetResult tdcLotSetResult = TdcLotSet(mcNoToApcs, lotNo, opNo, (RunModeType)runMode, dateTime, log);
+                if (!tdcLotSetResult.IsPass)
+                {
+                    //
+                    // TODO: Add constructor logic here
+                    //
+                }
+                return new StartLotResult(true, MessageType.Apcs, "apcsProDisable:" + apcsProDisable, "LotNo:" + lotNo + " opNo:" + opNo,
+                    "apcsProDisable", functionName, log);
             }
-       
-            LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
+
+            dateTime = c_ApcsProService.Get_DateTimeInfo(log).Datetime;       
+            lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTime);
             if (lotInfo == null)
             {
                 return new StartLotResult(true, MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo,
               "GetLotInfo", functionName, log);
-                //return new StartLotResult(false, MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo,
-                //  "GetLotInfo", functionName, log);
             }
 
               
-
             //Check package and Lot Pro
             CheckLotApcsProResult proResult = CheckLotApcsPro(lotNo, lotInfo.Package.Name, log);
             if (!proResult.IsPass)
             {
-                return new StartLotResult(false, MessageType.ApcsPro, proResult.Cause, "LotNo:" + lotNo + " opNo:" + opNo + " package:" + lotInfo.Package.Name,
+                //TDC LotSet
+                TdcLotSetResult tdcLotSetResult = TdcLotSet(mcNoToApcs, lotNo, opNo, (RunModeType)runMode, dateTime, log);
+                if (!tdcLotSetResult.IsPass)
+                {
+                    //
+                    // TODO: Add constructor logic here
+                    //
+                }
+                return new StartLotResult(true, MessageType.ApcsPro, proResult.Cause, "LotNo:" + lotNo + " opNo:" + opNo + " package:" + lotInfo.Package.Name,
                     "CheckLotApcsPro", functionName, log);
             }
             else
@@ -285,13 +299,13 @@ public class ServiceiLibrary : IServiceiLibrary
                 {
                     return new StartLotResult(true, MessageType.ApcsPro, "IsSkipped", "web.config", "IsSkipped", functionName, log);
                 }
-                UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
+                UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTime, 30);
                 if (userInfo == null)
                 {
                     return new StartLotResult(false, MessageType.Unknown, "ไม่พบผู้ใช้งานนี้ :" + opNo,
                         "", "GetUserInfo", MethodBase.GetCurrentMethod().Name, log);
                 }
-                MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
+                MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTime);
                 if (machineInfo == null)
                     return new StartLotResult(false,MessageType.ApcsPro, "ไม่พบ MCNo :" + mcNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo,
                         "GetMachineInfo", functionName, log);
@@ -317,6 +331,11 @@ public class ServiceiLibrary : IServiceiLibrary
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
+            //Only support Apcs Pro
+            var apcsProDisable = AppSettingHelper.GetAppSettingsValue("ApcsProDisable").ToUpper();
+            if (apcsProDisable == c_ApcsProDisable)
+                return new OnlineStartResult(true, MessageType.Apcs, "Only support Apcs Pro","LotNo:" + lotNo + " opNo:" + opNo, "", MethodBase.GetCurrentMethod().Name, log);
+
             DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
             LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
             if (lotInfo == null)
@@ -366,9 +385,12 @@ public class ServiceiLibrary : IServiceiLibrary
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
+            //Only support Apcs Pro
+            var apcsProDisable = AppSettingHelper.GetAppSettingsValue("ApcsProDisable").ToUpper();
+            if (apcsProDisable == c_ApcsProDisable)
+                return new UpdateFirstinspectionResult(true, MessageType.Apcs, "Only support Apcs Pro", "LotNo:" + lotNo + " opNo:" + opNo, "", MethodBase.GetCurrentMethod().Name, log);
+
             DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
-
-
             LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
             if (lotInfo == null)
                 return new UpdateFirstinspectionResult(false,MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo,
@@ -412,6 +434,11 @@ public class ServiceiLibrary : IServiceiLibrary
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
+            //Only support Apcs Pro
+            var apcsProDisable = AppSettingHelper.GetAppSettingsValue("ApcsProDisable").ToUpper();
+            if (apcsProDisable == c_ApcsProDisable)
+                return new OnlineEndResult(true, MessageType.Apcs, "Only support Apcs Pro", "LotNo:" + lotNo + " opNo:" + opNo, "", MethodBase.GetCurrentMethod().Name, log);
+
             DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
             LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
             if (lotInfo == null)
@@ -463,8 +490,12 @@ public class ServiceiLibrary : IServiceiLibrary
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
-            DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
+            //Only support Apcs Pro
+            var apcsProDisable = AppSettingHelper.GetAppSettingsValue("ApcsProDisable").ToUpper();
+            if (apcsProDisable == c_ApcsProDisable)
+                return new UpdateFinalinspectionResult(true, MessageType.Apcs, "Only support Apcs Pro", "LotNo:" + lotNo + " opNo:" + opNo, "", MethodBase.GetCurrentMethod().Name, log);
 
+            DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
             LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
             if (lotInfo == null)
                 return new UpdateFinalinspectionResult(false,MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo,
@@ -527,7 +558,6 @@ public class ServiceiLibrary : IServiceiLibrary
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
-            DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
             string mcNoToApcs;
             if (mcNoApcs != "")
             {
@@ -537,18 +567,25 @@ public class ServiceiLibrary : IServiceiLibrary
             {
                 mcNoToApcs = mcNo;
             }
+            DateTime dateTime = DateTime.Now;
+            LotInfo lotInfo = null;
+           
             //EndModeType.AbnormalEndAccumulate รันใหม่ทั้งหมด
             //EndModeType.AbnormalEndReset รันต่อที่เหลือ
             //EndModeType.Normal จบ Lot ปกติ
-            TdcLotEndResult tdcLotEndResult = TdcLotEnd(mcNoToApcs, lotNo, opNo, dateTimeInfo.Datetime, log, good, ng, EndModeType.Normal);
+            TdcLotEndResult tdcLotEndResult = TdcLotEnd(mcNoToApcs, lotNo, opNo, dateTime, log, good, ng, EndModeType.Normal);
             if (!tdcLotEndResult.IsPass)
             {
                 //
                 // TODO: Add constructor logic here
                 //
             }
+            var apcsProDisable = AppSettingHelper.GetAppSettingsValue("ApcsProDisable").ToUpper();
+            if (apcsProDisable == c_ApcsProDisable)
+                return new EndLotResult(true, MessageType.Apcs, "", "LotNo:" + lotNo + " opNo:" + opNo, "", functionName, log, "");
 
-            LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
+            dateTime = c_ApcsProService.Get_DateTimeInfo(log).Datetime;
+            lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTime);
             if (lotInfo == null)
             {
                 //return new EndLotResult(false, MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo +
@@ -569,14 +606,14 @@ public class ServiceiLibrary : IServiceiLibrary
                 return new EndLotResult(true, MessageType.ApcsPro, "IsSkipped", "web.config", "IsSkipped", functionName, log);
             }
 
-            UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
+            UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTime, 30);
             if (userInfo == null)
             {
                 return new EndLotResult(false, MessageType.Unknown, "ไม่พบผู้ใช้งานนี้ :" + opNo,
                     "", "GetUserInfo", MethodBase.GetCurrentMethod().Name, log);
             }
 
-            MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
+            MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTime);
             if (machineInfo == null)
                 return new EndLotResult(false, MessageType.ApcsPro, "ไม่พบ MCNo :" + mcNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo +
                     " good:" + good + " ng:" + ng, "GetMachineInfo", functionName, log);
@@ -597,7 +634,7 @@ public class ServiceiLibrary : IServiceiLibrary
                 }
             }
 
-            LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotEnd(lotInfo.Id, machineInfo.Id, userInfo.Id, false, good, ng, 0, "", 1, dateTimeInfo.Datetime, log);
+            LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotEnd(lotInfo.Id, machineInfo.Id, userInfo.Id, false, good, ng, 0, "", 1, dateTime, log);
             if (!lotUpdateInfo.IsOk)
                 return new EndLotResult(false, MessageType.ApcsPro, lotUpdateInfo.ErrorNo + ":" + lotUpdateInfo.ErrorMessage, "LotNo:" + lotNo + " opNo:" + opNo +
                     " mcNo:" + mcNo + " good:" + good + " ng:" + ng, "LotEnd", functionName, log);
@@ -639,8 +676,12 @@ public class ServiceiLibrary : IServiceiLibrary
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
-            DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
+            //Only support Apcs Pro
+            var apcsProDisable = AppSettingHelper.GetAppSettingsValue("ApcsProDisable").ToUpper();
+            if (apcsProDisable == c_ApcsProDisable)
+                return new CancelLotResult(false, MessageType.Apcs, "Only support Apcs Pro", "LotNo:" + lotNo + " opNo:" + opNo, "", MethodBase.GetCurrentMethod().Name, log);
 
+            DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
             LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
             if (lotInfo == null)
                 return new CancelLotResult(false,MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo,
@@ -729,12 +770,20 @@ public class ServiceiLibrary : IServiceiLibrary
             {
                 ng = 0;
             }
-            DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
+            DateTime dateTime = DateTime.Now;
+            LotInfo lotInfo = null;
+            var apcsProDisable = AppSettingHelper.GetAppSettingsValue("ApcsProDisable").ToUpper();
+            if (apcsProDisable == c_ApcsProDisable)
+            {
+                goto apcsProDisa;
+            }
+            dateTime = c_ApcsProService.Get_DateTimeInfo(log).Datetime;
+            lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTime);
+        apcsProDisa:
 
-            LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTimeInfo.Datetime);
             if (lotInfo == null)
             {
-                TdcLotEndResult tdcLotEndResult = TdcLotEnd(mcNoToApcs, lotNo, opNo, dateTimeInfo.Datetime, log, good, ng, (EndModeType)endMode);
+                TdcLotEndResult tdcLotEndResult = TdcLotEnd(mcNoToApcs, lotNo, opNo, dateTime, log, good, ng, (EndModeType)endMode);
                 if (!tdcLotEndResult.IsPass)
                 {
                     //
@@ -750,7 +799,7 @@ public class ServiceiLibrary : IServiceiLibrary
             CheckLotApcsProResult proResult = CheckLotApcsPro(lotNo, lotInfo.Package.Name, log);
             if (!proResult.IsPass)
             {
-                TdcLotEndResult tdcLotEndResult = TdcLotEnd(mcNoToApcs, lotNo, opNo, dateTimeInfo.Datetime, log, good, ng, (EndModeType)endMode);
+                TdcLotEndResult tdcLotEndResult = TdcLotEnd(mcNoToApcs, lotNo, opNo, dateTime, log, good, ng, (EndModeType)endMode);
                 if (!tdcLotEndResult.IsPass)
                 {
                     //
@@ -761,19 +810,19 @@ public class ServiceiLibrary : IServiceiLibrary
                     functionName, log);
             }
 
-            UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
+            UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTime, 30);
             if (userInfo == null)
             {
                 return new ReinputResult(false, MessageType.Unknown, "ไม่พบผู้ใช้งานนี้ :" + opNo,
                     "", "GetUserInfo", MethodBase.GetCurrentMethod().Name, log);
             }
 
-            MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
+            MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTime);
             if (machineInfo == null)
                 return new ReinputResult(false, MessageType.ApcsPro, "ไม่พบ MCNo :" + mcNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo +
                     " good:" + good + " ng:" + ng, "GetMachineInfo", functionName, log);
             LotUpdateInfo lotUpdateInfo = c_ApcsProService.AbnormalLotEnd_BackToThe_BeforeProcess(lotInfo.Id, machineInfo.Id, userInfo.Id, holdLot,
-                good, ng, 0, "", 1, dateTimeInfo.Datetime, log);
+                good, ng, 0, "", 1, dateTime, log);
 
             if (!lotUpdateInfo.IsOk)
             {
@@ -797,8 +846,12 @@ public class ServiceiLibrary : IServiceiLibrary
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile); 
         try
         {
-            DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
+            //Only support Apcs Pro
+            var apcsProDisable = AppSettingHelper.GetAppSettingsValue("ApcsProDisable").ToUpper();
+            if (apcsProDisable == c_ApcsProDisable)
+                return new MachineOnlineStateResult(true, MessageType.Apcs, "Only support Apcs Pro", online.ToString(), "", MethodBase.GetCurrentMethod().Name, log);
 
+            DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
             MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
             if (machineInfo == null)
                 return new MachineOnlineStateResult(false,MessageType.ApcsPro,"ไม่พบ MCNo :" + mcNo + " ในระบบ","",
@@ -823,9 +876,13 @@ public class ServiceiLibrary : IServiceiLibrary
     {
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
-        {      
-            DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
+        {
+            //Only support Apcs Pro
+            var apcsProDisable = AppSettingHelper.GetAppSettingsValue("ApcsProDisable").ToUpper();
+            if (apcsProDisable == c_ApcsProDisable)
+                return new UpdateMachineStateResult(true, MessageType.Apcs, "Only support Apcs Pro", state.ToString(), "", MethodBase.GetCurrentMethod().Name, log);
 
+            DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
             MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTimeInfo.Datetime);
             if (machineInfo == null)
                 return new UpdateMachineStateResult(false,MessageType.ApcsPro,"ไม่พบ MCNo :" + mcNo + " ในระบบ","", "GetMachineInfo",
@@ -850,6 +907,12 @@ public class ServiceiLibrary : IServiceiLibrary
         try
         {
             log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
+            //Only support Apcs Pro
+            var apcsProDisable = AppSettingHelper.GetAppSettingsValue("ApcsProDisable").ToUpper();
+            if (apcsProDisable == c_ApcsProDisable)
+                return new MachineAlarmResult(true, MessageType.Apcs, "Only support Apcs Pro", "AlarmNo:" + AlarmNo + " AlarmState:" + alarm.ToString(), "",
+                 MethodBase.GetCurrentMethod().Name, log);
+
             DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
             UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTimeInfo.Datetime, 30);
             if (userInfo == null)
@@ -884,7 +947,7 @@ public class ServiceiLibrary : IServiceiLibrary
                 MachineUpdateInfo machineAlarmSet = c_ApcsProService.Update_ErrorHappenRecord(lotArray, machineInfo, userInfo.Id, AlarmNo,
                dateTimeInfo.Datetime, log);
                 if (!machineAlarmSet.IsOk)
-                    return new MachineAlarmResult(false, MessageType.ApcsPro, machineAlarmSet.ErrorNo + ":" + machineAlarmSet.ErrorMessage,
+                    return new MachineAlarmResult(false, MessageType.ApcsPro, "Update_ErrorHappenRecord not Complete",
                         "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " AlarmNo:" + AlarmNo + " AlarmState:" + alarm.ToString(),
                         "Update_ErrorHappenRecord", MethodBase.GetCurrentMethod().Name, log);
             }
@@ -894,7 +957,7 @@ public class ServiceiLibrary : IServiceiLibrary
                 {
                     MachineUpdateInfo machineAlarmReset = c_ApcsProService.Update_ErrorResetRecord(machineInfo, userInfo.Id, AlarmNo, dateTimeInfo.Datetime, log);
                     if (!machineAlarmReset.IsOk)
-                        return new MachineAlarmResult(false, MessageType.ApcsPro, machineAlarmReset.ErrorNo + ":" + machineAlarmReset.ErrorMessage,
+                        return new MachineAlarmResult(false, MessageType.ApcsPro, "Update_ErrorResetRecord not Complete",
                             "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " AlarmNo:" + AlarmNo + " AlarmState:" + alarm.ToString(),
                             "Update_ErrorResetRecord", MethodBase.GetCurrentMethod().Name, log);
                 }
@@ -1139,7 +1202,7 @@ public class ServiceiLibrary : IServiceiLibrary
     #endregion
 
     #region iReport
-   
+
     public iReportResponse IRePortCheck(string mcNo)
     {
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
@@ -1176,7 +1239,7 @@ public class ServiceiLibrary : IServiceiLibrary
             result.HasError = true;
             result.ErrorMessage = "Exception:" + ex.Message.ToString();
 
-            log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Error", "WCFService", "iReportService", 0, "IRePortCheck", result.ErrorMessage,"");
+            log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Error", "WCFService", "iReportService", 0, "IRePortCheck", result.ErrorMessage, "");
 
             return result;
         }
