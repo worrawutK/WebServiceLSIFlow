@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TestService.ServiceReference1;
+using TestService.iLibraryService;
 using MessageDialog;
 using System.Threading;
 //using Message;
@@ -51,7 +51,7 @@ namespace TestService
         {
             //SetupLotResult result = c_ILibraryClient.SetupLot(textBoxLotNo.Text, textBoxMCNo.Text,
             //   textBoxOPNo.Text, textBoxProcess.Text, "");
-            SetupLotResult result = c_ILibraryClient.SetupLotNoCheckLicenser(textBoxLotNo.Text, textBoxMCNo.Text,
+            SetupLotResult result = c_ILibraryClient.SetupLot(textBoxLotNo.Text, textBoxMCNo.Text,
               textBoxOPNo.Text, textBoxProcess.Text, "");
 
             if (result.IsPass == SetupLotResult.Status.NotPass)
@@ -71,6 +71,7 @@ namespace TestService
         {
             StartLotResult result = c_ILibraryClient.StartLot(textBoxLotNo.Text, textBoxMCNo.Text,
                 textBoxOPNo.Text, textBoxRecipe.Text);
+
             //StartLotResult result = c_ILibraryClient.StartLotOven(textBoxLotNo.Text, textBoxMCNo.Text, textBoxMCNoOv.Text,
             //  textBoxOPNo.Text, textBoxRecipe.Text);
             if (!result.IsPass)
@@ -189,9 +190,9 @@ namespace TestService
 
         private void Button3_Click(object sender, EventArgs e)
         {
-          iReportResponse response =  c_ILibraryClient.IRePortCheck(textBoxMCNo.Text);
-            if (response.HasError)
-                MessageBoxDialog.ShowMessageDialog("iReport", response.ErrorMessage, "");
+          //iReportResponse response =  c_ILibraryClient.IRePortCheck(textBoxMCNo.Text);
+          //  if (response.HasError)
+          //      MessageBoxDialog.ShowMessageDialog("iReport", response.ErrorMessage, "");
         }
     }
 }

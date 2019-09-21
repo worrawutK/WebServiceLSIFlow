@@ -11,6 +11,8 @@ using System.Web;
 using TDCService;
 using IReport;
 using LotInfo = iLibrary.LotInfo;
+using System.Threading;
+using System.Data.SqlClient;
 
 // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "ServiceiLibrary" in code, svc and config file together.
 [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
@@ -273,6 +275,14 @@ public class ServiceiLibrary : IServiceiLibrary
             lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTime);
             if (lotInfo == null)
             {
+                //TDC LotSet
+                TdcLotSetResult tdcLotSetResult = TdcLotSet(mcNoToApcs, lotNo, opNo, (RunModeType)runMode, dateTime, log);
+                if (!tdcLotSetResult.IsPass)
+                {
+                    //
+                    // TODO: Add constructor logic here
+                    //
+                }
                 return new StartLotResult(true, MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo,
               "GetLotInfo", functionName, log);
             }
@@ -297,6 +307,7 @@ public class ServiceiLibrary : IServiceiLibrary
             {
                 if (IsSkipped(mcNo))
                 {
+                    TdcLotSet(mcNoToApcs, lotNo, opNo, (RunModeType)runMode, dateTime, log);
                     return new StartLotResult(true, MessageType.ApcsPro, "IsSkipped", "web.config", "IsSkipped", functionName, log);
                 }
                 UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTime, 30);
@@ -314,6 +325,8 @@ public class ServiceiLibrary : IServiceiLibrary
                 if (!lotUpdateInfo.IsOk)
                     return new StartLotResult(false, MessageType.ApcsPro, lotUpdateInfo.ErrorNo + ":" + lotUpdateInfo.ErrorMessage, "LotNo:" + lotNo + " opNo:" + opNo +
                         " mcNo:" + mcNo, "LotStart", functionName, log);
+
+                TdcLotSet(mcNoToApcs, lotNo, opNo, (RunModeType)runMode, dateTime, log);
             }
            
            
@@ -843,9 +856,12 @@ public class ServiceiLibrary : IServiceiLibrary
 
     public MachineOnlineStateResult MachineOnlineState(string mcNo, MachineOnline online)
     {
-        Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile); 
+        int countCheck = 0;
+        Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
+    refunction:
         try
         {
+       
             //Only support Apcs Pro
             var apcsProDisable = AppSettingHelper.GetAppSettingsValue("ApcsProDisable").ToUpper();
             if (apcsProDisable == c_ApcsProDisable)
@@ -866,10 +882,22 @@ public class ServiceiLibrary : IServiceiLibrary
 
             return new MachineOnlineStateResult(true, MessageType.ApcsPro, "", online.ToString(),"", MethodBase.GetCurrentMethod().Name,log);
         }
-        catch (Exception ex)
+        catch (SqlException ex)  // -2 is a sql timeout
+        {
+            if (ex.Number == -2)
+            {
+                if (countCheck <= 3)
+                {
+                    goto refunction;
+                }
+            }
+            return new MachineOnlineStateResult(false, MessageType.ApcsPro, ex.Message.ToString(), online.ToString(), "Exception", MethodBase.GetCurrentMethod().Name, log);
+        }
+        catch  (Exception ex)
         {
             return new MachineOnlineStateResult(false, MessageType.ApcsPro, ex.Message.ToString(), online.ToString(), "Exception", MethodBase.GetCurrentMethod().Name, log);
         }
+   
        // return new MachineOnlineStateResult();
     }
     public UpdateMachineStateResult UpdateMachineState(string mcNo, MachineProcessingState state)
