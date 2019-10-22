@@ -37,41 +37,117 @@ public class ServiceiLibrary : IServiceiLibrary
     
     public SetupLotResult SetupLot(string lotNo, string mcNo, string opNo, string processName, string layerNo)
     {
-        return SetupLotCommon(lotNo, mcNo, opNo, processName, layerNo, RunMode.Normal, MethodBase.GetCurrentMethod().Name);
+        SetupLotEventArgs setupEventArgs = new SetupLotEventArgs()
+        {
+            LotNo = lotNo,
+            MachineNo = mcNo,
+            OperatorNo = opNo,
+            Process = processName,
+            LayerNo = layerNo,
+            RunMode = RunMode.Normal,
+            FunctionName = MethodBase.GetCurrentMethod().Name
+        };
+        //return SetupLotCommon(lotNo, mcNo, opNo, processName, layerNo, RunMode.Normal, MethodBase.GetCurrentMethod().Name);
+        return SetupLotCommon(setupEventArgs);
     }
     
     public SetupLotResult SetupLotNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo)
     {
-        return SetupLotCommon(lotNo, mcNo, opNo, processName, layerNo, RunMode.Normal, MethodBase.GetCurrentMethod().Name, false);
+        SetupLotEventArgs setupEventArgs = new SetupLotEventArgs()
+        {
+            LotNo = lotNo,
+            MachineNo = mcNo,
+            OperatorNo = opNo,
+            Process = processName,
+            LayerNo = layerNo,
+            RunMode = RunMode.Normal,
+            IsCheckLicenser = Licenser.NoCheck,
+            FunctionName = MethodBase.GetCurrentMethod().Name
+        };
+        return SetupLotCommon(setupEventArgs);
+        //return SetupLotCommon(lotNo, mcNo, opNo, processName, layerNo, RunMode.Normal, MethodBase.GetCurrentMethod().Name, false);
     }
 
     public SetupLotResult SetupLotCustomMode(string lotNo, string mcNo, string opNo, string processName, string layerNo, RunMode runMode)
     {
-        return SetupLotCommon(lotNo, mcNo, opNo, processName, layerNo, runMode, MethodBase.GetCurrentMethod().Name);
+        SetupLotEventArgs setupEventArgs = new SetupLotEventArgs()
+        {
+            LotNo = lotNo,
+            MachineNo = mcNo,
+            OperatorNo = opNo,
+            Process = processName,
+            LayerNo = layerNo,
+            RunMode = runMode,
+            FunctionName = MethodBase.GetCurrentMethod().Name
+        };
+        return SetupLotCommon(setupEventArgs);
+        //return SetupLotCommon(lotNo, mcNo, opNo, processName, layerNo, runMode, MethodBase.GetCurrentMethod().Name);
     }
     public SetupLotResult SetupLotCustomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo, RunMode runMode)
     {
-        return SetupLotCommon(lotNo, mcNo, opNo, processName, layerNo,runMode, MethodBase.GetCurrentMethod().Name, false);
+        SetupLotEventArgs setupEventArgs = new SetupLotEventArgs()
+        {
+            LotNo = lotNo,
+            MachineNo = mcNo,
+            OperatorNo = opNo,
+            Process = processName,
+            LayerNo = layerNo,
+            RunMode = runMode,
+            FunctionName = MethodBase.GetCurrentMethod().Name,
+            IsCheckLicenser = Licenser.NoCheck
+        };
+        return SetupLotCommon(setupEventArgs);
+       // return SetupLotCommon(lotNo, mcNo, opNo, processName, layerNo,runMode, MethodBase.GetCurrentMethod().Name, false);
     }
 
     //Oven พี่อาร์ม
     public SetupLotResult SetupLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, string processName, string layerNo)
     {
-        return SetupLotCommon(lotNo, mcNoApcsPro, opNo, processName, layerNo, RunMode.Normal, MethodBase.GetCurrentMethod().Name,false, mcNoApcs);
+        SetupLotEventArgs setupEventArgs = new SetupLotEventArgs()
+        {
+            LotNo = lotNo,
+            MachineNo = mcNoApcsPro,
+            OperatorNo = opNo,
+            Process = processName,
+            LayerNo = layerNo,
+            RunMode = RunMode.Normal,
+            FunctionName = MethodBase.GetCurrentMethod().Name,
+            IsCheckLicenser = Licenser.NoCheck,
+            MachineOven = mcNoApcs
+        };
+        return SetupLotCommon(setupEventArgs);
+        //return SetupLotCommon(lotNo, mcNoApcsPro, opNo, processName, layerNo, RunMode.Normal, MethodBase.GetCurrentMethod().Name,false, mcNoApcs);
     }
 
-    private SetupLotResult SetupLotCommon(string lotNo, string mcNo, string opNo, string processName, string layerNo, RunMode tdcRunModeType,string functionName, bool isCheckLicenser = true,string mcNoApcs = "")
+    public SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, string layerNo,int frame_In,Licenser licenser,RunMode runMode) 
+    {
+        SetupLotEventArgs setupLotEventArgs = new SetupLotEventArgs()
+        {
+            LotNo = lotNo,
+            MachineNo = mcNo,
+            OperatorNo = opNo,
+            Process = processName,
+            LayerNo = layerNo,
+            FunctionName = MethodBase.GetCurrentMethod().Name,
+            IsCheckLicenser = licenser,
+            RunMode = runMode,
+            FrameIn = frame_In
+        };
+        return  SetupLotCommon(setupLotEventArgs);
+    }
+
+    private SetupLotResult SetupLotCommon(SetupLotEventArgs setupEventArgs)
     {
         string mcNoToApcs;
-        if (mcNoApcs != "")
+        if (setupEventArgs.MachineOven != "")
         {
-            mcNoToApcs = mcNoApcs;
+            mcNoToApcs = setupEventArgs.MachineOven;
         }
         else
         {
-            mcNoToApcs = mcNo;
+            mcNoToApcs = setupEventArgs.MachineNo;
         }
-        Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
+        Logger log = new Logger(c_LogVersion, setupEventArgs.MachineNo, c_PahtLogFile);
         try
         {
             DateTime dateTime = DateTime.Now;
@@ -82,46 +158,51 @@ public class ServiceiLibrary : IServiceiLibrary
                goto apcsProDisa;
             }
             dateTime = c_ApcsProService.Get_DateTimeInfo(log).Datetime;
-            lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTime);
+            lotInfo = c_ApcsProService.GetLotInfo(setupEventArgs.LotNo, log, dateTime);
         apcsProDisa:
-            if (lotInfo == null || IsSkipped(mcNo))
+            if (lotInfo == null || IsSkipped(setupEventArgs.MachineNo))
             {
             
                 //รอการแก้บัค เนื่องจากคิดว่าทุก lot จะมีใน db ของ ApcsPro แต่ไม่ใช่จะมีแค่ device slip ที่ลงทะเบียนแล้ว ถึงจะนำ lot เข้ามาในระบบ Apcs Pro (SetUp Start End)
-                TdcLotRequestResult requestResult = TdcLotRequest(mcNoToApcs, lotNo, (RunModeType)tdcRunModeType, log);
+                TdcLotRequestResult requestResult = TdcLotRequest(mcNoToApcs, setupEventArgs.LotNo, (RunModeType)setupEventArgs.RunMode, log);
                 if (!requestResult.IsPass)
                 {
                     return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.Apcs, requestResult.Cause,
-                              "LotNo:" + lotNo + " opNo:" + opNo, "", requestResult.ErrorNo,
-                              "CheckLotApcsPro", functionName, log);
+                              "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo, "", requestResult.ErrorNo,
+                              "CheckLotApcsPro", setupEventArgs.FunctionName, log);
                 }
-                return new SetupLotResult(SetupLotResult.Status.Pass, MessageType.Apcs, "lotInfo is null", "LotNo:" + lotNo + " opNo:" + opNo, "", "",
-                    "TdcLotRequest", functionName, log, requestResult.GoodQty, requestResult.NgQty);
+                return new SetupLotResult(SetupLotResult.Status.Pass, MessageType.Apcs, "lotInfo is null", "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo, "", "",
+                    "TdcLotRequest", setupEventArgs.FunctionName, log, requestResult.GoodQty, requestResult.NgQty);
             
             }
+            //Check frame and setDefult
+            if (setupEventArgs.FrameIn == 0)
+            {
+                setupEventArgs.FrameIn = lotInfo.FrameIn;
+            }
             //Check package and Lot  
-            CheckLotApcsProResult proResult = CheckLotApcsPro(lotNo, lotInfo.Package.Name, log);
+            CheckLotApcsProResult proResult = CheckLotApcsPro(setupEventArgs.LotNo, lotInfo.Package.Name, log);
             if (!proResult.IsPass)
             {
                 //TDC priority
-                TdcLotRequestResult requestResult = TdcLotRequest(mcNoToApcs, lotNo, (RunModeType)tdcRunModeType,log);
+                TdcLotRequestResult requestResult = TdcLotRequest(mcNoToApcs, setupEventArgs.LotNo, (RunModeType)setupEventArgs.RunMode, log);
                 if (!requestResult.IsPass)
                 {
                     return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.Apcs, requestResult.Cause + 
-                        Environment.NewLine + "LotNo:" + lotNo + " opNo:" + opNo + " package:" + lotInfo.Package.Name,
-                              "LotNo:" + lotNo + " opNo:" + opNo + " package:" + lotInfo.Package.Name, "", requestResult.ErrorNo,
-                              "CheckLotApcsPro", functionName, log);
+                        Environment.NewLine + "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo + " package:" + lotInfo.Package.Name,
+                              "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo + " package:" + lotInfo.Package.Name, "", requestResult.ErrorNo,
+                              "CheckLotApcsPro", setupEventArgs.FunctionName, log);
                 }
-                return new SetupLotResult(SetupLotResult.Status.Pass, MessageType.Apcs, "", "LotNo:" + lotNo + " opNo:" + opNo, "", "",
-                    "TdcLotRequest", functionName, log, requestResult.GoodQty, requestResult.NgQty);
+                return new SetupLotResult(SetupLotResult.Status.Pass, MessageType.Apcs, "", "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo, "", "",
+                    "TdcLotRequest", setupEventArgs.FunctionName, log, requestResult.GoodQty, requestResult.NgQty);
             }
             else
             {
 
-                UserInfo userInfo = c_ApcsProService.GetUserInfo(opNo, log, dateTime, 30);
+                UserInfo userInfo = c_ApcsProService.GetUserInfo(setupEventArgs.OperatorNo, log, dateTime, 30);
                 if (userInfo == null)
                 {
-                    return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.Unknown, "ไม่พบผู้ใช้งานนี้ :" + opNo,
+                    return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.Unknown, "ไม่พบผู้ใช้งานนี้ :" + setupEventArgs.OperatorNo,
                         "","","","GetUserInfo",MethodBase.GetCurrentMethod().Name,log);
                 }
                 string warningMessage = "";
@@ -153,35 +234,35 @@ public class ServiceiLibrary : IServiceiLibrary
 
                 //Check Permission
                 CheckUserPermissionResult permissionResult = c_ApcsProService.CheckUserPermission(userInfo, "CellController",
-                    processName + "-SetupLot", log, dateTime);
+                    setupEventArgs.Process + "-SetupLot", log, dateTime);
                 if (!permissionResult.IsPass)
                     return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro, permissionResult.ErrorMessage,
-                        "LotNo:" + lotNo + " opNo:" + opNo + " processName:" + processName, "", permissionResult.ErrorNo.ToString(), 
-                        "CheckUserPermission", functionName, log);
+                        "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo + " processName:" + setupEventArgs.Process, "", permissionResult.ErrorNo.ToString(), 
+                        "CheckUserPermission", setupEventArgs.FunctionName, log);
 
-                if (isCheckLicenser)
+                if (setupEventArgs.IsCheckLicenser == Licenser.Check)
                 {
-                    if (!c_ApcsProService.Check_PermissionMachinesByLMS(userInfo.Id, mcNo, log))
+                    if (!c_ApcsProService.Check_PermissionMachinesByLMS(userInfo.Id, setupEventArgs.MachineNo, log))
                     {
                         return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro,"รหัส : " + userInfo.Code +
-                             " ไม่ผ่านการตรวจสอบในระบบ Licenser กรุณาติดต่อ ETG (MCNo : " + mcNo + ")","","", "",
-                             "Check_PermissionMachinesByLMS", functionName, log);
+                             " ไม่ผ่านการตรวจสอบในระบบ Licenser กรุณาติดต่อ ETG (MCNo : " + setupEventArgs.MachineNo + ")","","", "",
+                             "Check_PermissionMachinesByLMS", setupEventArgs.FunctionName, log);
                     }
                     if (!c_ApcsProService.Check_UserLotAutoMotive(userInfo, lotInfo, log))
                     {
                         return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro, "รหัส : " + userInfo.Code +
                              " User ที่ไม่ใช่ Automotive ไม่สามารถรัน Lot Automotive ได้ กรุณาติดต่อ ETG (Lot Automotive : " + lotInfo.Name + ")","", "","",
-                             "Check_UserLotAutoMotive", functionName, log);
+                             "Check_UserLotAutoMotive", setupEventArgs.FunctionName, log);
                     }
                 }
 
-                MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTime);
+                MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(setupEventArgs.MachineNo, log, dateTime);
                 if (machineInfo == null)
-                    return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro, "ไม่พบ MCNo :" + mcNo + " ในระบบ", 
-                        "LotNo:" + lotNo + " opNo:" + opNo + " mcNo" + mcNo, "","", "GetMachineInfo",
-                        functionName, log);
+                    return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro, "ไม่พบ MCNo :" + setupEventArgs.MachineNo + " ในระบบ", 
+                        "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo + " mcNo" + setupEventArgs.MachineNo, "","", "GetMachineInfo",
+                        setupEventArgs.FunctionName, log);
             
-                LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotSetup(lotInfo.Id, machineInfo.Id, userInfo.Id, 0, "", 1, dateTime, log);
+                LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotSetup(lotInfo.Id, machineInfo.Id, userInfo.Id, 0, "", 1, dateTime, log, setupEventArgs.FrameIn);
                 if (!lotUpdateInfo.IsOk)
                 {
                     string jobName;
@@ -198,29 +279,29 @@ public class ServiceiLibrary : IServiceiLibrary
                         + "LotNo:" + lotInfo.Name + " || OPID:" + userInfo.Code + Environment.NewLine
                         + "เป็นงานของ:" + jobName,
                        "", "", lotUpdateInfo.ErrorNo.ToString(), "LotSetup",
-                        functionName, log);
+                        setupEventArgs.FunctionName, log);
                 }
                    
                 //TDC Move
-                TdcMove(mcNoToApcs, lotNo, opNo, layerNo, log);
+                TdcMove(mcNoToApcs, setupEventArgs.LotNo, setupEventArgs.OperatorNo, setupEventArgs.LayerNo, log);
 
                 if (warningMessage != "")
                 {
                     return new SetupLotResult(SetupLotResult.Status.Warning,MessageType.ApcsPro, warningMessage, 
-                        "LotNo:" + lotNo + " opNo:" + opNo, lotUpdateInfo.Recipe1, "","GetUserInfo", functionName, log, lotInfo.Quantity.Pass, lotInfo.Quantity.LastFail);
+                        "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo, lotUpdateInfo.Recipe1, "","GetUserInfo", setupEventArgs.FunctionName, log, lotInfo.Quantity.Pass, lotInfo.Quantity.LastFail);
                 }
                 else
                 {
-                    return new SetupLotResult(SetupLotResult.Status.Pass,MessageType.ApcsPro, "", "LotNo:" + lotNo + " opNo:" + opNo, lotUpdateInfo.Recipe1, "", "",
-                        functionName, log, lotInfo.Quantity.Pass, lotInfo.Quantity.LastFail);
+                    return new SetupLotResult(SetupLotResult.Status.Pass,MessageType.ApcsPro, "", "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo, lotUpdateInfo.Recipe1, "", "",
+                        setupEventArgs.FunctionName, log, lotInfo.Quantity.Pass, lotInfo.Quantity.LastFail);
                 }
             }
            
         }
         catch (Exception ex)
         {
-            return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.Unknown, ex.Message.ToString(), "LotNo:" + lotNo + " opNo:" + opNo,"", "", "Exception",
-                functionName, log);
+            return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.Unknown, ex.Message.ToString(), "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo, "", "", "Exception",
+                setupEventArgs.FunctionName, log);
         }
     }
 
@@ -548,15 +629,43 @@ public class ServiceiLibrary : IServiceiLibrary
 
     public EndLotResult EndLot(string lotNo, string mcNo, string opNo, int good, int ng)
     {
-        return EndLotCommon(lotNo, mcNo, opNo, good, ng, MethodBase.GetCurrentMethod().Name, false);
+        EndLotEvenArgs endLotEvenArgs = new EndLotEvenArgs(MethodBase.GetCurrentMethod().Name,Licenser.NoCheck)
+        {
+            LotNo = lotNo,
+            MachineNo = mcNo,
+            OperatorNo = opNo,
+            Good = good,
+            Ng = ng
+        };
+        //return EndLotCommon(lotNo, mcNo, opNo, good, ng, MethodBase.GetCurrentMethod().Name, false);
+        return EndLotCommon(endLotEvenArgs);
     }
     public EndLotResult EndLotNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng)
     {
-        return EndLotCommon(lotNo, mcNo, opNo, good, ng,MethodBase.GetCurrentMethod().Name, false);
+        EndLotEvenArgs endLotEvenArgs = new EndLotEvenArgs(MethodBase.GetCurrentMethod().Name, Licenser.NoCheck)
+        {
+            LotNo = lotNo,
+            MachineNo = mcNo,
+            OperatorNo = opNo,
+            Good = good,
+            Ng = ng
+        };
+        return EndLotCommon(endLotEvenArgs);
+        //return EndLotCommon(lotNo, mcNo, opNo, good, ng,MethodBase.GetCurrentMethod().Name, false);
     }
-    public EndLotResult EndLotOven(string lotNo, string mcNoApcs,string mcNoApcsPro, string opNo, int good, int ng)
+    public EndLotResult EndLotOven(string lotNo, string mcNoApcs, string mcNoApcsPro, string opNo, int good, int ng)
     {
-        return EndLotCommon(lotNo, mcNoApcs, opNo, good, ng, MethodBase.GetCurrentMethod().Name, false, mcNoApcsPro);
+        EndLotEvenArgs endLotEvenArgs = new EndLotEvenArgs(MethodBase.GetCurrentMethod().Name, Licenser.NoCheck)
+        {
+            LotNo = lotNo,
+            MachineNo = mcNoApcs,
+            MachineOven = mcNoApcsPro,
+            OperatorNo = opNo,
+            Good = good,
+            Ng = ng
+        };
+        return EndLotCommon(endLotEvenArgs);
+        //return EndLotCommon(lotNo, mcNoApcs, opNo, good, ng, MethodBase.GetCurrentMethod().Name, false, mcNoApcsPro);
     }
     //public EndLotResult EndLotCustomMode(string lotNo, string mcNo, string opNo, int good, int ng ,EndMode endMode)
     //{
@@ -566,8 +675,18 @@ public class ServiceiLibrary : IServiceiLibrary
     //{
     //    return EndLotCommon(lotNo, mcNo, opNo, good, ng, MethodBase.GetCurrentMethod().Name, endMode, false);
     //}
-    private EndLotResult EndLotCommon(string lotNo, string mcNo, string opNo, int good, int ng,string functionName,  bool isCheckLicenser = true,string mcNoApcs = "")
+    //  private EndLotResult EndLotCommon(string lotNo, string mcNo, string opNo, int good, int ng,string functionName,  bool isCheckLicenser = true,string mcNoApcs = "")
+    private EndLotResult EndLotCommon(EndLotEvenArgs endLotEvenArgs)
     {
+        string mcNo = endLotEvenArgs.MachineNo;
+        string lotNo = endLotEvenArgs.LotNo;
+        string opNo = endLotEvenArgs.OperatorNo;
+        int good = endLotEvenArgs.Good;
+        int ng = endLotEvenArgs.Ng;
+        string functionName = endLotEvenArgs.FunctionName;
+        string mcNoApcs = endLotEvenArgs.MachineOven;
+        
+
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
@@ -606,7 +725,16 @@ public class ServiceiLibrary : IServiceiLibrary
                 return new EndLotResult(true, MessageType.ApcsPro, "ไม่พบ lotNo :" + lotNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo +
                    " good:" + good + " ng:" + ng, "GetLotInfo", functionName, log);
             }
-               
+            int frame_Pass = 0;
+            if (endLotEvenArgs.Frame_Pass == 0)
+            {
+                frame_Pass = lotInfo.FramePass;
+            }
+            else
+            {
+                frame_Pass = endLotEvenArgs.Frame_Pass;
+            }
+
             //Check package and Lot Pro
             CheckLotApcsProResult proResult = CheckLotApcsPro(lotNo, lotInfo.Package.Name, log);
             if (!proResult.IsPass)
@@ -631,7 +759,7 @@ public class ServiceiLibrary : IServiceiLibrary
                 return new EndLotResult(false, MessageType.ApcsPro, "ไม่พบ MCNo :" + mcNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo +
                     " good:" + good + " ng:" + ng, "GetMachineInfo", functionName, log);
 
-            if (isCheckLicenser)
+            if (endLotEvenArgs.IsCheckLicenser == Licenser.Check)
             {
                 if (!c_ApcsProService.Check_PermissionMachinesByLMS(userInfo.Id, mcNo, log))
                 {
@@ -647,7 +775,8 @@ public class ServiceiLibrary : IServiceiLibrary
                 }
             }
 
-            LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotEnd(lotInfo.Id, machineInfo.Id, userInfo.Id, false, good, ng, 0, "", 1, dateTime, log);
+            LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotEnd(lotInfo.Id, machineInfo.Id, userInfo.Id, false, good, ng, 0, "", 1, 
+                dateTime, log,"", frame_Pass, endLotEvenArgs.Frame_Fail);
             if (!lotUpdateInfo.IsOk)
                 return new EndLotResult(false, MessageType.ApcsPro, lotUpdateInfo.ErrorNo + ":" + lotUpdateInfo.ErrorMessage, "LotNo:" + lotNo + " opNo:" + opNo +
                     " mcNo:" + mcNo + " good:" + good + " ng:" + ng, "LotEnd", functionName, log);

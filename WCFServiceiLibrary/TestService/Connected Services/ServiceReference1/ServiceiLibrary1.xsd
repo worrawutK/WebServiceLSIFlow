@@ -268,8 +268,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="lotNo" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="mcNoApcs" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="mcNoApcsPro" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mcNoApcs" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="opNo" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="good" type="xs:int" />
         <xs:element minOccurs="0" name="ng" type="xs:int" />

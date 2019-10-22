@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using TestService.iLibraryService;
 using MessageDialog;
 using System.Threading;
+using System.Data.SqlClient;
 //using Message;
 namespace TestService
 {
@@ -51,9 +52,10 @@ namespace TestService
         {
             //SetupLotResult result = c_ILibraryClient.SetupLot(textBoxLotNo.Text, textBoxMCNo.Text,
             //   textBoxOPNo.Text, textBoxProcess.Text, "");
-            SetupLotResult result = c_ILibraryClient.SetupLot(textBoxLotNo.Text, textBoxMCNo.Text,
-              textBoxOPNo.Text, textBoxProcess.Text, "");
-
+            //SetupLotResult result = c_ILibraryClient.SetupLotNoCheckLicenser(textBoxLotNo.Text, textBoxMCNo.Text,
+            //  textBoxOPNo.Text, textBoxProcess.Text, "");
+            SetupLotResult result = c_ILibraryClient.SetupLotOven(textBoxLotNo.Text, textBoxMCNo.Text, textBoxMCNoOv.Text,
+      textBoxOPNo.Text, textBoxProcess.Text, "");
             if (result.IsPass == SetupLotResult.Status.NotPass)
             {
                 MessageBoxDialog.ShowMessageDialog(result.FunctionName , result.Cause, result.Type.ToString(), result.ErrorNo);
@@ -100,11 +102,18 @@ namespace TestService
             }
 
         }
-
+        public class Lotdata
+        {
+            public string LotNo { get; set; }
+            public string MachineNo { get; set; }
+            public string OpNo { get; set; }
+        }
         private void buttonEnd_Click(object sender, EventArgs e)
         {
-            EndLotResult result = c_ILibraryClient.EndLot(textBoxLotNo.Text, textBoxMCNo.Text,
-                textBoxOPNo.Text, int.Parse(textBoxGood.Text), int.Parse(textBoxNg.Text));
+            EndLotResult result = c_ILibraryClient.EndLotOven(textBoxLotNo.Text, textBoxMCNo.Text, textBoxMCNoOv.Text,
+             textBoxOPNo.Text, int.Parse(textBoxGood.Text), int.Parse(textBoxNg.Text));
+            //EndLotResult result = c_ILibraryClient.EndLot(textBoxLotNo.Text, textBoxMCNo.Text,
+            //    textBoxOPNo.Text, int.Parse(textBoxGood.Text), int.Parse(textBoxNg.Text));
             if (!result.IsPass)
             {
                 MessageBox.Show(result.Cause);

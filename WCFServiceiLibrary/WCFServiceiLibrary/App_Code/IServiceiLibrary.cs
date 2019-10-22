@@ -197,7 +197,14 @@ public enum Judge
     [EnumMember()]
     OK = 1
 }
-
+[DataContract()]
+public enum Licenser
+{
+    [EnumMember()]
+    NoCheck = 0,
+    [EnumMember()]
+    Check = 1
+}
 //// Use a data contract as illustrated in the sample below to add composite types to service operations.
 //[DataContract]
 //public class MachineState

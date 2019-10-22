@@ -1789,7 +1789,7 @@ namespace TestService.ServiceReference1 {
         TestService.ServiceReference1.EndLotResult EndLotNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/EndLotOven", ReplyAction="http://tempuri.org/IServiceiLibrary/EndLotOvenResponse")]
-        TestService.ServiceReference1.EndLotResult EndLotOven(string lotNo, string mcNoApcs, string mcNoApcsPro, string opNo, int good, int ng);
+        TestService.ServiceReference1.EndLotResult EndLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, int good, int ng);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/UpdateFinalinspection", ReplyAction="http://tempuri.org/IServiceiLibrary/UpdateFinalinspectionResponse")]
         TestService.ServiceReference1.UpdateFinalinspectionResult UpdateFinalinspection(string lotNo, string opNo, TestService.ServiceReference1.Judge judge, string mcNo);
@@ -1903,8 +1903,8 @@ namespace TestService.ServiceReference1 {
             return base.Channel.EndLotNoCheckLicenser(lotNo, mcNo, opNo, good, ng);
         }
         
-        public TestService.ServiceReference1.EndLotResult EndLotOven(string lotNo, string mcNoApcs, string mcNoApcsPro, string opNo, int good, int ng) {
-            return base.Channel.EndLotOven(lotNo, mcNoApcs, mcNoApcsPro, opNo, good, ng);
+        public TestService.ServiceReference1.EndLotResult EndLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, int good, int ng) {
+            return base.Channel.EndLotOven(lotNo, mcNoApcsPro, mcNoApcs, opNo, good, ng);
         }
         
         public TestService.ServiceReference1.UpdateFinalinspectionResult UpdateFinalinspection(string lotNo, string opNo, TestService.ServiceReference1.Judge judge, string mcNo) {
