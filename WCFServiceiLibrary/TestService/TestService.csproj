@@ -106,6 +106,9 @@
     <None Include="Connected Services\iLibraryService\TestService.iLibraryService.CancelLotResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\iLibraryService\TestService.iLibraryService.CarrierInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\iLibraryService\TestService.iLibraryService.CheckLotApcsProResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -156,6 +159,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceReference1\TestService.ServiceReference1.CancelLotResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReference1\TestService.ServiceReference1.CarrierInfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceReference1\TestService.ServiceReference1.CheckLotApcsProResult.datasource">

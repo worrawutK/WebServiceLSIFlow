@@ -13,6 +13,7 @@ using IReport;
 using LotInfo = iLibrary.LotInfo;
 using System.Threading;
 using System.Data.SqlClient;
+using System.Data;
 
 // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "ServiceiLibrary" in code, svc and config file together.
 [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
@@ -119,7 +120,7 @@ public class ServiceiLibrary : IServiceiLibrary
         //return SetupLotCommon(lotNo, mcNoApcsPro, opNo, processName, layerNo, RunMode.Normal, MethodBase.GetCurrentMethod().Name,false, mcNoApcs);
     }
 
-    public SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, string layerNo,int frame_In,Licenser licenser,RunMode runMode) 
+    public SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, string layerNo,int frame_In, CarrierInfo carrierInfo, Licenser licenser,RunMode runMode) 
     {
         SetupLotEventArgs setupLotEventArgs = new SetupLotEventArgs()
         {
@@ -131,7 +132,8 @@ public class ServiceiLibrary : IServiceiLibrary
             FunctionName = MethodBase.GetCurrentMethod().Name,
             IsCheckLicenser = licenser,
             RunMode = runMode,
-            FrameIn = frame_In
+            FrameIn = frame_In,
+            CarrierInfo = carrierInfo
         };
         return  SetupLotCommon(setupLotEventArgs);
     }
@@ -262,6 +264,50 @@ public class ServiceiLibrary : IServiceiLibrary
                         "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo + " mcNo" + setupEventArgs.MachineNo, "","", "GetMachineInfo",
                         setupEventArgs.FunctionName, log);
             
+                //Carrier Control
+                if (setupEventArgs.CarrierInfo != null && setupEventArgs.CarrierInfo.EnabledControlCarrier == CarrierInfo.Status.Use &&
+                    setupEventArgs.CarrierInfo.InControlCarrier == CarrierInfo.Status.Use)
+                {
+                   
+                    if (setupEventArgs.CarrierInfo.LoadCarrier == CarrierInfo.Status.Use)
+                    {
+                        CarrierControlResult resultLoad = c_ApcsProService.VerificationLoadCarrier(machineInfo.Id, lotInfo.Id, setupEventArgs.CarrierInfo.LoadCarrierNo, userInfo.Id, log);
+                        if (!resultLoad.IsPass)
+                        {
+                            return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.ApcsPro, resultLoad.ErrorMessageDetail.Error_Message,
+                                "mcNo:" + setupEventArgs.MachineNo + " ,lotNo:" + setupEventArgs.LotNo +
+                                " ,LoadCarrierNo:" + setupEventArgs.CarrierInfo.LoadCarrierNo + " ,opNo:" + setupEventArgs.OperatorNo
+                                , "", resultLoad.ErrorMessageDetail.Error_No.ToString(), "VerificationLoadCarrier", setupEventArgs.FunctionName, log);
+                        }
+                    }
+
+                    if (setupEventArgs.CarrierInfo.RegisterCarrier == CarrierInfo.Status.Use)
+                    {
+                        CarrierControlResult resultRegister = c_ApcsProService.CheckAndRegisterCurrentCarrier(machineInfo.Id, lotInfo.Id, setupEventArgs.CarrierInfo.RegisterCarrierNo, userInfo.Id, log);
+                        if (!resultRegister.IsPass)
+                        {
+                            return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.ApcsPro, resultRegister.ErrorMessageDetail.Error_Message,
+                                "mcNo:" + setupEventArgs.MachineNo + " ,lotNo:" + setupEventArgs.LotNo +
+                                " ,RegisterCarrierNo:" + setupEventArgs.CarrierInfo.RegisterCarrierNo + " ,opNo:" + setupEventArgs.OperatorNo
+                                , "", resultRegister.ErrorMessageDetail.Error_No.ToString(), "CheckAndRegisterCurrentCarrier", setupEventArgs.FunctionName, log);
+                        }
+                    }
+
+                    if (setupEventArgs.CarrierInfo.TransferCarrier == CarrierInfo.Status.Use)
+                    {
+                        CarrierControlResult resultTransfer = c_ApcsProService.CheckAndRegisterNextCarrier(machineInfo.Id, lotInfo.Id,
+                            setupEventArgs.CarrierInfo.TransferCarrierNo, userInfo.Id, log);
+                        if (!resultTransfer.IsPass)
+                        {
+                            return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro,resultTransfer.ErrorMessageDetail.Error_Message,
+                                     "mcNo:" + setupEventArgs.MachineNo + " ,lotNo:" + setupEventArgs.LotNo +
+                                " ,TransferCarrierNo:" + setupEventArgs.CarrierInfo.TransferCarrierNo + " ,opNo:" + setupEventArgs.OperatorNo
+                                , "", resultTransfer.ErrorMessageDetail.Error_No.ToString(), "CheckAndRegisterNextCarrier", setupEventArgs.FunctionName, log);
+                        }
+                    }
+                }
+
+
                 LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotSetup(lotInfo.Id, machineInfo.Id, userInfo.Id, 0, "", 1, dateTime, log, setupEventArgs.FrameIn);
                 if (!lotUpdateInfo.IsOk)
                 {
@@ -667,6 +713,20 @@ public class ServiceiLibrary : IServiceiLibrary
         return EndLotCommon(endLotEvenArgs);
         //return EndLotCommon(lotNo, mcNoApcs, opNo, good, ng, MethodBase.GetCurrentMethod().Name, false, mcNoApcsPro);
     }
+
+    public EndLotResult EndLotPhase2(string lotNo,string mcNo,string opNo,int good,int ng, Licenser licenser ,CarrierInfo carrierInfo)
+    {
+        EndLotEvenArgs endLotEvenArgs = new EndLotEvenArgs(MethodBase.GetCurrentMethod().Name, licenser)
+        {
+            LotNo = lotNo,
+            MachineNo = mcNo,
+            OperatorNo = opNo,
+            Good = good,
+            Ng = ng,
+            CarrierInfo = carrierInfo
+        };
+        return EndLotCommon(endLotEvenArgs);
+    }
     //public EndLotResult EndLotCustomMode(string lotNo, string mcNo, string opNo, int good, int ng ,EndMode endMode)
     //{
     //    return EndLotCommon(lotNo, mcNo, opNo, good, ng, MethodBase.GetCurrentMethod().Name, endMode, false);
@@ -772,6 +832,20 @@ public class ServiceiLibrary : IServiceiLibrary
                     return new EndLotResult(false, MessageType.ApcsPro, "Check_PermissionMachinesByLMS", "รหัส : " + userInfo.Code +
                          " User ที่ไม่ใช่ Automotive ไม่สามารถรัน Lot Automotive ได้ กรุณาติดต่อ ETG (Lot Automotive : " + lotInfo.Name + ")",
                          "Check_UserLotAutoMotive", functionName, log);
+                }
+            }
+
+            //Carrier Control
+            if (endLotEvenArgs.CarrierInfo != null && endLotEvenArgs.CarrierInfo.EnabledControlCarrier == CarrierInfo.Status.Use && endLotEvenArgs.CarrierInfo.InControlCarrier == CarrierInfo.Status.Use)
+            {
+                if (endLotEvenArgs.CarrierInfo.UnloadCarrier == CarrierInfo.Status.Use)
+                {
+                    CarrierControlResult carrierControlResult = c_ApcsProService.VerificationUnloadCarrier(machineInfo.Id, lotInfo.Id, endLotEvenArgs.CarrierInfo.UnloadCarrierNo, userInfo.Id, log);
+                    if (!carrierControlResult.IsPass)
+                    {
+                        return new EndLotResult(false, MessageType.ApcsPro, carrierControlResult.ErrorMessageDetail.Error_Message,
+                             "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " good:" + good + " ng:" + ng, "LotEnd", functionName, log);
+                    }
                 }
             }
 
@@ -1402,5 +1476,146 @@ public class ServiceiLibrary : IServiceiLibrary
         }
 
     }
+    #endregion
+
+    #region CarrierControl
+    private ResultBase GetCarrierControl(LotInfo lotInfo)
+    {
+        ResultBase result = new ResultBase();
+        //Check process control carrier
+        DataTable tmpDataTable = new DataTable();
+        using (SqlCommand cmd = new SqlCommand())
+        {
+            string job = "";
+            if (lotInfo.IsSpecialFlow)
+            {
+                job = lotInfo.SpJob.Name;
+            }
+            else
+            {
+                job = lotInfo.Job.Name;
+            }
+            cmd.Connection = new SqlConnection("Data Source = 172.16.0.102; Initial Catalog = StoredProcedureDB; Persist Security Info = True; User ID = system; Password = 'p@$$w0rd'");
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "[cellcon].[sp_get_carrier]";
+            cmd.Parameters.Add("@job", SqlDbType.VarChar).Value = job;
+            cmd.Connection.Open();
+            using (SqlDataReader rd = cmd.ExecuteReader())
+            {
+                if (rd.HasRows)
+                {
+                    tmpDataTable.Load(rd);
+                }
+            }
+            cmd.Connection.Close();
+        }
+        if (tmpDataTable.Rows.Count <= 0)
+        {
+            result.IsPass = false;
+            result.Reason = "ไม่สามารถเข้าถึง [cellcon].[sp_get_carrier] ได้(" + lotInfo.Job.Name + ")";
+            return result;
+        }
+
+        foreach (DataRow row in tmpDataTable.Rows)
+        {
+
+            if (!(row["message"] is DBNull)) result.Reason = (string)row["message"];
+            if (!(row["enabled"] is DBNull)) result.IsPass = (bool)row["enabled"];
+
+        }
+        return result;
+    }
+    public CarrierInfo GetCarrierInfo(string mcNo,string lotNo,string opNo)
+    {
+        Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
+        CarrierInfo result = new CarrierInfo();
+        try
+        {
+          
+            DateTime dateTime = DateTime.Now;
+            MachineInfo machineInfo = c_ApcsProService.GetMachineInfo(mcNo, log, dateTime);
+            if (machineInfo == null)
+            {
+                result.IsPass = false;
+                result.Reason = "machineInfo not found (" + mcNo + ")";
+                return result;
+            }
+            LotInfo lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTime);
+            if (lotInfo == null)
+            {
+                result.IsPass = false;
+                result.Reason = "lotInfo not found (" + lotNo + ")";
+                log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Error", "WCF", "iLibrary", 0, "GetLotInfo", "mcNo :" + mcNo + ",lotNo :" + lotNo + ",opNo :" + opNo, "");
+                return result;
+            }
+
+            
+            CarrierControlResult carrierControlResult = c_ApcsProService.GetCarrierInformation(machineInfo.Id, lotInfo.Id, log);
+
+            if (!carrierControlResult.IsPass)
+            {
+                result.IsPass = false;
+                result.Reason = carrierControlResult.ErrorMessageDetail.Error_Message;
+                log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Error", "WCF", "iLibrary", 0, "GetCarrierInformation", carrierControlResult.ErrorMessageDetail.Error_Message , "mcNo :" + mcNo + ",lotNo :" + lotNo + ",opNo :" + opNo);
+                return result;
+            }
+          
+            if (carrierControlResult.CarrierInfo == null)
+            {
+                result.IsPass = false;
+                result.Reason = "CarrierInfo not found";
+                log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Error", "WCF", "iLibrary", 0, "GetCarrierInformation", result.Reason, "mcNo :" + mcNo + ",lotNo :" + lotNo + ",opNo :" + opNo);
+                return result;
+            }
+
+            ResultBase resultBase = GetCarrierControl(lotInfo);
+            if (!resultBase.IsPass)
+            {
+                result.InControlCarrier = CarrierInfo.Status.No_Use;
+                result.LoadCarrier = CarrierInfo.Status.No_Use;
+                result.UnloadCarrier = CarrierInfo.Status.No_Use;
+                result.RegisterCarrier = CarrierInfo.Status.No_Use;
+                result.TransferCarrier = CarrierInfo.Status.No_Use;
+                result.EnabledControlCarrier = CarrierInfo.Status.No_Use;
+                result.IsPass = true;
+                result.Reason = resultBase.Reason;
+                log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCF", "iLibrary", 0, "GetCarrierControl", result.Reason, "mcNo :" + mcNo + ",lotNo :" + lotNo + ",opNo :" + opNo);
+                return result;
+            }
+
+            result.EnabledControlCarrier = CarrierInfo.Status.Use;
+            //if (result.EnabledControlCarrier == CarrierInfo.Status.No_Use)
+            //{
+            //    result.InControlCarrier = CarrierInfo.Status.No_Use;
+            //    result.LoadCarrier = CarrierInfo.Status.No_Use;
+            //    result.UnloadCarrier = CarrierInfo.Status.No_Use;
+            //    result.RegisterCarrier = CarrierInfo.Status.No_Use;
+            //    result.TransferCarrier = CarrierInfo.Status.No_Use;
+            //    result.IsPass = true;
+            //    result.Reason = "No Control";
+            //    log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCF", "iLibrary", 0, "GetCarrierControl", result.Reason, "mcNo :" + mcNo + ",lotNo :" + lotNo + ",opNo :" + opNo);
+            //    return result;
+            //}
+            result.InControlCarrier = (CarrierInfo.Status)carrierControlResult.CarrierInfo.InControl;
+            result.LoadCarrier = (CarrierInfo.Status)carrierControlResult.CarrierInfo.VerificationOnStart;
+            result.RegisterCarrier = (CarrierInfo.Status)carrierControlResult.CarrierInfo.CarrierRegister;
+            result.UnloadCarrier = (CarrierInfo.Status)carrierControlResult.CarrierInfo.VerificationOnEnd;
+            result.TransferCarrier = (CarrierInfo.Status)carrierControlResult.CarrierInfo.CarrierTransfer;
+            result.IsPass = true;
+            log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCF", "iLibrary", 0, "GetCarrierInfo", result.Reason, "mcNo :" + mcNo + ",lotNo :" + lotNo + ",opNo :" + opNo);
+            return result;
+
+        }
+        catch (Exception ex)
+        {
+            
+            result.IsPass = false;
+            result.Reason = "Exception :" + ex.Message.ToString();
+            log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Error", "WCF", "iLibrary", 0, "GetCarrierInformation", result.Reason, "mcNo :" + mcNo + ",lotNo :" + lotNo + ",opNo :" + opNo);
+            return result;
+        }
+               
+    }
+
     #endregion
 }

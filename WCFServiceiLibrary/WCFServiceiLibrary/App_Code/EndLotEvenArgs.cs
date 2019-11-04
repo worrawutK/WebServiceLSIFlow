@@ -41,4 +41,6 @@ public class EndLotEvenArgs
         get { return c_MachineOven; }
         set { c_MachineOven = value; }
     }
+    public CarrierInfo CarrierInfo { get; set; }
+
 }

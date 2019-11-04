@@ -151,6 +151,18 @@
   <wsdl:message name="IServiceiLibrary_IRePortCheck_OutputMessage">
     <wsdl:part name="parameters" element="tns:IRePortCheckResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_GetCarrierInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCarrierInfo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_GetCarrierInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCarrierInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_SetupLotPhase2_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetupLotPhase2" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_SetupLotPhase2_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetupLotPhase2Response" />
+  </wsdl:message>
   <wsdl:portType name="IServiceiLibrary">
     <wsdl:operation name="MachineOnlineState">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/MachineOnlineState" message="tns:IServiceiLibrary_MachineOnlineState_InputMessage" />
@@ -247,6 +259,14 @@
     <wsdl:operation name="IRePortCheck">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/IRePortCheck" message="tns:IServiceiLibrary_IRePortCheck_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/IRePortCheckResponse" message="tns:IServiceiLibrary_IRePortCheck_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCarrierInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/GetCarrierInfo" message="tns:IServiceiLibrary_GetCarrierInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/GetCarrierInfoResponse" message="tns:IServiceiLibrary_GetCarrierInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetupLotPhase2">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/SetupLotPhase2" message="tns:IServiceiLibrary_SetupLotPhase2_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/SetupLotPhase2Response" message="tns:IServiceiLibrary_SetupLotPhase2_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceiLibrary" type="tns:IServiceiLibrary">
@@ -460,6 +480,24 @@
     </wsdl:operation>
     <wsdl:operation name="IRePortCheck">
       <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/IRePortCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarrierInfo">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/GetCarrierInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetupLotPhase2">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/SetupLotPhase2" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

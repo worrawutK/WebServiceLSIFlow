@@ -1739,6 +1739,249 @@ namespace TestService.iLibraryService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CarrierInfo", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class CarrierInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.iLibraryService.CarrierInfo.Status EnabledControlCarrierField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.iLibraryService.CarrierInfo.Status InControlCarrierField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsPassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.iLibraryService.CarrierInfo.Status LoadCarrierField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LoadCarrierNoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReasonField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.iLibraryService.CarrierInfo.Status RegisterCarrierField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RegisterCarrierNoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.iLibraryService.CarrierInfo.Status TransferCarrierField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TransferCarrierNoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.iLibraryService.CarrierInfo.Status UnloadCarrierField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UnloadCarrierNoField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.iLibraryService.CarrierInfo.Status EnabledControlCarrier {
+            get {
+                return this.EnabledControlCarrierField;
+            }
+            set {
+                if ((this.EnabledControlCarrierField.Equals(value) != true)) {
+                    this.EnabledControlCarrierField = value;
+                    this.RaisePropertyChanged("EnabledControlCarrier");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.iLibraryService.CarrierInfo.Status InControlCarrier {
+            get {
+                return this.InControlCarrierField;
+            }
+            set {
+                if ((this.InControlCarrierField.Equals(value) != true)) {
+                    this.InControlCarrierField = value;
+                    this.RaisePropertyChanged("InControlCarrier");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsPass {
+            get {
+                return this.IsPassField;
+            }
+            set {
+                if ((this.IsPassField.Equals(value) != true)) {
+                    this.IsPassField = value;
+                    this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.iLibraryService.CarrierInfo.Status LoadCarrier {
+            get {
+                return this.LoadCarrierField;
+            }
+            set {
+                if ((this.LoadCarrierField.Equals(value) != true)) {
+                    this.LoadCarrierField = value;
+                    this.RaisePropertyChanged("LoadCarrier");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LoadCarrierNo {
+            get {
+                return this.LoadCarrierNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LoadCarrierNoField, value) != true)) {
+                    this.LoadCarrierNoField = value;
+                    this.RaisePropertyChanged("LoadCarrierNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Reason {
+            get {
+                return this.ReasonField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReasonField, value) != true)) {
+                    this.ReasonField = value;
+                    this.RaisePropertyChanged("Reason");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.iLibraryService.CarrierInfo.Status RegisterCarrier {
+            get {
+                return this.RegisterCarrierField;
+            }
+            set {
+                if ((this.RegisterCarrierField.Equals(value) != true)) {
+                    this.RegisterCarrierField = value;
+                    this.RaisePropertyChanged("RegisterCarrier");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RegisterCarrierNo {
+            get {
+                return this.RegisterCarrierNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RegisterCarrierNoField, value) != true)) {
+                    this.RegisterCarrierNoField = value;
+                    this.RaisePropertyChanged("RegisterCarrierNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.iLibraryService.CarrierInfo.Status TransferCarrier {
+            get {
+                return this.TransferCarrierField;
+            }
+            set {
+                if ((this.TransferCarrierField.Equals(value) != true)) {
+                    this.TransferCarrierField = value;
+                    this.RaisePropertyChanged("TransferCarrier");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TransferCarrierNo {
+            get {
+                return this.TransferCarrierNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TransferCarrierNoField, value) != true)) {
+                    this.TransferCarrierNoField = value;
+                    this.RaisePropertyChanged("TransferCarrierNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.iLibraryService.CarrierInfo.Status UnloadCarrier {
+            get {
+                return this.UnloadCarrierField;
+            }
+            set {
+                if ((this.UnloadCarrierField.Equals(value) != true)) {
+                    this.UnloadCarrierField = value;
+                    this.RaisePropertyChanged("UnloadCarrier");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UnloadCarrierNo {
+            get {
+                return this.UnloadCarrierNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UnloadCarrierNoField, value) != true)) {
+                    this.UnloadCarrierNoField = value;
+                    this.RaisePropertyChanged("UnloadCarrierNo");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+        [System.Runtime.Serialization.DataContractAttribute(Name="CarrierInfo.Status", Namespace="http://schemas.datacontract.org/2004/07/")]
+        public enum Status : int {
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            No_Use = 0,
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            Use = 1,
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Licenser", Namespace="http://schemas.datacontract.org/2004/07/")]
+    public enum Licenser : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NoCheck = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Check = 1,
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="iLibraryService.IServiceiLibrary")]
     public interface IServiceiLibrary {
@@ -1814,6 +2057,12 @@ namespace TestService.iLibraryService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/IRePortCheck", ReplyAction="http://tempuri.org/IServiceiLibrary/IRePortCheckResponse")]
         TestService.iLibraryService.iReportResponse IRePortCheck(string mcNo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/GetCarrierInfo", ReplyAction="http://tempuri.org/IServiceiLibrary/GetCarrierInfoResponse")]
+        TestService.iLibraryService.CarrierInfo GetCarrierInfo(string mcNo, string lotNo, string opNo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/SetupLotPhase2", ReplyAction="http://tempuri.org/IServiceiLibrary/SetupLotPhase2Response")]
+        TestService.iLibraryService.SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, string layerNo, int frame_In, TestService.iLibraryService.CarrierInfo carrierInfo, TestService.iLibraryService.Licenser licenser, TestService.iLibraryService.RunMode runMode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1937,6 +2186,14 @@ namespace TestService.iLibraryService {
         
         public TestService.iLibraryService.iReportResponse IRePortCheck(string mcNo) {
             return base.Channel.IRePortCheck(mcNo);
+        }
+        
+        public TestService.iLibraryService.CarrierInfo GetCarrierInfo(string mcNo, string lotNo, string opNo) {
+            return base.Channel.GetCarrierInfo(mcNo, lotNo, opNo);
+        }
+        
+        public TestService.iLibraryService.SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, string layerNo, int frame_In, TestService.iLibraryService.CarrierInfo carrierInfo, TestService.iLibraryService.Licenser licenser, TestService.iLibraryService.RunMode runMode) {
+            return base.Channel.SetupLotPhase2(lotNo, mcNo, opNo, processName, layerNo, frame_In, carrierInfo, licenser, runMode);
         }
     }
 }

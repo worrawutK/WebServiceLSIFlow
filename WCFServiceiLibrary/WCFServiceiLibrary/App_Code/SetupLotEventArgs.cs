@@ -48,5 +48,5 @@ public class SetupLotEventArgs
 
     public int FrameIn { get; set; }
 
-
+    public CarrierInfo CarrierInfo { get; set; }
 }

@@ -268,8 +268,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="lotNo" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="mcNoApcsPro" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="mcNoApcs" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mcNoApcsPro" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="opNo" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="good" type="xs:int" />
         <xs:element minOccurs="0" name="ng" type="xs:int" />
@@ -456,4 +456,42 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="iReportResponse" nillable="true" type="tns:iReportResponse" />
+  <xs:element name="GetCarrierInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="mcNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lotNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="opNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCarrierInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetCarrierInfoResult" nillable="true" type="q35:CarrierInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetupLotPhase2">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="lotNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mcNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="opNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="processName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="layerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="frame_In" type="xs:int" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="carrierInfo" nillable="true" type="q36:CarrierInfo" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="licenser" type="q37:Licenser" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="runMode" type="q38:RunMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetupLotPhase2Response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="SetupLotPhase2Result" nillable="true" type="q39:SetupLotResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

@@ -221,4 +221,35 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CheckLotApcsProResult" nillable="true" type="tns:CheckLotApcsProResult" />
+  <xs:complexType name="CarrierInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EnabledControlCarrier" type="tns:CarrierInfo.Status" />
+      <xs:element minOccurs="0" name="InControlCarrier" type="tns:CarrierInfo.Status" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LoadCarrier" type="tns:CarrierInfo.Status" />
+      <xs:element minOccurs="0" name="LoadCarrierNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Reason" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RegisterCarrier" type="tns:CarrierInfo.Status" />
+      <xs:element minOccurs="0" name="RegisterCarrierNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TransferCarrier" type="tns:CarrierInfo.Status" />
+      <xs:element minOccurs="0" name="TransferCarrierNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UnloadCarrier" type="tns:CarrierInfo.Status" />
+      <xs:element minOccurs="0" name="UnloadCarrierNo" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CarrierInfo" nillable="true" type="tns:CarrierInfo" />
+  <xs:simpleType name="CarrierInfo.Status">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="No_Use" />
+      <xs:enumeration value="Use" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CarrierInfo.Status" nillable="true" type="tns:CarrierInfo.Status" />
+  <xs:simpleType name="Licenser">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NoCheck" />
+      <xs:enumeration value="Check" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Licenser" nillable="true" type="tns:Licenser" />
 </xs:schema>

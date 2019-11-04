@@ -113,6 +113,11 @@ public interface IServiceiLibrary
     [OperationContract]
     iReportResponse IRePortCheck(string mcNo);
 
+    [OperationContract]
+    CarrierInfo GetCarrierInfo(string mcNo, string lotNo, string opNo);
+
+    [OperationContract]
+    SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, string layerNo, int frame_In, CarrierInfo carrierInfo, Licenser licenser, RunMode runMode);
 }
 
 [DataContract()]

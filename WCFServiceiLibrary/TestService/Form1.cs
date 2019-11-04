@@ -50,20 +50,22 @@ namespace TestService
 
         private void buttonSetup_Click(object sender, EventArgs e)
         {
-            //SetupLotResult result = c_ILibraryClient.SetupLot(textBoxLotNo.Text, textBoxMCNo.Text,
-            //   textBoxOPNo.Text, textBoxProcess.Text, "");
-            //SetupLotResult result = c_ILibraryClient.SetupLotNoCheckLicenser(textBoxLotNo.Text, textBoxMCNo.Text,
-            //  textBoxOPNo.Text, textBoxProcess.Text, "");
-            SetupLotResult result = c_ILibraryClient.SetupLotOven(textBoxLotNo.Text, textBoxMCNo.Text, textBoxMCNoOv.Text,
-      textBoxOPNo.Text, textBoxProcess.Text, "");
+            CarrierInfo result2 = c_ILibraryClient.GetCarrierInfo(textBoxMCNo.Text, textBoxLotNo.Text,
+               textBoxOPNo.Text);
+            SetupLotResult result = c_ILibraryClient.SetupLotNoCheckLicenser(textBoxLotNo.Text, textBoxMCNo.Text,
+              textBoxOPNo.Text, textBoxProcess.Text, "");
+            //      SetupLotResult result = c_ILibraryClient.SetupLotOven(textBoxLotNo.Text, textBoxMCNo.Text, textBoxMCNoOv.Text,
+            //textBoxOPNo.Text, textBoxProcess.Text, "");
+            //SetupLotResult result = c_ILibraryClient.SetupLotPhase2(textBoxLotNo.Text, textBoxMCNo.Text,
+            //  textBoxOPNo.Text, textBoxProcess.Text, "",0,result2,Licenser.NoCheck,RunMode.Normal);
             if (result.IsPass == SetupLotResult.Status.NotPass)
             {
-                MessageBoxDialog.ShowMessageDialog(result.FunctionName , result.Cause, result.Type.ToString(), result.ErrorNo);
+                MessageBoxDialog.ShowMessageDialog(result.FunctionName, result.Cause, result.Type.ToString(), result.ErrorNo);
                 return;
             }
-            else if(result.IsPass == SetupLotResult.Status.Warning)
+            else if (result.IsPass == SetupLotResult.Status.Warning)
             {
-                MessageBoxDialog.ShowMessageDialog(result.FunctionName, result.Cause,result.Type.ToString(), result.ErrorNo);
+                MessageBoxDialog.ShowMessageDialog(result.FunctionName, result.Cause, result.Type.ToString(), result.ErrorNo);
             }
             textBoxRecipe.Text = result.Recipe;
 
