@@ -15,34 +15,66 @@ public class CarrierInfo
         //
         // TODO: Add constructor logic here
         //
+        c_LoadCarrierNo = "";
+        c_TransferCarrierNo = "";
+        c_RegisterCarrierNo = "";
+        c_UnloadCarrierNo = "";
     }
     [DataMember()]
     public bool IsPass { get; set; }
     [DataMember()]
     public string Reason { get; set; }
+    
+    private string c_LoadCarrierNo;
     [DataMember()]
-    public string LoadCarrierNo { get; set; }
+    public string LoadCarrierNo
+    {
+        get { return c_LoadCarrierNo; }
+        set { c_LoadCarrierNo = value; }
+    }
+
     [DataMember()]
-    public Status LoadCarrier { get; set; }
+    public CarrierStatus LoadCarrier { get; set; }
+    
+    private string c_TransferCarrierNo;
     [DataMember()]
-    public string TransferCarrierNo { get; set; }
+    public string TransferCarrierNo
+    {
+        get { return c_TransferCarrierNo; }
+        set { c_TransferCarrierNo = value; }
+    }
+
     [DataMember()]
-    public Status TransferCarrier { get; set; }
+    public CarrierStatus TransferCarrier { get; set; }
+    
+    private string c_UnloadCarrierNo;
     [DataMember()]
-    public string UnloadCarrierNo { get; set; }
+    public string UnloadCarrierNo
+    {
+        get { return c_UnloadCarrierNo; }
+        set { c_UnloadCarrierNo = value; }
+    }
+
     [DataMember()]
-    public Status UnloadCarrier { get; set; }
+    public CarrierStatus UnloadCarrier { get; set; }
+    
+    private string c_RegisterCarrierNo;
     [DataMember()]
-    public string RegisterCarrierNo { get; set; }
+    public string RegisterCarrierNo
+    {
+        get { return c_RegisterCarrierNo; }
+        set { c_RegisterCarrierNo = value; }
+    }
+
     [DataMember()]
-    public Status RegisterCarrier { get; set; }
+    public CarrierStatus RegisterCarrier { get; set; }
     [DataMember()]
-    public Status EnabledControlCarrier { get; set; }
+    public CarrierStatus EnabledControlCarrier { get; set; }
     [DataMember()]
-    public Status InControlCarrier { get; set; }
+    public CarrierStatus InControlCarrier { get; set; }
 
     [DataContract()]
-    public enum Status
+    public enum CarrierStatus
     {
         [EnumMember()]
         No_Use,

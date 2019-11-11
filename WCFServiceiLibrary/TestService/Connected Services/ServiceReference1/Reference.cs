@@ -1982,6 +1982,205 @@ namespace TestService.ServiceReference1 {
         Check = 1,
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SetupLotSpecialParametersEventArgs", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class SetupLotSpecialParametersEventArgs : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int FrameInField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LayerNoApcsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string McNoOvenApcsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.RunMode RunModeApcsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FrameIn {
+            get {
+                return this.FrameInField;
+            }
+            set {
+                if ((this.FrameInField.Equals(value) != true)) {
+                    this.FrameInField = value;
+                    this.RaisePropertyChanged("FrameIn");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LayerNoApcs {
+            get {
+                return this.LayerNoApcsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LayerNoApcsField, value) != true)) {
+                    this.LayerNoApcsField = value;
+                    this.RaisePropertyChanged("LayerNoApcs");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string McNoOvenApcs {
+            get {
+                return this.McNoOvenApcsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.McNoOvenApcsField, value) != true)) {
+                    this.McNoOvenApcsField = value;
+                    this.RaisePropertyChanged("McNoOvenApcs");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.RunMode RunModeApcs {
+            get {
+                return this.RunModeApcsField;
+            }
+            set {
+                if ((this.RunModeApcsField.Equals(value) != true)) {
+                    this.RunModeApcsField = value;
+                    this.RaisePropertyChanged("RunModeApcs");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StartLotSpecialParametersEventArgs", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class StartLotSpecialParametersEventArgs : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string McNoOvenApcsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.RunMode RunModeApcsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string McNoOvenApcs {
+            get {
+                return this.McNoOvenApcsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.McNoOvenApcsField, value) != true)) {
+                    this.McNoOvenApcsField = value;
+                    this.RaisePropertyChanged("McNoOvenApcs");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.RunMode RunModeApcs {
+            get {
+                return this.RunModeApcsField;
+            }
+            set {
+                if ((this.RunModeApcsField.Equals(value) != true)) {
+                    this.RunModeApcsField = value;
+                    this.RaisePropertyChanged("RunModeApcs");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EndLotSpecialParametersEventArgs", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class EndLotSpecialParametersEventArgs : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string McNoOvenApcsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string McNoOvenApcs {
+            get {
+                return this.McNoOvenApcsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.McNoOvenApcsField, value) != true)) {
+                    this.McNoOvenApcsField = value;
+                    this.RaisePropertyChanged("McNoOvenApcs");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IServiceiLibrary")]
     public interface IServiceiLibrary {
@@ -2062,7 +2261,13 @@ namespace TestService.ServiceReference1 {
         TestService.ServiceReference1.CarrierInfo GetCarrierInfo(string mcNo, string lotNo, string opNo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/SetupLotPhase2", ReplyAction="http://tempuri.org/IServiceiLibrary/SetupLotPhase2Response")]
-        TestService.ServiceReference1.SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, string layerNo, int frame_In, TestService.ServiceReference1.CarrierInfo carrierInfo, TestService.ServiceReference1.Licenser licenser, TestService.ServiceReference1.RunMode runMode);
+        TestService.ServiceReference1.SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, TestService.ServiceReference1.Licenser licenser, TestService.ServiceReference1.CarrierInfo carrierInfo, TestService.ServiceReference1.SetupLotSpecialParametersEventArgs specialParametersEventArgs);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/StartLotPhase2", ReplyAction="http://tempuri.org/IServiceiLibrary/StartLotPhase2Response")]
+        TestService.ServiceReference1.StartLotResult StartLotPhase2(string lotNo, string mcNo, string opNo, string recipe, TestService.ServiceReference1.CarrierInfo carrierInfo, TestService.ServiceReference1.StartLotSpecialParametersEventArgs specialParametersEventArgs);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/EndLotPhase2", ReplyAction="http://tempuri.org/IServiceiLibrary/EndLotPhase2Response")]
+        TestService.ServiceReference1.EndLotResult EndLotPhase2(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference1.Licenser licenser, TestService.ServiceReference1.CarrierInfo carrierInfo, TestService.ServiceReference1.EndLotSpecialParametersEventArgs specialParametersEventArgs);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2192,8 +2397,16 @@ namespace TestService.ServiceReference1 {
             return base.Channel.GetCarrierInfo(mcNo, lotNo, opNo);
         }
         
-        public TestService.ServiceReference1.SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, string layerNo, int frame_In, TestService.ServiceReference1.CarrierInfo carrierInfo, TestService.ServiceReference1.Licenser licenser, TestService.ServiceReference1.RunMode runMode) {
-            return base.Channel.SetupLotPhase2(lotNo, mcNo, opNo, processName, layerNo, frame_In, carrierInfo, licenser, runMode);
+        public TestService.ServiceReference1.SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, TestService.ServiceReference1.Licenser licenser, TestService.ServiceReference1.CarrierInfo carrierInfo, TestService.ServiceReference1.SetupLotSpecialParametersEventArgs specialParametersEventArgs) {
+            return base.Channel.SetupLotPhase2(lotNo, mcNo, opNo, processName, licenser, carrierInfo, specialParametersEventArgs);
+        }
+        
+        public TestService.ServiceReference1.StartLotResult StartLotPhase2(string lotNo, string mcNo, string opNo, string recipe, TestService.ServiceReference1.CarrierInfo carrierInfo, TestService.ServiceReference1.StartLotSpecialParametersEventArgs specialParametersEventArgs) {
+            return base.Channel.StartLotPhase2(lotNo, mcNo, opNo, recipe, carrierInfo, specialParametersEventArgs);
+        }
+        
+        public TestService.ServiceReference1.EndLotResult EndLotPhase2(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference1.Licenser licenser, TestService.ServiceReference1.CarrierInfo carrierInfo, TestService.ServiceReference1.EndLotSpecialParametersEventArgs specialParametersEventArgs) {
+            return base.Channel.EndLotPhase2(lotNo, mcNo, opNo, good, ng, licenser, carrierInfo, specialParametersEventArgs);
         }
     }
 }

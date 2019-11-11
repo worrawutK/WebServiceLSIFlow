@@ -10,6 +10,8 @@ using TestService.iLibraryService;
 using MessageDialog;
 using System.Threading;
 using System.Data.SqlClient;
+using System.IO;
+using System.Xml.Serialization;
 //using Message;
 namespace TestService
 {
@@ -23,10 +25,32 @@ namespace TestService
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            //CarrierInfo carrierInfo = new CarrierInfo()
+            //{
+            //    LoadCarrier = CarrierInfo.Status.No_Use,
+            //    RegisterCarrierNo = "xx"
+                
+            //};
+            //DataTest dataTest = new DataTest()
+            //{
+            //    MyProperty = 5
+            //};
+            //WriteDataToXmlFile(dataTest, System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location.ToString()) + @"\c_DataCommonList.xml");
 
         }
-
+        public class DataTest
+        {
+            public int MyProperty { get; set; }
+            public CarrierInfo CarrierInfo { get; set; }
+        }
+        protected void WriteDataToXmlFile(object data, string xmlPath)
+        {
+            using (StreamWriter sw = new StreamWriter(xmlPath, false))
+            {
+                var bs = new XmlSerializer(data.GetType());
+                bs.Serialize(sw, data);
+            }
+        }
         private void buttonMcOff_Click(object sender, EventArgs e)
         {
             MachineOnlineStateResult result = c_ILibraryClient.MachineOnlineState(textBoxMCNo.Text, MachineOnline.Offline);
@@ -50,10 +74,35 @@ namespace TestService
 
         private void buttonSetup_Click(object sender, EventArgs e)
         {
-            CarrierInfo result2 = c_ILibraryClient.GetCarrierInfo(textBoxMCNo.Text, textBoxLotNo.Text,
+            CarrierInfo carrierInfo = c_ILibraryClient.GetCarrierInfo(textBoxMCNo.Text, textBoxLotNo.Text,
                textBoxOPNo.Text);
-            SetupLotResult result = c_ILibraryClient.SetupLotNoCheckLicenser(textBoxLotNo.Text, textBoxMCNo.Text,
+            SetupLotSpecialParametersEventArgs setupLotSpecial = new SetupLotSpecialParametersEventArgs()
+            {
+                LayerNoApcs = ""
+            };
+            var sss = c_ILibraryClient.SetupLotNoCheckLicenser(textBoxLotNo.Text, textBoxMCNo.Text,
               textBoxOPNo.Text, textBoxProcess.Text, "");
+            SetupLotResult result = c_ILibraryClient.SetupLotPhase2(textBoxLotNo.Text, textBoxMCNo.Text,
+              textBoxOPNo.Text, textBoxProcess.Text,Licenser.NoCheck, carrierInfo, setupLotSpecial);
+
+
+            StartLotSpecialParametersEventArgs startLotSpecial = new StartLotSpecialParametersEventArgs()
+            {
+                RunModeApcs = RunMode.Normal
+            };
+            StartLotResult startLotResult = c_ILibraryClient.StartLotPhase2(textBoxLotNo.Text, textBoxMCNo.Text,
+              textBoxOPNo.Text, "", carrierInfo, startLotSpecial);
+
+
+            //EndLotSpecialParametersEventArgs endLotSpecial = new EndLotSpecialParametersEventArgs()
+            //{
+            //    McNoOvenApcs = ""
+            //};
+            EndLotResult endLotResult = c_ILibraryClient.EndLotPhase2(textBoxLotNo.Text, textBoxMCNo.Text,
+              textBoxOPNo.Text, 1000, 0, Licenser.NoCheck, carrierInfo, null);
+
+            EndLotResult endLotResult2 = c_ILibraryClient.EndLot(textBoxLotNo.Text, textBoxMCNo.Text,
+             textBoxOPNo.Text, 1000, 0);
             //      SetupLotResult result = c_ILibraryClient.SetupLotOven(textBoxLotNo.Text, textBoxMCNo.Text, textBoxMCNoOv.Text,
             //textBoxOPNo.Text, textBoxProcess.Text, "");
             //SetupLotResult result = c_ILibraryClient.SetupLotPhase2(textBoxLotNo.Text, textBoxMCNo.Text,

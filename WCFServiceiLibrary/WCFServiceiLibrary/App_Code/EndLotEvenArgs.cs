@@ -15,6 +15,7 @@ public class EndLotEvenArgs
         //
         IsCheckLicenser = licenser;
         FunctionName = functionName;
+        c_CarrierInfo = new CarrierInfo();
     }
     public string LotNo { get; set; }
     public string MachineNo { get; set; }
@@ -26,7 +27,7 @@ public class EndLotEvenArgs
     public int Frame_Pass { get; set; }
     public int Frame_Fail { get; set; }
     public string FunctionName { get;private set; }
-    private Licenser c_IsCheckLicenser = Licenser.Check;
+    private Licenser c_IsCheckLicenser;
 
     public Licenser IsCheckLicenser
     {
@@ -34,13 +35,21 @@ public class EndLotEvenArgs
         private set { c_IsCheckLicenser = value; }
     }
 
-    private string c_MachineOven = "";
+    private string c_MachineOven;
 
     public string MachineOven
     {
         get { return c_MachineOven; }
         set { c_MachineOven = value; }
     }
-    public CarrierInfo CarrierInfo { get; set; }
+    // public CarrierInfo CarrierInfo { get; set; }
+    private CarrierInfo c_CarrierInfo;
+
+    public CarrierInfo CarrierInfo
+    {
+        get { return c_CarrierInfo; }
+        set { c_CarrierInfo = value; }
+    }
+
 
 }

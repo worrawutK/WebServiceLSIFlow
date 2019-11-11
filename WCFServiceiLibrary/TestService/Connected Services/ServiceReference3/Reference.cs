@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestService.iLibraryService {
+namespace TestService.ServiceReference3 {
     using System.Runtime.Serialization;
     using System;
     
@@ -46,7 +46,7 @@ namespace TestService.iLibraryService {
         private string SubFunctionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.MessageType TypeField;
+        private TestService.ServiceReference3.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -111,7 +111,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.MessageType Type {
+        public TestService.ServiceReference3.MessageType Type {
             get {
                 return this.TypeField;
             }
@@ -198,7 +198,7 @@ namespace TestService.iLibraryService {
         private string SubFunctionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.MessageType TypeField;
+        private TestService.ServiceReference3.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -263,7 +263,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.MessageType Type {
+        public TestService.ServiceReference3.MessageType Type {
             get {
                 return this.TypeField;
             }
@@ -307,7 +307,7 @@ namespace TestService.iLibraryService {
         private int GoodQtyField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.SetupLotResult.Status IsPassField;
+        private TestService.ServiceReference3.SetupLotResult.Status IsPassField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int NgQtyField;
@@ -319,7 +319,7 @@ namespace TestService.iLibraryService {
         private string SubFunctionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.MessageType TypeField;
+        private TestService.ServiceReference3.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -384,7 +384,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.SetupLotResult.Status IsPass {
+        public TestService.ServiceReference3.SetupLotResult.Status IsPass {
             get {
                 return this.IsPassField;
             }
@@ -436,7 +436,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.MessageType Type {
+        public TestService.ServiceReference3.MessageType Type {
             get {
                 return this.TypeField;
             }
@@ -511,7 +511,7 @@ namespace TestService.iLibraryService {
         private string SubFunctionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.MessageType TypeField;
+        private TestService.ServiceReference3.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -576,7 +576,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.MessageType Type {
+        public TestService.ServiceReference3.MessageType Type {
             get {
                 return this.TypeField;
             }
@@ -620,7 +620,7 @@ namespace TestService.iLibraryService {
         private string SubFunctionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.MessageType TypeField;
+        private TestService.ServiceReference3.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -685,7 +685,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.MessageType Type {
+        public TestService.ServiceReference3.MessageType Type {
             get {
                 return this.TypeField;
             }
@@ -729,7 +729,7 @@ namespace TestService.iLibraryService {
         private string SubFunctionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.MessageType TypeField;
+        private TestService.ServiceReference3.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -794,7 +794,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.MessageType Type {
+        public TestService.ServiceReference3.MessageType Type {
             get {
                 return this.TypeField;
             }
@@ -849,7 +849,7 @@ namespace TestService.iLibraryService {
         private string SubFunctionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.MessageType TypeField;
+        private TestService.ServiceReference3.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -914,7 +914,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.MessageType Type {
+        public TestService.ServiceReference3.MessageType Type {
             get {
                 return this.TypeField;
             }
@@ -961,7 +961,7 @@ namespace TestService.iLibraryService {
         private string SubFunctionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.MessageType TypeField;
+        private TestService.ServiceReference3.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1039,7 +1039,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.MessageType Type {
+        public TestService.ServiceReference3.MessageType Type {
             get {
                 return this.TypeField;
             }
@@ -1083,7 +1083,7 @@ namespace TestService.iLibraryService {
         private string SubFunctionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.MessageType TypeField;
+        private TestService.ServiceReference3.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1148,7 +1148,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.MessageType Type {
+        public TestService.ServiceReference3.MessageType Type {
             get {
                 return this.TypeField;
             }
@@ -1203,7 +1203,7 @@ namespace TestService.iLibraryService {
         private string SubFunctionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.MessageType TypeField;
+        private TestService.ServiceReference3.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1268,7 +1268,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.MessageType Type {
+        public TestService.ServiceReference3.MessageType Type {
             get {
                 return this.TypeField;
             }
@@ -1312,7 +1312,7 @@ namespace TestService.iLibraryService {
         private string SubFunctionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.MessageType TypeField;
+        private TestService.ServiceReference3.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1377,7 +1377,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.MessageType Type {
+        public TestService.ServiceReference3.MessageType Type {
             get {
                 return this.TypeField;
             }
@@ -1435,7 +1435,7 @@ namespace TestService.iLibraryService {
         private string SubFunctionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.MessageType TypeField;
+        private TestService.ServiceReference3.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1500,7 +1500,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.MessageType Type {
+        public TestService.ServiceReference3.MessageType Type {
             get {
                 return this.TypeField;
             }
@@ -1544,7 +1544,7 @@ namespace TestService.iLibraryService {
         private string SubFunctionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.MessageType TypeField;
+        private TestService.ServiceReference3.MessageType TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1609,7 +1609,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.MessageType Type {
+        public TestService.ServiceReference3.MessageType Type {
             get {
                 return this.TypeField;
             }
@@ -1749,16 +1749,16 @@ namespace TestService.iLibraryService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.CarrierInfo.Status EnabledControlCarrierField;
+        private TestService.ServiceReference3.CarrierInfo.Status EnabledControlCarrierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.CarrierInfo.Status InControlCarrierField;
+        private TestService.ServiceReference3.CarrierInfo.Status InControlCarrierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsPassField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.CarrierInfo.Status LoadCarrierField;
+        private TestService.ServiceReference3.CarrierInfo.Status LoadCarrierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string LoadCarrierNoField;
@@ -1767,19 +1767,19 @@ namespace TestService.iLibraryService {
         private string ReasonField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.CarrierInfo.Status RegisterCarrierField;
+        private TestService.ServiceReference3.CarrierInfo.Status RegisterCarrierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RegisterCarrierNoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.CarrierInfo.Status TransferCarrierField;
+        private TestService.ServiceReference3.CarrierInfo.Status TransferCarrierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TransferCarrierNoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.CarrierInfo.Status UnloadCarrierField;
+        private TestService.ServiceReference3.CarrierInfo.Status UnloadCarrierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UnloadCarrierNoField;
@@ -1795,7 +1795,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.CarrierInfo.Status EnabledControlCarrier {
+        public TestService.ServiceReference3.CarrierInfo.Status EnabledControlCarrier {
             get {
                 return this.EnabledControlCarrierField;
             }
@@ -1808,7 +1808,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.CarrierInfo.Status InControlCarrier {
+        public TestService.ServiceReference3.CarrierInfo.Status InControlCarrier {
             get {
                 return this.InControlCarrierField;
             }
@@ -1834,7 +1834,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.CarrierInfo.Status LoadCarrier {
+        public TestService.ServiceReference3.CarrierInfo.Status LoadCarrier {
             get {
                 return this.LoadCarrierField;
             }
@@ -1873,7 +1873,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.CarrierInfo.Status RegisterCarrier {
+        public TestService.ServiceReference3.CarrierInfo.Status RegisterCarrier {
             get {
                 return this.RegisterCarrierField;
             }
@@ -1899,7 +1899,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.CarrierInfo.Status TransferCarrier {
+        public TestService.ServiceReference3.CarrierInfo.Status TransferCarrier {
             get {
                 return this.TransferCarrierField;
             }
@@ -1925,7 +1925,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.CarrierInfo.Status UnloadCarrier {
+        public TestService.ServiceReference3.CarrierInfo.Status UnloadCarrier {
             get {
                 return this.UnloadCarrierField;
             }
@@ -2001,7 +2001,7 @@ namespace TestService.iLibraryService {
         private string McNoOvenApcsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.RunMode RunModeApcsField;
+        private TestService.ServiceReference3.RunMode RunModeApcsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -2053,7 +2053,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.RunMode RunModeApcs {
+        public TestService.ServiceReference3.RunMode RunModeApcs {
             get {
                 return this.RunModeApcsField;
             }
@@ -2088,7 +2088,7 @@ namespace TestService.iLibraryService {
         private string McNoOvenApcsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.RunMode RunModeApcsField;
+        private TestService.ServiceReference3.RunMode RunModeApcsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -2114,7 +2114,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.RunMode RunModeApcs {
+        public TestService.ServiceReference3.RunMode RunModeApcs {
             get {
                 return this.RunModeApcsField;
             }
@@ -2182,101 +2182,101 @@ namespace TestService.iLibraryService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="iLibraryService.IServiceiLibrary")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference3.IServiceiLibrary")]
     public interface IServiceiLibrary {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/MachineOnlineState", ReplyAction="http://tempuri.org/IServiceiLibrary/MachineOnlineStateResponse")]
-        TestService.iLibraryService.MachineOnlineStateResult MachineOnlineState(string mcNo, TestService.iLibraryService.MachineOnline online);
+        TestService.ServiceReference3.MachineOnlineStateResult MachineOnlineState(string mcNo, TestService.ServiceReference3.MachineOnline online);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/UpdateMachineState", ReplyAction="http://tempuri.org/IServiceiLibrary/UpdateMachineStateResponse")]
-        TestService.iLibraryService.UpdateMachineStateResult UpdateMachineState(string mcNo, TestService.iLibraryService.MachineProcessingState state);
+        TestService.ServiceReference3.UpdateMachineStateResult UpdateMachineState(string mcNo, TestService.ServiceReference3.MachineProcessingState state);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/SetupLot", ReplyAction="http://tempuri.org/IServiceiLibrary/SetupLotResponse")]
-        TestService.iLibraryService.SetupLotResult SetupLot(string lotNo, string mcNo, string opNo, string processName, string layerNo);
+        TestService.ServiceReference3.SetupLotResult SetupLot(string lotNo, string mcNo, string opNo, string processName, string layerNo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/SetupLotNoCheckLicenser", ReplyAction="http://tempuri.org/IServiceiLibrary/SetupLotNoCheckLicenserResponse")]
-        TestService.iLibraryService.SetupLotResult SetupLotNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo);
+        TestService.ServiceReference3.SetupLotResult SetupLotNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/SetupLotCustomMode", ReplyAction="http://tempuri.org/IServiceiLibrary/SetupLotCustomModeResponse")]
-        TestService.iLibraryService.SetupLotResult SetupLotCustomMode(string lotNo, string mcNo, string opNo, string processName, string layerNo, TestService.iLibraryService.RunMode runMode);
+        TestService.ServiceReference3.SetupLotResult SetupLotCustomMode(string lotNo, string mcNo, string opNo, string processName, string layerNo, TestService.ServiceReference3.RunMode runMode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/SetupLotCustomModeNoCheckLicenser", ReplyAction="http://tempuri.org/IServiceiLibrary/SetupLotCustomModeNoCheckLicenserResponse")]
-        TestService.iLibraryService.SetupLotResult SetupLotCustomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo, TestService.iLibraryService.RunMode runMode);
+        TestService.ServiceReference3.SetupLotResult SetupLotCustomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo, TestService.ServiceReference3.RunMode runMode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/SetupLotOven", ReplyAction="http://tempuri.org/IServiceiLibrary/SetupLotOvenResponse")]
-        TestService.iLibraryService.SetupLotResult SetupLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, string processName, string layerNo);
+        TestService.ServiceReference3.SetupLotResult SetupLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, string processName, string layerNo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/StartLot", ReplyAction="http://tempuri.org/IServiceiLibrary/StartLotResponse")]
-        TestService.iLibraryService.StartLotResult StartLot(string lotNo, string mcNo, string opNo, string recipe);
+        TestService.ServiceReference3.StartLotResult StartLot(string lotNo, string mcNo, string opNo, string recipe);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/StartLotCustomMode", ReplyAction="http://tempuri.org/IServiceiLibrary/StartLotCustomModeResponse")]
-        TestService.iLibraryService.StartLotResult StartLotCustomMode(string lotNo, string mcNo, string opNo, string recipe, TestService.iLibraryService.RunMode runMode);
+        TestService.ServiceReference3.StartLotResult StartLotCustomMode(string lotNo, string mcNo, string opNo, string recipe, TestService.ServiceReference3.RunMode runMode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/StartLotOven", ReplyAction="http://tempuri.org/IServiceiLibrary/StartLotOvenResponse")]
-        TestService.iLibraryService.StartLotResult StartLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, string recipe);
+        TestService.ServiceReference3.StartLotResult StartLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, string recipe);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/OnlineStart", ReplyAction="http://tempuri.org/IServiceiLibrary/OnlineStartResponse")]
-        TestService.iLibraryService.OnlineStartResult OnlineStart(string lotNo, string mcNo, string opNo);
+        TestService.ServiceReference3.OnlineStartResult OnlineStart(string lotNo, string mcNo, string opNo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/OnlineEnd", ReplyAction="http://tempuri.org/IServiceiLibrary/OnlineEndResponse")]
-        TestService.iLibraryService.OnlineEndResult OnlineEnd(string lotNo, string mcNo, string opNo, int good, int ng);
+        TestService.ServiceReference3.OnlineEndResult OnlineEnd(string lotNo, string mcNo, string opNo, int good, int ng);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/UpdateFirstinspection", ReplyAction="http://tempuri.org/IServiceiLibrary/UpdateFirstinspectionResponse")]
-        TestService.iLibraryService.UpdateFirstinspectionResult UpdateFirstinspection(string lotNo, string opNo, TestService.iLibraryService.Judge judge, string mcNo);
+        TestService.ServiceReference3.UpdateFirstinspectionResult UpdateFirstinspection(string lotNo, string opNo, TestService.ServiceReference3.Judge judge, string mcNo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/EndLot", ReplyAction="http://tempuri.org/IServiceiLibrary/EndLotResponse")]
-        TestService.iLibraryService.EndLotResult EndLot(string lotNo, string mcNo, string opNo, int good, int ng);
+        TestService.ServiceReference3.EndLotResult EndLot(string lotNo, string mcNo, string opNo, int good, int ng);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/EndLotNoCheckLicenser", ReplyAction="http://tempuri.org/IServiceiLibrary/EndLotNoCheckLicenserResponse")]
-        TestService.iLibraryService.EndLotResult EndLotNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng);
+        TestService.ServiceReference3.EndLotResult EndLotNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/EndLotOven", ReplyAction="http://tempuri.org/IServiceiLibrary/EndLotOvenResponse")]
-        TestService.iLibraryService.EndLotResult EndLotOven(string lotNo, string mcNoApcs, string mcNoApcsPro, string opNo, int good, int ng);
+        TestService.ServiceReference3.EndLotResult EndLotOven(string lotNo, string mcNoApcs, string mcNoApcsPro, string opNo, int good, int ng);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/UpdateFinalinspection", ReplyAction="http://tempuri.org/IServiceiLibrary/UpdateFinalinspectionResponse")]
-        TestService.iLibraryService.UpdateFinalinspectionResult UpdateFinalinspection(string lotNo, string opNo, TestService.iLibraryService.Judge judge, string mcNo);
+        TestService.ServiceReference3.UpdateFinalinspectionResult UpdateFinalinspection(string lotNo, string opNo, TestService.ServiceReference3.Judge judge, string mcNo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/MachineAlarm", ReplyAction="http://tempuri.org/IServiceiLibrary/MachineAlarmResponse")]
-        TestService.iLibraryService.MachineAlarmResult MachineAlarm(string lotNo, string mcNo, string opNo, string AlarmNo, TestService.iLibraryService.AlarmState alarm);
+        TestService.ServiceReference3.MachineAlarmResult MachineAlarm(string lotNo, string mcNo, string opNo, string AlarmNo, TestService.ServiceReference3.AlarmState alarm);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/CancelLot", ReplyAction="http://tempuri.org/IServiceiLibrary/CancelLotResponse")]
-        TestService.iLibraryService.CancelLotResult CancelLot(string mcNo, string lotNo, string opNo);
+        TestService.ServiceReference3.CancelLotResult CancelLot(string mcNo, string lotNo, string opNo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/Reinput", ReplyAction="http://tempuri.org/IServiceiLibrary/ReinputResponse")]
-        TestService.iLibraryService.ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng, TestService.iLibraryService.EndMode endMode);
+        TestService.ServiceReference3.ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference3.EndMode endMode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/ReinputAndHoldLot", ReplyAction="http://tempuri.org/IServiceiLibrary/ReinputAndHoldLotResponse")]
-        TestService.iLibraryService.ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng, TestService.iLibraryService.EndMode endMode);
+        TestService.ServiceReference3.ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference3.EndMode endMode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/ReinputOven", ReplyAction="http://tempuri.org/IServiceiLibrary/ReinputOvenResponse")]
-        TestService.iLibraryService.ReinputResult ReinputOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, int good, int ng, TestService.iLibraryService.EndMode endMode);
+        TestService.ServiceReference3.ReinputResult ReinputOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, int good, int ng, TestService.ServiceReference3.EndMode endMode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/CheckLotApcsProManual", ReplyAction="http://tempuri.org/IServiceiLibrary/CheckLotApcsProManualResponse")]
-        TestService.iLibraryService.CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package);
+        TestService.ServiceReference3.CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/IRePortCheck", ReplyAction="http://tempuri.org/IServiceiLibrary/IRePortCheckResponse")]
-        TestService.iLibraryService.iReportResponse IRePortCheck(string mcNo);
+        TestService.ServiceReference3.iReportResponse IRePortCheck(string mcNo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/GetCarrierInfo", ReplyAction="http://tempuri.org/IServiceiLibrary/GetCarrierInfoResponse")]
-        TestService.iLibraryService.CarrierInfo GetCarrierInfo(string mcNo, string lotNo, string opNo);
+        TestService.ServiceReference3.CarrierInfo GetCarrierInfo(string mcNo, string lotNo, string opNo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/SetupLotPhase2", ReplyAction="http://tempuri.org/IServiceiLibrary/SetupLotPhase2Response")]
-        TestService.iLibraryService.SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, TestService.iLibraryService.Licenser licenser, TestService.iLibraryService.CarrierInfo carrierInfo, TestService.iLibraryService.SetupLotSpecialParametersEventArgs specialParametersEventArgs);
+        TestService.ServiceReference3.SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, TestService.ServiceReference3.Licenser licenser, TestService.ServiceReference3.CarrierInfo carrierInfo, TestService.ServiceReference3.SetupLotSpecialParametersEventArgs specialParametersEventArgs);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/StartLotPhase2", ReplyAction="http://tempuri.org/IServiceiLibrary/StartLotPhase2Response")]
-        TestService.iLibraryService.StartLotResult StartLotPhase2(string lotNo, string mcNo, string opNo, string recipe, TestService.iLibraryService.CarrierInfo carrierInfo, TestService.iLibraryService.StartLotSpecialParametersEventArgs specialParametersEventArgs);
+        TestService.ServiceReference3.StartLotResult StartLotPhase2(string lotNo, string mcNo, string opNo, string recipe, TestService.ServiceReference3.CarrierInfo carrierInfo, TestService.ServiceReference3.StartLotSpecialParametersEventArgs specialParametersEventArgs);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/EndLotPhase2", ReplyAction="http://tempuri.org/IServiceiLibrary/EndLotPhase2Response")]
-        TestService.iLibraryService.EndLotResult EndLotPhase2(string lotNo, string mcNo, string opNo, int good, int ng, TestService.iLibraryService.Licenser licenser, TestService.iLibraryService.CarrierInfo carrierInfo, TestService.iLibraryService.EndLotSpecialParametersEventArgs specialParametersEventArgs);
+        TestService.ServiceReference3.EndLotResult EndLotPhase2(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference3.Licenser licenser, TestService.ServiceReference3.CarrierInfo carrierInfo, TestService.ServiceReference3.EndLotSpecialParametersEventArgs specialParametersEventArgs);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceiLibraryChannel : TestService.iLibraryService.IServiceiLibrary, System.ServiceModel.IClientChannel {
+    public interface IServiceiLibraryChannel : TestService.ServiceReference3.IServiceiLibrary, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceiLibraryClient : System.ServiceModel.ClientBase<TestService.iLibraryService.IServiceiLibrary>, TestService.iLibraryService.IServiceiLibrary {
+    public partial class ServiceiLibraryClient : System.ServiceModel.ClientBase<TestService.ServiceReference3.IServiceiLibrary>, TestService.ServiceReference3.IServiceiLibrary {
         
         public ServiceiLibraryClient() {
         }
@@ -2297,115 +2297,115 @@ namespace TestService.iLibraryService {
                 base(binding, remoteAddress) {
         }
         
-        public TestService.iLibraryService.MachineOnlineStateResult MachineOnlineState(string mcNo, TestService.iLibraryService.MachineOnline online) {
+        public TestService.ServiceReference3.MachineOnlineStateResult MachineOnlineState(string mcNo, TestService.ServiceReference3.MachineOnline online) {
             return base.Channel.MachineOnlineState(mcNo, online);
         }
         
-        public TestService.iLibraryService.UpdateMachineStateResult UpdateMachineState(string mcNo, TestService.iLibraryService.MachineProcessingState state) {
+        public TestService.ServiceReference3.UpdateMachineStateResult UpdateMachineState(string mcNo, TestService.ServiceReference3.MachineProcessingState state) {
             return base.Channel.UpdateMachineState(mcNo, state);
         }
         
-        public TestService.iLibraryService.SetupLotResult SetupLot(string lotNo, string mcNo, string opNo, string processName, string layerNo) {
+        public TestService.ServiceReference3.SetupLotResult SetupLot(string lotNo, string mcNo, string opNo, string processName, string layerNo) {
             return base.Channel.SetupLot(lotNo, mcNo, opNo, processName, layerNo);
         }
         
-        public TestService.iLibraryService.SetupLotResult SetupLotNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo) {
+        public TestService.ServiceReference3.SetupLotResult SetupLotNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo) {
             return base.Channel.SetupLotNoCheckLicenser(lotNo, mcNo, opNo, processName, layerNo);
         }
         
-        public TestService.iLibraryService.SetupLotResult SetupLotCustomMode(string lotNo, string mcNo, string opNo, string processName, string layerNo, TestService.iLibraryService.RunMode runMode) {
+        public TestService.ServiceReference3.SetupLotResult SetupLotCustomMode(string lotNo, string mcNo, string opNo, string processName, string layerNo, TestService.ServiceReference3.RunMode runMode) {
             return base.Channel.SetupLotCustomMode(lotNo, mcNo, opNo, processName, layerNo, runMode);
         }
         
-        public TestService.iLibraryService.SetupLotResult SetupLotCustomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo, TestService.iLibraryService.RunMode runMode) {
+        public TestService.ServiceReference3.SetupLotResult SetupLotCustomModeNoCheckLicenser(string lotNo, string mcNo, string opNo, string processName, string layerNo, TestService.ServiceReference3.RunMode runMode) {
             return base.Channel.SetupLotCustomModeNoCheckLicenser(lotNo, mcNo, opNo, processName, layerNo, runMode);
         }
         
-        public TestService.iLibraryService.SetupLotResult SetupLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, string processName, string layerNo) {
+        public TestService.ServiceReference3.SetupLotResult SetupLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, string processName, string layerNo) {
             return base.Channel.SetupLotOven(lotNo, mcNoApcsPro, mcNoApcs, opNo, processName, layerNo);
         }
         
-        public TestService.iLibraryService.StartLotResult StartLot(string lotNo, string mcNo, string opNo, string recipe) {
+        public TestService.ServiceReference3.StartLotResult StartLot(string lotNo, string mcNo, string opNo, string recipe) {
             return base.Channel.StartLot(lotNo, mcNo, opNo, recipe);
         }
         
-        public TestService.iLibraryService.StartLotResult StartLotCustomMode(string lotNo, string mcNo, string opNo, string recipe, TestService.iLibraryService.RunMode runMode) {
+        public TestService.ServiceReference3.StartLotResult StartLotCustomMode(string lotNo, string mcNo, string opNo, string recipe, TestService.ServiceReference3.RunMode runMode) {
             return base.Channel.StartLotCustomMode(lotNo, mcNo, opNo, recipe, runMode);
         }
         
-        public TestService.iLibraryService.StartLotResult StartLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, string recipe) {
+        public TestService.ServiceReference3.StartLotResult StartLotOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, string recipe) {
             return base.Channel.StartLotOven(lotNo, mcNoApcsPro, mcNoApcs, opNo, recipe);
         }
         
-        public TestService.iLibraryService.OnlineStartResult OnlineStart(string lotNo, string mcNo, string opNo) {
+        public TestService.ServiceReference3.OnlineStartResult OnlineStart(string lotNo, string mcNo, string opNo) {
             return base.Channel.OnlineStart(lotNo, mcNo, opNo);
         }
         
-        public TestService.iLibraryService.OnlineEndResult OnlineEnd(string lotNo, string mcNo, string opNo, int good, int ng) {
+        public TestService.ServiceReference3.OnlineEndResult OnlineEnd(string lotNo, string mcNo, string opNo, int good, int ng) {
             return base.Channel.OnlineEnd(lotNo, mcNo, opNo, good, ng);
         }
         
-        public TestService.iLibraryService.UpdateFirstinspectionResult UpdateFirstinspection(string lotNo, string opNo, TestService.iLibraryService.Judge judge, string mcNo) {
+        public TestService.ServiceReference3.UpdateFirstinspectionResult UpdateFirstinspection(string lotNo, string opNo, TestService.ServiceReference3.Judge judge, string mcNo) {
             return base.Channel.UpdateFirstinspection(lotNo, opNo, judge, mcNo);
         }
         
-        public TestService.iLibraryService.EndLotResult EndLot(string lotNo, string mcNo, string opNo, int good, int ng) {
+        public TestService.ServiceReference3.EndLotResult EndLot(string lotNo, string mcNo, string opNo, int good, int ng) {
             return base.Channel.EndLot(lotNo, mcNo, opNo, good, ng);
         }
         
-        public TestService.iLibraryService.EndLotResult EndLotNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng) {
+        public TestService.ServiceReference3.EndLotResult EndLotNoCheckLicenser(string lotNo, string mcNo, string opNo, int good, int ng) {
             return base.Channel.EndLotNoCheckLicenser(lotNo, mcNo, opNo, good, ng);
         }
         
-        public TestService.iLibraryService.EndLotResult EndLotOven(string lotNo, string mcNoApcs, string mcNoApcsPro, string opNo, int good, int ng) {
+        public TestService.ServiceReference3.EndLotResult EndLotOven(string lotNo, string mcNoApcs, string mcNoApcsPro, string opNo, int good, int ng) {
             return base.Channel.EndLotOven(lotNo, mcNoApcs, mcNoApcsPro, opNo, good, ng);
         }
         
-        public TestService.iLibraryService.UpdateFinalinspectionResult UpdateFinalinspection(string lotNo, string opNo, TestService.iLibraryService.Judge judge, string mcNo) {
+        public TestService.ServiceReference3.UpdateFinalinspectionResult UpdateFinalinspection(string lotNo, string opNo, TestService.ServiceReference3.Judge judge, string mcNo) {
             return base.Channel.UpdateFinalinspection(lotNo, opNo, judge, mcNo);
         }
         
-        public TestService.iLibraryService.MachineAlarmResult MachineAlarm(string lotNo, string mcNo, string opNo, string AlarmNo, TestService.iLibraryService.AlarmState alarm) {
+        public TestService.ServiceReference3.MachineAlarmResult MachineAlarm(string lotNo, string mcNo, string opNo, string AlarmNo, TestService.ServiceReference3.AlarmState alarm) {
             return base.Channel.MachineAlarm(lotNo, mcNo, opNo, AlarmNo, alarm);
         }
         
-        public TestService.iLibraryService.CancelLotResult CancelLot(string mcNo, string lotNo, string opNo) {
+        public TestService.ServiceReference3.CancelLotResult CancelLot(string mcNo, string lotNo, string opNo) {
             return base.Channel.CancelLot(mcNo, lotNo, opNo);
         }
         
-        public TestService.iLibraryService.ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng, TestService.iLibraryService.EndMode endMode) {
+        public TestService.ServiceReference3.ReinputResult Reinput(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference3.EndMode endMode) {
             return base.Channel.Reinput(lotNo, mcNo, opNo, good, ng, endMode);
         }
         
-        public TestService.iLibraryService.ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng, TestService.iLibraryService.EndMode endMode) {
+        public TestService.ServiceReference3.ReinputResult ReinputAndHoldLot(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference3.EndMode endMode) {
             return base.Channel.ReinputAndHoldLot(lotNo, mcNo, opNo, good, ng, endMode);
         }
         
-        public TestService.iLibraryService.ReinputResult ReinputOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, int good, int ng, TestService.iLibraryService.EndMode endMode) {
+        public TestService.ServiceReference3.ReinputResult ReinputOven(string lotNo, string mcNoApcsPro, string mcNoApcs, string opNo, int good, int ng, TestService.ServiceReference3.EndMode endMode) {
             return base.Channel.ReinputOven(lotNo, mcNoApcsPro, mcNoApcs, opNo, good, ng, endMode);
         }
         
-        public TestService.iLibraryService.CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package) {
+        public TestService.ServiceReference3.CheckLotApcsProResult CheckLotApcsProManual(string lotNo, string mcNo, string package) {
             return base.Channel.CheckLotApcsProManual(lotNo, mcNo, package);
         }
         
-        public TestService.iLibraryService.iReportResponse IRePortCheck(string mcNo) {
+        public TestService.ServiceReference3.iReportResponse IRePortCheck(string mcNo) {
             return base.Channel.IRePortCheck(mcNo);
         }
         
-        public TestService.iLibraryService.CarrierInfo GetCarrierInfo(string mcNo, string lotNo, string opNo) {
+        public TestService.ServiceReference3.CarrierInfo GetCarrierInfo(string mcNo, string lotNo, string opNo) {
             return base.Channel.GetCarrierInfo(mcNo, lotNo, opNo);
         }
         
-        public TestService.iLibraryService.SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, TestService.iLibraryService.Licenser licenser, TestService.iLibraryService.CarrierInfo carrierInfo, TestService.iLibraryService.SetupLotSpecialParametersEventArgs specialParametersEventArgs) {
+        public TestService.ServiceReference3.SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, TestService.ServiceReference3.Licenser licenser, TestService.ServiceReference3.CarrierInfo carrierInfo, TestService.ServiceReference3.SetupLotSpecialParametersEventArgs specialParametersEventArgs) {
             return base.Channel.SetupLotPhase2(lotNo, mcNo, opNo, processName, licenser, carrierInfo, specialParametersEventArgs);
         }
         
-        public TestService.iLibraryService.StartLotResult StartLotPhase2(string lotNo, string mcNo, string opNo, string recipe, TestService.iLibraryService.CarrierInfo carrierInfo, TestService.iLibraryService.StartLotSpecialParametersEventArgs specialParametersEventArgs) {
+        public TestService.ServiceReference3.StartLotResult StartLotPhase2(string lotNo, string mcNo, string opNo, string recipe, TestService.ServiceReference3.CarrierInfo carrierInfo, TestService.ServiceReference3.StartLotSpecialParametersEventArgs specialParametersEventArgs) {
             return base.Channel.StartLotPhase2(lotNo, mcNo, opNo, recipe, carrierInfo, specialParametersEventArgs);
         }
         
-        public TestService.iLibraryService.EndLotResult EndLotPhase2(string lotNo, string mcNo, string opNo, int good, int ng, TestService.iLibraryService.Licenser licenser, TestService.iLibraryService.CarrierInfo carrierInfo, TestService.iLibraryService.EndLotSpecialParametersEventArgs specialParametersEventArgs) {
+        public TestService.ServiceReference3.EndLotResult EndLotPhase2(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference3.Licenser licenser, TestService.ServiceReference3.CarrierInfo carrierInfo, TestService.ServiceReference3.EndLotSpecialParametersEventArgs specialParametersEventArgs) {
             return base.Channel.EndLotPhase2(lotNo, mcNo, opNo, good, ng, licenser, carrierInfo, specialParametersEventArgs);
         }
     }

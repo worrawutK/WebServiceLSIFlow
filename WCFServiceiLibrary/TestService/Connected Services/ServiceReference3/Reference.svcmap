@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="94b2a74b-61d3-4e15-9196-1597547a16c5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://webserv.thematrix.net/ReflowWIP/ServiceiLibrary.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServiceiLibrary.xsd" MetadataType="Schema" ID="7ca7b4ac-a876-4677-8559-2c91df034190" SourceId="1" SourceUrl="http://webserv.thematrix.net/ReflowWIP/ServiceiLibrary.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceiLibrary1.xsd" MetadataType="Schema" ID="b2b6a06b-2c04-4ea6-be85-b9f4097fcec8" SourceId="1" SourceUrl="http://webserv.thematrix.net/ReflowWIP/ServiceiLibrary.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServiceiLibrary2.xsd" MetadataType="Schema" ID="f882c8fd-306e-46a7-ae6a-b7f2787e1755" SourceId="1" SourceUrl="http://webserv.thematrix.net/ReflowWIP/ServiceiLibrary.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServiceiLibrary.disco" MetadataType="Disco" ID="dcdd9273-ed0e-439b-ab96-8325e3e432c9" SourceId="1" SourceUrl="http://webserv.thematrix.net/ReflowWIP/ServiceiLibrary.svc?disco" />
+    <MetadataFile FileName="ServiceiLibrary.wsdl" MetadataType="Wsdl" ID="94c645ff-d012-4b8d-8638-0031a817ba3e" SourceId="1" SourceUrl="http://webserv.thematrix.net/ReflowWIP/ServiceiLibrary.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

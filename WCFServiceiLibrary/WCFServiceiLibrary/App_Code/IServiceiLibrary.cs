@@ -117,7 +117,16 @@ public interface IServiceiLibrary
     CarrierInfo GetCarrierInfo(string mcNo, string lotNo, string opNo);
 
     [OperationContract]
-    SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, string layerNo, int frame_In, CarrierInfo carrierInfo, Licenser licenser, RunMode runMode);
+    SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, Licenser licenser, CarrierInfo carrierInfo,
+        SetupLotSpecialParametersEventArgs specialParametersEventArgs);
+
+    [OperationContract]
+    StartLotResult StartLotPhase2(string lotNo, string mcNo, string opNo, string recipe, CarrierInfo carrierInfo,
+        StartLotSpecialParametersEventArgs specialParametersEventArgs);
+
+    [OperationContract]
+    EndLotResult EndLotPhase2(string lotNo, string mcNo, string opNo, int good, int ng, Licenser licenser, CarrierInfo carrierInfo,
+        EndLotSpecialParametersEventArgs specialParametersEventArgs);
 }
 
 [DataContract()]

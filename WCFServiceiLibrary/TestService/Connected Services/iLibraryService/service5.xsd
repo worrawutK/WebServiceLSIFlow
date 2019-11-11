@@ -252,4 +252,26 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="Licenser" nillable="true" type="tns:Licenser" />
+  <xs:complexType name="SetupLotSpecialParametersEventArgs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FrameIn" type="xs:int" />
+      <xs:element minOccurs="0" name="LayerNoApcs" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="McNoOvenApcs" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RunModeApcs" type="tns:RunMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SetupLotSpecialParametersEventArgs" nillable="true" type="tns:SetupLotSpecialParametersEventArgs" />
+  <xs:complexType name="StartLotSpecialParametersEventArgs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="McNoOvenApcs" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RunModeApcs" type="tns:RunMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StartLotSpecialParametersEventArgs" nillable="true" type="tns:StartLotSpecialParametersEventArgs" />
+  <xs:complexType name="EndLotSpecialParametersEventArgs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="McNoOvenApcs" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EndLotSpecialParametersEventArgs" nillable="true" type="tns:EndLotSpecialParametersEventArgs" />
 </xs:schema>

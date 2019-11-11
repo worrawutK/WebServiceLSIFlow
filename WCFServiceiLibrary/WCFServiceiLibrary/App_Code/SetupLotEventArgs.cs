@@ -20,7 +20,7 @@ public class SetupLotEventArgs
     public string Process { get; set; }
     public string LayerNo { get; set; }
 
-    private RunMode c_RunMode = RunMode.Normal;
+    private RunMode c_RunMode;
 
     public RunMode RunMode
     {
@@ -30,7 +30,7 @@ public class SetupLotEventArgs
 
     public string FunctionName { get; set; }
 
-    private Licenser c_IsCheckLicenser = Licenser.Check;
+    private Licenser c_IsCheckLicenser;
 
     public Licenser IsCheckLicenser
     {

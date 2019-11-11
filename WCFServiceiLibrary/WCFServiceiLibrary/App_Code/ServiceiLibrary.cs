@@ -46,7 +46,8 @@ public class ServiceiLibrary : IServiceiLibrary
             Process = processName,
             LayerNo = layerNo,
             RunMode = RunMode.Normal,
-            FunctionName = MethodBase.GetCurrentMethod().Name
+            FunctionName = MethodBase.GetCurrentMethod().Name,
+            IsCheckLicenser = Licenser.NoCheck
         };
         //return SetupLotCommon(lotNo, mcNo, opNo, processName, layerNo, RunMode.Normal, MethodBase.GetCurrentMethod().Name);
         return SetupLotCommon(setupEventArgs);
@@ -79,7 +80,8 @@ public class ServiceiLibrary : IServiceiLibrary
             Process = processName,
             LayerNo = layerNo,
             RunMode = runMode,
-            FunctionName = MethodBase.GetCurrentMethod().Name
+            FunctionName = MethodBase.GetCurrentMethod().Name,
+            IsCheckLicenser = Licenser.Check
         };
         return SetupLotCommon(setupEventArgs);
         //return SetupLotCommon(lotNo, mcNo, opNo, processName, layerNo, runMode, MethodBase.GetCurrentMethod().Name);
@@ -120,8 +122,20 @@ public class ServiceiLibrary : IServiceiLibrary
         //return SetupLotCommon(lotNo, mcNoApcsPro, opNo, processName, layerNo, RunMode.Normal, MethodBase.GetCurrentMethod().Name,false, mcNoApcs);
     }
 
-    public SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName, string layerNo,int frame_In, CarrierInfo carrierInfo, Licenser licenser,RunMode runMode) 
+    public SetupLotResult SetupLotPhase2(string lotNo, string mcNo, string opNo, string processName,Licenser licenser, CarrierInfo carrierInfo,
+        SetupLotSpecialParametersEventArgs specialParametersEventArgs) 
     {
+        string layerNo = "";
+        RunMode runMode = RunMode.Normal;
+        int frameIn = 0;
+        string mcNoOven = "";
+        if (specialParametersEventArgs != null)
+        {
+            if (!string.IsNullOrEmpty(specialParametersEventArgs.LayerNoApcs)) layerNo = specialParametersEventArgs.LayerNoApcs;
+            runMode = specialParametersEventArgs.RunModeApcs;
+            frameIn = specialParametersEventArgs.FrameIn;
+            if (!string.IsNullOrEmpty(specialParametersEventArgs.McNoOvenApcs)) mcNoOven = specialParametersEventArgs.McNoOvenApcs;
+        }
         SetupLotEventArgs setupLotEventArgs = new SetupLotEventArgs()
         {
             LotNo = lotNo,
@@ -132,8 +146,9 @@ public class ServiceiLibrary : IServiceiLibrary
             FunctionName = MethodBase.GetCurrentMethod().Name,
             IsCheckLicenser = licenser,
             RunMode = runMode,
-            FrameIn = frame_In,
-            CarrierInfo = carrierInfo
+            FrameIn = frameIn,
+            CarrierInfo = carrierInfo,
+            MachineOven = mcNoOven
         };
         return  SetupLotCommon(setupLotEventArgs);
     }
@@ -141,7 +156,7 @@ public class ServiceiLibrary : IServiceiLibrary
     private SetupLotResult SetupLotCommon(SetupLotEventArgs setupEventArgs)
     {
         string mcNoToApcs;
-        if (setupEventArgs.MachineOven != "")
+        if (!string.IsNullOrEmpty(setupEventArgs.MachineOven))
         {
             mcNoToApcs = setupEventArgs.MachineOven;
         }
@@ -265,11 +280,11 @@ public class ServiceiLibrary : IServiceiLibrary
                         setupEventArgs.FunctionName, log);
             
                 //Carrier Control
-                if (setupEventArgs.CarrierInfo != null && setupEventArgs.CarrierInfo.EnabledControlCarrier == CarrierInfo.Status.Use &&
-                    setupEventArgs.CarrierInfo.InControlCarrier == CarrierInfo.Status.Use)
+                if (setupEventArgs.CarrierInfo != null && setupEventArgs.CarrierInfo.EnabledControlCarrier == CarrierInfo.CarrierStatus.Use &&
+                    setupEventArgs.CarrierInfo.InControlCarrier == CarrierInfo.CarrierStatus.Use)
                 {
                    
-                    if (setupEventArgs.CarrierInfo.LoadCarrier == CarrierInfo.Status.Use)
+                    if (setupEventArgs.CarrierInfo.LoadCarrier == CarrierInfo.CarrierStatus.Use)
                     {
                         CarrierControlResult resultLoad = c_ApcsProService.VerificationLoadCarrier(machineInfo.Id, lotInfo.Id, setupEventArgs.CarrierInfo.LoadCarrierNo, userInfo.Id, log);
                         if (!resultLoad.IsPass)
@@ -281,7 +296,7 @@ public class ServiceiLibrary : IServiceiLibrary
                         }
                     }
 
-                    if (setupEventArgs.CarrierInfo.RegisterCarrier == CarrierInfo.Status.Use)
+                    if (setupEventArgs.CarrierInfo.RegisterCarrier == CarrierInfo.CarrierStatus.Use)
                     {
                         CarrierControlResult resultRegister = c_ApcsProService.CheckAndRegisterCurrentCarrier(machineInfo.Id, lotInfo.Id, setupEventArgs.CarrierInfo.RegisterCarrierNo, userInfo.Id, log);
                         if (!resultRegister.IsPass)
@@ -293,7 +308,7 @@ public class ServiceiLibrary : IServiceiLibrary
                         }
                     }
 
-                    if (setupEventArgs.CarrierInfo.TransferCarrier == CarrierInfo.Status.Use)
+                    if (setupEventArgs.CarrierInfo.TransferCarrier == CarrierInfo.CarrierStatus.Use)
                     {
                         CarrierControlResult resultTransfer = c_ApcsProService.CheckAndRegisterNextCarrier(machineInfo.Id, lotInfo.Id,
                             setupEventArgs.CarrierInfo.TransferCarrierNo, userInfo.Id, log);
@@ -366,13 +381,43 @@ public class ServiceiLibrary : IServiceiLibrary
     {
         return StartLotCommon(lotNo, mcNoApcsPro, opNo, recipe, MethodBase.GetCurrentMethod().Name, RunMode.Normal, mcNoApcs);
     }
-    private StartLotResult StartLotCommon(string lotNo, string mcNo, string opNo, string recipe,string functionName,RunMode runMode,string mcNoApcs = "")
+    public  StartLotResult StartLotPhase2(string lotNo,string mcNo,string opNo,string recipe,CarrierInfo carrierInfo,
+        StartLotSpecialParametersEventArgs specialParametersEventArgs)
+    {
+        RunMode runMode = RunMode.Normal;
+        string mcNoOven = "";
+        int locationNum = 1;
+        int actPassQty = -1;
+        string loadCarrierNo = "";
+        string transferCarrierNo = "";
+        if (specialParametersEventArgs != null)
+        {
+            if (!string.IsNullOrEmpty(specialParametersEventArgs.McNoOvenApcs)) mcNoOven = specialParametersEventArgs.McNoOvenApcs;
+            runMode = specialParametersEventArgs.RunModeApcs;
+          
+        }
+        if (carrierInfo != null)
+        {
+            if (!string.IsNullOrEmpty(carrierInfo.RegisterCarrierNo))
+            {
+                loadCarrierNo = carrierInfo.RegisterCarrierNo;
+            }
+            else
+            {
+                loadCarrierNo = carrierInfo.LoadCarrierNo;
+            }
+            transferCarrierNo = carrierInfo.TransferCarrierNo;
+        }
+        return StartLotCommon(lotNo, mcNo, opNo, recipe, MethodBase.GetCurrentMethod().Name,
+            runMode, mcNoOven,locationNum,actPassQty,loadCarrierNo,transferCarrierNo);
+    }
+    private StartLotResult StartLotCommon(string lotNo, string mcNo, string opNo, string recipe,string functionName,RunMode runMode,string mcNoApcs = "",int locationNum = 1,int actPassQty = -1,string loadCarrierNo = "",string transferCarrierNo = "")
     {
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
             string mcNoToApcs;
-            if (mcNoApcs != "")
+            if (!string.IsNullOrEmpty(mcNoApcs))
             {
                 mcNoToApcs = mcNoApcs;
             }
@@ -448,10 +493,12 @@ public class ServiceiLibrary : IServiceiLibrary
                     return new StartLotResult(false,MessageType.ApcsPro, "ไม่พบ MCNo :" + mcNo + " ในระบบ", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo,
                         "GetMachineInfo", functionName, log);
 
-                LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotStart(lotInfo.Id, machineInfo.Id, userInfo.Id, 0, "", 1, recipe, log, 1, -1);
+                LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotStart(lotInfo.Id, machineInfo.Id, userInfo.Id, 0, "", 1, recipe, log,
+                    locationNum, actPassQty,loadCarrierNo,transferCarrierNo);
                 if (!lotUpdateInfo.IsOk)
                     return new StartLotResult(false, MessageType.ApcsPro, lotUpdateInfo.ErrorNo + ":" + lotUpdateInfo.ErrorMessage, "LotNo:" + lotNo + " opNo:" + opNo +
-                        " mcNo:" + mcNo, "LotStart", functionName, log);
+                        " mcNo:" + mcNo + " locationNum:" + locationNum.ToString() + " actPassQty:" + actPassQty.ToString() + " loadCarrierNo:" + loadCarrierNo
+                        + " unloadCarrierNo:" + transferCarrierNo, "LotStart", functionName, log);
 
                 TdcLotSet(mcNoToApcs, lotNo, opNo, (RunModeType)runMode, dateTime, log);
             }
@@ -714,8 +761,14 @@ public class ServiceiLibrary : IServiceiLibrary
         //return EndLotCommon(lotNo, mcNoApcs, opNo, good, ng, MethodBase.GetCurrentMethod().Name, false, mcNoApcsPro);
     }
 
-    public EndLotResult EndLotPhase2(string lotNo,string mcNo,string opNo,int good,int ng, Licenser licenser ,CarrierInfo carrierInfo)
+    public EndLotResult EndLotPhase2(string lotNo,string mcNo,string opNo,int good,int ng, Licenser licenser ,CarrierInfo carrierInfo,
+        EndLotSpecialParametersEventArgs specialParametersEventArgs)
     {
+        string mcNoOven = "";
+        if (specialParametersEventArgs != null)
+        {
+            if(!string.IsNullOrEmpty(specialParametersEventArgs.McNoOvenApcs)) mcNoOven = specialParametersEventArgs.McNoOvenApcs;
+        }
         EndLotEvenArgs endLotEvenArgs = new EndLotEvenArgs(MethodBase.GetCurrentMethod().Name, licenser)
         {
             LotNo = lotNo,
@@ -723,7 +776,8 @@ public class ServiceiLibrary : IServiceiLibrary
             OperatorNo = opNo,
             Good = good,
             Ng = ng,
-            CarrierInfo = carrierInfo
+            CarrierInfo = carrierInfo,
+            MachineOven = mcNoOven
         };
         return EndLotCommon(endLotEvenArgs);
     }
@@ -745,13 +799,15 @@ public class ServiceiLibrary : IServiceiLibrary
         int ng = endLotEvenArgs.Ng;
         string functionName = endLotEvenArgs.FunctionName;
         string mcNoApcs = endLotEvenArgs.MachineOven;
-        
+        string unloadCarrierNo = "";
+        if (!string.IsNullOrEmpty(endLotEvenArgs.CarrierInfo.UnloadCarrierNo))
+            unloadCarrierNo = endLotEvenArgs.CarrierInfo.UnloadCarrierNo;
 
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
             string mcNoToApcs;
-            if (mcNoApcs != "")
+            if (!string.IsNullOrEmpty(mcNoApcs))
             {
                 mcNoToApcs = mcNoApcs;
             }
@@ -836,21 +892,21 @@ public class ServiceiLibrary : IServiceiLibrary
             }
 
             //Carrier Control
-            if (endLotEvenArgs.CarrierInfo != null && endLotEvenArgs.CarrierInfo.EnabledControlCarrier == CarrierInfo.Status.Use && endLotEvenArgs.CarrierInfo.InControlCarrier == CarrierInfo.Status.Use)
+            if (endLotEvenArgs.CarrierInfo != null && endLotEvenArgs.CarrierInfo.EnabledControlCarrier == CarrierInfo.CarrierStatus.Use && endLotEvenArgs.CarrierInfo.InControlCarrier == CarrierInfo.CarrierStatus.Use)
             {
-                if (endLotEvenArgs.CarrierInfo.UnloadCarrier == CarrierInfo.Status.Use)
+                if (endLotEvenArgs.CarrierInfo.UnloadCarrier == CarrierInfo.CarrierStatus.Use)
                 {
                     CarrierControlResult carrierControlResult = c_ApcsProService.VerificationUnloadCarrier(machineInfo.Id, lotInfo.Id, endLotEvenArgs.CarrierInfo.UnloadCarrierNo, userInfo.Id, log);
                     if (!carrierControlResult.IsPass)
                     {
                         return new EndLotResult(false, MessageType.ApcsPro, carrierControlResult.ErrorMessageDetail.Error_Message,
-                             "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " good:" + good + " ng:" + ng, "LotEnd", functionName, log);
+                             "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " good:" + good + " ng:" + ng + " UnloadCarrierNo:" + endLotEvenArgs.CarrierInfo.UnloadCarrierNo, "LotEnd", functionName, log);
                     }
                 }
             }
 
             LotUpdateInfo lotUpdateInfo = c_ApcsProService.LotEnd(lotInfo.Id, machineInfo.Id, userInfo.Id, false, good, ng, 0, "", 1, 
-                dateTime, log,"", frame_Pass, endLotEvenArgs.Frame_Fail);
+                dateTime, log, unloadCarrierNo, frame_Pass, endLotEvenArgs.Frame_Fail);
             if (!lotUpdateInfo.IsOk)
                 return new EndLotResult(false, MessageType.ApcsPro, lotUpdateInfo.ErrorNo + ":" + lotUpdateInfo.ErrorMessage, "LotNo:" + lotNo + " opNo:" + opNo +
                     " mcNo:" + mcNo + " good:" + good + " ng:" + ng, "LotEnd", functionName, log);
@@ -1549,7 +1605,22 @@ public class ServiceiLibrary : IServiceiLibrary
                 return result;
             }
 
-            
+            ResultBase resultBase = GetCarrierControl(lotInfo);
+            if (!resultBase.IsPass)
+            {
+                result.InControlCarrier = CarrierInfo.CarrierStatus.No_Use;
+                result.LoadCarrier = CarrierInfo.CarrierStatus.No_Use;
+                result.UnloadCarrier = CarrierInfo.CarrierStatus.No_Use;
+                result.RegisterCarrier = CarrierInfo.CarrierStatus.No_Use;
+                result.TransferCarrier = CarrierInfo.CarrierStatus.No_Use;
+                result.EnabledControlCarrier = CarrierInfo.CarrierStatus.No_Use;
+                result.IsPass = true;
+                result.Reason = resultBase.Reason;
+                log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCF", "iLibrary", 0, "GetCarrierControl", result.Reason, "mcNo :" + mcNo + ",lotNo :" + lotNo + ",opNo :" + opNo);
+                return result;
+            }
+            result.EnabledControlCarrier = CarrierInfo.CarrierStatus.Use;
+
             CarrierControlResult carrierControlResult = c_ApcsProService.GetCarrierInformation(machineInfo.Id, lotInfo.Id, log);
 
             if (!carrierControlResult.IsPass)
@@ -1568,39 +1639,26 @@ public class ServiceiLibrary : IServiceiLibrary
                 return result;
             }
 
-            ResultBase resultBase = GetCarrierControl(lotInfo);
-            if (!resultBase.IsPass)
-            {
-                result.InControlCarrier = CarrierInfo.Status.No_Use;
-                result.LoadCarrier = CarrierInfo.Status.No_Use;
-                result.UnloadCarrier = CarrierInfo.Status.No_Use;
-                result.RegisterCarrier = CarrierInfo.Status.No_Use;
-                result.TransferCarrier = CarrierInfo.Status.No_Use;
-                result.EnabledControlCarrier = CarrierInfo.Status.No_Use;
-                result.IsPass = true;
-                result.Reason = resultBase.Reason;
-                log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCF", "iLibrary", 0, "GetCarrierControl", result.Reason, "mcNo :" + mcNo + ",lotNo :" + lotNo + ",opNo :" + opNo);
-                return result;
-            }
-
-            result.EnabledControlCarrier = CarrierInfo.Status.Use;
-            //if (result.EnabledControlCarrier == CarrierInfo.Status.No_Use)
+            //ResultBase resultBase = GetCarrierControl(lotInfo);
+            //if (!resultBase.IsPass)
             //{
             //    result.InControlCarrier = CarrierInfo.Status.No_Use;
             //    result.LoadCarrier = CarrierInfo.Status.No_Use;
             //    result.UnloadCarrier = CarrierInfo.Status.No_Use;
             //    result.RegisterCarrier = CarrierInfo.Status.No_Use;
             //    result.TransferCarrier = CarrierInfo.Status.No_Use;
+            //    result.EnabledControlCarrier = CarrierInfo.Status.No_Use;
             //    result.IsPass = true;
-            //    result.Reason = "No Control";
+            //    result.Reason = resultBase.Reason;
             //    log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCF", "iLibrary", 0, "GetCarrierControl", result.Reason, "mcNo :" + mcNo + ",lotNo :" + lotNo + ",opNo :" + opNo);
             //    return result;
             //}
-            result.InControlCarrier = (CarrierInfo.Status)carrierControlResult.CarrierInfo.InControl;
-            result.LoadCarrier = (CarrierInfo.Status)carrierControlResult.CarrierInfo.VerificationOnStart;
-            result.RegisterCarrier = (CarrierInfo.Status)carrierControlResult.CarrierInfo.CarrierRegister;
-            result.UnloadCarrier = (CarrierInfo.Status)carrierControlResult.CarrierInfo.VerificationOnEnd;
-            result.TransferCarrier = (CarrierInfo.Status)carrierControlResult.CarrierInfo.CarrierTransfer;
+
+            result.InControlCarrier = (CarrierInfo.CarrierStatus)carrierControlResult.CarrierInfo.InControl;
+            result.LoadCarrier = (CarrierInfo.CarrierStatus)carrierControlResult.CarrierInfo.VerificationOnStart;
+            result.RegisterCarrier = (CarrierInfo.CarrierStatus)carrierControlResult.CarrierInfo.CarrierRegister;
+            result.UnloadCarrier = (CarrierInfo.CarrierStatus)carrierControlResult.CarrierInfo.VerificationOnEnd;
+            result.TransferCarrier = (CarrierInfo.CarrierStatus)carrierControlResult.CarrierInfo.CarrierTransfer;
             result.IsPass = true;
             log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCF", "iLibrary", 0, "GetCarrierInfo", result.Reason, "mcNo :" + mcNo + ",lotNo :" + lotNo + ",opNo :" + opNo);
             return result;

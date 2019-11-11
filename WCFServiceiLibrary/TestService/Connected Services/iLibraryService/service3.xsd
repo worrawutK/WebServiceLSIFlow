@@ -479,11 +479,9 @@
         <xs:element minOccurs="0" name="mcNo" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="opNo" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="processName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="layerNo" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="frame_In" type="xs:int" />
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="carrierInfo" nillable="true" type="q36:CarrierInfo" />
-        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="licenser" type="q37:Licenser" />
-        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="runMode" type="q38:RunMode" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="licenser" type="q36:Licenser" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="carrierInfo" nillable="true" type="q37:CarrierInfo" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="specialParametersEventArgs" nillable="true" type="q38:SetupLotSpecialParametersEventArgs" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -491,6 +489,46 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="SetupLotPhase2Result" nillable="true" type="q39:SetupLotResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StartLotPhase2">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="lotNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mcNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="opNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="recipe" nillable="true" type="xs:string" />
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="carrierInfo" nillable="true" type="q40:CarrierInfo" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="specialParametersEventArgs" nillable="true" type="q41:StartLotSpecialParametersEventArgs" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StartLotPhase2Response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="StartLotPhase2Result" nillable="true" type="q42:StartLotResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndLotPhase2">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="lotNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mcNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="opNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="good" type="xs:int" />
+        <xs:element minOccurs="0" name="ng" type="xs:int" />
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="licenser" type="q43:Licenser" />
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="carrierInfo" nillable="true" type="q44:CarrierInfo" />
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="specialParametersEventArgs" nillable="true" type="q45:EndLotSpecialParametersEventArgs" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndLotPhase2Response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="EndLotPhase2Result" nillable="true" type="q46:EndLotResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

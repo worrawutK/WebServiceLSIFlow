@@ -163,6 +163,18 @@
   <wsdl:message name="IServiceiLibrary_SetupLotPhase2_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetupLotPhase2Response" />
   </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_StartLotPhase2_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartLotPhase2" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_StartLotPhase2_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartLotPhase2Response" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_EndLotPhase2_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndLotPhase2" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_EndLotPhase2_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndLotPhase2Response" />
+  </wsdl:message>
   <wsdl:portType name="IServiceiLibrary">
     <wsdl:operation name="MachineOnlineState">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/MachineOnlineState" message="tns:IServiceiLibrary_MachineOnlineState_InputMessage" />
@@ -267,6 +279,14 @@
     <wsdl:operation name="SetupLotPhase2">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/SetupLotPhase2" message="tns:IServiceiLibrary_SetupLotPhase2_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/SetupLotPhase2Response" message="tns:IServiceiLibrary_SetupLotPhase2_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StartLotPhase2">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/StartLotPhase2" message="tns:IServiceiLibrary_StartLotPhase2_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/StartLotPhase2Response" message="tns:IServiceiLibrary_StartLotPhase2_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndLotPhase2">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/EndLotPhase2" message="tns:IServiceiLibrary_EndLotPhase2_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/EndLotPhase2Response" message="tns:IServiceiLibrary_EndLotPhase2_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceiLibrary" type="tns:IServiceiLibrary">
@@ -498,6 +518,24 @@
     </wsdl:operation>
     <wsdl:operation name="SetupLotPhase2">
       <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/SetupLotPhase2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartLotPhase2">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/StartLotPhase2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndLotPhase2">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/EndLotPhase2" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

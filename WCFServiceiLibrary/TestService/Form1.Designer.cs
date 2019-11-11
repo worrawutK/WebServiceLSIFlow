@@ -36,6 +36,7 @@
             this.buttonMcOn = new System.Windows.Forms.Button();
             this.buttonMcOff = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.textBoxMCNoOv = new System.Windows.Forms.TextBox();
@@ -59,7 +60,6 @@
             this.textBoxOPNo = new System.Windows.Forms.TextBox();
             this.textBoxMCNo = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.button3 = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -169,6 +169,16 @@
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Example";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(289, 47);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 18;
+            this.button3.Text = "iReport";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // button2
             // 
@@ -311,7 +321,7 @@
             this.textBoxPackage.Name = "textBoxPackage";
             this.textBoxPackage.Size = new System.Drawing.Size(128, 20);
             this.textBoxPackage.TabIndex = 0;
-            this.textBoxPackage.Text = "SSOP-B20W";
+            this.textBoxPackage.Text = "SSOP-B28W";
             // 
             // label2
             // 
@@ -363,22 +373,12 @@
             this.textBoxMCNo.Name = "textBoxMCNo";
             this.textBoxMCNo.Size = new System.Drawing.Size(128, 20);
             this.textBoxMCNo.TabIndex = 2;
-            this.textBoxMCNo.Text = "MP-TWE-00";
+            this.textBoxMCNo.Text = "FT-EP-000";
             // 
             // backgroundWorker1
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker1_RunWorkerCompleted);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(289, 47);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 18;
-            this.button3.Text = "iReport";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // Form1
             // 
