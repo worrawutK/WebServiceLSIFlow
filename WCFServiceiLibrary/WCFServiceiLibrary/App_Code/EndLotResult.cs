@@ -84,7 +84,7 @@ public class EndLotResult
 
         try
         {
-            log.ConnectionLogger.Write(0, functionName, typeState, "WCFService", "iLibrary", 0, "", cause, cause2);
+            log.ConnectionLogger.Write(0, functionName, typeState, "WCFService", "iLibrary", 0, subFunction, cause, cause2);
         }
         catch (Exception ex)
         {

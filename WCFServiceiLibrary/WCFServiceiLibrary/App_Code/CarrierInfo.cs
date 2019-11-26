@@ -65,7 +65,20 @@ public class CarrierInfo
         get { return c_RegisterCarrierNo; }
         set { c_RegisterCarrierNo = value; }
     }
-
+    private string c_CurrentCarrierNo;
+    [DataMember()]
+    public string CurrentCarrierNo
+    {
+        get { return c_CurrentCarrierNo; }
+        set { c_CurrentCarrierNo = value; }
+    }
+    private string c_NextCarrierNo;
+    [DataMember()]
+    public string NextCarrierNo
+    {
+        get { return c_NextCarrierNo; }
+        set { c_NextCarrierNo = value; }
+    }
     [DataMember()]
     public CarrierStatus RegisterCarrier { get; set; }
     [DataMember()]

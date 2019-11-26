@@ -278,12 +278,17 @@ public class ServiceiLibrary : IServiceiLibrary
                     return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro, "ไม่พบ MCNo :" + setupEventArgs.MachineNo + " ในระบบ", 
                         "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo + " mcNo" + setupEventArgs.MachineNo, "","", "GetMachineInfo",
                         setupEventArgs.FunctionName, log);
-            
+
                 //Carrier Control
+                string loadCarrierNo = "";
+                string registerCarrierNo = "";
+                string transferCarrierNo = "";
                 if (setupEventArgs.CarrierInfo != null && setupEventArgs.CarrierInfo.EnabledControlCarrier == CarrierInfo.CarrierStatus.Use &&
                     setupEventArgs.CarrierInfo.InControlCarrier == CarrierInfo.CarrierStatus.Use)
                 {
-                   
+                    loadCarrierNo = setupEventArgs.CarrierInfo.LoadCarrierNo;
+                    registerCarrierNo = setupEventArgs.CarrierInfo.RegisterCarrierNo;
+                    transferCarrierNo = setupEventArgs.CarrierInfo.TransferCarrierNo;
                     if (setupEventArgs.CarrierInfo.LoadCarrier == CarrierInfo.CarrierStatus.Use)
                     {
                         CarrierControlResult resultLoad = c_ApcsProService.VerificationLoadCarrier(machineInfo.Id, lotInfo.Id, setupEventArgs.CarrierInfo.LoadCarrierNo, userInfo.Id, log);
@@ -349,11 +354,14 @@ public class ServiceiLibrary : IServiceiLibrary
                 if (warningMessage != "")
                 {
                     return new SetupLotResult(SetupLotResult.Status.Warning,MessageType.ApcsPro, warningMessage, 
-                        "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo, lotUpdateInfo.Recipe1, "","GetUserInfo", setupEventArgs.FunctionName, log, lotInfo.Quantity.Pass, lotInfo.Quantity.LastFail);
+                        "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo, lotUpdateInfo.Recipe1, "","GetUserInfo",
+                        setupEventArgs.FunctionName, log, lotInfo.Quantity.Pass, lotInfo.Quantity.LastFail);
                 }
                 else
                 {
-                    return new SetupLotResult(SetupLotResult.Status.Pass,MessageType.ApcsPro, "", "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo, lotUpdateInfo.Recipe1, "", "",
+                    return new SetupLotResult(SetupLotResult.Status.Pass,MessageType.ApcsPro, "", "LotNo:" + setupEventArgs.LotNo + 
+                        " opNo:" + setupEventArgs.OperatorNo + " loadCarrierNo:" + loadCarrierNo + " registerCarrierNo:" + registerCarrierNo + 
+                        " transferCarrierNo:" + transferCarrierNo, lotUpdateInfo.Recipe1, "", "",
                         setupEventArgs.FunctionName, log, lotInfo.Quantity.Pass, lotInfo.Quantity.LastFail);
                 }
             }
@@ -504,7 +512,8 @@ public class ServiceiLibrary : IServiceiLibrary
             }
            
            
-            return new StartLotResult(true, MessageType.ApcsPro, "", "LotNo:" + lotNo + " opNo:" + opNo, "", functionName, log);
+            return new StartLotResult(true, MessageType.ApcsPro, "", "LotNo:" + lotNo + " opNo:" + opNo + " loadCarrierNo:" + loadCarrierNo + 
+                " transferCarrierNo:" + transferCarrierNo, "", functionName, log);
         }
         catch (Exception ex)
         {
@@ -900,7 +909,7 @@ public class ServiceiLibrary : IServiceiLibrary
                     if (!carrierControlResult.IsPass)
                     {
                         return new EndLotResult(false, MessageType.ApcsPro, carrierControlResult.ErrorMessageDetail.Error_Message,
-                             "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " good:" + good + " ng:" + ng + " UnloadCarrierNo:" + endLotEvenArgs.CarrierInfo.UnloadCarrierNo, "LotEnd", functionName, log);
+                             "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " good:" + good + " ng:" + ng + " UnloadCarrierNo:" + endLotEvenArgs.CarrierInfo.UnloadCarrierNo, "VerificationUnloadCarrier", functionName, log);
                     }
                 }
             }
@@ -909,7 +918,7 @@ public class ServiceiLibrary : IServiceiLibrary
                 dateTime, log, unloadCarrierNo, frame_Pass, endLotEvenArgs.Frame_Fail);
             if (!lotUpdateInfo.IsOk)
                 return new EndLotResult(false, MessageType.ApcsPro, lotUpdateInfo.ErrorNo + ":" + lotUpdateInfo.ErrorMessage, "LotNo:" + lotNo + " opNo:" + opNo +
-                    " mcNo:" + mcNo + " good:" + good + " ng:" + ng, "LotEnd", functionName, log);
+                    " mcNo:" + mcNo + " good:" + good + " ng:" + ng + " unloadCarrierNo:" + unloadCarrierNo, "LotEnd", functionName, log);
 
             string nextFlow = "";
             if (lotUpdateInfo.NextProcess != null)
@@ -929,7 +938,7 @@ public class ServiceiLibrary : IServiceiLibrary
                 //}
                 nextFlow = "Next Process :" + lotUpdateInfo.NextProcess.Job_name;
             }
-            return new EndLotResult(true, MessageType.ApcsPro, "", "LotNo:" + lotNo + " opNo:" + opNo, "", functionName, log, nextFlow);
+            return new EndLotResult(true, MessageType.ApcsPro, "", "LotNo:" + lotNo + " opNo:" + opNo + " unloadCarrierNo:" + unloadCarrierNo, "", functionName, log, nextFlow);
         }
         catch (Exception ex)
         {
@@ -1653,7 +1662,8 @@ public class ServiceiLibrary : IServiceiLibrary
             //    log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCF", "iLibrary", 0, "GetCarrierControl", result.Reason, "mcNo :" + mcNo + ",lotNo :" + lotNo + ",opNo :" + opNo);
             //    return result;
             //}
-
+            result.CurrentCarrierNo = carrierControlResult.CarrierInfo.CurrentCarrier;
+            result.NextCarrierNo = carrierControlResult.CarrierInfo.NextCarrier;
             result.InControlCarrier = (CarrierInfo.CarrierStatus)carrierControlResult.CarrierInfo.InControl;
             result.LoadCarrier = (CarrierInfo.CarrierStatus)carrierControlResult.CarrierInfo.VerificationOnStart;
             result.RegisterCarrier = (CarrierInfo.CarrierStatus)carrierControlResult.CarrierInfo.CarrierRegister;
