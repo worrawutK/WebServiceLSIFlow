@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TestService.iLibraryService;
+using TestService.ServiceReference1;
 using MessageDialog;
 using System.Threading;
 using System.Data.SqlClient;
@@ -25,6 +25,7 @@ namespace TestService
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            var xxx = InputCarrier.InputQrCode("Tranfer Carrier No.", 11, Color.SpringGreen);
             //CarrierInfo carrierInfo = new CarrierInfo()
             //{
             //    LoadCarrier = CarrierInfo.Status.No_Use,
@@ -122,8 +123,11 @@ namespace TestService
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            StartLotResult result = c_ILibraryClient.StartLot(textBoxLotNo.Text, textBoxMCNo.Text,
-                textBoxOPNo.Text, textBoxRecipe.Text);
+           var carrier =  c_ILibraryClient.GetCarrierInfo(textBoxMCNo.Text, textBoxLotNo.Text, textBoxOPNo.Text);
+            StartLotResult result = c_ILibraryClient.StartLotPhase2(textBoxLotNo.Text, textBoxMCNo.Text,
+               textBoxOPNo.Text, textBoxRecipe.Text, carrier,null);
+            //StartLotResult result = c_ILibraryClient.StartLot(textBoxLotNo.Text, textBoxMCNo.Text,
+            //    textBoxOPNo.Text, textBoxRecipe.Text);
 
             //StartLotResult result = c_ILibraryClient.StartLotOven(textBoxLotNo.Text, textBoxMCNo.Text, textBoxMCNoOv.Text,
             //  textBoxOPNo.Text, textBoxRecipe.Text);

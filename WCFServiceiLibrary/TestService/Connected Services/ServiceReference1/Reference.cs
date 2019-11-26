@@ -1749,37 +1749,43 @@ namespace TestService.ServiceReference1 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.ServiceReference1.CarrierInfo.Status EnabledControlCarrierField;
+        private string CurrentCarrierNoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.ServiceReference1.CarrierInfo.Status InControlCarrierField;
+        private TestService.ServiceReference1.CarrierInfo.CarrierStatus EnabledControlCarrierField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.CarrierInfo.CarrierStatus InControlCarrierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsPassField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.ServiceReference1.CarrierInfo.Status LoadCarrierField;
+        private TestService.ServiceReference1.CarrierInfo.CarrierStatus LoadCarrierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string LoadCarrierNoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NextCarrierNoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ReasonField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.ServiceReference1.CarrierInfo.Status RegisterCarrierField;
+        private TestService.ServiceReference1.CarrierInfo.CarrierStatus RegisterCarrierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RegisterCarrierNoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.ServiceReference1.CarrierInfo.Status TransferCarrierField;
+        private TestService.ServiceReference1.CarrierInfo.CarrierStatus TransferCarrierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TransferCarrierNoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.ServiceReference1.CarrierInfo.Status UnloadCarrierField;
+        private TestService.ServiceReference1.CarrierInfo.CarrierStatus UnloadCarrierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UnloadCarrierNoField;
@@ -1795,7 +1801,20 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.ServiceReference1.CarrierInfo.Status EnabledControlCarrier {
+        public string CurrentCarrierNo {
+            get {
+                return this.CurrentCarrierNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CurrentCarrierNoField, value) != true)) {
+                    this.CurrentCarrierNoField = value;
+                    this.RaisePropertyChanged("CurrentCarrierNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.CarrierInfo.CarrierStatus EnabledControlCarrier {
             get {
                 return this.EnabledControlCarrierField;
             }
@@ -1808,7 +1827,7 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.ServiceReference1.CarrierInfo.Status InControlCarrier {
+        public TestService.ServiceReference1.CarrierInfo.CarrierStatus InControlCarrier {
             get {
                 return this.InControlCarrierField;
             }
@@ -1834,7 +1853,7 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.ServiceReference1.CarrierInfo.Status LoadCarrier {
+        public TestService.ServiceReference1.CarrierInfo.CarrierStatus LoadCarrier {
             get {
                 return this.LoadCarrierField;
             }
@@ -1860,6 +1879,19 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NextCarrierNo {
+            get {
+                return this.NextCarrierNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NextCarrierNoField, value) != true)) {
+                    this.NextCarrierNoField = value;
+                    this.RaisePropertyChanged("NextCarrierNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Reason {
             get {
                 return this.ReasonField;
@@ -1873,7 +1905,7 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.ServiceReference1.CarrierInfo.Status RegisterCarrier {
+        public TestService.ServiceReference1.CarrierInfo.CarrierStatus RegisterCarrier {
             get {
                 return this.RegisterCarrierField;
             }
@@ -1899,7 +1931,7 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.ServiceReference1.CarrierInfo.Status TransferCarrier {
+        public TestService.ServiceReference1.CarrierInfo.CarrierStatus TransferCarrier {
             get {
                 return this.TransferCarrierField;
             }
@@ -1925,7 +1957,7 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.ServiceReference1.CarrierInfo.Status UnloadCarrier {
+        public TestService.ServiceReference1.CarrierInfo.CarrierStatus UnloadCarrier {
             get {
                 return this.UnloadCarrierField;
             }
@@ -1960,8 +1992,8 @@ namespace TestService.ServiceReference1 {
         }
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-        [System.Runtime.Serialization.DataContractAttribute(Name="CarrierInfo.Status", Namespace="http://schemas.datacontract.org/2004/07/")]
-        public enum Status : int {
+        [System.Runtime.Serialization.DataContractAttribute(Name="CarrierInfo.CarrierStatus", Namespace="http://schemas.datacontract.org/2004/07/")]
+        public enum CarrierStatus : int {
             
             [System.Runtime.Serialization.EnumMemberAttribute()]
             No_Use = 0,
