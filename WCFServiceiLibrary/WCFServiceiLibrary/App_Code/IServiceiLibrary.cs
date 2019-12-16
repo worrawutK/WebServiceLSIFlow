@@ -127,6 +127,8 @@ public interface IServiceiLibrary
     [OperationContract]
     EndLotResult EndLotPhase2(string lotNo, string mcNo, string opNo, int good, int ng, Licenser licenser, CarrierInfo carrierInfo,
         EndLotSpecialParametersEventArgs specialParametersEventArgs);
+    [OperationContract]
+    LotInformation GetLotInfo(string lotNo, string mcNo);
 }
 
 [DataContract()]

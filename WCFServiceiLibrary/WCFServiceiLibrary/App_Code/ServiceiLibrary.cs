@@ -179,7 +179,23 @@ public class ServiceiLibrary : IServiceiLibrary
         apcsProDisa:
             if (lotInfo == null || IsSkipped(setupEventArgs.MachineNo))
             {
-            
+                if (lotInfo == null)
+                {
+                    string packageName = GetPackageName(setupEventArgs.LotNo);
+                    if (string.IsNullOrEmpty(packageName))
+                    {
+                        return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.Unknown, "lotNo:" + setupEventArgs.LotNo + " ไม่พบข้อมูลในระบบ",
+                          "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo, "", "",
+                          "CheckLotApcsPro", setupEventArgs.FunctionName, log);
+                    }
+                    CheckLotApcsProResult checkLot = CheckLotApcsPro(setupEventArgs.LotNo, packageName, log);
+                    if (checkLot.IsPass)
+                    {
+                        return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.ApcsPro, "lotNo:" + setupEventArgs.LotNo + " รอการ Import date เข้าระบบ APCS Pro",
+                            "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo, "", "",
+                            "CheckLotApcsPro", setupEventArgs.FunctionName, log);
+                    }
+                }
                 //รอการแก้บัค เนื่องจากคิดว่าทุก lot จะมีใน db ของ ApcsPro แต่ไม่ใช่จะมีแค่ device slip ที่ลงทะเบียนแล้ว ถึงจะนำ lot เข้ามาในระบบ Apcs Pro (SetUp Start End)
                 TdcLotRequestResult requestResult = TdcLotRequest(mcNoToApcs, setupEventArgs.LotNo, (RunModeType)setupEventArgs.RunMode, log);
                 if (!requestResult.IsPass)
@@ -1119,8 +1135,36 @@ public class ServiceiLibrary : IServiceiLibrary
         }
     }
     #endregion
-    
-    
+
+    public LotInformation GetLotInfo(string lotNo, string mcNo)
+    {
+        Logger log = new Logger(c_LogVersion, mcNo);
+        try
+        {
+            DateTime dateTime = c_ApcsProService.Get_DateTimeInfo(log).Datetime;
+            var lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTime);
+            log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCF", "iLibrary", 0, "GetLotInfo", "", "LotNo[" + lotNo + "],MCNo[" + mcNo + "]");
+            LotInformation lotInformation = new LotInformation();
+            lotInformation.LotId = lotInfo.Id;
+            lotInformation.LotNo = lotInfo.Name;
+            lotInformation.DeviceName = lotInfo.Device.Name;
+            lotInformation.PackageName = lotInfo.Package.Name;
+            lotInformation.PassQty = lotInfo.Quantity.Pass;
+            lotInformation.FailQty = lotInfo.Quantity.Fail;
+            lotInformation.JobName = lotInfo.Job.Name;
+            if (c_ApcsProService.CheckPackageEnable(lotInfo.Package.Name, log))
+                lotInformation.LotType = LotInformation.LotTypeState.ApcsPro;
+            else
+                lotInformation.LotType = LotInformation.LotTypeState.Apcs;
+            return lotInformation;
+        }
+        catch (Exception ex)
+        {
+            log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Error", "WCF", "iLibrary", 0, "GetLotInfo", "Exception:" + ex.Message.ToString(), "LotNo[" + lotNo + "],MCNo[" + mcNo + "]");
+            return null;
+        }
+
+    }
 
     public MachineOnlineStateResult MachineOnlineState(string mcNo, MachineOnline online)
     {
@@ -1664,6 +1708,7 @@ public class ServiceiLibrary : IServiceiLibrary
             //}
             result.CurrentCarrierNo = carrierControlResult.CarrierInfo.CurrentCarrier;
             result.NextCarrierNo = carrierControlResult.CarrierInfo.NextCarrier;
+            result.TransferCarrierNo = carrierControlResult.CarrierInfo.NextCarrier;
             result.InControlCarrier = (CarrierInfo.CarrierStatus)carrierControlResult.CarrierInfo.InControl;
             result.LoadCarrier = (CarrierInfo.CarrierStatus)carrierControlResult.CarrierInfo.VerificationOnStart;
             result.RegisterCarrier = (CarrierInfo.CarrierStatus)carrierControlResult.CarrierInfo.CarrierRegister;
@@ -1685,5 +1730,33 @@ public class ServiceiLibrary : IServiceiLibrary
                
     }
 
+    #endregion
+    #region DENPYO_PRINT
+    private string GetPackageName(string lotNo)
+    {
+        using (SqlCommand cmd = new SqlCommand())
+        {
+            cmd.Connection = new SqlConnection("Data Source = 172.16.0.102; Initial Catalog = APCSDB; Persist Security Info = True; User ID = system; Password = 'p@$$w0rd'");
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT FORM_NAME_1,LOT_NO_1,ZUBAN_1 FROM [APCSDB].[dbo].[LCQW_UNION_WORK_DENPYO_PRINT] where LOT_NO_1 = @lotNo";
+            cmd.Parameters.Add("@lotNo", SqlDbType.NVarChar).Value = lotNo;
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    if (reader["ZUBAN_1"] != DBNull.Value)
+                    {
+                        return (string)reader["FORM_NAME_1"];
+                    }
+                    if (reader["FORM_NAME_1"] != DBNull.Value)
+                    {
+                        return (string)reader["FORM_NAME_1"];
+                    }
+                }
+            }
+            
+        }
+        return "";
+    }
     #endregion
 }

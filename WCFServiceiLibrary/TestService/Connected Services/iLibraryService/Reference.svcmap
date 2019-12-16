@@ -18,13 +18,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="e3e6f4ad-0a54-431a-b674-ccaba14be520" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex" />
-    <MetadataFile FileName="service3.xsd" MetadataType="Schema" ID="2211dc46-9598-4a46-8261-3942af42c6c8" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex" />
-    <MetadataFile FileName="service4.xsd" MetadataType="Schema" ID="822e76e6-6f77-464f-b67a-8f4cf19916f0" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex" />
-    <MetadataFile FileName="service5.xsd" MetadataType="Schema" ID="25b64fad-e562-4cb0-b39a-74e9d8983393" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="a92af946-7e65-462f-b5c1-c6b6199c33f5" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex/mex" />
+    <MetadataFile FileName="service3.xsd" MetadataType="Schema" ID="c72eea27-5bf6-41a2-9cff-babe277a09ed" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex/mex" />
+    <MetadataFile FileName="service4.xsd" MetadataType="Schema" ID="0aaeef23-c1fc-44a6-808a-6ba69c553ea8" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex/mex" />
+    <MetadataFile FileName="service5.xsd" MetadataType="Schema" ID="66119c1a-d0dd-461e-b097-de728a39214d" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

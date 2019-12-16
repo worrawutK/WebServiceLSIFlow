@@ -175,6 +175,12 @@
   <wsdl:message name="IServiceiLibrary_EndLotPhase2_OutputMessage">
     <wsdl:part name="parameters" element="tns:EndLotPhase2Response" />
   </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_GetLotInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLotInfo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_GetLotInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLotInfoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceiLibrary">
     <wsdl:operation name="MachineOnlineState">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/MachineOnlineState" message="tns:IServiceiLibrary_MachineOnlineState_InputMessage" />
@@ -287,6 +293,10 @@
     <wsdl:operation name="EndLotPhase2">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/EndLotPhase2" message="tns:IServiceiLibrary_EndLotPhase2_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/EndLotPhase2Response" message="tns:IServiceiLibrary_EndLotPhase2_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLotInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/GetLotInfo" message="tns:IServiceiLibrary_GetLotInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/GetLotInfoResponse" message="tns:IServiceiLibrary_GetLotInfo_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceiLibrary" type="tns:IServiceiLibrary">
@@ -536,6 +546,15 @@
     </wsdl:operation>
     <wsdl:operation name="EndLotPhase2">
       <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/EndLotPhase2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLotInfo">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/GetLotInfo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

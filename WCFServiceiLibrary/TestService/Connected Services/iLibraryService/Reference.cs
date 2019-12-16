@@ -1749,37 +1749,43 @@ namespace TestService.iLibraryService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.CarrierInfo.Status EnabledControlCarrierField;
+        private string CurrentCarrierNoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.CarrierInfo.Status InControlCarrierField;
+        private TestService.iLibraryService.CarrierInfo.CarrierStatus EnabledControlCarrierField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.iLibraryService.CarrierInfo.CarrierStatus InControlCarrierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsPassField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.CarrierInfo.Status LoadCarrierField;
+        private TestService.iLibraryService.CarrierInfo.CarrierStatus LoadCarrierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string LoadCarrierNoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NextCarrierNoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ReasonField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.CarrierInfo.Status RegisterCarrierField;
+        private TestService.iLibraryService.CarrierInfo.CarrierStatus RegisterCarrierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RegisterCarrierNoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.CarrierInfo.Status TransferCarrierField;
+        private TestService.iLibraryService.CarrierInfo.CarrierStatus TransferCarrierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TransferCarrierNoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestService.iLibraryService.CarrierInfo.Status UnloadCarrierField;
+        private TestService.iLibraryService.CarrierInfo.CarrierStatus UnloadCarrierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UnloadCarrierNoField;
@@ -1795,7 +1801,20 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.CarrierInfo.Status EnabledControlCarrier {
+        public string CurrentCarrierNo {
+            get {
+                return this.CurrentCarrierNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CurrentCarrierNoField, value) != true)) {
+                    this.CurrentCarrierNoField = value;
+                    this.RaisePropertyChanged("CurrentCarrierNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.iLibraryService.CarrierInfo.CarrierStatus EnabledControlCarrier {
             get {
                 return this.EnabledControlCarrierField;
             }
@@ -1808,7 +1827,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.CarrierInfo.Status InControlCarrier {
+        public TestService.iLibraryService.CarrierInfo.CarrierStatus InControlCarrier {
             get {
                 return this.InControlCarrierField;
             }
@@ -1834,7 +1853,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.CarrierInfo.Status LoadCarrier {
+        public TestService.iLibraryService.CarrierInfo.CarrierStatus LoadCarrier {
             get {
                 return this.LoadCarrierField;
             }
@@ -1860,6 +1879,19 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NextCarrierNo {
+            get {
+                return this.NextCarrierNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NextCarrierNoField, value) != true)) {
+                    this.NextCarrierNoField = value;
+                    this.RaisePropertyChanged("NextCarrierNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Reason {
             get {
                 return this.ReasonField;
@@ -1873,7 +1905,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.CarrierInfo.Status RegisterCarrier {
+        public TestService.iLibraryService.CarrierInfo.CarrierStatus RegisterCarrier {
             get {
                 return this.RegisterCarrierField;
             }
@@ -1899,7 +1931,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.CarrierInfo.Status TransferCarrier {
+        public TestService.iLibraryService.CarrierInfo.CarrierStatus TransferCarrier {
             get {
                 return this.TransferCarrierField;
             }
@@ -1925,7 +1957,7 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestService.iLibraryService.CarrierInfo.Status UnloadCarrier {
+        public TestService.iLibraryService.CarrierInfo.CarrierStatus UnloadCarrier {
             get {
                 return this.UnloadCarrierField;
             }
@@ -1960,8 +1992,8 @@ namespace TestService.iLibraryService {
         }
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-        [System.Runtime.Serialization.DataContractAttribute(Name="CarrierInfo.Status", Namespace="http://schemas.datacontract.org/2004/07/")]
-        public enum Status : int {
+        [System.Runtime.Serialization.DataContractAttribute(Name="CarrierInfo.CarrierStatus", Namespace="http://schemas.datacontract.org/2004/07/")]
+        public enum CarrierStatus : int {
             
             [System.Runtime.Serialization.EnumMemberAttribute()]
             No_Use = 0,
@@ -2181,6 +2213,177 @@ namespace TestService.iLibraryService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LotInformation", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class LotInformation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DeviceNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int FailQtyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string JobNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int LotIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LotNoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.iLibraryService.LotInformation.LotTypeState LotTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PackageNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PassQtyField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DeviceName {
+            get {
+                return this.DeviceNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DeviceNameField, value) != true)) {
+                    this.DeviceNameField = value;
+                    this.RaisePropertyChanged("DeviceName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FailQty {
+            get {
+                return this.FailQtyField;
+            }
+            set {
+                if ((this.FailQtyField.Equals(value) != true)) {
+                    this.FailQtyField = value;
+                    this.RaisePropertyChanged("FailQty");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string JobName {
+            get {
+                return this.JobNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.JobNameField, value) != true)) {
+                    this.JobNameField = value;
+                    this.RaisePropertyChanged("JobName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int LotId {
+            get {
+                return this.LotIdField;
+            }
+            set {
+                if ((this.LotIdField.Equals(value) != true)) {
+                    this.LotIdField = value;
+                    this.RaisePropertyChanged("LotId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LotNo {
+            get {
+                return this.LotNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LotNoField, value) != true)) {
+                    this.LotNoField = value;
+                    this.RaisePropertyChanged("LotNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.iLibraryService.LotInformation.LotTypeState LotType {
+            get {
+                return this.LotTypeField;
+            }
+            set {
+                if ((this.LotTypeField.Equals(value) != true)) {
+                    this.LotTypeField = value;
+                    this.RaisePropertyChanged("LotType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PackageName {
+            get {
+                return this.PackageNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PackageNameField, value) != true)) {
+                    this.PackageNameField = value;
+                    this.RaisePropertyChanged("PackageName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PassQty {
+            get {
+                return this.PassQtyField;
+            }
+            set {
+                if ((this.PassQtyField.Equals(value) != true)) {
+                    this.PassQtyField = value;
+                    this.RaisePropertyChanged("PassQty");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+        [System.Runtime.Serialization.DataContractAttribute(Name="LotInformation.LotTypeState", Namespace="http://schemas.datacontract.org/2004/07/")]
+        public enum LotTypeState : int {
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            Apcs = 0,
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            ApcsPro = 1,
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            Unknown = 2,
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="iLibraryService.IServiceiLibrary")]
     public interface IServiceiLibrary {
@@ -2268,6 +2471,9 @@ namespace TestService.iLibraryService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/EndLotPhase2", ReplyAction="http://tempuri.org/IServiceiLibrary/EndLotPhase2Response")]
         TestService.iLibraryService.EndLotResult EndLotPhase2(string lotNo, string mcNo, string opNo, int good, int ng, TestService.iLibraryService.Licenser licenser, TestService.iLibraryService.CarrierInfo carrierInfo, TestService.iLibraryService.EndLotSpecialParametersEventArgs specialParametersEventArgs);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/GetLotInfo", ReplyAction="http://tempuri.org/IServiceiLibrary/GetLotInfoResponse")]
+        TestService.iLibraryService.LotInformation GetLotInfo(string lotNo, string mcNo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2407,6 +2613,10 @@ namespace TestService.iLibraryService {
         
         public TestService.iLibraryService.EndLotResult EndLotPhase2(string lotNo, string mcNo, string opNo, int good, int ng, TestService.iLibraryService.Licenser licenser, TestService.iLibraryService.CarrierInfo carrierInfo, TestService.iLibraryService.EndLotSpecialParametersEventArgs specialParametersEventArgs) {
             return base.Channel.EndLotPhase2(lotNo, mcNo, opNo, good, ng, licenser, carrierInfo, specialParametersEventArgs);
+        }
+        
+        public TestService.iLibraryService.LotInformation GetLotInfo(string lotNo, string mcNo) {
+            return base.Channel.GetLotInfo(lotNo, mcNo);
         }
     }
 }

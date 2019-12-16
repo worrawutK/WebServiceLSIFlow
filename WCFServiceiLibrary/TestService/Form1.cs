@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TestService.ServiceReference1;
+using TestService.iLibraryService;
 using MessageDialog;
 using System.Threading;
 using System.Data.SqlClient;
@@ -75,6 +75,7 @@ namespace TestService
 
         private void buttonSetup_Click(object sender, EventArgs e)
         {
+            var lotin = c_ILibraryClient.GetLotInfo(textBoxLotNo.Text, textBoxMCNo.Text);
             CarrierInfo carrierInfo = c_ILibraryClient.GetCarrierInfo(textBoxMCNo.Text, textBoxLotNo.Text,
                textBoxOPNo.Text);
             SetupLotSpecialParametersEventArgs setupLotSpecial = new SetupLotSpecialParametersEventArgs()

@@ -2213,6 +2213,177 @@ namespace TestService.ServiceReference1 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LotInformation", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class LotInformation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DeviceNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int FailQtyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string JobNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int LotIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LotNoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestService.ServiceReference1.LotInformation.LotTypeState LotTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PackageNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PassQtyField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DeviceName {
+            get {
+                return this.DeviceNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DeviceNameField, value) != true)) {
+                    this.DeviceNameField = value;
+                    this.RaisePropertyChanged("DeviceName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FailQty {
+            get {
+                return this.FailQtyField;
+            }
+            set {
+                if ((this.FailQtyField.Equals(value) != true)) {
+                    this.FailQtyField = value;
+                    this.RaisePropertyChanged("FailQty");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string JobName {
+            get {
+                return this.JobNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.JobNameField, value) != true)) {
+                    this.JobNameField = value;
+                    this.RaisePropertyChanged("JobName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int LotId {
+            get {
+                return this.LotIdField;
+            }
+            set {
+                if ((this.LotIdField.Equals(value) != true)) {
+                    this.LotIdField = value;
+                    this.RaisePropertyChanged("LotId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LotNo {
+            get {
+                return this.LotNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LotNoField, value) != true)) {
+                    this.LotNoField = value;
+                    this.RaisePropertyChanged("LotNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestService.ServiceReference1.LotInformation.LotTypeState LotType {
+            get {
+                return this.LotTypeField;
+            }
+            set {
+                if ((this.LotTypeField.Equals(value) != true)) {
+                    this.LotTypeField = value;
+                    this.RaisePropertyChanged("LotType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PackageName {
+            get {
+                return this.PackageNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PackageNameField, value) != true)) {
+                    this.PackageNameField = value;
+                    this.RaisePropertyChanged("PackageName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PassQty {
+            get {
+                return this.PassQtyField;
+            }
+            set {
+                if ((this.PassQtyField.Equals(value) != true)) {
+                    this.PassQtyField = value;
+                    this.RaisePropertyChanged("PassQty");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+        [System.Runtime.Serialization.DataContractAttribute(Name="LotInformation.LotTypeState", Namespace="http://schemas.datacontract.org/2004/07/")]
+        public enum LotTypeState : int {
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            Apcs = 0,
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            ApcsPro = 1,
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            Unknown = 2,
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IServiceiLibrary")]
     public interface IServiceiLibrary {
@@ -2300,6 +2471,9 @@ namespace TestService.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/EndLotPhase2", ReplyAction="http://tempuri.org/IServiceiLibrary/EndLotPhase2Response")]
         TestService.ServiceReference1.EndLotResult EndLotPhase2(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference1.Licenser licenser, TestService.ServiceReference1.CarrierInfo carrierInfo, TestService.ServiceReference1.EndLotSpecialParametersEventArgs specialParametersEventArgs);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/GetLotInfo", ReplyAction="http://tempuri.org/IServiceiLibrary/GetLotInfoResponse")]
+        TestService.ServiceReference1.LotInformation GetLotInfo(string lotNo, string mcNo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2439,6 +2613,10 @@ namespace TestService.ServiceReference1 {
         
         public TestService.ServiceReference1.EndLotResult EndLotPhase2(string lotNo, string mcNo, string opNo, int good, int ng, TestService.ServiceReference1.Licenser licenser, TestService.ServiceReference1.CarrierInfo carrierInfo, TestService.ServiceReference1.EndLotSpecialParametersEventArgs specialParametersEventArgs) {
             return base.Channel.EndLotPhase2(lotNo, mcNo, opNo, good, ng, licenser, carrierInfo, specialParametersEventArgs);
+        }
+        
+        public TestService.ServiceReference1.LotInformation GetLotInfo(string lotNo, string mcNo) {
+            return base.Channel.GetLotInfo(lotNo, mcNo);
         }
     }
 }

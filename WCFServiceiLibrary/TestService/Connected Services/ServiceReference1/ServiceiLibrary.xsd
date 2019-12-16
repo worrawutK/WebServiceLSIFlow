@@ -276,4 +276,25 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="EndLotSpecialParametersEventArgs" nillable="true" type="tns:EndLotSpecialParametersEventArgs" />
+  <xs:complexType name="LotInformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DeviceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FailQty" type="xs:int" />
+      <xs:element minOccurs="0" name="JobName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LotId" type="xs:int" />
+      <xs:element minOccurs="0" name="LotNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LotType" type="tns:LotInformation.LotTypeState" />
+      <xs:element minOccurs="0" name="PackageName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PassQty" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LotInformation" nillable="true" type="tns:LotInformation" />
+  <xs:simpleType name="LotInformation.LotTypeState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Apcs" />
+      <xs:enumeration value="ApcsPro" />
+      <xs:enumeration value="Unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="LotInformation.LotTypeState" nillable="true" type="tns:LotInformation.LotTypeState" />
 </xs:schema>
