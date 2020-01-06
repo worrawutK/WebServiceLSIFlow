@@ -95,7 +95,7 @@ public class EndLotResult
 
 
         this.IsPass = isPass;
-        this.Cause = cause;
+        this.Cause = cause + " " + cause2;
         this.FunctionName = functionName;
         this.Type = type;
         this.SubFunction = subFunction;
