@@ -129,6 +129,9 @@ public interface IServiceiLibrary
         EndLotSpecialParametersEventArgs specialParametersEventArgs);
     [OperationContract]
     LotInformation GetLotInfo(string lotNo, string mcNo);
+    //Temporary
+    [OperationContract]
+    bool CheckPackageOnlyApcsPro(string mcNo, string package, string opNo, string lotNo);
 }
 
 [DataContract()]

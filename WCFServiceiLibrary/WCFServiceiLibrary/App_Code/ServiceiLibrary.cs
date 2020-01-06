@@ -306,7 +306,14 @@ public class ServiceiLibrary : IServiceiLibrary
                     registerCarrierNo = setupEventArgs.CarrierInfo.RegisterCarrierNo;
                     transferCarrierNo = setupEventArgs.CarrierInfo.TransferCarrierNo;
                     if (setupEventArgs.CarrierInfo.LoadCarrier == CarrierInfo.CarrierStatus.Use)
-                    {
+                    {//setupEventArgs.CarrierInfo.LoadCarrierNo
+                        ResultBase resultBase = SetAutoCarrier(lotInfo.Name, setupEventArgs.CarrierInfo.LoadCarrierNo, machineInfo.Name, CarrierStatue.Load,log);
+                        if (!resultBase.IsPass)
+                        {
+                            return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.ApcsPro, resultBase.Reason,
+                              "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo + " mcNo:" + setupEventArgs.MachineNo + " LoadCarrierNo:" + setupEventArgs.CarrierInfo.LoadCarrierNo,"",
+                              "0","AutoRegisterCarrier", setupEventArgs.FunctionName, log);
+                        }
                         CarrierControlResult resultLoad = c_ApcsProService.VerificationLoadCarrier(machineInfo.Id, lotInfo.Id, setupEventArgs.CarrierInfo.LoadCarrierNo, userInfo.Id, log);
                         if (!resultLoad.IsPass)
                         {
@@ -921,6 +928,13 @@ public class ServiceiLibrary : IServiceiLibrary
             {
                 if (endLotEvenArgs.CarrierInfo.UnloadCarrier == CarrierInfo.CarrierStatus.Use)
                 {
+                    ResultBase resultBase = SetAutoCarrier(lotNo, endLotEvenArgs.CarrierInfo.UnloadCarrierNo, mcNo, CarrierStatue.Unload, log);
+                    if (!resultBase.IsPass)
+                    {
+                        return new EndLotResult(false, MessageType.ApcsPro, resultBase.Reason,
+                          "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " good:" + good + " ng:" + ng + " UnloadCarrierNo:" + endLotEvenArgs.CarrierInfo.UnloadCarrierNo,
+                          "AutoRegisterCarrier", functionName, log);
+                    }
                     CarrierControlResult carrierControlResult = c_ApcsProService.VerificationUnloadCarrier(machineInfo.Id, lotInfo.Id, endLotEvenArgs.CarrierInfo.UnloadCarrierNo, userInfo.Id, log);
                     if (!carrierControlResult.IsPass)
                     {
@@ -1737,26 +1751,142 @@ public class ServiceiLibrary : IServiceiLibrary
         using (SqlCommand cmd = new SqlCommand())
         {
             cmd.Connection = new SqlConnection("Data Source = 172.16.0.102; Initial Catalog = APCSDB; Persist Security Info = True; User ID = system; Password = 'p@$$w0rd'");
+            cmd.Connection.Open();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT FORM_NAME_1,LOT_NO_1,ZUBAN_1 FROM [APCSDB].[dbo].[LCQW_UNION_WORK_DENPYO_PRINT] where LOT_NO_1 = @lotNo";
+            cmd.CommandText = "SELECT FORM_NAME_1,FORM_NAME_2,FORM_NAME_3,FORM_NAME_4,FORM_NAME_6" +
+                ",LOT_NO_1,LOT_NO_2,LOT_NO_3,LOT_NO_4,ZUBAN_1 FROM [APCSDB].[dbo].[LCQW_UNION_WORK_DENPYO_PRINT]" +
+                " where LOT_NO_1 = @lotNo or LOT_NO_2 = @lotNo or LOT_NO_3 = @lotNo or LOT_NO_4 = @lotNo";
             cmd.Parameters.Add("@lotNo", SqlDbType.NVarChar).Value = lotNo;
+            DataTable dataTable = new DataTable();
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                if (reader.HasRows)
+                dataTable.Load(reader);
+                //if (reader.HasRows)
+                //{
+                //    //if (reader["ZUBAN_1"] != DBNull.Value)
+                //    //{
+                //    //    return (string)reader["FORM_NAME_1"];
+                //    //}
+                //    if (reader["FORM_NAME_1"] != DBNull.Value) return (string)reader["FORM_NAME_1"];
+                //    else if (reader["FORM_NAME_2"] != DBNull.Value) return (string)reader["FORM_NAME_2"];
+                //    else if (reader["FORM_NAME_3"] != DBNull.Value) return (string)reader["FORM_NAME_3"];
+                //    else if (reader["FORM_NAME_4"] != DBNull.Value) return (string)reader["FORM_NAME_4"];
+                //    else if (reader["FORM_NAME_6"] != DBNull.Value) return (string)reader["FORM_NAME_6"];
+                //}
+            }
+            cmd.Connection.Close();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                if (row["FORM_NAME_1"] != DBNull.Value && (string)row["FORM_NAME_1"] != "")
                 {
-                    if (reader["ZUBAN_1"] != DBNull.Value)
-                    {
-                        return (string)reader["FORM_NAME_1"];
-                    }
-                    if (reader["FORM_NAME_1"] != DBNull.Value)
-                    {
-                        return (string)reader["FORM_NAME_1"];
-                    }
+                   return (string)row["FORM_NAME_1"];
+                }
+                else if (row["FORM_NAME_2"] != DBNull.Value && (string)row["FORM_NAME_2"] != "")
+                {
+                    return (string)row["FORM_NAME_2"];
+                }
+                else if (row["FORM_NAME_3"] != DBNull.Value && (string)row["FORM_NAME_3"] != "")
+                {
+                    return (string)row["FORM_NAME_3"];
+
+                }
+                else if (row["FORM_NAME_4"] != DBNull.Value && (string)row["FORM_NAME_4"] != "")
+                {
+                    return (string)row["FORM_NAME_4"];
+
+                }
+                else if (row["FORM_NAME_6"] != DBNull.Value && (string)row["FORM_NAME_6"] != "")
+                {
+                   return (string)row["FORM_NAME_6"];
+
                 }
             }
-            
+           
         }
         return "";
+    }
+    #endregion
+    #region TemporaryFunction
+    //Temporary for D lot ที่ยังไม่เปิดระบบ APCS Pro เพราะ D lot มันจะไม่มีในระบบ apcs 2019/12/18 (พี่ฟรี พี่ก็อตเล็ก)
+    public bool CheckPackageOnlyApcsPro(string mcNo,string package,string opNo,string lotNo)
+    {
+        Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
+        try
+        {
+            bool result =  c_ApcsProService.CheckPackageEnable(package, log);
+            log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCFService", "iLibrary", 0, "CheckPackageEnable", "result=" + result, "package[" + package + "] opNo[" + opNo + "] lotNo["+ lotNo + "]");
+            return result;
+        }
+        catch (Exception ex)
+        {
+            log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Error", "WCFService", "iLibrary", 0, "CheckPackageEnable", "Exception:" + ex.Message.ToString(), "package[" + package + "] opNo[" + opNo + "] lotNo[" + lotNo + "]");
+            throw;
+        }
+     
+    }
+    #endregion
+    #region AutoRegisterCarrier
+    private ResultBase SetAutoCarrier(string lotNo,string carrierNo,string mcNo, CarrierStatue carrierStatue,Logger log)
+    {
+        ResultBase result = new ResultBase();
+        try
+        {
+          
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.Connection = new SqlConnection("Data Source = 172.16.0.102; Initial Catalog = StoredProcedureDB; Persist Security Info = True; User ID = system; Password = 'p@$$w0rd'; Application Name = iLibraryService");
+                cmd.Connection.Open();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "[cellcon].[sp_set_register_carrier]";
+                cmd.Parameters.Add("@lot_no", SqlDbType.VarChar).Value = lotNo;
+                cmd.Parameters.Add("@carrier_no", SqlDbType.VarChar).Value = carrierNo;
+                cmd.Parameters.Add("@status", SqlDbType.Int).Value = 1;//(int)carrierStatue;
+                cmd.Parameters.Add("@mcno", SqlDbType.VarChar).Value = mcNo;
+                DataTable dataTable = new DataTable();
+                using (SqlDataReader dataReader = cmd.ExecuteReader())
+                {
+                    dataTable.Load(dataReader);
+                }
+                //cmd.Connection.Close();
+                foreach (DataRow item in dataTable.Rows)
+                {
+                    bool isUpdate = false;
+                    CarrierStatue statusCarrier = CarrierStatue.NotSet;
+                    if (item["is_update"] != null)
+                    {
+                        isUpdate = (bool)item["is_update"];
+                    }
+                    if (item["status_carrier"] != null)
+                    {
+                        if ((int)item["status_carrier"] == 1)
+                        {
+                            statusCarrier = CarrierStatue.Load;
+                        }
+                        else if ((int)item["status_carrier"] == 2)
+                        {
+                            statusCarrier = CarrierStatue.Unload;
+                        }
+                    }
+                    log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCF", "StoredProcedureDB", 0, "SetAutoCarrier", "IsUpdate:" + isUpdate + " status_carrier:" + statusCarrier.ToString(), "status_carrier 1 = Load ,2 = Unload");
+
+                }
+            }
+            result.IsPass = true;
+            
+        }
+        catch (Exception ex)
+        {
+            result.IsPass = false;
+            result.Reason = "Exception : " + ex.Message.ToString();
+        }
+        return result;
+    }
+    enum CarrierStatue
+    {
+        NotSet =0,
+        Load = 1,
+        Unload = 2
+      
     }
     #endregion
 }
