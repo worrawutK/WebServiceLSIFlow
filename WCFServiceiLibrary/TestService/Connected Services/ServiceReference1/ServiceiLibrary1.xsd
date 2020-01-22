@@ -547,4 +547,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="CheckPackageOnlyApcsPro">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="mcNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="package" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="opNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lotNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckPackageOnlyApcsProResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckPackageOnlyApcsProResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

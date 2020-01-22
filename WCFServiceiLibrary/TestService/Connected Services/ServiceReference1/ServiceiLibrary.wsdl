@@ -181,6 +181,12 @@
   <wsdl:message name="IServiceiLibrary_GetLotInfo_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetLotInfoResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_CheckPackageOnlyApcsPro_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckPackageOnlyApcsPro" />
+  </wsdl:message>
+  <wsdl:message name="IServiceiLibrary_CheckPackageOnlyApcsPro_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckPackageOnlyApcsProResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceiLibrary">
     <wsdl:operation name="MachineOnlineState">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/MachineOnlineState" message="tns:IServiceiLibrary_MachineOnlineState_InputMessage" />
@@ -297,6 +303,10 @@
     <wsdl:operation name="GetLotInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/GetLotInfo" message="tns:IServiceiLibrary_GetLotInfo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/GetLotInfoResponse" message="tns:IServiceiLibrary_GetLotInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckPackageOnlyApcsPro">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceiLibrary/CheckPackageOnlyApcsPro" message="tns:IServiceiLibrary_CheckPackageOnlyApcsPro_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceiLibrary/CheckPackageOnlyApcsProResponse" message="tns:IServiceiLibrary_CheckPackageOnlyApcsPro_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceiLibrary" type="tns:IServiceiLibrary">
@@ -555,6 +565,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetLotInfo">
       <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/GetLotInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPackageOnlyApcsPro">
+      <soap:operation soapAction="http://tempuri.org/IServiceiLibrary/CheckPackageOnlyApcsPro" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

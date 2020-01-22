@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TestService.iLibraryService;
+using TestService.ServiceReference1;
 using MessageDialog;
 using System.Threading;
 using System.Data.SqlClient;
@@ -54,7 +54,7 @@ namespace TestService
         }
         private void buttonMcOff_Click(object sender, EventArgs e)
         {
-            MachineOnlineStateResult result = c_ILibraryClient.MachineOnlineState(textBoxMCNo.Text, MachineOnline.Offline);
+               MachineOnlineStateResult result = c_ILibraryClient.MachineOnlineState(textBoxMCNo.Text, MachineOnline.Offline);
             
         }
         private void buttonMcOn_Click(object sender, EventArgs e)
@@ -75,6 +75,8 @@ namespace TestService
 
         private void buttonSetup_Click(object sender, EventArgs e)
         {
+            c_ILibraryClient.
+            //var xxx = c_ILibraryClient.CheckPackageOnlyApcsPro("TP-TP-52", "TSSOP-B8J", "007567", "1952D2368V");
             var lotin = c_ILibraryClient.GetLotInfo(textBoxLotNo.Text, textBoxMCNo.Text);
             CarrierInfo carrierInfo = c_ILibraryClient.GetCarrierInfo(textBoxMCNo.Text, textBoxLotNo.Text,
                textBoxOPNo.Text);
@@ -85,7 +87,7 @@ namespace TestService
             var sss = c_ILibraryClient.SetupLotNoCheckLicenser(textBoxLotNo.Text, textBoxMCNo.Text,
               textBoxOPNo.Text, textBoxProcess.Text, "");
             SetupLotResult result = c_ILibraryClient.SetupLotPhase2(textBoxLotNo.Text, textBoxMCNo.Text,
-              textBoxOPNo.Text, textBoxProcess.Text,Licenser.NoCheck, carrierInfo, setupLotSpecial);
+              textBoxOPNo.Text, textBoxProcess.Text,Licenser.Check, carrierInfo, setupLotSpecial);
 
 
             StartLotSpecialParametersEventArgs startLotSpecial = new StartLotSpecialParametersEventArgs()

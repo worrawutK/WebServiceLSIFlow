@@ -1158,7 +1158,20 @@ public class ServiceiLibrary : IServiceiLibrary
             DateTime dateTime = c_ApcsProService.Get_DateTimeInfo(log).Datetime;
             var lotInfo = c_ApcsProService.GetLotInfo(lotNo, log, dateTime);
             log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCF", "iLibrary", 0, "GetLotInfo", "", "LotNo[" + lotNo + "],MCNo[" + mcNo + "]");
+            if (lotInfo == null)
+            {
+                return null;
+            }
+
             LotInformation lotInformation = new LotInformation();
+
+            if (c_ApcsProService.CheckPackageEnable(lotInfo.Package.Name, log))
+                lotInformation.LotType = LotInformation.LotTypeState.ApcsPro;
+            else
+            {
+                lotInformation.LotType = LotInformation.LotTypeState.Apcs;
+            }
+            
             lotInformation.LotId = lotInfo.Id;
             lotInformation.LotNo = lotInfo.Name;
             lotInformation.DeviceName = lotInfo.Device.Name;
@@ -1166,10 +1179,14 @@ public class ServiceiLibrary : IServiceiLibrary
             lotInformation.PassQty = lotInfo.Quantity.Pass;
             lotInformation.FailQty = lotInfo.Quantity.Fail;
             lotInformation.JobName = lotInfo.Job.Name;
-            if (c_ApcsProService.CheckPackageEnable(lotInfo.Package.Name, log))
-                lotInformation.LotType = LotInformation.LotTypeState.ApcsPro;
-            else
-                lotInformation.LotType = LotInformation.LotTypeState.Apcs;
+            //if (c_ApcsProService.CheckPackageEnable(lotInfo.Package.Name, log))
+            //    lotInformation.LotType = LotInformation.LotTypeState.ApcsPro;
+            //else
+            //{
+            //    lotInformation.LotType = LotInformation.LotTypeState.Apcs;
+            //    return null;
+            //}
+                
             return lotInformation;
         }
         catch (Exception ex)
