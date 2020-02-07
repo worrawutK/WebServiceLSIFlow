@@ -1178,7 +1178,17 @@ public class ServiceiLibrary : IServiceiLibrary
             lotInformation.PackageName = lotInfo.Package.Name;
             lotInformation.PassQty = lotInfo.Quantity.Pass;
             lotInformation.FailQty = lotInfo.Quantity.Fail;
-            lotInformation.JobName = lotInfo.Job.Name;
+            string jobName = "";
+            if (lotInfo.IsSpecialFlow)
+            {
+                jobName = lotInfo.SpJob.Name;
+            }
+            else
+            {
+                jobName = lotInfo.Job.Name;
+            }
+
+            lotInformation.JobName = jobName;
             //if (c_ApcsProService.CheckPackageEnable(lotInfo.Package.Name, log))
             //    lotInformation.LotType = LotInformation.LotTypeState.ApcsPro;
             //else
