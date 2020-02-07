@@ -32,7 +32,8 @@ public class ServiceiLibrary : IServiceiLibrary
         c_ApcsProService = new ApcsProService();
         c_TdcService =  TdcService.GetInstance();
         //[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
-        c_PahtLogFile = HttpContext.Current.Server.MapPath(@"~\\Log");
+        //c_PahtLogFile = HttpContext.Current.Server.MapPath(@"~\\Log");
+        c_PahtLogFile = @"\\172.16.0.115\NewCenterPoint\iLibraryService\Log";//HttpContext.Current.Server.MapPath(@"~F:\bin\WCFLog");
     }
     #region Setup
     
