@@ -32,8 +32,15 @@ public class ServiceiLibrary : IServiceiLibrary
         c_ApcsProService = new ApcsProService();
         c_TdcService =  TdcService.GetInstance();
         //[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
-        //c_PahtLogFile = HttpContext.Current.Server.MapPath(@"~\\Log");
-        c_PahtLogFile = @"\\172.16.0.115\NewCenterPoint\iLibraryService\Log";//HttpContext.Current.Server.MapPath(@"~F:\bin\WCFLog");
+        string testMode =  AppSettingHelper.GetAppSettingsValue("TestMode");
+        if (testMode.Trim().ToUpper() == "TRUE")
+        {
+            c_PahtLogFile = HttpContext.Current.Server.MapPath(@"~\\Log");
+        }
+        else
+        {
+            c_PahtLogFile = @"\\172.16.0.115\NewCenterPoint\iLibraryService\Log";//HttpContext.Current.Server.MapPath(@"~F:\bin\WCFLog");
+        }
     }
     #region Setup
     
@@ -1369,6 +1376,11 @@ public class ServiceiLibrary : IServiceiLibrary
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
+            string fullName = GetPackageFullName(package);
+            if (!string.IsNullOrEmpty(fullName))
+            {
+                package = fullName.Trim();
+            }
             CheckLotApcsProResult apcsProResult = CheckLotApcsPro(lotNo, package, log);
             if (!apcsProResult.IsPass)
             {
@@ -1776,6 +1788,7 @@ public class ServiceiLibrary : IServiceiLibrary
     #region DENPYO_PRINT
     private string GetPackageName(string lotNo)
     {
+        string pkg = "";
         using (SqlCommand cmd = new SqlCommand())
         {
             cmd.Connection = new SqlConnection("Data Source = 172.16.0.102; Initial Catalog = APCSDB; Persist Security Info = True; User ID = system; Password = 'p@$$w0rd'");
@@ -1807,31 +1820,36 @@ public class ServiceiLibrary : IServiceiLibrary
             {
                 if (row["FORM_NAME_1"] != DBNull.Value && (string)row["FORM_NAME_1"] != "")
                 {
-                   return (string)row["FORM_NAME_1"];
+                    pkg = (string)row["FORM_NAME_1"];
                 }
                 else if (row["FORM_NAME_2"] != DBNull.Value && (string)row["FORM_NAME_2"] != "")
                 {
-                    return (string)row["FORM_NAME_2"];
+                    pkg=(string)row["FORM_NAME_2"];
                 }
                 else if (row["FORM_NAME_3"] != DBNull.Value && (string)row["FORM_NAME_3"] != "")
                 {
-                    return (string)row["FORM_NAME_3"];
+                    pkg=(string)row["FORM_NAME_3"];
 
                 }
                 else if (row["FORM_NAME_4"] != DBNull.Value && (string)row["FORM_NAME_4"] != "")
                 {
-                    return (string)row["FORM_NAME_4"];
+                    pkg=(string)row["FORM_NAME_4"];
 
                 }
                 else if (row["FORM_NAME_6"] != DBNull.Value && (string)row["FORM_NAME_6"] != "")
                 {
-                   return (string)row["FORM_NAME_6"];
+                    pkg=(string)row["FORM_NAME_6"];
 
                 }
             }
-           
+            string fullName = GetPackageFullName(pkg);
+            if (!string.IsNullOrEmpty(fullName))
+            {
+                pkg = fullName;
+            }
+
         }
-        return "";
+        return pkg;
     }
     #endregion
     #region TemporaryFunction
@@ -1841,6 +1859,12 @@ public class ServiceiLibrary : IServiceiLibrary
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);
         try
         {
+            string fullName = GetPackageFullName(package);
+            if (!string.IsNullOrEmpty(fullName))
+            {
+                package = fullName.Trim();
+            }
+
             bool result =  c_ApcsProService.CheckPackageEnable(package, log);
             log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Normal", "WCFService", "iLibrary", 0, "CheckPackageEnable", "result=" + result, "package[" + package + "] opNo[" + opNo + "] lotNo["+ lotNo + "]");
             return result;
@@ -1851,6 +1875,32 @@ public class ServiceiLibrary : IServiceiLibrary
             throw;
         }
      
+    }
+    private string GetPackageFullName(string packageShortName)
+    {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.Connection = new SqlConnection(AppSettingHelper.GetConnectionStringValue("ApcsProConnectionString"));
+                cmd.Connection.Open();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "SELECT [name],[short_name] FROM [APCSProDB].[method].[packages] WHERE [short_name] = @package_short_name";
+                cmd.Parameters.Add("@package_short_name", SqlDbType.NVarChar).Value = packageShortName;
+                DataTable dataTable = new DataTable();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    dataTable.Load(reader);
+                }
+                cmd.Connection.Close();
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    if (row["name"] != DBNull.Value && (string)row["name"] != "")
+                    {
+                        return (string)row["name"];
+                    }
+                }
+
+            }
+            return "";
     }
     #endregion
     #region AutoRegisterCarrier

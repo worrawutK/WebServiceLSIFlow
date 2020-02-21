@@ -20,4 +20,13 @@ internal class AppSettingHelper
         }
         return val;
     }
+    internal static string GetConnectionStringValue(string key)
+    {
+        string val = ConfigurationManager.ConnectionStrings[key].ConnectionString;
+        if (string.IsNullOrEmpty(val))
+        {
+            throw new Exception("Application Setting Key was not found [Key=" + key + "]");
+        }
+        return val;
+    }
 }
