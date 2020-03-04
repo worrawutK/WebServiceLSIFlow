@@ -1918,7 +1918,7 @@ public class ServiceiLibrary : IServiceiLibrary
                 cmd.CommandText = "[cellcon].[sp_set_register_carrier]";
                 cmd.Parameters.Add("@lot_no", SqlDbType.VarChar).Value = lotNo;
                 cmd.Parameters.Add("@carrier_no", SqlDbType.VarChar).Value = carrierNo;
-                cmd.Parameters.Add("@status", SqlDbType.Int).Value = 1;//(int)carrierStatue;
+                cmd.Parameters.Add("@status", SqlDbType.Int).Value = (int)carrierStatue;
                 cmd.Parameters.Add("@mcno", SqlDbType.VarChar).Value = mcNo;
                 DataTable dataTable = new DataTable();
                 using (SqlDataReader dataReader = cmd.ExecuteReader())
