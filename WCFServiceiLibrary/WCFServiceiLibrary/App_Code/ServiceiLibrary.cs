@@ -310,36 +310,36 @@ public class ServiceiLibrary : IServiceiLibrary
                 if (setupEventArgs.CarrierInfo != null && setupEventArgs.CarrierInfo.EnabledControlCarrier == CarrierInfo.CarrierStatus.Use &&
                     setupEventArgs.CarrierInfo.InControlCarrier == CarrierInfo.CarrierStatus.Use)
                 {
-                    loadCarrierNo = setupEventArgs.CarrierInfo.LoadCarrierNo;
-                    registerCarrierNo = setupEventArgs.CarrierInfo.RegisterCarrierNo;
-                    transferCarrierNo = setupEventArgs.CarrierInfo.TransferCarrierNo;
+                    loadCarrierNo = setupEventArgs.CarrierInfo.LoadCarrierNo.Trim().ToUpper();
+                    registerCarrierNo = setupEventArgs.CarrierInfo.RegisterCarrierNo.Trim().ToUpper();
+                    transferCarrierNo = setupEventArgs.CarrierInfo.TransferCarrierNo.Trim().ToUpper();
                     if (setupEventArgs.CarrierInfo.LoadCarrier == CarrierInfo.CarrierStatus.Use)
                     {//setupEventArgs.CarrierInfo.LoadCarrierNo
-                        ResultBase resultBase = SetAutoCarrier(lotInfo.Name, setupEventArgs.CarrierInfo.LoadCarrierNo, machineInfo.Name, CarrierStatue.Load,log);
+                        ResultBase resultBase = SetAutoCarrier(lotInfo.Name, loadCarrierNo, machineInfo.Name, CarrierStatue.Load,log);
                         if (!resultBase.IsPass)
                         {
                             return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.ApcsPro, resultBase.Reason,
-                              "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo + " mcNo:" + setupEventArgs.MachineNo + " LoadCarrierNo:" + setupEventArgs.CarrierInfo.LoadCarrierNo,"",
+                              "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo + " mcNo:" + setupEventArgs.MachineNo + " LoadCarrierNo:" + loadCarrierNo, "",
                               "0","AutoRegisterCarrier", setupEventArgs.FunctionName, log);
                         }
-                        CarrierControlResult resultLoad = c_ApcsProService.VerificationLoadCarrier(machineInfo.Id, lotInfo.Id, setupEventArgs.CarrierInfo.LoadCarrierNo, userInfo.Id, log);
+                        CarrierControlResult resultLoad = c_ApcsProService.VerificationLoadCarrier(machineInfo.Id, lotInfo.Id, loadCarrierNo, userInfo.Id, log);
                         if (!resultLoad.IsPass)
                         {
                             return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.ApcsPro, resultLoad.ErrorMessageDetail.Error_Message,
                                 "mcNo:" + setupEventArgs.MachineNo + " ,lotNo:" + setupEventArgs.LotNo +
-                                " ,LoadCarrierNo:" + setupEventArgs.CarrierInfo.LoadCarrierNo + " ,opNo:" + setupEventArgs.OperatorNo
+                                " ,LoadCarrierNo:" + loadCarrierNo + " ,opNo:" + setupEventArgs.OperatorNo
                                 , "", resultLoad.ErrorMessageDetail.Error_No.ToString(), "VerificationLoadCarrier", setupEventArgs.FunctionName, log);
                         }
                     }
 
                     if (setupEventArgs.CarrierInfo.RegisterCarrier == CarrierInfo.CarrierStatus.Use)
                     {
-                        CarrierControlResult resultRegister = c_ApcsProService.CheckAndRegisterCurrentCarrier(machineInfo.Id, lotInfo.Id, setupEventArgs.CarrierInfo.RegisterCarrierNo, userInfo.Id, log);
+                        CarrierControlResult resultRegister = c_ApcsProService.CheckAndRegisterCurrentCarrier(machineInfo.Id, lotInfo.Id, registerCarrierNo, userInfo.Id, log);
                         if (!resultRegister.IsPass)
                         {
                             return new SetupLotResult(SetupLotResult.Status.NotPass, MessageType.ApcsPro, resultRegister.ErrorMessageDetail.Error_Message,
                                 "mcNo:" + setupEventArgs.MachineNo + " ,lotNo:" + setupEventArgs.LotNo +
-                                " ,RegisterCarrierNo:" + setupEventArgs.CarrierInfo.RegisterCarrierNo + " ,opNo:" + setupEventArgs.OperatorNo
+                                " ,RegisterCarrierNo:" + registerCarrierNo + " ,opNo:" + setupEventArgs.OperatorNo
                                 , "", resultRegister.ErrorMessageDetail.Error_No.ToString(), "CheckAndRegisterCurrentCarrier", setupEventArgs.FunctionName, log);
                         }
                     }
@@ -347,12 +347,12 @@ public class ServiceiLibrary : IServiceiLibrary
                     if (setupEventArgs.CarrierInfo.TransferCarrier == CarrierInfo.CarrierStatus.Use)
                     {
                         CarrierControlResult resultTransfer = c_ApcsProService.CheckAndRegisterNextCarrier(machineInfo.Id, lotInfo.Id,
-                            setupEventArgs.CarrierInfo.TransferCarrierNo, userInfo.Id, log);
+                            transferCarrierNo, userInfo.Id, log);
                         if (!resultTransfer.IsPass)
                         {
                             return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro,resultTransfer.ErrorMessageDetail.Error_Message,
                                      "mcNo:" + setupEventArgs.MachineNo + " ,lotNo:" + setupEventArgs.LotNo +
-                                " ,TransferCarrierNo:" + setupEventArgs.CarrierInfo.TransferCarrierNo + " ,opNo:" + setupEventArgs.OperatorNo
+                                " ,TransferCarrierNo:" + transferCarrierNo + " ,opNo:" + setupEventArgs.OperatorNo
                                 , "", resultTransfer.ErrorMessageDetail.Error_No.ToString(), "CheckAndRegisterNextCarrier", setupEventArgs.FunctionName, log);
                         }
                     }
