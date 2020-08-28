@@ -90,8 +90,10 @@ public class CarrierInfo
     public enum CarrierStatus
     {
         [EnumMember()]
-        No_Use,
+        No_Use=0,
         [EnumMember()]
-        Use
+        Use=1,
+        [EnumMember()]
+        Use_OnLotEnd = 2
     }
 }

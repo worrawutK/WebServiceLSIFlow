@@ -2000,6 +2000,9 @@ namespace TestService.ServiceReference1 {
             
             [System.Runtime.Serialization.EnumMemberAttribute()]
             Use = 1,
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            Use_OnLotEnd = 2,
         }
     }
     

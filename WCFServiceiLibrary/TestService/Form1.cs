@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TestService.ServiceReference1;
+using TestService.iLibraryService;
 using MessageDialog;
 using System.Threading;
 using System.Data.SqlClient;
@@ -25,12 +25,12 @@ namespace TestService
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            var xxx = InputCarrier.InputQrCode("Tranfer Carrier No.", 11, Color.SpringGreen);
+           
             //CarrierInfo carrierInfo = new CarrierInfo()
             //{
             //    LoadCarrier = CarrierInfo.Status.No_Use,
             //    RegisterCarrierNo = "xx"
-                
+
             //};
             //DataTest dataTest = new DataTest()
             //{
@@ -59,7 +59,15 @@ namespace TestService
         }
         private void buttonMcOn_Click(object sender, EventArgs e)
         {
+            //if (System.Text.RegularExpressions.Regex.IsMatch(textBoxLotNo.Text, @"^([a-zA-Z]|\d){3}-\d{2}-([a-zA-Z]|\d){4}$"))
+            //{
+            //    // It's a match
+            //    MessageBox.Show("It's a match");
+            //}
+            //return;
             //c_ILibraryClient.UpdateMachineState(textBoxMCNo.Text, MachineProcessingState.Execute);
+            var result1 = c_ILibraryClient.GetCarrierInfo("MP-TWE-00", "2018A2056V", "007567");
+            return;
             MachineOnlineStateResult result = c_ILibraryClient.MachineOnlineState(textBoxMCNo.Text, MachineOnline.Online);
             int? aa = 2;
             int? b = null;
@@ -75,11 +83,10 @@ namespace TestService
 
         private void buttonSetup_Click(object sender, EventArgs e)
         {
-            c_ILibraryClient.
-            //var xxx = c_ILibraryClient.CheckPackageOnlyApcsPro("TP-TP-52", "TSSOP-B8J", "007567", "1952D2368V");
-            var lotin = c_ILibraryClient.GetLotInfo(textBoxLotNo.Text, textBoxMCNo.Text);
+       
             CarrierInfo carrierInfo = c_ILibraryClient.GetCarrierInfo(textBoxMCNo.Text, textBoxLotNo.Text,
                textBoxOPNo.Text);
+            var result2 = c_ILibraryClient.CheckPackageOnlyApcsPro("MP-TEW-00", "VSON008X20", "007567", "1234A5678V");
             SetupLotSpecialParametersEventArgs setupLotSpecial = new SetupLotSpecialParametersEventArgs()
             {
                 LayerNoApcs = ""
@@ -168,6 +175,11 @@ namespace TestService
         }
         private void buttonEnd_Click(object sender, EventArgs e)
         {
+            var carierData = c_ILibraryClient.GetCarrierInfo("FL-AXI-17", "2022A5261V", "008832");
+
+            EndLotResult result2 = c_ILibraryClient.EndLotPhase2(textBoxLotNo.Text, textBoxMCNo.Text,
+            textBoxOPNo.Text, int.Parse(textBoxGood.Text), int.Parse(textBoxNg.Text),Licenser.NoCheck, carierData,null);
+            return;
             EndLotResult result = c_ILibraryClient.EndLotOven(textBoxLotNo.Text, textBoxMCNo.Text, textBoxMCNoOv.Text,
              textBoxOPNo.Text, int.Parse(textBoxGood.Text), int.Parse(textBoxNg.Text));
             //EndLotResult result = c_ILibraryClient.EndLot(textBoxLotNo.Text, textBoxMCNo.Text,

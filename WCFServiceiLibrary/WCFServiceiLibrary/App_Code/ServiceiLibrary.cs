@@ -544,7 +544,6 @@ public class ServiceiLibrary : IServiceiLibrary
                 //TdcLotSet(mcNoToApcs, lotNo, opNo, (RunModeType)runMode, dateTime, log);
             }
            
-           
             return new StartLotResult(true, MessageType.ApcsPro, "", "LotNo:" + lotNo + " opNo:" + opNo + " loadCarrierNo:" + loadCarrierNo + 
                 " transferCarrierNo:" + transferCarrierNo, "", functionName, log);
         }
@@ -950,6 +949,15 @@ public class ServiceiLibrary : IServiceiLibrary
                     {
                         return new EndLotResult(false, MessageType.ApcsPro, carrierControlResult.ErrorMessageDetail.Error_Message,
                              "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " good:" + good + " ng:" + ng + " UnloadCarrierNo:" + endLotEvenArgs.CarrierInfo.UnloadCarrierNo, "VerificationUnloadCarrier", functionName, log);
+                    }
+                }
+                if (endLotEvenArgs.CarrierInfo.TransferCarrier == CarrierInfo.CarrierStatus.Use_OnLotEnd)
+                {
+                    CarrierControlResult carrierControlResult = c_ApcsProService.CheckAndRegisterNextCarrier(machineInfo.Id, lotInfo.Id, endLotEvenArgs.CarrierInfo.UnloadCarrierNo, userInfo.Id, log);
+                    if (!carrierControlResult.IsPass)
+                    {
+                        return new EndLotResult(false, MessageType.ApcsPro, carrierControlResult.ErrorMessageDetail.Error_Message,
+                             "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " good:" + good + " ng:" + ng + " UnloadCarrierNo:" + endLotEvenArgs.CarrierInfo.UnloadCarrierNo, "CheckAndRegisterNextCarrier", functionName, log);
                     }
                 }
             }

@@ -2000,6 +2000,9 @@ namespace TestService.iLibraryService {
             
             [System.Runtime.Serialization.EnumMemberAttribute()]
             Use = 1,
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            Use_OnLotEnd = 2,
         }
     }
     
@@ -2474,6 +2477,9 @@ namespace TestService.iLibraryService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/GetLotInfo", ReplyAction="http://tempuri.org/IServiceiLibrary/GetLotInfoResponse")]
         TestService.iLibraryService.LotInformation GetLotInfo(string lotNo, string mcNo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/CheckPackageOnlyApcsPro", ReplyAction="http://tempuri.org/IServiceiLibrary/CheckPackageOnlyApcsProResponse")]
+        bool CheckPackageOnlyApcsPro(string mcNo, string package, string opNo, string lotNo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2617,6 +2623,10 @@ namespace TestService.iLibraryService {
         
         public TestService.iLibraryService.LotInformation GetLotInfo(string lotNo, string mcNo) {
             return base.Channel.GetLotInfo(lotNo, mcNo);
+        }
+        
+        public bool CheckPackageOnlyApcsPro(string mcNo, string package, string opNo, string lotNo) {
+            return base.Channel.CheckPackageOnlyApcsPro(mcNo, package, opNo, lotNo);
         }
     }
 }

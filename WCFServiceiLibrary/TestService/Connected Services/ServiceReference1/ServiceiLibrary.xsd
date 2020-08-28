@@ -244,6 +244,7 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="No_Use" />
       <xs:enumeration value="Use" />
+      <xs:enumeration value="Use_OnLotEnd" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="CarrierInfo.CarrierStatus" nillable="true" type="tns:CarrierInfo.CarrierStatus" />
