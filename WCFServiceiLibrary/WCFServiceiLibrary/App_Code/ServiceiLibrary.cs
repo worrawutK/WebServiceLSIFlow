@@ -447,7 +447,10 @@ public class ServiceiLibrary : IServiceiLibrary
             {
                 loadCarrierNo = carrierInfo.LoadCarrierNo;
             }
-            transferCarrierNo = carrierInfo.TransferCarrierNo;
+            if (carrierInfo.TransferCarrierNo != carrierInfo.LoadCarrierNo)
+            {
+                transferCarrierNo = carrierInfo.TransferCarrierNo;
+            }
         }
         return StartLotCommon(lotNo, mcNo, opNo, recipe, MethodBase.GetCurrentMethod().Name,
             runMode, mcNoOven,locationNum,actPassQty,loadCarrierNo,transferCarrierNo);
@@ -466,7 +469,7 @@ public class ServiceiLibrary : IServiceiLibrary
             {
                 mcNoToApcs = mcNo;
             }
-            //  DateTimeInfo dateTimeInfo = c_ApcsProService.Get_DateTimeInfo(log);
+            //  DateTimeInfo dateTimeInfo = c_,ApcsProService.Get_DateTimeInfo(log);
             DateTime dateTime = DateTime.Now;
             LotInfo lotInfo = null;
             //var apcsProDisable = AppSettingHelper.GetAppSettingsValue("ApcsProDisable").ToUpper();
@@ -1438,6 +1441,19 @@ public class ServiceiLibrary : IServiceiLibrary
         }
         return false;
     }
+    #region CheckPermission
+    public ResultBase CheckPermission(string machineNo,UserInfo userInfo,License license,string applicationName,string functionName, DateTime dateTime)
+    {
+        Logger log = new Logger(c_LogVersion, machineNo, c_PahtLogFile);
+        
+        return null;
+    }
+    public ResultBase ManualCheckPermission(string UserCode, string MachineNo, PermissionParamitersEventArgs args)
+    {
+        Logger log = new Logger(c_LogVersion, MachineNo, c_PahtLogFile);
+        return null;
+    }
+    #endregion
     #endregion
 
 
@@ -1471,7 +1487,7 @@ public class ServiceiLibrary : IServiceiLibrary
     //    {
     //        LogFile.SaveLog(log, 0, MethodBase.GetCurrentMethod().Name,"Error", "WCFService", "TDC", "Exception", ex.Message.ToString(), "");
     //    }
-        
+
     //}
     //private TdcLotRequestResult TdcLotRequest(string mcNoApcs,string lotNo,RunModeType runMode, Logger log)
     //{
@@ -1497,7 +1513,7 @@ public class ServiceiLibrary : IServiceiLibrary
     //        LogFile.SaveLog(log, 0, MethodBase.GetCurrentMethod().Name, "Error", "WCFService", "TDC", "Exception", ex.Message.ToString(), "");
     //        return new TdcLotRequestResult("0", ex.Message.ToString());
     //    }
-        
+
     //}
     //private TdcLotSetResult TdcLotSet(string mcNoApcs, string lotNo, string opNo, RunModeType runMode, DateTime dateTime, Logger log)
     //{
@@ -1586,7 +1602,7 @@ public class ServiceiLibrary : IServiceiLibrary
     //                {
     //                    File.Delete(fileOld.Path);
     //                }
-                   
+
     //            }
     //            File.Copy(Path.Combine(pathLog, c_FileTdcBackupName), Path.Combine(pathLog, c_PathFolderBackupTdc, "TDC_before_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".csv"), true);
     //            File.Delete(Path.Combine(pathLog, c_FileTdcBackupName));
@@ -1596,11 +1612,11 @@ public class ServiceiLibrary : IServiceiLibrary
     //    {
     //        LogFile.SaveLog("CatchLog",0, MethodBase.GetCurrentMethod().Name, "Error", "WCFService", "TDC", "Exception", ex.Message.ToString(), "");
     //    }
-      
+
     //    TdcLoggerCsvWriter tdcLogger = new TdcLoggerCsvWriter();
     //    tdcLogger.LogFolder = pathLog;//HttpContext.Current.Server.MapPath(@"~\\Log\\" + pathLog);
     //    c_TdcService.Logger = tdcLogger;
-       
+
     //    return tdcLogger;
     //}
     #endregion
@@ -1977,4 +1993,5 @@ public class ServiceiLibrary : IServiceiLibrary
       
     }
     #endregion
+
 }
