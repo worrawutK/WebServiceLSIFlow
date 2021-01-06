@@ -141,6 +141,9 @@
     <None Include="Connected Services\iLibraryService\TestService.iLibraryService.ReinputResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\iLibraryService\TestService.iLibraryService.ResultBase.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\iLibraryService\TestService.iLibraryService.SetupLotResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -197,6 +200,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceReference1\TestService.ServiceReference1.ReinputResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReference1\TestService.ServiceReference1.ResultBase.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceReference1\TestService.ServiceReference1.SetupLotResult.datasource">

@@ -258,6 +258,7 @@
   <xs:complexType name="SetupLotSpecialParametersEventArgs">
     <xs:sequence>
       <xs:element minOccurs="0" name="FrameIn" type="xs:int" />
+      <xs:element minOccurs="0" name="IsOffline" type="xs:boolean" />
       <xs:element minOccurs="0" name="LayerNoApcs" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="McNoOvenApcs" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RunModeApcs" type="tns:RunMode" />
@@ -266,6 +267,7 @@
   <xs:element name="SetupLotSpecialParametersEventArgs" nillable="true" type="tns:SetupLotSpecialParametersEventArgs" />
   <xs:complexType name="StartLotSpecialParametersEventArgs">
     <xs:sequence>
+      <xs:element minOccurs="0" name="IsOffline" type="xs:boolean" />
       <xs:element minOccurs="0" name="McNoOvenApcs" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RunModeApcs" type="tns:RunMode" />
     </xs:sequence>
@@ -273,6 +275,7 @@
   <xs:element name="StartLotSpecialParametersEventArgs" nillable="true" type="tns:StartLotSpecialParametersEventArgs" />
   <xs:complexType name="EndLotSpecialParametersEventArgs">
     <xs:sequence>
+      <xs:element minOccurs="0" name="IsOffline" type="xs:boolean" />
       <xs:element minOccurs="0" name="McNoOvenApcs" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -298,4 +301,12 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="LotInformation.LotTypeState" nillable="true" type="tns:LotInformation.LotTypeState" />
+  <xs:complexType name="ResultBase">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPass" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Reason" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultBase" nillable="true" type="tns:ResultBase" />
 </xs:schema>

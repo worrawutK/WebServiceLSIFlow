@@ -132,6 +132,12 @@ public interface IServiceiLibrary
     //Temporary
     [OperationContract]
     bool CheckPackageOnlyApcsPro(string mcNo, string package, string opNo, string lotNo);
+    [OperationContract]
+    ResultBase CheckPermissionApplication(string machineNo, string opNo, string applicationName, string functionName);
+    [OperationContract]
+    ResultBase CheckPermissionMachineByLMS(string machineNo, string opNo);
+    [OperationContract]
+    ResultBase CheckPermissionUserLotAutoMotive(string opNo, string lotNo, string machineNo);
 }
 
 [DataContract()]

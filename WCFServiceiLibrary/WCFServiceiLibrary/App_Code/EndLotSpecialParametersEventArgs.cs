@@ -23,5 +23,11 @@ public class EndLotSpecialParametersEventArgs
         get { return c_McNoOvenApcs; }
         set { c_McNoOvenApcs = value; }
     }
-
+    private bool c_IsOffline = true;
+    [DataMember()]
+    public bool IsOffline
+    {
+        get { return c_IsOffline; }
+        set { c_IsOffline = value; }
+    }
 }

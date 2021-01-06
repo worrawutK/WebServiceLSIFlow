@@ -50,6 +50,11 @@ public class EndLotEvenArgs
         get { return c_CarrierInfo; }
         set { c_CarrierInfo = value; }
     }
-
+    private int c_IsOnline;
+    public int IsOnline
+    {
+        get { return c_IsOnline; }
+        set { c_IsOnline = value; }
+    }
 
 }

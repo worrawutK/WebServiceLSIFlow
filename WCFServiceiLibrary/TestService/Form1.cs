@@ -83,16 +83,16 @@ namespace TestService
 
         private void buttonSetup_Click(object sender, EventArgs e)
         {
-       
-            CarrierInfo carrierInfo = c_ILibraryClient.GetCarrierInfo(textBoxMCNo.Text, textBoxLotNo.Text,
+                 CarrierInfo carrierInfo = c_ILibraryClient.GetCarrierInfo(textBoxMCNo.Text, textBoxLotNo.Text,
                textBoxOPNo.Text);
-            var result2 = c_ILibraryClient.CheckPackageOnlyApcsPro("MP-TEW-00", "VSON008X20", "007567", "1234A5678V");
+        //    var result2 = c_ILibraryClient.CheckPackageOnlyApcsPro("MP-TEW-00", "VSON008X20", "007567", "1234A5678V");
             SetupLotSpecialParametersEventArgs setupLotSpecial = new SetupLotSpecialParametersEventArgs()
             {
-                LayerNoApcs = ""
+                LayerNoApcs = "",
+                IsOffline = true
             };
-            var sss = c_ILibraryClient.SetupLotNoCheckLicenser(textBoxLotNo.Text, textBoxMCNo.Text,
-              textBoxOPNo.Text, textBoxProcess.Text, "");
+           // var sss = c_ILibraryClient.SetupLotNoCheckLicenser(textBoxLotNo.Text, textBoxMCNo.Text,
+           //   textBoxOPNo.Text, textBoxProcess.Text, "");
             SetupLotResult result = c_ILibraryClient.SetupLotPhase2(textBoxLotNo.Text, textBoxMCNo.Text,
               textBoxOPNo.Text, textBoxProcess.Text,Licenser.Check, carrierInfo, setupLotSpecial);
 
@@ -105,12 +105,14 @@ namespace TestService
               textBoxOPNo.Text, "", carrierInfo, startLotSpecial);
 
 
-            //EndLotSpecialParametersEventArgs endLotSpecial = new EndLotSpecialParametersEventArgs()
-            //{
-            //    McNoOvenApcs = ""
-            //};
+            EndLotSpecialParametersEventArgs endlotspecial = new EndLotSpecialParametersEventArgs()
+            {
+                McNoOvenApcs = "",
+                IsOffline = false
+                
+            };
             EndLotResult endLotResult = c_ILibraryClient.EndLotPhase2(textBoxLotNo.Text, textBoxMCNo.Text,
-              textBoxOPNo.Text, 1000, 0, Licenser.NoCheck, carrierInfo, null);
+              textBoxOPNo.Text, 1000, 0, Licenser.NoCheck, carrierInfo, endlotspecial);
 
             EndLotResult endLotResult2 = c_ILibraryClient.EndLot(textBoxLotNo.Text, textBoxMCNo.Text,
              textBoxOPNo.Text, 1000, 0);

@@ -2030,6 +2030,9 @@ namespace TestService.ServiceReference1 {
         private int FrameInField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsOfflineField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string LayerNoApcsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -2057,6 +2060,19 @@ namespace TestService.ServiceReference1 {
                 if ((this.FrameInField.Equals(value) != true)) {
                     this.FrameInField = value;
                     this.RaisePropertyChanged("FrameIn");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsOffline {
+            get {
+                return this.IsOfflineField;
+            }
+            set {
+                if ((this.IsOfflineField.Equals(value) != true)) {
+                    this.IsOfflineField = value;
+                    this.RaisePropertyChanged("IsOffline");
                 }
             }
         }
@@ -2120,6 +2136,9 @@ namespace TestService.ServiceReference1 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsOfflineField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string McNoOvenApcsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -2132,6 +2151,19 @@ namespace TestService.ServiceReference1 {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsOffline {
+            get {
+                return this.IsOfflineField;
+            }
+            set {
+                if ((this.IsOfflineField.Equals(value) != true)) {
+                    this.IsOfflineField = value;
+                    this.RaisePropertyChanged("IsOffline");
+                }
             }
         }
         
@@ -2181,6 +2213,9 @@ namespace TestService.ServiceReference1 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsOfflineField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string McNoOvenApcsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -2190,6 +2225,19 @@ namespace TestService.ServiceReference1 {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsOffline {
+            get {
+                return this.IsOfflineField;
+            }
+            set {
+                if ((this.IsOfflineField.Equals(value) != true)) {
+                    this.IsOfflineField = value;
+                    this.RaisePropertyChanged("IsOffline");
+                }
             }
         }
         
@@ -2387,6 +2435,83 @@ namespace TestService.ServiceReference1 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ResultBase", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class ResultBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorNoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsPassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReasonField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorNo {
+            get {
+                return this.ErrorNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorNoField, value) != true)) {
+                    this.ErrorNoField = value;
+                    this.RaisePropertyChanged("ErrorNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsPass {
+            get {
+                return this.IsPassField;
+            }
+            set {
+                if ((this.IsPassField.Equals(value) != true)) {
+                    this.IsPassField = value;
+                    this.RaisePropertyChanged("IsPass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Reason {
+            get {
+                return this.ReasonField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReasonField, value) != true)) {
+                    this.ReasonField = value;
+                    this.RaisePropertyChanged("Reason");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IServiceiLibrary")]
     public interface IServiceiLibrary {
@@ -2480,6 +2605,15 @@ namespace TestService.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/CheckPackageOnlyApcsPro", ReplyAction="http://tempuri.org/IServiceiLibrary/CheckPackageOnlyApcsProResponse")]
         bool CheckPackageOnlyApcsPro(string mcNo, string package, string opNo, string lotNo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/CheckPermissionApplication", ReplyAction="http://tempuri.org/IServiceiLibrary/CheckPermissionApplicationResponse")]
+        TestService.ServiceReference1.ResultBase CheckPermissionApplication(string machineNo, string opNo, string applicationName, string functionName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/CheckPermissionMachineByLMS", ReplyAction="http://tempuri.org/IServiceiLibrary/CheckPermissionMachineByLMSResponse")]
+        TestService.ServiceReference1.ResultBase CheckPermissionMachineByLMS(string machineNo, string opNo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceiLibrary/CheckPermissionUserLotAutoMotive", ReplyAction="http://tempuri.org/IServiceiLibrary/CheckPermissionUserLotAutoMotiveResponse")]
+        TestService.ServiceReference1.ResultBase CheckPermissionUserLotAutoMotive(string opNo, string lotNo, string machineNo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2627,6 +2761,18 @@ namespace TestService.ServiceReference1 {
         
         public bool CheckPackageOnlyApcsPro(string mcNo, string package, string opNo, string lotNo) {
             return base.Channel.CheckPackageOnlyApcsPro(mcNo, package, opNo, lotNo);
+        }
+        
+        public TestService.ServiceReference1.ResultBase CheckPermissionApplication(string machineNo, string opNo, string applicationName, string functionName) {
+            return base.Channel.CheckPermissionApplication(machineNo, opNo, applicationName, functionName);
+        }
+        
+        public TestService.ServiceReference1.ResultBase CheckPermissionMachineByLMS(string machineNo, string opNo) {
+            return base.Channel.CheckPermissionMachineByLMS(machineNo, opNo);
+        }
+        
+        public TestService.ServiceReference1.ResultBase CheckPermissionUserLotAutoMotive(string opNo, string lotNo, string machineNo) {
+            return base.Channel.CheckPermissionUserLotAutoMotive(opNo, lotNo, machineNo);
         }
     }
 }

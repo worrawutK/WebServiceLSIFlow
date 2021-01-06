@@ -31,4 +31,12 @@ public class StartLotSpecialParametersEventArgs
         get { return c_RunModeApcs; }
         set { c_RunModeApcs = value; }
     }
+    //Default value = false (WCF)
+    private bool c_IsOffline;
+    [DataMember()]
+    public bool IsOffline
+    {
+        get { return c_IsOffline; }
+        set { c_IsOffline = value; }
+    }
 }

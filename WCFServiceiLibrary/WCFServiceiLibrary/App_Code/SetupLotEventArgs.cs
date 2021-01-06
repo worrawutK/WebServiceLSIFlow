@@ -49,4 +49,11 @@ public class SetupLotEventArgs
     public int FrameIn { get; set; }
 
     public CarrierInfo CarrierInfo { get; set; }
+
+    private int c_IsOnline;
+    public int IsOnline
+    {
+        get { return c_IsOnline; }
+        set { c_IsOnline = value; }
+    }
 }

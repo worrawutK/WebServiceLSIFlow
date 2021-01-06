@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/" />
+  <xs:import schemaLocation="" namespace="http://schemas.datacontract.org/2004/07/" />
   <xs:element name="MachineOnlineState">
     <xs:complexType>
       <xs:sequence>
@@ -561,6 +561,54 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="CheckPackageOnlyApcsProResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckPermissionApplication">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="machineNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="opNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="applicationName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="functionName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckPermissionApplicationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="CheckPermissionApplicationResult" nillable="true" type="q48:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckPermissionMachineByLMS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="machineNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="opNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckPermissionMachineByLMSResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="CheckPermissionMachineByLMSResult" nillable="true" type="q49:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckPermissionUserLotAutoMotive">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="opNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lotNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="machineNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckPermissionUserLotAutoMotiveResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="CheckPermissionUserLotAutoMotiveResult" nillable="true" type="q50:ResultBase" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
