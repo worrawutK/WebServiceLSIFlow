@@ -1022,7 +1022,7 @@ public class ServiceiLibrary : IServiceiLibrary
         string mcNoApcs = endLotEvenArgs.MachineOven;
         string unloadCarrierNo = "";
         if (endLotEvenArgs.CarrierInfo.TransferCarrier == CarrierInfo.CarrierStatus.Use_OnLotEnd)
-            unloadCarrierNo = endLotEvenArgs.CarrierInfo.TransferCarrierNo;
+            endLotEvenArgs.CarrierInfo.UnloadCarrierNo = endLotEvenArgs.CarrierInfo.TransferCarrierNo;
         if (!string.IsNullOrEmpty(endLotEvenArgs.CarrierInfo.UnloadCarrierNo))
             unloadCarrierNo = endLotEvenArgs.CarrierInfo.UnloadCarrierNo;
        
