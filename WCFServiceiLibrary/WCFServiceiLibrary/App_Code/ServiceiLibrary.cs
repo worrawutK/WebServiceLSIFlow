@@ -411,8 +411,8 @@ public class ServiceiLibrary : IServiceiLibrary
                      return new SetupLotResult(SetupLotResult.Status.NotPass,MessageType.ApcsPro, lotUpdateInfo.ErrorMessage + Environment.NewLine
                         + "MCNo:" + machineInfo.Name + Environment.NewLine
                         + "LotNo:" + lotInfo.Name + " || OPID:" + userInfo.Code + Environment.NewLine
-                        + "เป็นงานของ:" + jobName,
-                       "", "", lotUpdateInfo.ErrorNo.ToString(), "LotSetup",
+                        + "เป็นงานของ:" + jobName, "IsOnline:" + setupEventArgs.IsOnline.ToString()
+                       , "", lotUpdateInfo.ErrorNo.ToString(), "LotSetup",
                         setupEventArgs.FunctionName, log);
                 }
                    
@@ -422,14 +422,14 @@ public class ServiceiLibrary : IServiceiLibrary
                 if (warningMessage != "")
                 {
                     return new SetupLotResult(SetupLotResult.Status.Warning,MessageType.ApcsPro, warningMessage, 
-                        "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo, lotUpdateInfo.Recipe1, "","GetUserInfo",
+                        "LotNo:" + setupEventArgs.LotNo + " opNo:" + setupEventArgs.OperatorNo + " IsOnline:" + setupEventArgs.IsOnline.ToString(), lotUpdateInfo.Recipe1, "","GetUserInfo",
                         setupEventArgs.FunctionName, log, lotInfo.Quantity.Pass, lotInfo.Quantity.LastFail);
                 }
                 else
                 {
                     return new SetupLotResult(SetupLotResult.Status.Pass,MessageType.ApcsPro, "", "LotNo:" + setupEventArgs.LotNo + 
                         " opNo:" + setupEventArgs.OperatorNo + " loadCarrierNo:" + loadCarrierNo + " registerCarrierNo:" + registerCarrierNo + 
-                        " transferCarrierNo:" + transferCarrierNo, lotUpdateInfo.Recipe1, "", "",
+                        " transferCarrierNo:" + transferCarrierNo + " IsOnline:" + setupEventArgs.IsOnline.ToString(), lotUpdateInfo.Recipe1, "", "",
                         setupEventArgs.FunctionName, log, lotInfo.Quantity.Pass, lotInfo.Quantity.LastFail);
                 }
             }
@@ -1148,7 +1148,7 @@ public class ServiceiLibrary : IServiceiLibrary
                 dateTime, log, unloadCarrierNo, frame_Pass, endLotEvenArgs.Frame_Fail);
             if (!lotUpdateInfo.IsOk)
                 return new EndLotResult(false, MessageType.ApcsPro, lotUpdateInfo.ErrorNo + ":" + lotUpdateInfo.ErrorMessage, "LotNo:" + lotNo + " opNo:" + opNo +
-                    " mcNo:" + mcNo + " good:" + good + " ng:" + ng + " unloadCarrierNo:" + unloadCarrierNo, "LotEnd", functionName, log);
+                    " mcNo:" + mcNo + " good:" + good + " ng:" + ng + " unloadCarrierNo:" + unloadCarrierNo + " IsOnline:" + endLotEvenArgs.IsOnline.ToString(), "LotEnd", functionName, log);
 
             string nextFlow = "";
             if (lotUpdateInfo.NextProcess != null)
@@ -1168,7 +1168,7 @@ public class ServiceiLibrary : IServiceiLibrary
                 //}
                 nextFlow = "Next Process :" + lotUpdateInfo.NextProcess.Job_name;
             }
-            return new EndLotResult(true, MessageType.ApcsPro, "", "LotNo:" + lotNo + " opNo:" + opNo + " unloadCarrierNo:" + unloadCarrierNo, "", functionName, log, nextFlow);
+            return new EndLotResult(true, MessageType.ApcsPro, "", "LotNo:" + lotNo + " opNo:" + opNo + " unloadCarrierNo:" + unloadCarrierNo + " IsOnline:" + endLotEvenArgs.IsOnline.ToString(), "", functionName, log, nextFlow);
         }
         catch (Exception ex)
         {
