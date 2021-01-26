@@ -1126,12 +1126,16 @@ public class ServiceiLibrary : IServiceiLibrary
                           "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " good:" + good + " ng:" + ng + " UnloadCarrierNo:" + endLotEvenArgs.CarrierInfo.UnloadCarrierNo,
                           "AutoRegisterCarrier", functionName, log);
                     }
-                    CarrierControlResult carrierControlResult = c_ApcsProService.VerificationUnloadCarrier(machineInfo.Id, lotInfo.Id, endLotEvenArgs.CarrierInfo.UnloadCarrierNo, userInfo.Id, log);
-                    if (!carrierControlResult.IsPass)
+                    if (endLotEvenArgs.CarrierInfo.TransferCarrier != CarrierInfo.CarrierStatus.No_Use)
                     {
-                        return new EndLotResult(false, MessageType.ApcsPro, carrierControlResult.ErrorMessageDetail.Error_Message,
-                             "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " good:" + good + " ng:" + ng + " UnloadCarrierNo:" + endLotEvenArgs.CarrierInfo.UnloadCarrierNo, "VerificationUnloadCarrier", functionName, log);
+                        CarrierControlResult carrierControlResult = c_ApcsProService.VerificationUnloadCarrier(machineInfo.Id, lotInfo.Id, endLotEvenArgs.CarrierInfo.UnloadCarrierNo, userInfo.Id, log);
+                        if (!carrierControlResult.IsPass)
+                        {
+                            return new EndLotResult(false, MessageType.ApcsPro, carrierControlResult.ErrorMessageDetail.Error_Message,
+                                 "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " good:" + good + " ng:" + ng + " UnloadCarrierNo:" + endLotEvenArgs.CarrierInfo.UnloadCarrierNo, "VerificationUnloadCarrier", functionName, log);
+                        }
                     }
+                        
                 }
                 if (endLotEvenArgs.CarrierInfo.TransferCarrier == CarrierInfo.CarrierStatus.Use_OnLotEnd)
                 {

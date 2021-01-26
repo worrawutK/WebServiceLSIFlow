@@ -177,7 +177,7 @@ namespace TestService
         }
         private void buttonEnd_Click(object sender, EventArgs e)
         {
-            var carierData = c_ILibraryClient.GetCarrierInfo("FL-M-20", "2102A1079V", "000836");
+            var carierData = c_ILibraryClient.GetCarrierInfo(textBoxMCNo.Text, textBoxLotNo.Text, textBoxOPNo.Text);
 
             EndLotResult result2 = c_ILibraryClient.EndLotPhase2(textBoxLotNo.Text, textBoxMCNo.Text,
             textBoxOPNo.Text, int.Parse(textBoxGood.Text), int.Parse(textBoxNg.Text),Licenser.NoCheck, carierData,null);
