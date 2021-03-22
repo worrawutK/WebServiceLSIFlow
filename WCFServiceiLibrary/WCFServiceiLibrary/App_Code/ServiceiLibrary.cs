@@ -1382,6 +1382,9 @@ public class ServiceiLibrary : IServiceiLibrary
             lotInformation.PackageName = lotInfo.Package.Name;
             lotInformation.PassQty = lotInfo.Quantity.Pass;
             lotInformation.FailQty = lotInfo.Quantity.Fail;
+            lotInformation.FramePass = lotInfo.FramePass;
+            lotInformation.FrameFail = lotInfo.FrameFail;
+            lotInformation.GoPiece = lotInfo.FramePass * lotInfo.PcsPerWork;
             string jobName = "";
             if (lotInfo.IsSpecialFlow)
             {

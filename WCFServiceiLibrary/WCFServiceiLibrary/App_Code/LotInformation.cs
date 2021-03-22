@@ -32,7 +32,12 @@ public class LotInformation
     public int PassQty { get; set; }
     [DataMember()]
     public int FailQty { get; set; }
-
+    [DataMember()]
+    public int FramePass { get; set; }
+    [DataMember()]
+    public int FrameFail { get; set; }
+    [DataMember()]
+    public int GoPiece { get; set; }
     [DataContract()]
     public enum LotTypeState
     {
