@@ -2213,10 +2213,28 @@ namespace TestService.iLibraryService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> CutFrameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> FrameFailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> FramePassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> Front_NgField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsOfflineField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> MarkerNgField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string McNoOvenApcsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> PNashiField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -2225,6 +2243,58 @@ namespace TestService.iLibraryService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> CutFrame {
+            get {
+                return this.CutFrameField;
+            }
+            set {
+                if ((this.CutFrameField.Equals(value) != true)) {
+                    this.CutFrameField = value;
+                    this.RaisePropertyChanged("CutFrame");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> FrameFail {
+            get {
+                return this.FrameFailField;
+            }
+            set {
+                if ((this.FrameFailField.Equals(value) != true)) {
+                    this.FrameFailField = value;
+                    this.RaisePropertyChanged("FrameFail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> FramePass {
+            get {
+                return this.FramePassField;
+            }
+            set {
+                if ((this.FramePassField.Equals(value) != true)) {
+                    this.FramePassField = value;
+                    this.RaisePropertyChanged("FramePass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Front_Ng {
+            get {
+                return this.Front_NgField;
+            }
+            set {
+                if ((this.Front_NgField.Equals(value) != true)) {
+                    this.Front_NgField = value;
+                    this.RaisePropertyChanged("Front_Ng");
+                }
             }
         }
         
@@ -2242,6 +2312,19 @@ namespace TestService.iLibraryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> MarkerNg {
+            get {
+                return this.MarkerNgField;
+            }
+            set {
+                if ((this.MarkerNgField.Equals(value) != true)) {
+                    this.MarkerNgField = value;
+                    this.RaisePropertyChanged("MarkerNg");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string McNoOvenApcs {
             get {
                 return this.McNoOvenApcsField;
@@ -2250,6 +2333,19 @@ namespace TestService.iLibraryService {
                 if ((object.ReferenceEquals(this.McNoOvenApcsField, value) != true)) {
                     this.McNoOvenApcsField = value;
                     this.RaisePropertyChanged("McNoOvenApcs");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> PNashi {
+            get {
+                return this.PNashiField;
+            }
+            set {
+                if ((this.PNashiField.Equals(value) != true)) {
+                    this.PNashiField = value;
+                    this.RaisePropertyChanged("PNashi");
                 }
             }
         }
@@ -2278,6 +2374,15 @@ namespace TestService.iLibraryService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int FailQtyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int FrameFailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int FramePassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int GoPieceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string JobNameField;
@@ -2329,6 +2434,45 @@ namespace TestService.iLibraryService {
                 if ((this.FailQtyField.Equals(value) != true)) {
                     this.FailQtyField = value;
                     this.RaisePropertyChanged("FailQty");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FrameFail {
+            get {
+                return this.FrameFailField;
+            }
+            set {
+                if ((this.FrameFailField.Equals(value) != true)) {
+                    this.FrameFailField = value;
+                    this.RaisePropertyChanged("FrameFail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FramePass {
+            get {
+                return this.FramePassField;
+            }
+            set {
+                if ((this.FramePassField.Equals(value) != true)) {
+                    this.FramePassField = value;
+                    this.RaisePropertyChanged("FramePass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int GoPiece {
+            get {
+                return this.GoPieceField;
+            }
+            set {
+                if ((this.GoPieceField.Equals(value) != true)) {
+                    this.GoPieceField = value;
+                    this.RaisePropertyChanged("GoPiece");
                 }
             }
         }

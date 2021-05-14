@@ -30,4 +30,47 @@ public class EndLotSpecialParametersEventArgs
         get { return c_IsOffline; }
         set { c_IsOffline = value; }
     }
+    private int? c_FramePass;
+    [DataMember()]
+    public int? FramePass
+    {
+        get { return c_FramePass; }
+        set { c_FramePass = value; }
+    }
+
+    private int? c_FrameFail;
+    [DataMember()]
+    public int? FrameFail
+    {
+        get { return c_FrameFail; }
+        set { c_FrameFail = value; }
+    }
+    private int? C_PNashi;
+    [DataMember()]
+    public int? PNashi
+    {
+        get { return C_PNashi; }
+        set { C_PNashi = value; }
+    }
+    private int? c_Front_Ng;
+    [DataMember()]
+    public int? Front_Ng
+    {
+        get { return c_Front_Ng; }
+        set { c_Front_Ng = value; }
+    }
+    private int? c_MarkerNg;
+    [DataMember()]
+    public int? MarkerNg
+    {
+        get { return c_MarkerNg; }
+        set { c_MarkerNg = value; }
+    }
+    private int? c_CutFrame;
+    [DataMember()]
+    public int? CutFrame
+    {
+        get { return c_CutFrame; }
+        set { c_CutFrame = value; }
+    }
 }

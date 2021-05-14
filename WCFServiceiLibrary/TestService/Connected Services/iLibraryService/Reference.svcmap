@@ -18,13 +18,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex/mex/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex/mex/mex/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="3f47eb24-445b-46e5-9cb4-738a3d9245ff" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex/mex/mex" />
-    <MetadataFile FileName="service3.xsd" MetadataType="Schema" ID="ef07dcfd-e0ea-4d4b-aadf-32922a8b63af" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex/mex/mex" />
-    <MetadataFile FileName="service4.xsd" MetadataType="Schema" ID="700aee16-cd59-46da-9921-9875797e8583" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex/mex/mex" />
-    <MetadataFile FileName="service5.xsd" MetadataType="Schema" ID="b9d82d20-420e-4172-99b0-d39e75937fa8" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex/mex/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="e8cfabbd-ff04-4939-9e3f-eb968adf5510" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex/mex/mex/mex" />
+    <MetadataFile FileName="service3.xsd" MetadataType="Schema" ID="bfd8ad2c-3612-42d1-b19c-55e3a726cf0f" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex/mex/mex/mex" />
+    <MetadataFile FileName="service4.xsd" MetadataType="Schema" ID="41632cf7-3f88-4035-81b2-1c0170f42904" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex/mex/mex/mex" />
+    <MetadataFile FileName="service5.xsd" MetadataType="Schema" ID="361d860d-ea73-4a5f-92cc-eabcdacce315" SourceId="1" SourceUrl="http://webserv.thematrix.net/iLibraryService/ServiceiLibrary.svc/mex/mex/mex/mex/mex/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

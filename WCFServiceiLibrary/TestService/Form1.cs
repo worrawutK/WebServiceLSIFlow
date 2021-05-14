@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TestService.ServiceReference1;
+using TestService.iLibraryService;
 using MessageDialog;
 using System.Threading;
 using System.Data.SqlClient;

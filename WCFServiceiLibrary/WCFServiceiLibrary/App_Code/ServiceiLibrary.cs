@@ -979,6 +979,8 @@ public class ServiceiLibrary : IServiceiLibrary
     {
         string mcNoOven = "";
         int isOnline = 1;
+        int framePass = 0;
+        int frameFail = 0;
         if (specialParametersEventArgs != null)
         {
             if(!string.IsNullOrEmpty(specialParametersEventArgs.McNoOvenApcs)) mcNoOven = specialParametersEventArgs.McNoOvenApcs;
@@ -987,7 +989,12 @@ public class ServiceiLibrary : IServiceiLibrary
                 isOnline = 0;
             else
                 isOnline = 1;
-                    
+
+            if (specialParametersEventArgs.FramePass.HasValue)
+                framePass = specialParametersEventArgs.FramePass.Value;
+            if (specialParametersEventArgs.FrameFail.HasValue)
+                frameFail = specialParametersEventArgs.FrameFail.Value;
+
         }
         EndLotEvenArgs endLotEvenArgs = new EndLotEvenArgs(MethodBase.GetCurrentMethod().Name, licenser)
         {
@@ -998,7 +1005,9 @@ public class ServiceiLibrary : IServiceiLibrary
             Ng = ng,
             CarrierInfo = carrierInfo,
             MachineOven = mcNoOven,
-            IsOnline = isOnline
+            IsOnline = isOnline,
+            Frame_Pass = framePass,
+            Frame_Fail = frameFail
         };
         return EndLotCommon(endLotEvenArgs);
     }
@@ -1384,7 +1393,7 @@ public class ServiceiLibrary : IServiceiLibrary
             lotInformation.FailQty = lotInfo.Quantity.Fail;
             lotInformation.FramePass = lotInfo.FramePass;
             lotInformation.FrameFail = lotInfo.FrameFail;
-            lotInformation.GoPiece = lotInfo.FramePass * lotInfo.PcsPerWork;
+            lotInformation.GoPiece = lotInfo.FramePass * lotInfo.PcsPerWork;      
             string jobName = "";
             if (lotInfo.IsSpecialFlow)
             {
