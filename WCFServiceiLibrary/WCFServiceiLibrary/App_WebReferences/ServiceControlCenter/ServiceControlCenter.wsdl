@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ServiceControlCenter" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="BasicHttpsBinding_IServiceControlCenter_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://webserv.thematrix.net/CellConCenterService/ServiceControlCenter.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://webserv.thematrix.net/CellConCenterService/ServiceControlCenter.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://webserv.thematrix.net/CellConCenterService/ServiceControlCenter.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/" />
+      <xsd:import schemaLocation="http://webserv.thematrix.net/CellConCenterService/ServiceControlCenter.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServiceControlCenter_DoWork_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoWork" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_DoWork_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoWorkResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_AfterLotEnd_InputMessage">
+    <wsdl:part name="parameters" element="tns:AfterLotEnd" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_AfterLotEnd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AfterLotEndResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_AddSpecialFlow_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddSpecialFlow" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_AddSpecialFlow_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddSpecialFlowResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_JigToolChecking_InputMessage">
+    <wsdl:part name="parameters" element="tns:JigToolChecking" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_JigToolChecking_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JigToolCheckingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_JigGetData_InputMessage">
+    <wsdl:part name="parameters" element="tns:JigGetData" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_JigGetData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JigGetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_JigCheckData_InputMessage">
+    <wsdl:part name="parameters" element="tns:JigCheckData" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_JigCheckData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JigCheckDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_JigSetupData_InputMessage">
+    <wsdl:part name="parameters" element="tns:JigSetupData" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_JigSetupData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JigSetupDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_JigUpdateData_InputMessage">
+    <wsdl:part name="parameters" element="tns:JigUpdateData" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_JigUpdateData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JigUpdateDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_JigRemoveData_InputMessage">
+    <wsdl:part name="parameters" element="tns:JigRemoveData" />
+  </wsdl:message>
+  <wsdl:message name="IServiceControlCenter_JigRemoveData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JigRemoveDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServiceControlCenter">
+    <wsdl:operation name="DoWork">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceControlCenter/DoWork" message="tns:IServiceControlCenter_DoWork_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceControlCenter/DoWorkResponse" message="tns:IServiceControlCenter_DoWork_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AfterLotEnd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceControlCenter/AfterLotEnd" message="tns:IServiceControlCenter_AfterLotEnd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceControlCenter/AfterLotEndResponse" message="tns:IServiceControlCenter_AfterLotEnd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddSpecialFlow">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceControlCenter/AddSpecialFlow" message="tns:IServiceControlCenter_AddSpecialFlow_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceControlCenter/AddSpecialFlowResponse" message="tns:IServiceControlCenter_AddSpecialFlow_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JigToolChecking">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceControlCenter/JigToolChecking" message="tns:IServiceControlCenter_JigToolChecking_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceControlCenter/JigToolCheckingResponse" message="tns:IServiceControlCenter_JigToolChecking_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JigGetData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceControlCenter/JigGetData" message="tns:IServiceControlCenter_JigGetData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceControlCenter/JigGetDataResponse" message="tns:IServiceControlCenter_JigGetData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JigCheckData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceControlCenter/JigCheckData" message="tns:IServiceControlCenter_JigCheckData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceControlCenter/JigCheckDataResponse" message="tns:IServiceControlCenter_JigCheckData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JigSetupData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceControlCenter/JigSetupData" message="tns:IServiceControlCenter_JigSetupData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceControlCenter/JigSetupDataResponse" message="tns:IServiceControlCenter_JigSetupData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JigUpdateData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceControlCenter/JigUpdateData" message="tns:IServiceControlCenter_JigUpdateData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceControlCenter/JigUpdateDataResponse" message="tns:IServiceControlCenter_JigUpdateData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JigRemoveData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceControlCenter/JigRemoveData" message="tns:IServiceControlCenter_JigRemoveData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceControlCenter/JigRemoveDataResponse" message="tns:IServiceControlCenter_JigRemoveData_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IServiceControlCenter" type="tns:IServiceControlCenter">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DoWork">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/DoWork" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AfterLotEnd">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/AfterLotEnd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSpecialFlow">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/AddSpecialFlow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JigToolChecking">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/JigToolChecking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JigGetData">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/JigGetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JigCheckData">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/JigCheckData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JigSetupData">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/JigSetupData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JigUpdateData">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/JigUpdateData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JigRemoveData">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/JigRemoveData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpsBinding_IServiceControlCenter" type="tns:IServiceControlCenter">
+    <wsp:PolicyReference URI="#BasicHttpsBinding_IServiceControlCenter_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DoWork">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/DoWork" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AfterLotEnd">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/AfterLotEnd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSpecialFlow">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/AddSpecialFlow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JigToolChecking">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/JigToolChecking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JigGetData">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/JigGetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JigCheckData">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/JigCheckData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JigSetupData">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/JigSetupData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JigUpdateData">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/JigUpdateData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JigRemoveData">
+      <soap:operation soapAction="http://tempuri.org/IServiceControlCenter/JigRemoveData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceControlCenter">
+    <wsdl:port name="BasicHttpBinding_IServiceControlCenter" binding="tns:BasicHttpBinding_IServiceControlCenter">
+      <soap:address location="http://webserv.thematrix.net/CellConCenterService/ServiceControlCenter.svc" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpsBinding_IServiceControlCenter" binding="tns:BasicHttpsBinding_IServiceControlCenter">
+      <soap:address location="https://webpro.lsi.rist.local/CellConCenterService/ServiceControlCenter.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

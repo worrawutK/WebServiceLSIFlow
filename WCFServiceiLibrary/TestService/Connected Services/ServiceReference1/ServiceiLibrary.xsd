@@ -275,8 +275,17 @@
   <xs:element name="StartLotSpecialParametersEventArgs" nillable="true" type="tns:StartLotSpecialParametersEventArgs" />
   <xs:complexType name="EndLotSpecialParametersEventArgs">
     <xs:sequence>
+      <xs:element minOccurs="0" name="CutFrame" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="FrameFail" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="FramePass" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Front_Ng" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Front_Ng_Scrap" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="IsOffline" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MarkerNg" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="MarkerNg_Scrap" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="McNoOvenApcs" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PNashi" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PNashi_Scrap" nillable="true" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="EndLotSpecialParametersEventArgs" nillable="true" type="tns:EndLotSpecialParametersEventArgs" />
@@ -284,6 +293,9 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="DeviceName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FailQty" type="xs:int" />
+      <xs:element minOccurs="0" name="FrameFail" type="xs:int" />
+      <xs:element minOccurs="0" name="FramePass" type="xs:int" />
+      <xs:element minOccurs="0" name="GoPiece" type="xs:int" />
       <xs:element minOccurs="0" name="JobName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="LotId" type="xs:int" />
       <xs:element minOccurs="0" name="LotNo" nillable="true" type="xs:string" />

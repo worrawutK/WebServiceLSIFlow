@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1c100835-7aa2-427a-b999-f41c3d4313a6" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://webserv.thematrix.net/cellconcenterservice/ServiceControlCenter.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServiceControlCenter.xsd" MetadataType="Schema" ID="14cd9112-58a7-421b-aa37-41f5beaf8277" SourceId="1" SourceUrl="http://webserv.thematrix.net/CellConCenterService/ServiceControlCenter.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceControlCenter.disco" MetadataType="Disco" ID="e7b8eee5-242a-470d-9933-7d75986434ec" SourceId="1" SourceUrl="http://webserv.thematrix.net/CellConCenterService/ServiceControlCenter.svc?disco" />
+    <MetadataFile FileName="ServiceControlCenter1.xsd" MetadataType="Schema" ID="2b9025b6-bb30-447d-aa97-49183d5d98fb" SourceId="1" SourceUrl="http://webserv.thematrix.net/CellConCenterService/ServiceControlCenter.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServiceControlCenter2.xsd" MetadataType="Schema" ID="21e329fa-743a-44ba-9416-b99a196b7388" SourceId="1" SourceUrl="http://webserv.thematrix.net/CellConCenterService/ServiceControlCenter.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServiceControlCenter3.xsd" MetadataType="Schema" ID="d88b96d7-17d0-4eb2-9f62-020e1421d115" SourceId="1" SourceUrl="http://webserv.thematrix.net/CellConCenterService/ServiceControlCenter.svc?xsd=xsd3" />
+    <MetadataFile FileName="ServiceControlCenter.wsdl" MetadataType="Wsdl" ID="b25bd699-0e24-4beb-a7f3-71183cc933ee" SourceId="1" SourceUrl="http://webserv.thematrix.net/CellConCenterService/ServiceControlCenter.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TestService.iLibraryService;
+using TestService.ServiceReference1;
 using MessageDialog;
 using System.Threading;
 using System.Data.SqlClient;
@@ -178,9 +178,10 @@ namespace TestService
         private void buttonEnd_Click(object sender, EventArgs e)
         {
             var carierData = c_ILibraryClient.GetCarrierInfo(textBoxMCNo.Text, textBoxLotNo.Text, textBoxOPNo.Text);
-
+            EndLotSpecialParametersEventArgs arg = new EndLotSpecialParametersEventArgs();
+            
             EndLotResult result2 = c_ILibraryClient.EndLotPhase2(textBoxLotNo.Text, textBoxMCNo.Text,
-            textBoxOPNo.Text, int.Parse(textBoxGood.Text), int.Parse(textBoxNg.Text),Licenser.NoCheck, carierData,null);
+            textBoxOPNo.Text, int.Parse(textBoxGood.Text), int.Parse(textBoxNg.Text),Licenser.NoCheck, carierData, arg);
             return;
             EndLotResult result = c_ILibraryClient.EndLotOven(textBoxLotNo.Text, textBoxMCNo.Text, textBoxMCNoOv.Text,
              textBoxOPNo.Text, int.Parse(textBoxGood.Text), int.Parse(textBoxNg.Text));

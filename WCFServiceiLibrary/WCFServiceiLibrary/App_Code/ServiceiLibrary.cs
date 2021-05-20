@@ -981,6 +981,13 @@ public class ServiceiLibrary : IServiceiLibrary
         int isOnline = 1;
         int framePass = 0;
         int frameFail = 0;
+        int? pNashi = null;
+        int? pNashi_Scrap = null;
+        int? front_Ng = null;
+        int? front_Ng_Scrap = null;
+        int? markerNg = null;
+        int? markerNg_Scrap = null;
+        int? cutFrame = null;
         if (specialParametersEventArgs != null)
         {
             if(!string.IsNullOrEmpty(specialParametersEventArgs.McNoOvenApcs)) mcNoOven = specialParametersEventArgs.McNoOvenApcs;
@@ -994,7 +1001,10 @@ public class ServiceiLibrary : IServiceiLibrary
                 framePass = specialParametersEventArgs.FramePass.Value;
             if (specialParametersEventArgs.FrameFail.HasValue)
                 frameFail = specialParametersEventArgs.FrameFail.Value;
-
+            pNashi = specialParametersEventArgs.PNashi;
+            front_Ng = specialParametersEventArgs.Front_Ng;
+            markerNg = specialParametersEventArgs.MarkerNg;
+            cutFrame = specialParametersEventArgs.CutFrame;
         }
         EndLotEvenArgs endLotEvenArgs = new EndLotEvenArgs(MethodBase.GetCurrentMethod().Name, licenser)
         {
@@ -1007,7 +1017,15 @@ public class ServiceiLibrary : IServiceiLibrary
             MachineOven = mcNoOven,
             IsOnline = isOnline,
             Frame_Pass = framePass,
-            Frame_Fail = frameFail
+            Frame_Fail = frameFail,
+            CutFrame = cutFrame,
+            Front_Ng = front_Ng,
+            Front_Ng_Scrap =front_Ng_Scrap,
+            MarkerNg = markerNg,
+            MarkerNg_Scrap = markerNg_Scrap,
+            PNashi = pNashi,
+            PNashi_Scrap = pNashi_Scrap
+
         };
         return EndLotCommon(endLotEvenArgs);
     }
@@ -1181,6 +1199,33 @@ public class ServiceiLibrary : IServiceiLibrary
                 //}
                 nextFlow = "Next Process :" + lotUpdateInfo.NextProcess.Job_name;
             }
+            #region ServiceControlCenter
+                ServiceControlCenter.AfterLotEndEventArgs afterLotEndEventArgs = new ServiceControlCenter.AfterLotEndEventArgs();
+                afterLotEndEventArgs.JobId = lotInfo.IsSpecialFlow ? lotInfo.SpJob.Id : lotInfo.Job.Id;
+                afterLotEndEventArgs.McNo = mcNo;
+                afterLotEndEventArgs.OpNo = opNo;
+                afterLotEndEventArgs.LotNo = lotInfo.Name;
+                afterLotEndEventArgs.LotDataQuantity = new ServiceControlCenter.LotData();
+                afterLotEndEventArgs.LotDataQuantity.FrontNg = endLotEvenArgs.Front_Ng;
+                afterLotEndEventArgs.LotDataQuantity.FrontNg_Scrap = endLotEvenArgs.Front_Ng_Scrap;
+                afterLotEndEventArgs.LotDataQuantity.PNashi = endLotEvenArgs.PNashi;
+                afterLotEndEventArgs.LotDataQuantity.PNashi_Scrap = endLotEvenArgs.PNashi_Scrap;
+                afterLotEndEventArgs.LotDataQuantity.Marker = endLotEvenArgs.MarkerNg;
+                afterLotEndEventArgs.LotDataQuantity.Marker_Scrap = endLotEvenArgs.MarkerNg_Scrap;
+                afterLotEndEventArgs.LotDataQuantity.Qty_Scrap = endLotEvenArgs.CutFrame;
+
+                ServiceControlCenter.ServiceControlCenterClient serviceControlCenterClient = new ServiceControlCenter.ServiceControlCenterClient();
+                ServiceControlCenter.AfterLotEndResult result = serviceControlCenterClient.AfterLotEnd(afterLotEndEventArgs);
+                if (result.HasError)
+                {
+                    log.ConnectionLogger.Write(0, "ServiceControlCenter.AfterLotEnd", "LotData", "iLibraryService", "WcfService", 0, "", "Error > ", result.ErrorMessage);
+                }
+                else
+                {
+                    log.ConnectionLogger.Write(0, "ServiceControlCenter.AfterLotEnd", "LotData", "iLibraryService", "WcfService", 0, "", "Error > ", result.WarningMessage);
+                }
+
+            #endregion
             return new EndLotResult(true, MessageType.ApcsPro, "", "LotNo:" + lotNo + " opNo:" + opNo + " unloadCarrierNo:" + unloadCarrierNo + " IsOnline:" + endLotEvenArgs.IsOnline.ToString(), "", functionName, log, nextFlow);
         }
         catch (Exception ex)

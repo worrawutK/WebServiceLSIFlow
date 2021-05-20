@@ -56,5 +56,46 @@ public class EndLotEvenArgs
         get { return c_IsOnline; }
         set { c_IsOnline = value; }
     }
-
+    private int? C_PNashi;
+    public int? PNashi
+    {
+        get { return C_PNashi; }
+        set { C_PNashi = value; }
+    }
+    private int? C_PNashi_Scrap;
+    public int? PNashi_Scrap
+    {
+        get { return C_PNashi_Scrap; }
+        set { C_PNashi_Scrap = value; }
+    }
+    private int? c_Front_Ng;
+    public int? Front_Ng
+    {
+        get { return c_Front_Ng; }
+        set { c_Front_Ng = value; }
+    }
+    private int? c_Front_Ng_Scrap;
+    public int? Front_Ng_Scrap
+    {
+        get { return c_Front_Ng_Scrap; }
+        set { c_Front_Ng_Scrap = value; }
+    }
+    private int? c_MarkerNg;
+    public int? MarkerNg
+    {
+        get { return c_MarkerNg; }
+        set { c_MarkerNg = value; }
+    }
+    private int? c_MarkerNg_Scrap;
+    public int? MarkerNg_Scrap
+    {
+        get { return c_MarkerNg_Scrap; }
+        set { c_MarkerNg_Scrap = value; }
+    }
+    private int? c_CutFrame;
+    public int? CutFrame
+    {
+        get { return c_CutFrame; }
+        set { c_CutFrame = value; }
+    }
 }

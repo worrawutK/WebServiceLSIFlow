@@ -52,6 +52,13 @@ public class EndLotSpecialParametersEventArgs
         get { return C_PNashi; }
         set { C_PNashi = value; }
     }
+    private int? C_PNashi_Scrap;
+    [DataMember()]
+    public int? PNashi_Scrap
+    {
+        get { return C_PNashi_Scrap; }
+        set { C_PNashi_Scrap = value; }
+    }
     private int? c_Front_Ng;
     [DataMember()]
     public int? Front_Ng
@@ -59,12 +66,26 @@ public class EndLotSpecialParametersEventArgs
         get { return c_Front_Ng; }
         set { c_Front_Ng = value; }
     }
+    private int? c_Front_Ng_Scrap;
+    [DataMember()]
+    public int? Front_Ng_Scrap
+    {
+        get { return c_Front_Ng_Scrap; }
+        set { c_Front_Ng_Scrap = value; }
+    }
     private int? c_MarkerNg;
     [DataMember()]
     public int? MarkerNg
     {
         get { return c_MarkerNg; }
         set { c_MarkerNg = value; }
+    }
+    private int? c_MarkerNg_Scrap;
+    [DataMember()]
+    public int? MarkerNg_Scrap
+    {
+        get { return c_MarkerNg_Scrap; }
+        set { c_MarkerNg_Scrap = value; }
     }
     private int? c_CutFrame;
     [DataMember()]
