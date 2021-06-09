@@ -14,6 +14,7 @@ using LotInfo = iLibrary.LotInfo;
 using System.Threading;
 using System.Data.SqlClient;
 using System.Data;
+using ServiceControlCenter;
 
 // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "ServiceiLibrary" in code, svc and config file together.
 [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
@@ -1200,6 +1201,8 @@ public class ServiceiLibrary : IServiceiLibrary
                 nextFlow = "Next Process :" + lotUpdateInfo.NextProcess.Job_name;
             }
             #region ServiceControlCenter
+            try
+            {
                 ServiceControlCenter.AfterLotEndEventArgs afterLotEndEventArgs = new ServiceControlCenter.AfterLotEndEventArgs();
                 afterLotEndEventArgs.JobId = lotInfo.IsSpecialFlow ? lotInfo.SpJob.Id : lotInfo.Job.Id;
                 afterLotEndEventArgs.McNo = mcNo;
@@ -1214,19 +1217,25 @@ public class ServiceiLibrary : IServiceiLibrary
                 afterLotEndEventArgs.LotDataQuantity.Marker_Scrap = endLotEvenArgs.MarkerNg_Scrap;
                 afterLotEndEventArgs.LotDataQuantity.Qty_Scrap = endLotEvenArgs.CutFrame;
 
-                ServiceControlCenter.ServiceControlCenterClient serviceControlCenterClient = new ServiceControlCenter.ServiceControlCenterClient();
-                ServiceControlCenter.AfterLotEndResult result = serviceControlCenterClient.AfterLotEnd(afterLotEndEventArgs);
+                ServiceControlCenterClient serviceControlCenterClient = new ServiceControlCenterClient();
+                AfterLotEndResult result = serviceControlCenterClient.AfterLotEnd(afterLotEndEventArgs);
                 if (result.HasError)
                 {
                     log.ConnectionLogger.Write(0, "ServiceControlCenter.AfterLotEnd", "LotData", "iLibraryService", "WcfService", 0, "", "Error > ", result.ErrorMessage);
                 }
                 else
                 {
-                    log.ConnectionLogger.Write(0, "ServiceControlCenter.AfterLotEnd", "LotData", "iLibraryService", "WcfService", 0, "", "Error > ", result.WarningMessage);
+                    log.ConnectionLogger.Write(0, "ServiceControlCenter.AfterLotEnd", "LotData", "iLibraryService", "WcfService", 0, "", "Pass > ", result.WarningMessage);
                 }
+            }
+            catch (Exception ex)
+            {
+                log.ConnectionLogger.Write(0, "ServiceControlCenter.AfterLotEnd", "LotData", "iLibraryService", "WcfService", 0, "", "Exception > ", ex.Message.ToString());
+            }
+                
 
             #endregion
-            return new EndLotResult(true, MessageType.ApcsPro, "", "LotNo:" + lotNo + " opNo:" + opNo + " unloadCarrierNo:" + unloadCarrierNo + " IsOnline:" + endLotEvenArgs.IsOnline.ToString(), "", functionName, log, nextFlow);
+            return new EndLotResult(true, MessageType.ApcsPro, "", "LotNo:" + lotNo + " opNo:" + opNo + " mcNo:" + mcNo + " good:" + good + " ng:" + ng + " unloadCarrierNo:" + unloadCarrierNo + " IsOnline:" + endLotEvenArgs.IsOnline.ToString(), "", functionName, log, nextFlow);
         }
         catch (Exception ex)
         {
