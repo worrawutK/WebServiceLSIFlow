@@ -1216,16 +1216,37 @@ public class ServiceiLibrary : IServiceiLibrary
                 afterLotEndEventArgs.LotDataQuantity.Marker = endLotEvenArgs.MarkerNg;
                 afterLotEndEventArgs.LotDataQuantity.Marker_Scrap = endLotEvenArgs.MarkerNg_Scrap;
                 afterLotEndEventArgs.LotDataQuantity.Qty_Scrap = endLotEvenArgs.CutFrame;
+                afterLotEndEventArgs.LotDataQuantity.NgAdjust = ng;
+                afterLotEndEventArgs.LotDataQuantity.NgFrameAdjust = endLotEvenArgs.Frame_Fail;
+                string jobId = afterLotEndEventArgs.JobId.ToString();
+                string frontNg = afterLotEndEventArgs.LotDataQuantity.FrontNg.HasValue? afterLotEndEventArgs.LotDataQuantity.FrontNg.ToString():"NULL";
+                string frontNg_Scrap = afterLotEndEventArgs.LotDataQuantity.FrontNg_Scrap.HasValue ? afterLotEndEventArgs.LotDataQuantity.FrontNg_Scrap.ToString() : "NULL";
+                string pNashi= afterLotEndEventArgs.LotDataQuantity.PNashi.HasValue ? afterLotEndEventArgs.LotDataQuantity.PNashi.ToString() : "NULL";
+                string pNashi_Scarap=afterLotEndEventArgs.LotDataQuantity.PNashi_Scrap.HasValue? afterLotEndEventArgs.LotDataQuantity.PNashi_Scrap.ToString() : "NULL";
+                string marker=afterLotEndEventArgs.LotDataQuantity.Marker.HasValue? afterLotEndEventArgs.LotDataQuantity.Marker.ToString() : "NULL";
+                string marker_Scrap=afterLotEndEventArgs.LotDataQuantity.Marker_Scrap.HasValue? afterLotEndEventArgs.LotDataQuantity.Marker_Scrap.ToString() : "NULL";
+                string qty_Scrap=afterLotEndEventArgs.LotDataQuantity.Qty_Scrap.HasValue? afterLotEndEventArgs.LotDataQuantity.Qty_Scrap.ToString() : "NULL";
+                string ngAdjust = afterLotEndEventArgs.LotDataQuantity.NgAdjust.ToString();
+                string ngFrameAdjust = afterLotEndEventArgs.LotDataQuantity.NgFrameAdjust.ToString();
+
 
                 ServiceControlCenterClient serviceControlCenterClient = new ServiceControlCenterClient();
                 AfterLotEndResult result = serviceControlCenterClient.AfterLotEnd(afterLotEndEventArgs);
                 if (result.HasError)
                 {
-                    log.ConnectionLogger.Write(0, "ServiceControlCenter.AfterLotEnd", "LotData", "iLibraryService", "WcfService", 0, "", "Error > ", result.ErrorMessage);
+                    log.ConnectionLogger.Write(0, "ServiceControlCenter.AfterLotEnd", "LotData", "iLibraryService", "WcfService", 0, "", "Error > " +
+                        "JobId:" + jobId + ",frontNg:" + frontNg + ",frontNg_Scrap" + frontNg_Scrap + ",pNashi:" + pNashi +
+                        ",pNashi_Scarap:" + pNashi_Scarap + ",marker:" + marker + ",marker_Scrap:" + marker_Scrap + ",qty_Scrap:" + qty_Scrap + 
+                        ",ngAdjust:" + ngAdjust + ",ngFrameAdjust:" + ngFrameAdjust
+                        , result.ErrorMessage);
                 }
                 else
                 {
-                    log.ConnectionLogger.Write(0, "ServiceControlCenter.AfterLotEnd", "LotData", "iLibraryService", "WcfService", 0, "", "Pass > ", result.WarningMessage);
+                    log.ConnectionLogger.Write(0, "ServiceControlCenter.AfterLotEnd", "LotData", "iLibraryService", "WcfService", 0, "", "Pass > " + 
+                        "JobId:" + jobId + ",frontNg:" + frontNg +",frontNg_Scrap" + frontNg_Scrap + ",pNashi:" + pNashi + 
+                        ",pNashi_Scarap:" + pNashi_Scarap + ",marker:" + marker + ",marker_Scrap:" + marker_Scrap + ",qty_Scrap:" + qty_Scrap +
+                           ",ngAdjust:" + ngAdjust + ",ngFrameAdjust:" + ngFrameAdjust
+                        , result.WarningMessage);
                 }
             }
             catch (Exception ex)
