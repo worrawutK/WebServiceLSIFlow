@@ -2418,6 +2418,9 @@ namespace TestService.ServiceReference1 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CutFrameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DeviceNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -2428,6 +2431,9 @@ namespace TestService.ServiceReference1 {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int FramePassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Front_ngField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int GoPieceField;
@@ -2445,6 +2451,12 @@ namespace TestService.ServiceReference1 {
         private TestService.ServiceReference1.LotInformation.LotTypeState LotTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Marker_ngField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PNashiField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PackageNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -2457,6 +2469,19 @@ namespace TestService.ServiceReference1 {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CutFrame {
+            get {
+                return this.CutFrameField;
+            }
+            set {
+                if ((this.CutFrameField.Equals(value) != true)) {
+                    this.CutFrameField = value;
+                    this.RaisePropertyChanged("CutFrame");
+                }
             }
         }
         
@@ -2508,6 +2533,19 @@ namespace TestService.ServiceReference1 {
                 if ((this.FramePassField.Equals(value) != true)) {
                     this.FramePassField = value;
                     this.RaisePropertyChanged("FramePass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Front_ng {
+            get {
+                return this.Front_ngField;
+            }
+            set {
+                if ((this.Front_ngField.Equals(value) != true)) {
+                    this.Front_ngField = value;
+                    this.RaisePropertyChanged("Front_ng");
                 }
             }
         }
@@ -2573,6 +2611,32 @@ namespace TestService.ServiceReference1 {
                 if ((this.LotTypeField.Equals(value) != true)) {
                     this.LotTypeField = value;
                     this.RaisePropertyChanged("LotType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Marker_ng {
+            get {
+                return this.Marker_ngField;
+            }
+            set {
+                if ((this.Marker_ngField.Equals(value) != true)) {
+                    this.Marker_ngField = value;
+                    this.RaisePropertyChanged("Marker_ng");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PNashi {
+            get {
+                return this.PNashiField;
+            }
+            set {
+                if ((this.PNashiField.Equals(value) != true)) {
+                    this.PNashiField = value;
+                    this.RaisePropertyChanged("PNashi");
                 }
             }
         }

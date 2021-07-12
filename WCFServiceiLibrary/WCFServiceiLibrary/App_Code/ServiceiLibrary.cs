@@ -1480,6 +1480,13 @@ public class ServiceiLibrary : IServiceiLibrary
             }
 
             lotInformation.JobName = jobName;
+
+            LotInformation Get_Currents = GetCurrentTransLots(lotNo, mcNo);
+
+            lotInformation.Front_ng = Get_Currents.Front_ng;
+            lotInformation.PNashi = Get_Currents.PNashi;
+            lotInformation.Marker_ng = Get_Currents.Marker_ng;
+            lotInformation.CutFrame = Get_Currents.CutFrame;
             //if (c_ApcsProService.CheckPackageEnable(lotInfo.Package.Name, log))
             //    lotInformation.LotType = LotInformation.LotTypeState.ApcsPro;
             //else
@@ -1487,7 +1494,7 @@ public class ServiceiLibrary : IServiceiLibrary
             //    lotInformation.LotType = LotInformation.LotTypeState.Apcs;
             //    return null;
             //}
-                
+
             return lotInformation;
         }
         catch (Exception ex)
@@ -1497,8 +1504,47 @@ public class ServiceiLibrary : IServiceiLibrary
         }
 
     }
+    public LotInformation GetCurrentTransLots(string lotNo , string mcNo)
+    {
+        Logger log = new Logger(c_LogVersion, mcNo);
+        try
+        {
+            LotInformation lotInfo = new LotInformation();
+            DataTable tmpDataTable = new DataTable();
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.Connection = new SqlConnection("Data Source = 172.16.0.102; Initial Catalog = StoredProcedureDB; Persist Security Info = True; User ID = system; Password = 'p@$$w0rd'");
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "[cellcon].[sp_get_current_trans_lots]";
+                cmd.Parameters.Add("@lot_no", SqlDbType.VarChar).Value = lotNo;
+                cmd.Connection.Open();
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    if (rd.HasRows)
+                    {
+                        tmpDataTable.Load(rd);
+                    }
+                }
+                cmd.Connection.Close();
+                foreach (DataRow row in tmpDataTable.Rows)
+                {
 
-    public MachineOnlineStateResult MachineOnlineState(string mcNo, MachineOnline online)
+                    if (!(row["PNashi"] is DBNull)) lotInfo.PNashi = (int)row["PNashi"];
+                    if (!(row["FrontNg"] is DBNull)) lotInfo.Front_ng = (int)row["FrontNg"];
+                    if (!(row["MarkerNg"] is DBNull)) lotInfo.Marker_ng = (int)row["MarkerNg"];
+                    if (!(row["CutFrame"] is DBNull)) lotInfo.CutFrame = (int)row["CutFrame"];
+
+                }
+                return lotInfo;
+            }
+        }
+        catch (Exception ex)
+        {
+            log.ConnectionLogger.Write(0, MethodBase.GetCurrentMethod().Name, "Error", "WCF", "iLibrary", 0, "GetCurrentTransLots", "Exception:" + ex.Message.ToString(), "LotNo[" + lotNo + "],MCNo[" + mcNo + "]");
+            return null;
+        }
+    }
+        public MachineOnlineStateResult MachineOnlineState(string mcNo, MachineOnline online)
     {
         int countCheck = 0;
         Logger log = new Logger(c_LogVersion, mcNo, c_PahtLogFile);

@@ -48,4 +48,12 @@ public class LotInformation
         [EnumMember()]
         Unknown
     }
+    [DataMember()]
+    public int Front_ng { get; set; }
+    [DataMember()]
+    public int PNashi { get; set; }
+    [DataMember()]
+    public int Marker_ng { get; set; }
+    [DataMember()]
+    public int CutFrame { get; set; }
 }
