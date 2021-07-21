@@ -56,4 +56,6 @@ public class LotInformation
     public int Marker_ng { get; set; }
     [DataMember()]
     public int CutFrame { get; set; }
+    [DataMember()]
+    public int Combined { get; set; }
 }

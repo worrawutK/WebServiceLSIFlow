@@ -1487,6 +1487,7 @@ public class ServiceiLibrary : IServiceiLibrary
             lotInformation.PNashi = Get_Currents.PNashi;
             lotInformation.Marker_ng = Get_Currents.Marker_ng;
             lotInformation.CutFrame = Get_Currents.CutFrame;
+            lotInformation.Combined = Get_Currents.Combined;
             //if (c_ApcsProService.CheckPackageEnable(lotInfo.Package.Name, log))
             //    lotInformation.LotType = LotInformation.LotTypeState.ApcsPro;
             //else
@@ -1533,6 +1534,7 @@ public class ServiceiLibrary : IServiceiLibrary
                     if (!(row["FrontNg"] is DBNull)) lotInfo.Front_ng = (int)row["FrontNg"];
                     if (!(row["MarkerNg"] is DBNull)) lotInfo.Marker_ng = (int)row["MarkerNg"];
                     if (!(row["CutFrame"] is DBNull)) lotInfo.CutFrame = (int)row["CutFrame"];
+                    if (!(row["Combine"] is DBNull)) lotInfo.Combined = (int)row["Combine"];
 
                 }
                 return lotInfo;

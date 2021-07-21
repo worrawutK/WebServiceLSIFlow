@@ -244,7 +244,7 @@ namespace TestService
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            c_ILibraryClient.GetLotInfo("2128A6603V", "FL-FFL-00");
+            c_ILibraryClient.GetLotInfo("2129F6053V", "FL-FFL-00");
             //backgroundWorker1.RunWorkerAsync();
             //Thread thread = new Thread(new ThreadStart(Test));
             //thread.Start();
