@@ -1006,6 +1006,8 @@ public class ServiceiLibrary : IServiceiLibrary
             front_Ng = specialParametersEventArgs.Front_Ng;
             markerNg = specialParametersEventArgs.MarkerNg;
             cutFrame = specialParametersEventArgs.CutFrame;
+            markerNg_Scrap = specialParametersEventArgs.MarkerNg_Scrap;
+            front_Ng_Scrap = specialParametersEventArgs.Front_Ng_Scrap;
         }
         EndLotEvenArgs endLotEvenArgs = new EndLotEvenArgs(MethodBase.GetCurrentMethod().Name, licenser)
         {
